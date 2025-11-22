@@ -3,52 +3,51 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>הצהרת נגישות - Greek Souvlaki</title>
+    <title>Accessibility Statement - Greek Souvlaki</title>
     <link rel="stylesheet" href="styles.css">
     <style>
+        body { background: #f9fafb; }
         .legal-container {
             max-width: 900px;
             margin: 0 auto;
             padding: 3rem 2rem;
             background: white;
             min-height: 100vh;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
         }
         .legal-container h1 {
             color: var(--color-primary, #2563eb);
-            margin-bottom: 1rem;
+            margin-bottom: 2rem;
             font-size: 2.5rem;
         }
         .legal-container h2 {
             color: var(--color-primary-dark, #1e40af);
-            margin-top: 2.5rem;
-            margin-bottom: 1rem;
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
             font-size: 1.8rem;
         }
-        .legal-container h3 {
-            color: #333;
-            margin-top: 1.5rem;
-            margin-bottom: 0.75rem;
-            font-size: 1.3rem;
-        }
         .legal-container p, .legal-container li {
-            line-height: 1.8;
-            margin-bottom: 1rem;
+            line-height: 1.9;
+            margin-bottom: 1.2rem;
             color: #444;
+            font-size: 1.05rem;
         }
         .legal-container ul {
-            margin-right: 2rem;
-            margin-bottom: 1.5rem;
+            margin: 1.5rem 0 2rem 0;
         }
-        .legal-container .update-date {
+        [dir="rtl"] .legal-container ul {
+            margin-right: 2.5rem;
+            margin-left: 0;
+        }
+        [dir="ltr"] .legal-container ul {
+            margin-left: 2.5rem;
+            margin-right: 0;
+        }
+        .update-date {
             color: #666;
             font-style: italic;
-            margin-bottom: 2rem;
-        }
-        .legal-container .placeholder {
-            background: #fff3cd;
-            padding: 2px 6px;
-            border-radius: 3px;
-            font-weight: 600;
+            margin-bottom: 2.5rem;
+            font-size: 0.95rem;
         }
         .back-link {
             display: inline-block;
@@ -56,10 +55,14 @@
             color: var(--color-primary, #2563eb);
             text-decoration: none;
             font-weight: 600;
+            font-size: 1.05rem;
         }
-        .back-link:hover {
-            text-decoration: underline;
-        }
+        .back-link:hover { text-decoration: underline; }
+        .lang-content { display: none; }
+        [lang="he"] .lang-he { display: block; }
+        [lang="ar"] .lang-ar { display: block; }
+        [lang="en"] .lang-en { display: block; }
+        [lang="ru"] .lang-ru { display: block; }
         .contact-box {
             background: #f0fdf4;
             border-right: 4px solid #10b981;
@@ -67,227 +70,224 @@
             margin: 2rem 0;
             border-radius: 4px;
         }
-        .contact-box h3 {
-            color: #059669;
-            margin-top: 0;
+        [dir="ltr"] .contact-box {
+            border-right: none;
+            border-left: 4px solid #10b981;
         }
-        .english-section {
-            margin-top: 4rem;
-            padding-top: 3rem;
-            border-top: 2px solid #e5e7eb;
+        .lang-switcher {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 1000;
+            background: white;
+            padding: 0.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.15);
         }
-        .english-section h1, .english-section h2, .english-section h3 {
-            text-align: left;
+        .lang-switcher button {
+            background: none;
+            border: none;
+            padding: 0.5rem 1rem;
+            cursor: pointer;
+            font-size: 0.9rem;
+            color: #666;
+            transition: all 0.2s;
         }
-        .english-section p, .english-section li {
-            text-align: left;
+        .lang-switcher button.active {
+            color: var(--color-primary, #2563eb);
+            font-weight: 600;
+        }
+        .lang-switcher button:hover {
+            color: var(--color-primary, #2563eb);
         }
     </style>
 </head>
 <body>
+    <div class="lang-switcher">
+        <button onclick="switchPageLang('he')" class="lang-btn active" data-lang="he">עב</button>
+        <button onclick="switchPageLang('ar')" class="lang-btn" data-lang="ar">عر</button>
+        <button onclick="switchPageLang('en')" class="lang-btn" data-lang="en">EN</button>
+        <button onclick="switchPageLang('ru')" class="lang-btn" data-lang="ru">RU</button>
+    </div>
+
     <div class="legal-container">
-        <a href="index.html" class="back-link">← חזרה לאתר</a>
+        <a href="index.html" class="back-link">← <span class="back-text">Back</span></a>
 
-        <h1>הצהרת נגישות</h1>
-        <p class="update-date">תאריך עדכון אחרון: <span class="placeholder">[תאריך עדכון]</span></p>
+        <!-- HEBREW -->
+        <div class="lang-content lang-he">
+            <h1>הצהרת נגישות</h1>
+            <p class="update-date">תאריך עדכון: [יש לעדכן]</p>
 
-        <h2>1. מחויבות לנגישות</h2>
-        <p><strong>Greek Souvlaki</strong> מחויב להנגשת אתר האינטרנט שלו לאנשים עם מוגבלות ולכל המשתמשים, לפי תקנות שוויון זכויות לאנשים עם מוגבלות (התאמות נגישות לשירות), התשע"ג-2013.</p>
+            <h2>1. מחויבות לנגישות</h2>
+            <p>Greek Souvlaki מחויב להנגשת האתר לאנשים עם מוגבלות, בהתאם לתקנות שוויון זכויות לאנשים עם מוגבלות (התאמות נגישות לשירות), התשע"ג-2013.</p>
+            <p>האתר נבנה על פי <strong>תקן ישראלי ת"י 5568</strong> ו-<strong>WCAG 2.1</strong> ברמת <strong>AA</strong>.</p>
 
-        <p>האתר נבנה תוך מאמץ ליישום נגישות בהתאם ל<strong>תקן ישראלי ת"י 5568</strong> ול<strong>WCAG 2.1</strong> ברמת התאמה <strong>AA</strong>.</p>
+            <h2>2. אמצעי נגישות</h2>
+            <ul>
+                <li><strong>ניווט במקלדת:</strong> ניווט מלא עם סימון חזותי (Focus)</li>
+                <li><strong>קוראי מסך:</strong> כותרות סמנטיות, ARIA landmarks, טקסט חלופי לתמונות</li>
+                <li><strong>ניגודיות:</strong> יחס 4.5:1 לטקסט רגיל</li>
+                <li><strong>הגדלת טקסט:</strong> עד 200% ללא אובדן תפקוד</li>
+                <li><strong>תמיכה בשפות:</strong> עברית, ערבית, אנגלית, רוסית עם RTL/LTR</li>
+            </ul>
 
-        <h2>2. תקנים ועקרונות נגישות</h2>
-        <p>האתר מיושם על פי העקרונות הבאים:</p>
-        <ul>
-            <li><strong>ניתן לתפעול:</strong> האתר ניתן לשימוש באמצעות מקלדת בלבד, ללא עכבר</li>
-            <li><strong>ניתן לתפיסה:</strong> תוכן ניתן לקריאה על ידי קוראי מסך, ניגודיות מתאימה, אפשרות להגדלת טקסט</li>
-            <li><strong>ניתן להבנה:</strong> שפה ברורה, מבנה הגיוני, הודעות שגיאה מפורטות</li>
-            <li><strong>עמידות:</strong> תאימות לטכנולוגיות מסייעות שונות</li>
-        </ul>
+            <h2>3. פלטפורמות נתמכות</h2>
+            <ul>
+                <li><strong>דפדפנים:</strong> Chrome, Firefox, Edge, Safari (גרסאות אחרונות)</li>
+                <li><strong>קוראי מסך:</strong> NVDA, JAWS, VoiceOver, TalkBack</li>
+                <li><strong>מכשירים ניידים:</strong> iOS, Android</li>
+            </ul>
 
-        <h2>3. אמצעי נגישות מרכזיים באתר</h2>
+            <h2>4. מגבלות ידועות</h2>
+            <ul>
+                <li>תמונות חיצוניות (Unsplash) עשויות להיות ללא טקסט חלופי מפורט</li>
+                <li>אינטגרציות חיצוניות (מפות, סרטונים) בשליטה חלקית</li>
+            </ul>
 
-        <h3>3.1 ניווט במקלדת</h3>
-        <ul>
-            <li>ניווט מלא באתר באמצעות מקלדת בלבד (Tab, Shift+Tab, Enter, חצים)</li>
-            <li>סימון חזותי ברור של האלמנט הפעיל (Focus indicator)</li>
-            <li>דילוג לתוכן ראשי (Skip to main content) למשתמשי מקלדת</li>
-        </ul>
+            <div class="contact-box">
+                <h2 style="margin-top: 0;">📞 רכז/ת נגישות</h2>
+                <p><strong>שם:</strong> Greek Souvlaki Management<br>
+                <strong>טלפון:</strong> 04-8122980<br>
+                <strong>דוא"ל:</strong> [accessibility@greeksouvlaki.co.il]<br>
+                <strong>כתובת:</strong> כביש 70, כפר יאסיף</p>
+                <p><strong>זמן תגובה:</strong> 7 ימי עסקים</p>
+            </div>
 
-        <h3>3.2 תמיכה בקוראי מסך</h3>
-        <ul>
-            <li>כותרות (Headings) סמנטיות ממוספרות בהיררכיה הגיונית</li>
-            <li>תוויות (Labels) לשדות טפסים</li>
-            <li>טקסט חלופי (Alt text) לתמונות</li>
-            <li>ARIA landmarks לסימון אזורי תוכן (header, nav, main, footer)</li>
-            <li>הודעות שגיאה ברורות וניתנות לזיהוי</li>
-        </ul>
+            <h2>5. דיווח על בעיות</h2>
+            <p>ניתן לדווח על בעיות נגישות דרך:</p>
+            <ul>
+                <li>טלפון: 04-8122980</li>
+                <li>דוא"ל: [accessibility@greeksouvlaki.co.il]</li>
+                <li>דואר: כביש 70, כפר יאסיף</li>
+            </ul>
 
-        <h3>3.3 ניגודיות וצבעים</h3>
-        <ul>
-            <li>ניגודיות בין טקסט לרקע עומדת ביחס 4.5:1 (טקסט רגיל) או 3:1 (טקסט גדול)</li>
-            <li>מידע לא מועבר באמצעות צבע בלבד (גם סמלים וטקסט)</li>
-        </ul>
-
-        <h3>3.4 הגדלת טקסט וזום</h3>
-        <ul>
-            <li>אפשרות להגדיל טקסט עד 200% ללא אובדן תפקוד או תוכן</li>
-            <li>אפשרות לזום הדף עד 400% (Ctrl/Cmd + "+"/"-")</li>
-            <li>שמירת מבנה ותפקוד גם לאחר הגדלה</li>
-        </ul>
-
-        <h3>3.5 שפה וניווט</h3>
-        <ul>
-            <li>סימון שפת המסמך (lang="he/ar/ru/en") לקוראי מסך</li>
-            <li>סימון כיוון הטקסט (RTL/LTR) באופן דינמי</li>
-            <li>תפריט ניווט עקבי ונגיש בכל הדפים</li>
-        </ul>
-
-        <h2>4. פלטפורמות נתמכות</h2>
-        <p>האתר נבדק ונמצא תואם לדפדפנים ולמערכות ההפעלה הנפוצים:</p>
-
-        <h3>4.1 דפדפנים</h3>
-        <ul>
-            <li>Google Chrome (גרסה 90 ומעלה)</li>
-            <li>Mozilla Firefox (גרסה 88 ומעלה)</li>
-            <li>Microsoft Edge (גרסה 90 ומעלה)</li>
-            <li>Safari (גרסה 14 ומעלה)</li>
-        </ul>
-
-        <h3>4.2 קוראי מסך</h3>
-        <ul>
-            <li>NVDA (Windows)</li>
-            <li>JAWS (Windows)</li>
-            <li>VoiceOver (macOS, iOS)</li>
-            <li>TalkBack (Android)</li>
-        </ul>
-
-        <h3>4.3 מכשירים ניידים</h3>
-        <ul>
-            <li>iOS (iPhone, iPad) – Safari, Chrome</li>
-            <li>Android – Chrome, Firefox</li>
-        </ul>
-
-        <h2>5. מגבלות נגישות ידועות</h2>
-        <p>למרות מאמצינו, ייתכנו מגבלות נגישות מסוימות:</p>
-        <ul>
-            <li><strong>תמונות מ-Unsplash:</strong> חלק מהתמונות החיצוניות עשויות להיות ללא טקסט חלופי מפורט</li>
-            <li><strong>תכנים חיצוניים:</strong> אינטגרציות חיצוניות (מפות, סרטונים משובצים) עשויות להיות בשליטה חלקית בלבד</li>
-            <li><strong>קובצי PDF ישנים:</strong> במידה ויעלו, עלולים שלא להיות נגישים במלואם</li>
-        </ul>
-
-        <p><strong>אנו פועלים באופן שוטף לשיפור הנגישות.</strong> אם נתקלת בבעיה, אנא דווח לנו (פרטים בהמשך).</p>
-
-        <h2>6. תהליך בדיקה ושיפור</h2>
-        <ul>
-            <li>האתר נבדק על ידי כלי בדיקה אוטומטיים (WAVE, axe DevTools, Lighthouse)</li>
-            <li>בדיקות ידניות עם דפדפנים שונים וקוראי מסך</li>
-            <li>שיפור מתמיד על בסיס משוב מהמשתמשים</li>
-        </ul>
-
-        <h2>7. רכז/ת נגישות ויצירת קשר</h2>
-
-        <div class="contact-box">
-            <h3>📞 ליצירת קשר בנושא נגישות:</h3>
-            <p><strong>שם:</strong> <span class="placeholder">[רכז/ת נגישות]</span> – Greek Souvlaki Management<br>
-            <strong>טלפון:</strong> 04-8122980<br>
-            <strong>דוא"ל:</strong> <span class="placeholder">[accessibility@greeksouvlaki.co.il]</span><br>
-            <strong>כתובת למשלוח דואר:</strong> כביש 70, כפר יאסיף</p>
-
-            <p><strong>זמן תגובה:</strong> נשתדל לענות תוך <strong>7 ימי עסקים</strong> מקבלת הפנייה.</p>
+            <p><strong>תודה על עזרתך בהפיכת האתר לנגיש יותר!</strong></p>
         </div>
 
-        <h2>8. תהליך טיפול בפניות נגישות</h2>
-        <ol>
-            <li><strong>קבלת הפנייה:</strong> דרך טלפון, דוא"ל או דואר רגיל</li>
-            <li><strong>רישום ותיעוד:</strong> רישום הפנייה ואישור קבלה למפנה</li>
-            <li><strong>בדיקה ותיקון:</strong> בדיקת הבעיה והפקת פתרון טכני או חלופה</li>
-            <li><strong>עדכון:</strong> עדכון הפונה על הטיפול והפתרון שבוצע</li>
-            <li><strong>מעקב:</strong> בדיקת שביעות רצון ושיפור מתמיד</li>
-        </ol>
+        <!-- ARABIC -->
+        <div class="lang-content lang-ar">
+            <h1>بيان إمكانية الوصول</h1>
+            <p class="update-date">آخر تحديث: [يجب التحديث]</p>
 
-        <h2>9. סוגי פניות שניתן להגיש</h2>
-        <ul>
-            <li>דיווח על בעיית נגישות ספציפית באתר</li>
-            <li>בקשה לקבלת מידע בפורמט נגיש (למשל, קובץ PDF נגיש)</li>
-            <li>שאלות כלליות על נגישות האתר</li>
-            <li>הצעות לשיפור הנגישות</li>
-        </ul>
+            <h2>1. الالتزام بإمكانية الوصول</h2>
+            <p>Greek Souvlaki ملتزم بجعل موقعه الإلكتروني متاحاً للأشخاص ذوي الإعاقة، وفقاً للوائح المساواة في الحقوق.</p>
 
-        <h2>10. התחייבות מתמשכת</h2>
-        <p>Greek Souvlaki מתחייב:</p>
-        <ul>
-            <li>להמשיך ולשפר את נגישות האתר באופן שוטף</li>
-            <li>לבחון ולעדכן את הצהרת הנגישות באופן תקופתי</li>
-            <li>להכשיר את הצוותים הטכניים בנושא נגישות</li>
-            <li>לקחת בחשבון נגישות בכל פיתוח או עדכון עתידי של האתר</li>
-        </ul>
+            <h2>2. ميزات إمكانية الوصول</h2>
+            <ul>
+                <li>التنقل بلوحة المفاتيح الكاملة</li>
+                <li>دعم قارئات الشاشة</li>
+                <li>تباين اللون المناسب</li>
+                <li>تكبير النص حتى 200%</li>
+            </ul>
 
-        <p><strong>תודה על סבלנותך ועל עזרתך בהפיכת האתר לנגיש יותר לכולם!</strong></p>
+            <div class="contact-box">
+                <h2 style="margin-top: 0;">📞 منسق إمكانية الوصول</h2>
+                <p><strong>الاسم:</strong> Greek Souvlaki Management<br>
+                <strong>الهاتف:</strong> 04-8122980<br>
+                <strong>البريد الإلكتروني:</strong> [accessibility@greeksouvlaki.co.il]<br>
+                <strong>وقت الرد:</strong> 7 أيام عمل</p>
+            </div>
+        </div>
 
-        <hr style="margin: 3rem 0; border: none; border-top: 1px solid #ddd;">
-
-        <!-- English Summary -->
-        <div class="english-section" dir="ltr">
-            <h1>Accessibility Statement - Short English Summary</h1>
-            <p><em>(This is a non-binding summary. The Hebrew version above is the legally binding document.)</em></p>
+        <!-- ENGLISH -->
+        <div class="lang-content lang-en">
+            <h1>Accessibility Statement</h1>
+            <p class="update-date">Last updated: [To be updated]</p>
 
             <h2>1. Commitment</h2>
-            <p>Greek Souvlaki is committed to making its website accessible to people with disabilities, in accordance with Israeli regulations (Equal Rights for Persons with Disabilities) and international standards (WCAG 2.1 Level AA, Israeli Standard 5568).</p>
+            <p>Greek Souvlaki is committed to making its website accessible to people with disabilities, in accordance with Israeli regulations (Equal Rights for Persons with Disabilities) and international standards (<strong>WCAG 2.1 Level AA</strong>, <strong>Israeli Standard 5568</strong>).</p>
 
             <h2>2. Accessibility Features</h2>
             <ul>
-                <li><strong>Keyboard navigation:</strong> Full keyboard support with visible focus indicators</li>
-                <li><strong>Screen readers:</strong> Semantic headings, ARIA landmarks, alt text for images</li>
-                <li><strong>Contrast:</strong> 4.5:1 ratio for text, information not conveyed by color alone</li>
+                <li><strong>Keyboard navigation:</strong> Full support with visible focus indicators</li>
+                <li><strong>Screen readers:</strong> Semantic headings, ARIA landmarks, alt text</li>
+                <li><strong>Contrast:</strong> 4.5:1 ratio for text</li>
                 <li><strong>Text scaling:</strong> Up to 200% without loss of functionality</li>
-                <li><strong>Language support:</strong> Hebrew, Arabic, Russian, English with RTL/LTR switching</li>
+                <li><strong>Language support:</strong> Hebrew, Arabic, English, Russian with RTL/LTR</li>
             </ul>
 
             <h2>3. Supported Platforms</h2>
             <ul>
                 <li><strong>Browsers:</strong> Chrome, Firefox, Edge, Safari (latest versions)</li>
                 <li><strong>Screen readers:</strong> NVDA, JAWS, VoiceOver, TalkBack</li>
-                <li><strong>Mobile:</strong> iOS (Safari, Chrome), Android (Chrome, Firefox)</li>
+                <li><strong>Mobile:</strong> iOS, Android</li>
             </ul>
 
             <h2>4. Known Limitations</h2>
             <ul>
-                <li>Some external images (Unsplash) may lack detailed alt text</li>
-                <li>Third-party integrations (maps, embedded videos) have partial accessibility</li>
-                <li>Legacy PDFs (if any) may not be fully accessible</li>
+                <li>External images (Unsplash) may lack detailed alt text</li>
+                <li>Third-party integrations (maps, videos) have partial accessibility</li>
             </ul>
 
-            <h2>5. Accessibility Coordinator</h2>
-            <p><strong>Name:</strong> Greek Souvlaki Management<br>
-            <strong>Phone:</strong> 04-8122980<br>
-            <strong>Email:</strong> [accessibility@greeksouvlaki.co.il]<br>
-            <strong>Address:</strong> Route 70, Kafr Yasif<br>
-            <strong>Response time:</strong> Within 7 business days</p>
+            <div class="contact-box">
+                <h2 style="margin-top: 0;">📞 Accessibility Coordinator</h2>
+                <p><strong>Name:</strong> Greek Souvlaki Management<br>
+                <strong>Phone:</strong> 04-8122980<br>
+                <strong>Email:</strong> [accessibility@greeksouvlaki.co.il]<br>
+                <strong>Address:</strong> Route 70, Kafr Yasif<br>
+                <strong>Response time:</strong> 7 business days</p>
+            </div>
 
-            <h2>6. How to Report Issues</h2>
-            <p>You can report accessibility issues or request accessible formats via:</p>
+            <h2>5. Report Issues</h2>
+            <p>You can report accessibility issues via:</p>
             <ul>
                 <li>Phone: 04-8122980</li>
                 <li>Email: [accessibility@greeksouvlaki.co.il]</li>
                 <li>Mail: Route 70, Kafr Yasif</li>
             </ul>
 
-            <h2>7. Ongoing Commitment</h2>
-            <p>We are committed to:</p>
+            <p><strong>Thank you for helping us make our website more accessible!</strong></p>
+        </div>
+
+        <!-- RUSSIAN -->
+        <div class="lang-content lang-ru">
+            <h1>Заявление о доступности</h1>
+            <p class="update-date">Обновлено: [Необходимо обновить]</p>
+
+            <h2>1. Обязательство</h2>
+            <p>Greek Souvlaki стремится сделать свой веб-сайт доступным для людей с ограниченными возможностями в соответствии с израильскими правилами и международными стандартами (WCAG 2.1 уровень AA).</p>
+
+            <h2>2. Функции доступности</h2>
             <ul>
-                <li>Continuously improve website accessibility</li>
-                <li>Periodically review and update this accessibility statement</li>
-                <li>Train technical teams on accessibility</li>
-                <li>Consider accessibility in all future developments</li>
+                <li>Навигация с клавиатуры</li>
+                <li>Поддержка программ чтения с экрана</li>
+                <li>Контрастность цветов</li>
+                <li>Масштабирование текста до 200%</li>
             </ul>
 
-            <p><strong>Thank you for helping us make our website more accessible to everyone!</strong></p>
-        </div>
-
-        <div style="margin-top: 4rem; text-align: center; padding: 2rem; background: #f9fafb; border-radius: 8px;">
-            <p style="margin: 0;"><a href="index.html" class="back-link">← חזרה לדף הבית</a></p>
+            <div class="contact-box">
+                <h2 style="margin-top: 0;">📞 Координатор доступности</h2>
+                <p><strong>Имя:</strong> Greek Souvlaki Management<br>
+                <strong>Телефон:</strong> 04-8122980<br>
+                <strong>Email:</strong> [accessibility@greeksouvlaki.co.il]<br>
+                <strong>Время ответа:</strong> 7 рабочих дней</p>
+            </div>
         </div>
     </div>
+
+    <script>
+        const savedLang = localStorage.getItem('preferredLanguage') || 'he';
+        switchPageLang(savedLang);
+
+        function switchPageLang(lang) {
+            const html = document.documentElement;
+            html.setAttribute('lang', lang);
+            html.setAttribute('dir', ['he', 'ar'].includes(lang) ? 'rtl' : 'ltr');
+
+            document.querySelectorAll('.lang-btn').forEach(btn => {
+                btn.classList.toggle('active', btn.dataset.lang === lang);
+            });
+
+            const backTexts = {
+                'he': 'חזרה לאתר',
+                'ar': 'العودة إلى الموقع',
+                'en': 'Back to site',
+                'ru': 'Вернуться на сайт'
+            };
+            document.querySelector('.back-text').textContent = backTexts[lang];
+
+            localStorage.setItem('preferredLanguage', lang);
+        }
+    </script>
 </body>
 </html>
