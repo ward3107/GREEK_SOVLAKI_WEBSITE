@@ -1630,29 +1630,45 @@ footer {
 
 .contact-item {
     display: flex;
+    flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 0.75rem;
+    gap: 1rem;
     font-size: 1.1rem;
-    flex-wrap: wrap;
 }
 
 .contact-item .icon {
     font-size: 1.75rem;
 }
 
+.phone-title,
+.social-title {
+    font-size: 1.3rem;
+    font-weight: 700;
+    margin-bottom: 0.5rem;
+}
+
+.phone-numbers,
+.social-links {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+}
+
 .contact-link {
     display: inline-flex;
     align-items: center;
+    justify-content: center;
     gap: 0.5rem;
     color: white;
     text-decoration: none;
-    padding: 0.5rem 1rem;
+    padding: 0.75rem 1.5rem;
     border-radius: var(--radius-md);
     background: rgba(255, 255, 255, 0.1);
     transition: all var(--transition-base);
     font-weight: 500;
     border: 1px solid rgba(255, 255, 255, 0.2);
+    min-width: 200px;
 }
 
 .contact-link:hover {
@@ -1665,6 +1681,12 @@ footer {
     transform: translateY(0);
 }
 
+.phone-link {
+    font-size: 1.2rem;
+    font-weight: 600;
+    letter-spacing: 1px;
+}
+
 .instagram-link {
     background: linear-gradient(135deg, #833AB4 0%, #FD1D1D 50%, #F77737 100%);
     border: none;
@@ -1674,6 +1696,22 @@ footer {
 .instagram-link:hover {
     background: linear-gradient(135deg, #9b4dc4 0%, #ff3333 50%, #ff8c52 100%);
     box-shadow: 0 6px 16px rgba(131, 58, 180, 0.4);
+}
+
+.facebook-link {
+    background: #1877F2;
+    border: none;
+    font-weight: 600;
+}
+
+.facebook-link:hover {
+    background: #2d88ff;
+    box-shadow: 0 6px 16px rgba(24, 119, 242, 0.4);
+}
+
+.restaurant-info {
+    font-size: 1.2rem;
+    font-weight: 600;
 }
 
 .contact-slogan {
