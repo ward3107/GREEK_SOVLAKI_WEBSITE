@@ -1,0 +1,464 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <style id="i18n-hide">body{visibility:hidden}</style>
+    <title>Greek Souvlaki - סובלאקי יווני | מסעדה יוונית אותנטית בכפר יאסיף</title>
+    <meta name="description" content="מסעדה יוונית אותנטית בכפר יאסיף. סובלקי, גירוס ומטעמים יווניים מסורתיים באווירה חמה ומזמינה">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+    <link rel="preconnect" href="https://flagcdn.com" crossorigin>
+</head>
+<body>
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="logo">
+                    <h1>🥙 <span data-lang="logo">Greek Souvlaki</span></h1>
+                </div>
+                <div class="language-switcher">
+                    <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                        <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="5"></circle>
+                            <line x1="12" y1="1" x2="12" y2="3"></line>
+                            <line x1="12" y1="21" x2="12" y2="23"></line>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                            <line x1="1" y1="12" x2="3" y2="12"></line>
+                            <line x1="21" y1="12" x2="23" y2="12"></line>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                        </svg>
+                        <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                        </svg>
+                    </button>
+                    <div class="language-dropdown">
+                        <button type="button" class="lang-dropdown-btn" aria-label="Select language" aria-haspopup="true" aria-expanded="false">
+                            <span class="current-lang">🇮🇱 HE</span>
+                            <span class="dropdown-arrow">▼</span>
+                        </button>
+                        <div class="language-dropdown-content" role="menu">
+                            <button type="button" class="lang-option active" data-lang-switch="he" role="menuitem">🇮🇱 עברית</button>
+                            <button type="button" class="lang-option" data-lang-switch="en" role="menuitem">🇬🇧 English</button>
+                            <button type="button" class="lang-option" data-lang-switch="ar" role="menuitem">🇸🇦 العربية</button>
+                            <button type="button" class="lang-option" data-lang-switch="ru" role="menuitem">🇷🇺 Русский</button>
+                        </div>
+                    </div>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="#home" data-lang="nav-home">בית</a></li>
+                    <li><a href="#menu" data-lang="nav-menu">תפריט</a></li>
+                    <li><a href="#about" data-lang="nav-about">אודות</a></li>
+                    <li><a href="#gallery" data-lang="nav-gallery">גלריה</a></li>
+                    <li><a href="#contact" data-lang="nav-contact">צור קשר</a></li>
+                </ul>
+                <div class="hamburger">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </div>
+            </div>
+        </nav>
+    </header>
+
+    <section id="home" class="hero">
+        <div class="hero-content">
+            <div class="greek-flag">
+                <img src="https://flagcdn.com/w320/gr.png" alt="Greek Flag" width="120" height="80">
+            </div>
+            <h2 data-lang="hero-title">טעמים יווניים אותנטיים בלב כפר יאסיף</h2>
+            <p data-lang="hero-subtitle">חוויה קולינרית יוונית אמיתית עם מתכונים מסורתיים, חומרי גלם טריים ואווירה ים תיכונית חמה</p>
+            <p class="hero-description" data-lang="hero-description">
+                סובלאקי יווני - כפר יאסיף
+            </p>
+            <div class="hero-buttons">
+                <button type="button" class="cta-btn" data-lang="view-menu">צפה בתפריט</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="menu" class="menu-section">
+        <div class="container">
+            <h2 data-lang="menu-title">התפריט שלנו</h2>
+            <p class="menu-subtitle" data-lang="menu-subtitle">מבחר עשיר של מנות יווניות מסורתיות</p>
+
+            <!-- Category: Souvlaki in Pita -->
+            <div class="menu-category-modern">
+                <div class="category-header">
+                    <img src="https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=1200&h=300&fit=crop" alt="Souvlaki in Pita" class="category-image" loading="lazy">
+                    <div class="category-overlay">
+                        <h3 class="category-title-modern">
+                            <span class="category-icon">🥙</span>
+                            <span data-lang="cat-pita-title">סובלאקי בפיתה</span>
+                        </h3>
+                        <p class="category-price-range">30–40 ₪</p>
+                    </div>
+                </div>
+                <div class="menu-grid-modern">
+                    <div class="menu-item-row">
+                        <div class="item-name" data-lang="item-pita-chicken">Souvlaki Peta Chicken</div>
+                        <div class="item-dots"></div>
+                        <div class="item-price">30 ₪</div>
+                        <div class="item-desc" data-lang="desc-pita-chicken">פיתה יוונית, שיפוד עוף, רוטב צזיקי/חריף, כרוב, בצל, עגבנייה, חסה, צ'יפס</div>
+                    </div>
+                    <div class="menu-item-row">
+                        <div class="item-name" data-lang="item-pita-pork">Souvlaki Peta Pork</div>
+                        <div class="item-dots"></div>
+                        <div class="item-price">30 ₪</div>
+                        <div class="item-desc" data-lang="desc-pita-pork">פיתה יוונית, שיפוד לבן, רוטב צזיקי/חריף, כרוב, בצל, עגבנייה, חסה, צ'יפס</div>
+                    </div>
+                    <div class="menu-item-row">
+                        <div class="item-name" data-lang="item-pita-gyros">Souvlaki Peta Pork Gyros</div>
+                        <div class="item-dots"></div>
+                        <div class="item-price">30 ₪</div>
+                        <div class="item-desc" data-lang="desc-pita-gyros">פיתה יוונית, גירוס לבן (שווארמה), רוטב צזיקי/חריף, כרוב, בצל, עגבנייה, חסה, צ'יפס</div>
+                    </div>
+                    <div class="menu-item-row">
+                        <div class="item-name" data-lang="item-pita-kebab">Souvlaki Peta Kebab</div>
+                        <div class="item-dots"></div>
+                        <div class="item-price">30 ₪</div>
+                        <div class="item-desc" data-lang="desc-pita-kebab">פיתה יוונית, קבב רגל טלה, רוטב צזיקי/חריף, כרוב, בצל, עגבנייה, חסה, צ'יפס</div>
+                    </div>
+                    <div class="menu-item-row">
+                        <div class="item-name" data-lang="item-pita-sausage">Souvlaki Peta Sausage</div>
+                        <div class="item-dots"></div>
+                        <div class="item-price">30 ₪</div>
+                        <div class="item-desc" data-lang="desc-pita-sausage">פיתה יוונית, נקניקיות, רוטב צזיקי/חריף, כרוב, בצל, עגבנייה, חסה, צ'יפס</div>
+                    </div>
+                    <div class="menu-item-row">
+                        <div class="item-name" data-lang="item-pita-vegan">Souvlaki Peta Vegan</div>
+                        <div class="item-dots"></div>
+                        <div class="item-price">30 ₪</div>
+                        <div class="item-desc" data-lang="desc-pita-vegan">פיתה יוונית, שיפוד טבעוני, רוטב צזיקי/חריף, כרוב, בצל, עגבנייה, חסה, צ'יפס</div>
+                    </div>
+                    <div class="menu-item-row">
+                        <div class="item-name" data-lang="item-pita-steak">Souvlaki Peta Pork Steak</div>
+                        <div class="item-dots"></div>
+                        <div class="item-price">35 ₪</div>
+                        <div class="item-desc" data-lang="desc-pita-steak">פיתה יוונית, סטייק לבן סינטה, רוטב צזיקי/חריף, כרוב, בצל, עגבנייה, חסה, צ'יפס</div>
+                    </div>
+                    <div class="menu-item-row">
+                        <div class="item-name" data-lang="item-pita-glutenfree">Souvlaki Peta Gluten Free</div>
+                        <div class="item-dots"></div>
+                        <div class="item-price">40 ₪</div>
+                        <div class="item-desc" data-lang="desc-pita-glutenfree">פיתה ללא גלוטן, שיפוד לבחירה, רוטב צזיקי/חריף, כרוב, בצל, עגבנייה, חסה, צ'יפס</div>
+                    </div>
+                    <div class="menu-item-row">
+                        <div class="item-name" data-lang="item-double-skewer">Double Skewer</div>
+                        <div class="item-dots"></div>
+                        <div class="item-price">15 ₪</div>
+                        <div class="item-desc" data-lang="desc-double-skewer">תוספת שיפוד נוסף</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category: Souvlaki Plates -->
+            <div class="menu-category">
+                <h3 class="category-title">
+                    <span class="category-icon">🍽</span>
+                    <span data-lang="cat-plates-title">צלחות סובלאקי</span>
+                </h3>
+                <div class="menu-items">
+                    <div class="menu-item-row">
+                        <div class="item-name" data-lang="item-plate-souvlaki">Souvlaki Plate</div>
+                        <div class="item-dots"></div>
+                        <div class="item-price">35 ₪</div>
+                        <div class="item-desc" data-lang="desc-plate-souvlaki">שיפודים לבחירה, רוטב צזיקי/חריף, כרוב, בצל, עגבנייה, חסה, צ'יפס</div>
+                    </div>
+                    <div class="menu-item-row">
+                        <div class="item-name" data-lang="item-plate-gyros">Souvlaki Plate Gyros</div>
+                        <div class="item-dots"></div>
+                        <div class="item-price">40 ₪</div>
+                        <div class="item-desc" data-lang="desc-plate-gyros">שווארמה לבן, רוטב צזיקי/חריף, כרוב, בצל, עגבנייה, חסה, צ'יפס</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category: Meat Platters -->
+            <div class="menu-category">
+                <h3 class="category-title">
+                    <span class="category-icon">🍖</span>
+                    <span data-lang="cat-platters-title">מגשי בשרים</span>
+                </h3>
+                <div class="menu-items">
+                    <div class="menu-item-row">
+                        <div class="item-name" data-lang="item-platter-two">Meat Platter for Two</div>
+                        <div class="item-dots"></div>
+                        <div class="item-price">150 ₪</div>
+                        <div class="item-desc" data-lang="desc-platter-two">3 שיפודים (לבן/עוף/קבב), נקניקה, רוטב מיוחד, 2 סטייק לבן סינטה</div>
+                    </div>
+                    <div class="menu-item-row">
+                        <div class="item-name" data-lang="item-platter-four">Meat Platter for Four</div>
+                        <div class="item-dots"></div>
+                        <div class="item-price">250 ₪</div>
+                        <div class="item-desc" data-lang="desc-platter-four">6 שיפודים, שווארמה לבן, נקניקה, רוטב מיוחד, 3 סטייק לבן סינטה</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category: Pizza Gyros -->
+            <div class="menu-category">
+                <h3 class="category-title">
+                    <span class="category-icon">🍕</span>
+                    <span data-lang="cat-pizza-title">פיצה גירוס</span>
+                </h3>
+                <div class="menu-items">
+                    <div class="menu-item-row">
+                        <div class="item-name" data-lang="item-pizza-small">Pizza Gyros (Small)</div>
+                        <div class="item-dots"></div>
+                        <div class="item-price">40 ₪</div>
+                        <div class="item-desc" data-lang="desc-pizza-small">פיצה עם שווארמה לבן וצ'יפס</div>
+                    </div>
+                    <div class="menu-item-row">
+                        <div class="item-name" data-lang="item-pizza-large">Pizza Gyros (Large)</div>
+                        <div class="item-dots"></div>
+                        <div class="item-price">70 ₪</div>
+                        <div class="item-desc" data-lang="desc-pizza-large">פיצה עם שווארמה לבן וצ'יפס</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category: Salad -->
+            <div class="menu-category">
+                <h3 class="category-title">
+                    <span class="category-icon">🥗</span>
+                    <span data-lang="cat-salad-title">סלטים</span>
+                </h3>
+                <div class="menu-items">
+                    <div class="menu-item-row">
+                        <div class="item-name" data-lang="item-greek-salad">Greek Salad</div>
+                        <div class="item-dots"></div>
+                        <div class="item-price">40 ₪</div>
+                        <div class="item-desc" data-lang="desc-greek-salad">עגבניות, מלפפון, פלפל מחוק, בצל, זיתים שחורים קלמטה, גבינת פטה</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category: Drinks -->
+            <div class="menu-category">
+                <h3 class="category-title">
+                    <span class="category-icon">🥤</span>
+                    <span data-lang="cat-drinks-title">משקאות</span>
+                </h3>
+                <div class="menu-items">
+                    <div class="menu-item-row">
+                        <div class="item-name" data-lang="item-soft-drinks">Soft Drinks</div>
+                        <div class="item-dots"></div>
+                        <div class="item-price">7 ₪</div>
+                        <div class="item-desc" data-lang="desc-soft-drinks">קוקה קולה, קולה זירו, פנטה, ספרייט, ענבים</div>
+                    </div>
+                    <div class="menu-item-row">
+                        <div class="item-name" data-lang="item-water">Water</div>
+                        <div class="item-dots"></div>
+                        <div class="item-price">5 ₪</div>
+                        <div class="item-desc" data-lang="desc-water">מים</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category: Alcohol -->
+            <div class="menu-category">
+                <h3 class="category-title">
+                    <span class="category-icon">🍷</span>
+                    <span data-lang="cat-alcohol-title">אלכוהול</span>
+                </h3>
+                <div class="menu-items">
+                    <div class="menu-item-row">
+                        <div class="item-name" data-lang="item-beer">Drift Beer (1/3)</div>
+                        <div class="item-dots"></div>
+                        <div class="item-price">15 ₪</div>
+                        <div class="item-desc" data-lang="desc-beer">בירה הבית</div>
+                    </div>
+                    <div class="menu-item-row">
+                        <div class="item-name" data-lang="item-wine-glass">Wine (Glass)</div>
+                        <div class="item-dots"></div>
+                        <div class="item-price">15 ₪</div>
+                        <div class="item-desc" data-lang="desc-wine-glass">יין אדום/לבן/רוזה</div>
+                    </div>
+                    <div class="menu-item-row">
+                        <div class="item-name" data-lang="item-wine-bottle">Wine Bottle</div>
+                        <div class="item-dots"></div>
+                        <div class="item-price">100 ₪</div>
+                        <div class="item-desc" data-lang="desc-wine-bottle">בקבוק יין</div>
+                    </div>
+                    <div class="menu-item-row">
+                        <div class="item-name" data-lang="item-whiskey">Whiskey</div>
+                        <div class="item-dots"></div>
+                        <div class="item-price">30 ₪</div>
+                        <div class="item-desc" data-lang="desc-whiskey">וויסקי</div>
+                    </div>
+                    <div class="menu-item-row">
+                        <div class="item-name" data-lang="item-ouzo">Ouzo Plomari</div>
+                        <div class="item-dots"></div>
+                        <div class="item-price">70 ₪</div>
+                        <div class="item-desc" data-lang="desc-ouzo">בקבוק אוזו פלומרי 200 מ"ל</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Category: Sides -->
+            <div class="menu-category">
+                <h3 class="category-title">
+                    <span class="category-icon">🍟</span>
+                    <span data-lang="cat-sides-title">תוספות</span>
+                </h3>
+                <div class="menu-items">
+                    <div class="menu-item-row">
+                        <div class="item-name" data-lang="item-fries">Fries Chips</div>
+                        <div class="item-dots"></div>
+                        <div class="item-price">15 ₪</div>
+                        <div class="item-desc" data-lang="desc-fries">צלחת צ'יפס</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Contact Info Footer -->
+            <div class="menu-contact-footer">
+                <div class="contact-row">
+                    <span class="contact-icon">📞</span>
+                    <span data-lang="contact-phones">טלפון: 04-8122980, 052-8921454, 054-2001235</span>
+                </div>
+                <div class="contact-row">
+                    <span class="contact-icon">📷</span>
+                    <span data-lang="contact-instagram">אינסטגרם: @GREEK.SOUVLAKII</span>
+                </div>
+                <div class="contact-row">
+                    <span class="contact-icon">🏛️</span>
+                    <span data-lang="contact-name">מסעדת GREEK SOUVLAKI</span>
+                </div>
+                <div class="contact-slogan" data-lang="contact-slogan">אהבתם? תייגו אותנו!</div>
+            </div>
+        </div>
+    </section>
+
+    <section id="about" class="about-section">
+        <div class="container">
+            <h2 data-lang="about-title">אודותינו</h2>
+            <p data-lang="about-text">חוויה קולינרית יוונית אמיתית בלב כפר יאסיף. אנו מביאים את הטעמים האותנטיים של יוון עם מתכונים מסורתיים שעוברים במשפחה מדור לדור. המסעדה שלנו מציעה אווירה חמה ומזמינה, שירות מעולה וחומרי גלם טריים ואיכותיים.</p>
+            <div class="features">
+                <div class="feature">
+                    <h3>🍖 <span data-lang="quality-title">בשרים איכותיים</span></h3>
+                    <p data-lang="quality-desc">בשרים טריים ואיכותיים מספקים מובחרים</p>
+                </div>
+                <div class="feature">
+                    <h3>🌿 <span data-lang="fresh-title">חומרי גלם טריים</span></h3>
+                    <p data-lang="fresh-desc">ירקות ותבלינים טריים מדי יום</p>
+                </div>
+                <div class="feature">
+                    <h3>👨‍🍳 <span data-lang="chef-title">מתכונים מסורתיים</span></h3>
+                    <p data-lang="chef-desc">שיטות בישול יווניות אותנטיות</p>
+                </div>
+                <div class="feature">
+                    <h3>🏛️ <span data-lang="atmosphere-title">אווירה יוונית</span></h3>
+                    <p data-lang="atmosphere-desc">עיצוב ים תיכוני ומוזיקה יוונית</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="gallery-section">
+        <div class="container">
+            <h2 data-lang="gallery-title">גלריה</h2>
+            <p data-lang="gallery-subtitle">טעימה מהאווירה והמנות שלנו</p>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&h=300&fit=crop" alt="Restaurant atmosphere" width="400" height="300" loading="lazy" decoding="async" fetchpriority="low"
+                 srcset="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&h=300&fit=crop 400w,
+                         https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800&h=600&fit=crop 800w,
+                         https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=1200&h=900&fit=crop 1200w"
+                 sizes="(max-width: 600px) 90vw, 400px">
+                </div>
+                <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=400&h=300&fit=crop" alt="Souvlaki plate" width="400" height="300" loading="lazy" decoding="async" fetchpriority="low"
+                 srcset="https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=400&h=300&fit=crop 400w,
+                         https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=800&h=600&fit=crop 800w,
+                         https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=1200&h=900&fit=crop 1200w"
+                 sizes="(max-width: 600px) 90vw, 400px">
+                </div>
+                <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400&h=300&fit=crop" alt="Greek salad" width="400" height="300" loading="lazy" decoding="async" fetchpriority="low"
+                 srcset="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400&h=300&fit=crop 400w,
+                         https://images.unsplash.com/photo-1540420773420-3366772f4999?w=800&h=600&fit=crop 800w,
+                         https://images.unsplash.com/photo-1540420773420-3366772f4999?w=1200&h=900&fit=crop 1200w"
+                 sizes="(max-width: 600px) 90vw, 400px">
+                </div>
+                <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1544124094-8aea0374da93?w=400&h=300&fit=crop" alt="Restaurant interior" width="400" height="300" loading="lazy" decoding="async" fetchpriority="low"
+                 srcset="https://images.unsplash.com/photo-1544124094-8aea0374da93?w=400&h=300&fit=crop 400w,
+                         https://images.unsplash.com/photo-1544124094-8aea0374da93?w=800&h=600&fit=crop 800w,
+                         https://images.unsplash.com/photo-1544124094-8aea0374da93?w=1200&h=900&fit=crop 1200w"
+                 sizes="(max-width: 600px) 90vw, 400px">
+                </div>
+                <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&h=300&fit=crop" alt="Greek dishes" width="400" height="300" loading="lazy" decoding="async" fetchpriority="low"
+                 srcset="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&h=300&fit=crop 400w,
+                         https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&h=600&fit=crop 800w,
+                         https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1200&h=900&fit=crop 1200w"
+                 sizes="(max-width: 600px) 90vw, 400px">
+                </div>
+                <div class="gallery-item">
+            <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400&h=300&fit=crop" alt="Dining atmosphere" width="400" height="300" loading="lazy" decoding="async" fetchpriority="low"
+                 srcset="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400&h=300&fit=crop 400w,
+                         https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&h=600&fit=crop 800w,
+                         https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&h=900&fit=crop 1200w"
+                 sizes="(max-width: 600px) 90vw, 400px">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="contact" class="contact-section">
+        <div class="container">
+            <h2 data-lang="contact-title">צור קשר</h2>
+            <div class="reservation-section">
+                <h3 data-lang="reservation-title">הזמנות ופרטים</h3>
+                <p data-lang="reservation-text">להזמנת מקום, אירועים מיוחדים או פרטים נוספים</p>
+                <div class="reservation-buttons">
+                    <a href="tel:04&#8209;812&#8209;2980" class="cta-btn phone-btn">
+                        <span>📞</span>
+                        <span data-lang="call-now">התקשר עכשיו</span>
+                        <span>04&#8209;812&#8209;2980</span>
+                    </a>
+                    <a href="https://wa.me/97248122980" class="cta-btn whatsapp-btn" target="_blank" rel="noopener">
+                        <span>💬</span>
+                        <span data-lang="whatsapp">WhatsApp</span>
+                    </a>
+                </div>
+            </div>
+            <div class="contact-info">
+                <div>
+                    <h3>📍 <span data-lang="location-title">מיקום</span></h3>
+                    <p data-lang="location-text">Road 70, כפר יאסיף</p>
+                    <button type="button" class="map-btn" data-lang="get-directions">קבל הוראות הגעה</button>
+                </div>
+                <div>
+                    <h3>🕐 <span data-lang="hours-title">שעות פתיחה</span></h3>
+                    <p data-lang="hours-text">פתוח כל יום עד 01:00</p>
+                    <p class="hours-note" data-lang="hours-note">מומלץ להזמין מקום מראש</p>
+                </div>
+                <div>
+                    <h3>🎉 <span data-lang="events-title">שירותים נוספים</span></h3>
+                    <p data-lang="events-text">• ישיבה בחוץ<br>• מנות טבעוניות<br>• Wi-Fi חינם</p>
+                    <p data-lang="events-contact">מחיר לאדם: ₪20-40</p>
+                </div>
+                <div>
+                    <h3>📱 <span data-lang="social-title">עקבו אחרינו</span></h3>
+                    <p class="social-links">
+                        <a href="https://www.instagram.com/greek.souvlakii" target="_blank" rel="noopener">Instagram</a> |
+                        <a href="https://www.facebook.com/greeksouvlaki" target="_blank" rel="noopener">Facebook</a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p data-lang="footer">&copy; 2024 Greek Souvlaki - סובלאקי יווני | מסעדה יוונית אותנטית בכפר יאסיף</p>
+    </footer>
+
+    <script defer src="translations.js"></script>
+    <script defer src="script.js"></script>
+</body>
+</html>
