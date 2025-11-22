@@ -588,12 +588,35 @@ body.rtl .contact-info {
     direction: rtl;
 }
 
+.logo {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+}
+
+.logo-img {
+    height: 50px;
+    width: auto;
+    object-fit: contain;
+    border-radius: 8px;
+}
+
 .logo h1 {
     color: var(--color-white);
     font-size: 1.8rem;
     font-family: 'Poppins', sans-serif;
     font-weight: 700;
     letter-spacing: -0.5px;
+    margin: 0;
+}
+
+@media (max-width: 768px) {
+    .logo-img {
+        height: 40px;
+    }
+    .logo h1 {
+        font-size: 1.4rem;
+    }
 }
 
 .nav-menu {
