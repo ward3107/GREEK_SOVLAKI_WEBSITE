@@ -39,6 +39,17 @@ function applyTranslations(langData) {
             }
         }
     });
+
+    // Update meta tags for SEO
+    if (langData['meta-title']) {
+        document.title = langData['meta-title'];
+    }
+    if (langData['meta-description']) {
+        let metaDesc = document.querySelector('meta[name="description"]');
+        if (metaDesc) {
+            metaDesc.setAttribute('content', langData['meta-description']);
+        }
+    }
 }
 
 // Update text direction based on language

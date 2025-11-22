@@ -9,6 +9,55 @@
     <link rel="stylesheet" href="styles.css">
     <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
     <link rel="preconnect" href="https://flagcdn.com" crossorigin>
+
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "Restaurant",
+      "name": "Greek Souvlaki",
+      "alternateName": "סובלאקי יווני",
+      "image": "https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=1200",
+      "priceRange": "₪₪",
+      "servesCuisine": ["Greek", "Mediterranean"],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Route 70",
+        "addressLocality": "Kafr Yasif",
+        "addressCountry": "IL"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 32.9556,
+        "longitude": 35.1636
+      },
+      "telephone": "+972-4-8122980",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Thursday", "Friday", "Saturday"],
+          "opens": "13:00",
+          "closes": "01:00"
+        }
+      ],
+      "acceptsReservations": "True",
+      "menu": "https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/#menu",
+      "sameAs": [
+        "https://www.instagram.com/greek.souvlakii",
+        "https://www.facebook.com/greeksouvlaki"
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics Placeholder -->
+    <!-- Replace G-XXXXXXXXXX with your actual Google Analytics ID -->
+    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
+    <script>
+      window.dataLayer = window.dataLayer || [];
+      function gtag(){dataLayer.push(arguments);}
+      gtag('js', new Date());
+      gtag('config', 'G-XXXXXXXXXX');
+    </script> -->
 </head>
 <body>
     <header>
