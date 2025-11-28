@@ -63,6 +63,16 @@ New shortcut.lnk
 __pycache__/
 *.pyc
 
+# Playwright Test Results
+test-results/
+playwright-report/
+playwright/.cache/
+.playwright/
+
+# Visual Regression Snapshots (commit these for baseline!)
+# Uncomment to ignore snapshots (not recommended)
+# tests/**/*-snapshots/
+
 # Package manager locks (optional - uncomment if needed)
 # package-lock.json
 # yarn.lock

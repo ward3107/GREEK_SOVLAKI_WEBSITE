@@ -1,0 +1,62 @@
+{
+  "name": "Greek Souvlaki - מסעדה יוונית אותנטית",
+  "short_name": "Greek Souvlaki",
+  "description": "מסעדה יוונית אותנטית בכפר יאסיף. סובלקי, גירוס ומטעמים יווניים מסורתיים",
+  "start_url": "/",
+  "display": "standalone",
+  "background_color": "#ffffff",
+  "theme_color": "#1e3a8a",
+  "orientation": "portrait-primary",
+  "dir": "rtl",
+  "lang": "he",
+  "icons": [
+    {
+      "src": "restaurant-logo.jpg",
+      "sizes": "512x512",
+      "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "restaurant-logo.jpg",
+      "sizes": "192x192",
+      "type": "image/jpeg",
+      "purpose": "any"
+    }
+  ],
+  "categories": ["food", "restaurant"],
+  "scope": "/",
+  "screenshots": [
+    {
+      "src": "https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=1200",
+      "sizes": "1200x900",
+      "type": "image/jpeg",
+      "label": "Greek Souvlaki Menu"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "View Menu",
+      "short_name": "Menu",
+      "description": "View our full menu",
+      "url": "/#menu",
+      "icons": [
+        {
+          "src": "restaurant-logo.jpg",
+          "sizes": "192x192"
+        }
+      ]
+    },
+    {
+      "name": "Contact Us",
+      "short_name": "Contact",
+      "description": "Get in touch with us",
+      "url": "/#contact",
+      "icons": [
+        {
+          "src": "restaurant-logo.jpg",
+          "sizes": "192x192"
+        }
+      ]
+    }
+  ]
+}

@@ -6,7 +6,18 @@
     <style id="i18n-hide">body{visibility:hidden}</style>
     <title>Greek Souvlaki - סובלאקי יווני | מסעדה יוונית אותנטית בכפר יאסיף</title>
     <meta name="description" content="מסעדה יוונית אותנטית בכפר יאסיף. סובלקי, גירוס ומטעמים יווניים מסורתיים באווירה חמה ומזמינה">
+
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#1e3a8a">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Greek Souvlaki">
+    <link rel="apple-touch-icon" href="restaurant-logo.jpg">
+    <link rel="manifest" href="manifest.json">
+
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="animations.css">
+    <link rel="stylesheet" href="accessibility-widget.css">
     <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
     <link rel="preconnect" href="https://flagcdn.com" crossorigin>
 
@@ -114,28 +125,25 @@
     </header>
 
     <section id="home" class="hero">
-        <div class="hero-content">
-            <div class="flags-container">
-                <div class="greek-flag">
-                    <img src="https://flagcdn.com/w320/gr.png" alt="Greek Flag" width="120" height="80">
+        <div class="hero-container">
+            <div class="hero-content parallax-layer" data-speed="0.3">
+                <h2 class="fade-in" data-lang="hero-title">טעמים יווניים אותנטיים בלב כפר יאסיף</h2>
+                <p class="fade-in" data-lang="hero-subtitle">חוויה קולינרית יוונית אמיתית עם מתכונים מסורתיים, חומרי גלם טריים ואווירה ים תיכונית חמה</p>
+                <p class="hero-description fade-in" data-lang="hero-description">
+                    סובלאקי יווני - כפר יאסיף
+                </p>
+                <div class="hero-buttons fade-in">
+                    <button type="button" class="cta-btn pulse-animation" data-lang="view-menu">צפה בתפריט</button>
                 </div>
-            </div>
-            <h2 data-lang="hero-title">טעמים יווניים אותנטיים בלב כפר יאסיף</h2>
-            <p data-lang="hero-subtitle">חוויה קולינרית יוונית אמיתית עם מתכונים מסורתיים, חומרי גלם טריים ואווירה ים תיכונית חמה</p>
-            <p class="hero-description" data-lang="hero-description">
-                סובלאקי יווני - כפר יאסיף
-            </p>
-            <div class="hero-buttons">
-                <button type="button" class="cta-btn" data-lang="view-menu">צפה בתפריט</button>
             </div>
         </div>
     </section>
 
     <!-- Modern Menu Section -->
-<section id="menu" class="menu-section-modern">
+<section id="menu" class="menu-section-modern greek-pattern">
     <div class="container">
-        <h2 data-lang="menu-title">התפריט שלנו</h2>
-        <p class="menu-subtitle" data-lang="menu-subtitle">מבחר עשיר של מנות יווניות מסורתיות</p>
+        <h2 class="fade-in" data-lang="menu-title">התפריט שלנו</h2>
+        <p class="menu-subtitle fade-in" data-lang="menu-subtitle">מבחר עשיר של מנות יווניות מסורתיות</p>
 
         <!-- Category: Souvlaki in Pita -->
         <div class="menu-category-modern">
@@ -351,8 +359,10 @@
             </div>
         </div>
 
-        <!-- Contact Info Footer -->
-        <div class="menu-contact-footer-modern">
+        <!-- Combined Contact Info -->
+        <div id="contact" class="menu-contact-footer-modern">
+            <h3 class="contact-main-title" data-lang="contact-title">צור קשר</h3>
+
             <div class="contact-grid">
                 <div class="contact-item phone-numbers">
                     <div class="phone-title">📞 <span data-lang="contact-call">התקשרו אלינו</span></div>
@@ -360,45 +370,58 @@
                     <a href="tel:052-8921454" class="contact-link phone-link" dir="ltr">052‑892‑1454</a>
                     <a href="tel:054-2001235" class="contact-link phone-link" dir="ltr">054‑200‑1235</a>
                 </div>
-                <div class="contact-item social-links">
-                    <div class="social-title">📱 <span data-lang="contact-social">עקבו אחרינו</span></div>
-                    <a href="https://www.instagram.com/GREEK.SOUVLAKII" target="_blank" rel="noopener noreferrer" class="contact-link instagram-link">
-                        <span class="icon">📷</span>
-                        <span>Instagram</span>
-                    </a>
-                    <a href="https://www.facebook.com/GREEK.SOUVLAKII" target="_blank" rel="noopener noreferrer" class="contact-link facebook-link">
-                        <span class="icon">📘</span>
-                        <span>Facebook</span>
-                    </a>
+                <div class="contact-item">
+                    <div class="phone-title">📍 <span data-lang="location-title">מיקום</span></div>
+                    <p data-lang="location-text">Road 70, כפר יאסיף</p>
+                    <button type="button" class="map-btn" data-lang="get-directions">קבל הוראות הגעה</button>
                 </div>
-                <div class="contact-item restaurant-info">
-                    <span class="icon">🏛️</span>
-                    <span data-lang="contact-name">מסעדת GREEK SOUVLAKI</span>
+                <div class="contact-item">
+                    <div class="phone-title">🕐 <span data-lang="hours-title">שעות פתיחה</span></div>
+                    <p data-lang="hours-text">פתוח כל יום עד 01:00</p>
                 </div>
+            </div>
+
+            <div class="contact-actions">
+                <a href="https://wa.me/97248122980" class="cta-btn whatsapp-btn" target="_blank" rel="noopener">
+                    <span>💬</span>
+                    <span data-lang="whatsapp">WhatsApp</span>
+                </a>
+            </div>
+
+            <div class="contact-social-footer">
+                <span data-lang="contact-social">עקבו אחרינו:</span>
+                <a href="https://www.instagram.com/GREEK.SOUVLAKII" target="_blank" rel="noopener noreferrer" class="contact-link instagram-link">
+                    <span class="icon">📷</span>
+                    <span>Instagram</span>
+                </a>
+                <a href="https://www.facebook.com/GREEK.SOUVLAKII" target="_blank" rel="noopener noreferrer" class="contact-link facebook-link">
+                    <span class="icon">📘</span>
+                    <span>Facebook</span>
+                </a>
             </div>
             <div class="contact-slogan" data-lang="contact-slogan">אהבתם? תייגו אותנו!</div>
         </div>
     </div>
 </section>
 
-    <section id="about" class="about-section">
+    <section id="about" class="about-section glass-card">
         <div class="container">
-            <h2 data-lang="about-title">אודותינו</h2>
-            <p data-lang="about-text">חוויה קולינרית יוונית אמיתית בלב כפר יאסיף. אנו מביאים את הטעמים האותנטיים של יוון עם מתכונים מסורתיים שעוברים במשפחה מדור לדור. המסעדה שלנו מציעה אווירה חמה ומזמינה, שירות מעולה וחומרי גלם טריים ואיכותיים.</p>
+            <h2 class="fade-in" data-lang="about-title">אודותינו</h2>
+            <p class="fade-in" data-lang="about-text">חוויה קולינרית יוונית אמיתית בלב כפר יאסיף. אנו מביאים את הטעמים האותנטיים של יוון עם מתכונים מסורתיים שעוברים במשפחה מדור לדור. המסעדה שלנו מציעה אווירה חמה ומזמינה, שירות מעולה וחומרי גלם טריים ואיכותיים.</p>
             <div class="features">
-                <div class="feature">
+                <div class="feature scale-in stagger-1">
                     <h3>🍖 <span data-lang="quality-title">בשרים איכותיים</span></h3>
                     <p data-lang="quality-desc">בשרים טריים ואיכותיים מספקים מובחרים</p>
                 </div>
-                <div class="feature">
+                <div class="feature scale-in stagger-2">
                     <h3>🌿 <span data-lang="fresh-title">חומרי גלם טריים</span></h3>
                     <p data-lang="fresh-desc">ירקות ותבלינים טריים מדי יום</p>
                 </div>
-                <div class="feature">
+                <div class="feature scale-in stagger-3">
                     <h3>👨‍🍳 <span data-lang="chef-title">מתכונים מסורתיים</span></h3>
                     <p data-lang="chef-desc">שיטות בישול יווניות אותנטיות</p>
                 </div>
-                <div class="feature">
+                <div class="feature scale-in stagger-4">
                     <h3>🏛️ <span data-lang="atmosphere-title">אווירה יוונית</span></h3>
                     <p data-lang="atmosphere-desc">עיצוב ים תיכוני ומוזיקה יוונית</p>
                 </div>
@@ -457,56 +480,24 @@
         </div>
     </section>
 
-    <section id="contact" class="contact-section">
-        <div class="container">
-            <h2 data-lang="contact-title">צור קשר</h2>
-            <div class="reservation-section">
-                <h3 data-lang="reservation-title">הזמנות ופרטים</h3>
-                <p data-lang="reservation-text">להזמנת מקום, אירועים מיוחדים או פרטים נוספים</p>
-                <div class="reservation-buttons">
-                    <a href="tel:04&#8209;812&#8209;2980" class="cta-btn phone-btn">
-                        <span>📞</span>
-                        <span data-lang="call-now">התקשר עכשיו</span>
-                        <span dir="ltr">04&#8209;812&#8209;2980</span>
-                    </a>
-                    <a href="https://wa.me/97248122980" class="cta-btn whatsapp-btn" target="_blank" rel="noopener">
-                        <span>💬</span>
-                        <span data-lang="whatsapp">WhatsApp</span>
-                    </a>
-                </div>
-            </div>
-            <div class="contact-info">
-                <div>
-                    <h3>📍 <span data-lang="location-title">מיקום</span></h3>
-                    <p data-lang="location-text">Road 70, כפר יאסיף</p>
-                    <button type="button" class="map-btn" data-lang="get-directions">קבל הוראות הגעה</button>
-                </div>
-                <div>
-                    <h3>🕐 <span data-lang="hours-title">שעות פתיחה</span></h3>
-                    <p data-lang="hours-text">פתוח כל יום עד 01:00</p>
-                    <p class="hours-note" data-lang="hours-note">מומלץ להזמין מקום מראש</p>
-                </div>
-                <div>
-                    <h3>🎉 <span data-lang="events-title">שירותים נוספים</span></h3>
-                    <p data-lang="events-text">• ישיבה בחוץ<br>• מנות טבעוניות<br>• Wi-Fi חינם</p>
-                </div>
-                <div>
-                    <h3>📱 <span data-lang="social-title">עקבו אחרינו</span></h3>
-                    <p class="social-links">
-                        <a href="https://www.instagram.com/greek.souvlakii" target="_blank" rel="noopener">Instagram</a> |
-                        <a href="https://www.facebook.com/greeksouvlaki" target="_blank" rel="noopener">Facebook</a>
-                    </p>
-                </div>
-            </div>
-        </div>
-    </section>
-
     <footer>
         <div class="footer-content" style="max-width: 1200px; margin: 0 auto; padding: 2rem;">
             <div class="footer-legal-links" style="margin-bottom: 1.5rem; text-align: center;">
                 <a href="terms.html" style="color: #fff; margin: 0 1rem; text-decoration: none; opacity: 0.9; transition: opacity 0.3s;">תנאי שימוש | Terms</a>
                 <a href="privacy.html" style="color: #fff; margin: 0 1rem; text-decoration: none; opacity: 0.9; transition: opacity 0.3s;">פרטיות | Privacy</a>
                 <a href="accessibility.html" style="color: #fff; margin: 0 1rem; text-decoration: none; opacity: 0.9; transition: opacity 0.3s;">נגישות | Accessibility</a>
+            </div>
+            <div id="accessibility-badge-container" style="text-align: center; margin: 1rem 0;">
+                <a href="accessibility.html" class="a11y-badge" aria-label="Accessibility Statement">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="12" cy="12" r="10"></circle>
+                        <circle cx="12" cy="8" r="1"></circle>
+                        <line x1="12" y1="10" x2="12" y2="16"></line>
+                        <line x1="8" y1="14" x2="16" y2="14"></line>
+                    </svg>
+                    <span>אתר נגיש | Accessible Website</span>
+                    <button type="button" class="a11y-badge-close" aria-label="Hide accessibility badge" title="Hide">✕</button>
+                </a>
             </div>
             <p data-lang="footer" style="margin: 0;">&copy; 2024 Greek Souvlaki - סובלאקי יווני | מסעדה יוונית אותנטית בכפר יאסיף</p>
         </div>
@@ -516,5 +507,22 @@
     <script defer src="script.js"></script>
     <script defer src="toggles.js"></script>
     <script src="scroll-button.js"></script>
+    <script defer src="accessibility-widget.js"></script>
+    <script defer src="wow-animations.js"></script>
+
+    <!-- Service Worker Registration -->
+    <script>
+        if ('serviceWorker' in navigator) {
+            window.addEventListener('load', () => {
+                navigator.serviceWorker.register('/service-worker.js')
+                    .then((registration) => {
+                        console.log('Service Worker registered successfully:', registration.scope);
+                    })
+                    .catch((error) => {
+                        console.log('Service Worker registration failed:', error);
+                    });
+            });
+        }
+    </script>
 </body>
 </html>
