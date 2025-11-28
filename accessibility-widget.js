@@ -35,6 +35,30 @@
           localStorage.setItem('a11y-badge-hidden', 'true');
         });
       }
+
+      // Hide badge on scroll
+      const toggle = document.getElementById('a11y-toggle');
+      let lastScrollY = window.scrollY;
+
+      window.addEventListener('scroll', () => {
+        const currentScrollY = window.scrollY;
+
+        if (currentScrollY > 100) {
+          // Scrolled down - hide the toggle button
+          if (toggle) {
+            toggle.style.opacity = '0';
+            toggle.style.pointerEvents = 'none';
+          }
+        } else {
+          // At top - show the toggle button
+          if (toggle) {
+            toggle.style.opacity = '1';
+            toggle.style.pointerEvents = 'auto';
+          }
+        }
+
+        lastScrollY = currentScrollY;
+      }, { passive: true });
     },
 
     hideBadge() {
@@ -111,12 +135,16 @@
         const isOpen = panel.classList.toggle('open');
         toggle.setAttribute('aria-expanded', isOpen);
         widgetElement.setAttribute('aria-hidden', !isOpen);
+        // Lock/unlock body scroll
+        document.body.style.overflow = isOpen ? 'hidden' : '';
       });
 
       close.addEventListener('click', () => {
         panel.classList.remove('open');
         toggle.setAttribute('aria-expanded', 'false');
         widgetElement.setAttribute('aria-hidden', 'true');
+        // Unlock body scroll
+        document.body.style.overflow = '';
       });
 
       // Action buttons
@@ -133,6 +161,19 @@
           panel.classList.remove('open');
           toggle.setAttribute('aria-expanded', 'false');
           widgetElement.setAttribute('aria-hidden', 'true');
+          // Unlock body scroll
+          document.body.style.overflow = '';
+        }
+      });
+
+      // Close on click outside
+      document.addEventListener('click', (e) => {
+        if (panel.classList.contains('open') && !widgetElement.contains(e.target)) {
+          panel.classList.remove('open');
+          toggle.setAttribute('aria-expanded', 'false');
+          widgetElement.setAttribute('aria-hidden', 'true');
+          // Unlock body scroll
+          document.body.style.overflow = '';
         }
       });
     },

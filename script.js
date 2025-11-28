@@ -422,7 +422,7 @@ document.addEventListener('DOMContentLoaded', () => {
   try { enhanceImages(); } catch(e){}
   try { normalizePhones(); } catch(e){}
   try { menuScrollArrow(); } catch(e){}
-  try { themeToggle(); } catch(e){}
+  // themeToggle handled by toggles.js
   
   function menuScrollArrow(){
     const btn = document.createElement('button');
@@ -475,8 +475,8 @@ document.addEventListener('DOMContentLoaded', () => {
       }
     });
   }
-  
-function themeToggle() {
+
+  function themeToggle() {
     const btn = qs('#theme-toggle');
     if (!btn) return;
 

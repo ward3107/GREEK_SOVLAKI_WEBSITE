@@ -164,24 +164,54 @@
     }
 
     // ============================================
-    // MENU CARD INTERACTIONS
+    // MENU CARD INTERACTIONS & FLOW ANIMATIONS
     // ============================================
     function initMenuCardEffects() {
-        const menuCards = document.querySelectorAll('.menu-card');
+        // Process each menu grid separately
+        const menuGrids = document.querySelectorAll('.menu-card-grid');
 
-        menuCards.forEach(card => {
-            // Add classes for animations
-            card.classList.add('menu-item-wow');
+        menuGrids.forEach(grid => {
+            const cards = grid.querySelectorAll('.menu-card');
 
-            // Add shine effect on hover
-            card.addEventListener('mouseenter', function() {
-                this.classList.add('shine-effect');
-            });
+            cards.forEach((card, index) => {
+                // Remove any existing flow/stagger classes
+                card.classList.remove('flow-from-left', 'flow-from-right', 'flow-from-top', 'flow-from-bottom');
+                card.classList.remove('stagger-1', 'stagger-2', 'stagger-3', 'stagger-4', 'stagger-5', 'stagger-6');
 
-            card.addEventListener('mouseleave', function() {
-                this.classList.remove('shine-effect');
+                // Add base class
+                card.classList.add('menu-item-wow');
+
+                // Alternating pattern: odd index from right, even index from left
+                const direction = index % 2 === 0 ? 'flow-from-right' : 'flow-from-left';
+                card.classList.add(direction);
+
+                // Add stagger delay
+                const staggerClass = `stagger-${(index % 3) + 1}`;
+                card.classList.add(staggerClass);
+
+                // Add shine effect on hover
+                card.addEventListener('mouseenter', function() {
+                    this.classList.add('shine-effect');
+                });
+
+                card.addEventListener('mouseleave', function() {
+                    this.classList.remove('shine-effect');
+                });
             });
         });
+
+        // Observe menu cards for scroll animation - only once
+        const menuObserver = new IntersectionObserver((entries, observer) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                    // Stop observing after animation plays once
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1, rootMargin: '0px 0px -50px 0px' });
+
+        document.querySelectorAll('.menu-card').forEach(card => menuObserver.observe(card));
     }
 
     // ============================================

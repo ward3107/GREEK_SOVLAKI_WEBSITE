@@ -26,7 +26,7 @@
     --color-greek-white: #f8fafc;
     --color-text: #1e293b;
     --color-muted: #64748b;
-    --color-bg: #f1f5f9;
+    --color-bg: #fefeff;
     --color-black: #0f172a;
     --color-surface: #ffffff;
     --color-border: #e2e8f0;
@@ -522,7 +522,7 @@ body.rtl .contact-info {
 :root[data-theme="light"] {
   --color-text: #1e293b;
   --color-muted: #64748b;
-  --color-bg: #f1f5f9;
+  --color-bg: #fefeff;
   --color-surface: #ffffff;
   --color-dark: #1e293b;
   --color-border: #e2e8f0;
@@ -692,10 +692,13 @@ body.rtl .contact-info {
     text-decoration: none;
     font-weight: 500;
     transition: all var(--transition-base);
-    padding: var(--space-2) var(--space-4);
-    border-radius: var(--radius-md);
+    padding: 0.6rem 1.2rem;
+    border-radius: 25px;
     font-size: 15px;
     position: relative;
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
 .nav-menu a::after {
@@ -711,21 +714,25 @@ body.rtl .contact-info {
 }
 
 .nav-menu a:hover {
-    background: var(--glass-bg);
+    background: rgba(255, 255, 255, 0.2);
     transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
 }
 
 .nav-menu a:hover::after {
-    width: 70%;
+    width: 0;
 }
 
 .nav-menu a.active {
-    background: rgba(255, 255, 255, 0.2);
-    box-shadow: var(--shadow-sm);
+    background: var(--color-white);
+    color: var(--color-primary);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+    border-color: transparent;
 }
 
 .nav-menu a.active::after {
-    width: 70%;
+    width: 0;
 }
 
 .hamburger {
@@ -881,7 +888,7 @@ body.rtl .contact-info {
     }
 
     .hero-content h2 {
-        font-size: 2.5rem;
+        font-size: 3.5rem;
     }
 }
 
@@ -892,13 +899,13 @@ body.rtl .contact-info {
     }
 
     .hero-content h2 {
-        font-size: 2rem;
+        font-size: 3rem;
     }
 }
 
 .hero-content h2 {
     font-family: 'Poppins', sans-serif;
-    font-size: 3.5rem;
+    font-size: 5.5rem;
     margin-bottom: 1.5rem;
     font-weight: 800;
     letter-spacing: -1px;
@@ -907,17 +914,17 @@ body.rtl .contact-info {
 }
 
 .hero-content p {
-    font-size: 1.6rem;
+    font-size: 2.5rem;
     margin-bottom: 2rem;
     text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
 }
 
 .hero-description {
-    font-size: 1.35rem !important;
+    font-size: 2rem !important;
     margin-bottom: 1.5rem !important;
     line-height: 1.7;
     opacity: 0.97;
-    max-width: 750px;
+    max-width: 850px;
     margin-left: auto;
     margin-right: auto;
     text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
@@ -1255,13 +1262,19 @@ a.cta-btn {
 .feature h3 {
     font-family: 'Poppins', sans-serif;
     margin-bottom: 1rem;
-    color: var(--color-white);
+    color: var(--color-primary);
     font-size: 1.7rem;
     font-weight: 600;
 }
 
 .feature h3 span {
     font-size: 1.5rem;
+}
+
+.feature p {
+    color: var(--color-text);
+    font-size: 1.1rem;
+    line-height: 1.6;
 }
 
 /* Contact Section - Modern Premium */
@@ -1301,6 +1314,44 @@ footer {
     position: relative;
     z-index: 1;
     box-shadow: var(--shadow-lg);
+}
+
+/* Compact Footer */
+.footer-compact {
+    background: var(--gradient-primary);
+    color: white;
+    text-align: center;
+    padding: 0.75rem 1rem;
+}
+
+.footer-compact .footer-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 0.5rem;
+    margin-bottom: 0.25rem;
+    font-size: 0.85rem;
+}
+
+.footer-compact .footer-row a {
+    color: white;
+    text-decoration: none;
+    opacity: 0.9;
+}
+
+.footer-compact .footer-row a:hover {
+    opacity: 1;
+    text-decoration: underline;
+}
+
+.footer-compact .footer-row span {
+    opacity: 0.5;
+}
+
+.footer-compact p {
+    margin: 0;
+    font-size: 0.8rem;
+    opacity: 0.8;
 }
 
 /* Responsive Design */
@@ -1790,7 +1841,7 @@ footer {
 
 /* Featured Card (for premium items) - Premium Glassmorphism */
 .menu-card.featured {
-    background: linear-gradient(135deg, rgba(37, 99, 235, 0.08) 0%, rgba(37, 99, 235, 0.03) 100%);
+    background: white;
     border: 2px solid var(--color-primary);
     box-shadow: var(--shadow-primary-md);
 }
@@ -1828,11 +1879,112 @@ footer {
     text-align: center;
 }
 
+/* Compact Contact Footer */
+.menu-contact-footer-compact {
+    background: var(--gradient-primary);
+    color: white;
+    padding: 1.5rem 2rem;
+    border-radius: var(--radius-xl);
+    margin-top: 3rem;
+}
+
+.contact-row {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 2rem;
+    flex-wrap: wrap;
+    margin-bottom: 1rem;
+}
+
+.contact-col {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 1rem;
+}
+
+.contact-icon {
+    font-size: 1.2rem;
+}
+
+.contact-phones-inline {
+    display: flex;
+    gap: 0.75rem;
+}
+
+.contact-phones-inline a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.2s;
+}
+
+.contact-phones-inline a:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+}
+
+.contact-buttons-row {
+    display: flex;
+    justify-content: center;
+    gap: 0.75rem;
+    flex-wrap: wrap;
+}
+
+.contact-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3rem;
+    padding: 0.5rem 1rem;
+    border-radius: var(--radius-md);
+    color: white;
+    text-decoration: none;
+    font-size: 0.9rem;
+    font-weight: 500;
+    transition: all 0.2s;
+}
+
+.contact-btn.whatsapp {
+    background: #25D366;
+}
+
+.contact-btn.instagram {
+    background: linear-gradient(135deg, #833AB4, #FD1D1D, #F77737);
+}
+
+.contact-btn.facebook {
+    background: #1877F2;
+}
+
+.contact-btn:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0,0,0,0.3);
+}
+
+@media (max-width: 600px) {
+    .contact-row {
+        flex-direction: column;
+        gap: 0.75rem;
+    }
+
+    .contact-buttons-row {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .contact-btn {
+        width: 100%;
+        max-width: 200px;
+        justify-content: center;
+    }
+}
+
 .contact-grid {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 2rem;
-    margin-bottom: 2rem;
+    gap: 1rem;
+    margin-bottom: 1rem;
 }
 
 .contact-item {
@@ -1840,7 +1992,7 @@ footer {
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    gap: 1rem;
+    gap: 0.5rem;
     font-size: 1.1rem;
 }
 
