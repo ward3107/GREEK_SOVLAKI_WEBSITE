@@ -428,3 +428,213 @@ body {
     opacity: 1;
   }
 }
+
+/* ============================================
+   FLOWING SECTION ANIMATIONS
+   ============================================ */
+
+/* Section Reveal - Slide Up with Fade */
+.section-reveal {
+  opacity: 0;
+  transform: translateY(80px);
+  transition: opacity 1s ease-out, transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.section-reveal.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Section Tilt on Scroll */
+.section-tilt {
+  opacity: 0;
+  transform: perspective(1000px) rotateX(10deg) translateY(60px);
+  transition: opacity 1.2s ease-out, transform 1.2s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.section-tilt.visible {
+  opacity: 1;
+  transform: perspective(1000px) rotateX(0deg) translateY(0);
+}
+
+/* Section Zoom In */
+.section-zoom {
+  opacity: 0;
+  transform: scale(0.9);
+  transition: opacity 1s ease-out, transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.section-zoom.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* Wave Float Animation for Sections */
+.wave-float {
+  animation: waveFloat 8s ease-in-out infinite;
+}
+
+@keyframes waveFloat {
+  0%, 100% { transform: translateY(0) rotate(0deg); }
+  25% { transform: translateY(-10px) rotate(0.5deg); }
+  50% { transform: translateY(0) rotate(0deg); }
+  75% { transform: translateY(-5px) rotate(-0.5deg); }
+}
+
+/* Slide from Side with Rotation */
+.slide-rotate-left {
+  opacity: 0;
+  transform: translateX(-120px) rotate(-8deg);
+  transition: opacity 1.2s ease-out, transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.slide-rotate-left.visible {
+  opacity: 1;
+  transform: translateX(0) rotate(0deg);
+}
+
+.slide-rotate-right {
+  opacity: 0;
+  transform: translateX(120px) rotate(8deg);
+  transition: opacity 1.2s ease-out, transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.slide-rotate-right.visible {
+  opacity: 1;
+  transform: translateX(0) rotate(0deg);
+}
+
+/* Elastic Pop In */
+.elastic-pop {
+  opacity: 0;
+  transform: scale(0.5);
+  transition: opacity 0.8s ease-out, transform 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.elastic-pop.visible {
+  opacity: 1;
+  transform: scale(1);
+}
+
+/* 3D Flip Reveal */
+.flip-reveal {
+  opacity: 0;
+  transform: perspective(1000px) rotateY(-30deg);
+  transition: opacity 1s ease-out, transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.flip-reveal.visible {
+  opacity: 1;
+  transform: perspective(1000px) rotateY(0);
+}
+
+/* Blur to Clear */
+.blur-reveal {
+  opacity: 0;
+  filter: blur(20px);
+  transform: translateY(40px);
+  transition: opacity 1s ease-out, filter 1s ease-out, transform 1s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.blur-reveal.visible {
+  opacity: 1;
+  filter: blur(0);
+  transform: translateY(0);
+}
+
+/* Cascade Wave - for multiple items */
+.cascade-wave {
+  opacity: 0;
+  transform: translateY(60px) scale(0.95);
+  transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.cascade-wave.visible {
+  opacity: 1;
+  transform: translateY(0) scale(1);
+}
+
+/* Cascade delays */
+.cascade-1 { transition-delay: 0.05s; }
+.cascade-2 { transition-delay: 0.1s; }
+.cascade-3 { transition-delay: 0.15s; }
+.cascade-4 { transition-delay: 0.2s; }
+.cascade-5 { transition-delay: 0.25s; }
+.cascade-6 { transition-delay: 0.3s; }
+.cascade-7 { transition-delay: 0.35s; }
+.cascade-8 { transition-delay: 0.4s; }
+
+/* Floating Shadow Effect */
+.float-shadow {
+  animation: floatShadow 4s ease-in-out infinite;
+}
+
+@keyframes floatShadow {
+  0%, 100% {
+    transform: translateY(0);
+    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  }
+  50% {
+    transform: translateY(-15px);
+    box-shadow: 0 25px 60px rgba(0, 0, 0, 0.15);
+  }
+}
+
+/* Breathing Scale */
+.breathe {
+  animation: breathe 4s ease-in-out infinite;
+}
+
+@keyframes breathe {
+  0%, 100% { transform: scale(1); }
+  50% { transform: scale(1.02); }
+}
+
+/* Swirl In */
+.swirl-in {
+  opacity: 0;
+  transform: rotate(-180deg) scale(0);
+  transition: opacity 1s ease-out, transform 1.2s cubic-bezier(0.34, 1.56, 0.64, 1);
+}
+
+.swirl-in.visible {
+  opacity: 1;
+  transform: rotate(0deg) scale(1);
+}
+
+/* Bounce In */
+.bounce-in {
+  opacity: 0;
+  transform: translateY(100px);
+  transition: opacity 0.6s ease-out, transform 1s cubic-bezier(0.68, -0.55, 0.265, 1.55);
+}
+
+.bounce-in.visible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Slide Up Stagger for Content */
+.slide-up-content > * {
+  opacity: 0;
+  transform: translateY(40px);
+  transition: opacity 0.8s ease-out, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.slide-up-content.visible > *:nth-child(1) { transition-delay: 0.1s; opacity: 1; transform: translateY(0); }
+.slide-up-content.visible > *:nth-child(2) { transition-delay: 0.2s; opacity: 1; transform: translateY(0); }
+.slide-up-content.visible > *:nth-child(3) { transition-delay: 0.3s; opacity: 1; transform: translateY(0); }
+.slide-up-content.visible > *:nth-child(4) { transition-delay: 0.4s; opacity: 1; transform: translateY(0); }
+.slide-up-content.visible > *:nth-child(5) { transition-delay: 0.5s; opacity: 1; transform: translateY(0); }
+
+/* Morph Background */
+.morph-bg {
+  animation: morphBg 10s ease-in-out infinite;
+}
+
+@keyframes morphBg {
+  0%, 100% { border-radius: 60% 40% 30% 70% / 60% 30% 70% 40%; }
+  25% { border-radius: 30% 60% 70% 40% / 50% 60% 30% 60%; }
+  50% { border-radius: 50% 60% 30% 60% / 30% 40% 70% 60%; }
+  75% { border-radius: 60% 40% 60% 30% / 70% 60% 40% 30%; }
+}

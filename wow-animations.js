@@ -19,7 +19,11 @@
     }, observerOptions);
 
     function initScrollAnimations() {
-        const elements = document.querySelectorAll('.fade-in, .slide-in-left, .slide-in-right, .scale-in, .curtain-reveal');
+        const elements = document.querySelectorAll(
+            '.fade-in, .slide-in-left, .slide-in-right, .scale-in, .curtain-reveal, ' +
+            '.section-reveal, .section-tilt, .section-zoom, .slide-rotate-left, .slide-rotate-right, ' +
+            '.elastic-pop, .flip-reveal, .blur-reveal, .cascade-wave, .swirl-in, .bounce-in, .slide-up-content'
+        );
         elements.forEach(el => observer.observe(el));
     }
 

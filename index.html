@@ -71,6 +71,14 @@
     </script> -->
 </head>
 <body>
+    <!-- Floating Side Logos -->
+    <div class="side-logo side-logo-left" aria-hidden="true">
+        <img src="restaurant-logo.jpg" alt="" loading="lazy">
+    </div>
+    <div class="side-logo side-logo-right" aria-hidden="true">
+        <img src="restaurant-logo.jpg" alt="" loading="lazy">
+    </div>
+
     <header>
         <nav class="navbar">
             <div class="container">
@@ -125,34 +133,39 @@
     </header>
 
     <section id="home" class="hero">
-        <div class="hero-container">
-            <div class="hero-content parallax-layer" data-speed="0.3">
-                <h2 class="fade-in" data-lang="hero-title">טעמים יווניים אותנטיים בלב כפר יאסיף</h2>
-                <p class="fade-in" data-lang="hero-subtitle">חוויה קולינרית יוונית אמיתית עם מתכונים מסורתיים, חומרי גלם טריים ואווירה ים תיכונית חמה</p>
-                <p class="hero-description fade-in" data-lang="hero-description">
-                    סובלאקי יווני - כפר יאסיף
-                </p>
-                <div class="hero-buttons fade-in">
-                    <button type="button" class="cta-btn pulse-animation" data-lang="view-menu">צפה בתפריט</button>
-                </div>
+        <!-- Content on Left Side -->
+        <div class="hero-content">
+            <h2 data-lang="hero-title">סובלאקי יווני - כפר יאסיף</h2>
+            <p data-lang="hero-subtitle">טעמים יווניים אותנטיים בלב כפר יאסיף</p>
+            <p class="hero-description" data-lang="hero-description">
+                חוויה קולינרית יוונית אמיתית עם מתכונים מסורתיים, חומרי גלם טריים ואווירה ים תיכונית חמה
+            </p>
+            <div class="hero-buttons">
+                <button type="button" class="cta-btn pulse-animation" data-lang="view-menu">צפה בתפריט</button>
             </div>
         </div>
+
     </section>
 
-    <!-- Modern Menu Section -->
-<section id="menu" class="menu-section-modern greek-pattern">
+    <!-- Modern Menu Section with Tabs -->
+<section id="menu" class="menu-section-modern greek-pattern section-reveal">
     <div class="container">
         <h2 class="fade-in" data-lang="menu-title">התפריט שלנו</h2>
         <p class="menu-subtitle fade-in" data-lang="menu-subtitle">מבחר עשיר של מנות יווניות מסורתיות</p>
 
-        <!-- Category: Souvlaki in Pita -->
-        <div class="menu-category-modern">
-            <div class="category-header-img">
-                <img src="https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=1200&h=250&fit=crop" alt="Souvlaki in Pita" loading="lazy">
-                <div class="category-overlay">
-                    <h3><span>🥙</span> <span data-lang="cat-pita-title">סובלאקי בפיתה</span></h3>
-                    <p class="price-range">30–40 ₪</p>
-                </div>
+        <!-- Menu Tabs Navigation -->
+        <div class="menu-tabs">
+            <button class="menu-tab active" data-tab="pita">🥙 <span data-lang="cat-pita-title">סובלאקי בפיתה</span></button>
+            <button class="menu-tab" data-tab="plates">🍽 <span data-lang="cat-plates-title">צלחות</span></button>
+            <button class="menu-tab" data-tab="platters">🍖 <span data-lang="cat-platters-title">מגשים</span></button>
+            <button class="menu-tab" data-tab="more">🍕 <span data-lang="tab-more">עוד</span></button>
+            <button class="menu-tab" data-tab="drinks">🥤 <span data-lang="cat-drinks-title">משקאות</span></button>
+        </div>
+
+        <!-- Tab Content: Souvlaki in Pita -->
+        <div class="menu-tab-content active" id="tab-pita">
+            <div class="tab-header">
+                <span class="tab-price-range">30–40 ₪</span>
             </div>
             <div class="menu-card-grid">
                 <div class="menu-card">
@@ -198,18 +211,15 @@
                 <div class="menu-card special">
                     <h4 data-lang="item-double-skewer">Double Skewer</h4>
                     <p data-lang="desc-double-skewer">תוספת שיפוד נוסף</p>
-                    <span class="price">15 ₪</span>
+                    <span class="price">+15 ₪</span>
                 </div>
             </div>
         </div>
 
-        <!-- Category: Souvlaki Plates -->
-        <div class="menu-category-modern">
-            <div class="category-header-img">
-                <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=1200&h=250&fit=crop" alt="Souvlaki Plates" loading="lazy">
-                <div class="category-overlay">
-                    <h3><span>🍽</span> <span data-lang="cat-plates-title">צלחות סובלאקי</span></h3>
-                </div>
+        <!-- Tab Content: Plates -->
+        <div class="menu-tab-content" id="tab-plates">
+            <div class="tab-header">
+                <span class="tab-price-range">35–40 ₪</span>
             </div>
             <div class="menu-card-grid">
                 <div class="menu-card">
@@ -225,13 +235,10 @@
             </div>
         </div>
 
-        <!-- Category: Meat Platters -->
-        <div class="menu-category-modern">
-            <div class="category-header-img">
-                <img src="https://images.unsplash.com/photo-1529692236671-f1f6cf9683ba?w=1200&h=250&fit=crop" alt="Meat Platters" loading="lazy">
-                <div class="category-overlay">
-                    <h3><span>🍖</span> <span data-lang="cat-platters-title">מגשי בשרים</span></h3>
-                </div>
+        <!-- Tab Content: Platters -->
+        <div class="menu-tab-content" id="tab-platters">
+            <div class="tab-header">
+                <span class="tab-price-range">150–250 ₪</span>
             </div>
             <div class="menu-card-grid">
                 <div class="menu-card featured">
@@ -247,16 +254,10 @@
             </div>
         </div>
 
-        <!-- Category: Pizza & Salad Row -->
-        <div class="menu-row-categories">
-            <!-- Pizza Gyros -->
-            <div class="menu-category-modern half">
-                <div class="category-header-img">
-                    <img src="https://images.unsplash.com/photo-1513104890138-7c749659a591?w=600&h=200&fit=crop" alt="Pizza Gyros" loading="lazy">
-                    <div class="category-overlay">
-                        <h3><span>🍕</span> <span data-lang="cat-pizza-title">פיצה גירוס</span></h3>
-                    </div>
-                </div>
+        <!-- Tab Content: More (Pizza, Salad, Sides) -->
+        <div class="menu-tab-content" id="tab-more">
+            <div class="menu-subcategory">
+                <h3 class="subcategory-title">🍕 <span data-lang="cat-pizza-title">פיצה גירוס</span></h3>
                 <div class="menu-card-grid">
                     <div class="menu-card">
                         <h4 data-lang="item-pizza-small">Pizza Gyros (Small)</h4>
@@ -270,15 +271,8 @@
                     </div>
                 </div>
             </div>
-
-            <!-- Greek Salad -->
-            <div class="menu-category-modern half">
-                <div class="category-header-img">
-                    <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=600&h=200&fit=crop" alt="Greek Salad" loading="lazy">
-                    <div class="category-overlay">
-                        <h3><span>🥗</span> <span data-lang="cat-salad-title">סלטים</span></h3>
-                    </div>
-                </div>
+            <div class="menu-subcategory">
+                <h3 class="subcategory-title">🥗 <span data-lang="cat-salad-title">סלטים</span></h3>
                 <div class="menu-card-grid">
                     <div class="menu-card">
                         <h4 data-lang="item-greek-salad">Greek Salad</h4>
@@ -287,56 +281,59 @@
                     </div>
                 </div>
             </div>
+            <div class="menu-subcategory">
+                <h3 class="subcategory-title">🍟 <span data-lang="cat-sides-title">תוספות</span></h3>
+                <div class="menu-card-grid">
+                    <div class="menu-card">
+                        <h4 data-lang="item-fries">Fries Chips</h4>
+                        <p data-lang="desc-fries">צלחת צ'יפס</p>
+                        <span class="price">15 ₪</span>
+                    </div>
+                </div>
+            </div>
         </div>
 
-        <!-- Category: Drinks & Alcohol Row -->
-        <div class="menu-row-categories">
-            <!-- Drinks -->
-            <div class="menu-category-modern half">
-                <div class="category-header-simple">
-                    <h3><span>🥤</span> <span data-lang="cat-drinks-title">משקאות</span></h3>
-                </div>
-                <div class="menu-card-grid compact">
-                    <div class="menu-card compact">
+        <!-- Tab Content: Drinks -->
+        <div class="menu-tab-content" id="tab-drinks">
+            <div class="menu-subcategory">
+                <h3 class="subcategory-title">🥤 <span data-lang="cat-drinks-title">משקאות קלים</span></h3>
+                <div class="menu-card-grid">
+                    <div class="menu-card">
                         <h4 data-lang="item-soft-drinks">Soft Drinks</h4>
                         <p data-lang="desc-soft-drinks">קוקה קולה, קולה זירו, פנטה, ספרייט, ענבים</p>
                         <span class="price">7 ₪</span>
                     </div>
-                    <div class="menu-card compact">
+                    <div class="menu-card">
                         <h4 data-lang="item-water">Water</h4>
                         <p data-lang="desc-water">מים</p>
                         <span class="price">5 ₪</span>
                     </div>
                 </div>
             </div>
-
-            <!-- Alcohol -->
-            <div class="menu-category-modern half">
-                <div class="category-header-simple">
-                    <h3><span>🍷</span> <span data-lang="cat-alcohol-title">אלכוהול</span></h3>
-                </div>
-                <div class="menu-card-grid compact">
-                    <div class="menu-card compact">
+            <div class="menu-subcategory">
+                <h3 class="subcategory-title">🍷 <span data-lang="cat-alcohol-title">אלכוהול</span></h3>
+                <div class="menu-card-grid">
+                    <div class="menu-card">
                         <h4 data-lang="item-beer">Drift Beer (1/3)</h4>
                         <p data-lang="desc-beer">בירה הבית</p>
                         <span class="price">15 ₪</span>
                     </div>
-                    <div class="menu-card compact">
+                    <div class="menu-card">
                         <h4 data-lang="item-wine-glass">Wine (Glass)</h4>
                         <p data-lang="desc-wine-glass">יין אדום/לבן/רוזה</p>
                         <span class="price">15 ₪</span>
                     </div>
-                    <div class="menu-card compact">
+                    <div class="menu-card">
                         <h4 data-lang="item-wine-bottle">Wine Bottle</h4>
                         <p data-lang="desc-wine-bottle">בקבוק יין</p>
                         <span class="price">100 ₪</span>
                     </div>
-                    <div class="menu-card compact">
+                    <div class="menu-card">
                         <h4 data-lang="item-whiskey">Whiskey</h4>
                         <p data-lang="desc-whiskey">וויסקי</p>
                         <span class="price">30 ₪</span>
                     </div>
-                    <div class="menu-card compact">
+                    <div class="menu-card">
                         <h4 data-lang="item-ouzo">Ouzo Plomari</h4>
                         <p data-lang="desc-ouzo">בקבוק אוזו פלומרי 200 מ"ל</p>
                         <span class="price">70 ₪</span>
@@ -345,41 +342,27 @@
             </div>
         </div>
 
-        <!-- Sides -->
-        <div class="menu-category-modern">
-            <div class="category-header-simple">
-                <h3><span>🍟</span> <span data-lang="cat-sides-title">תוספות</span></h3>
-            </div>
-            <div class="menu-card-grid compact">
-                <div class="menu-card compact">
-                    <h4 data-lang="item-fries">Fries Chips</h4>
-                    <p data-lang="desc-fries">צלחת צ'יפס</p>
-                    <span class="price">15 ₪</span>
-                </div>
-            </div>
-        </div>
-
     </div>
 </section>
 
-    <section id="about" class="about-section glass-card">
-        <div class="container">
-            <h2 class="fade-in" data-lang="about-title">אודותינו</h2>
-            <p class="fade-in" data-lang="about-text">חוויה קולינרית יוונית אמיתית בלב כפר יאסיף. אנו מביאים את הטעמים האותנטיים של יוון עם מתכונים מסורתיים שעוברים במשפחה מדור לדור. המסעדה שלנו מציעה אווירה חמה ומזמינה, שירות מעולה וחומרי גלם טריים ואיכותיים.</p>
+    <section id="about" class="about-section glass-card section-tilt">
+        <div class="container slide-up-content">
+            <h2 class="blur-reveal" data-lang="about-title">אודותינו</h2>
+            <p class="blur-reveal" data-lang="about-text">חוויה קולינרית יוונית אמיתית בלב כפר יאסיף. אנו מביאים את הטעמים האותנטיים של יוון עם מתכונים מסורתיים שעוברים במשפחה מדור לדור. המסעדה שלנו מציעה אווירה חמה ומזמינה, שירות מעולה וחומרי גלם טריים ואיכותיים.</p>
             <div class="features">
-                <div class="feature scale-in stagger-1">
+                <div class="feature elastic-pop cascade-1">
                     <h3>🍖 <span data-lang="quality-title">בשרים איכותיים</span></h3>
                     <p data-lang="quality-desc">בשרים טריים ואיכותיים מספקים מובחרים</p>
                 </div>
-                <div class="feature scale-in stagger-2">
+                <div class="feature elastic-pop cascade-2">
                     <h3>🌿 <span data-lang="fresh-title">חומרי גלם טריים</span></h3>
                     <p data-lang="fresh-desc">ירקות ותבלינים טריים מדי יום</p>
                 </div>
-                <div class="feature scale-in stagger-3">
+                <div class="feature elastic-pop cascade-3">
                     <h3>👨‍🍳 <span data-lang="chef-title">מתכונים מסורתיים</span></h3>
                     <p data-lang="chef-desc">שיטות בישול יווניות אותנטיות</p>
                 </div>
-                <div class="feature scale-in stagger-4">
+                <div class="feature elastic-pop cascade-4">
                     <h3>🏛️ <span data-lang="atmosphere-title">אווירה יוונית</span></h3>
                     <p data-lang="atmosphere-desc">עיצוב ים תיכוני ומוזיקה יוונית</p>
                 </div>
@@ -387,52 +370,43 @@
         </div>
     </section>
 
-    <section id="gallery" class="gallery-section">
+    <section id="gallery" class="gallery-section section-zoom">
         <div class="container">
             <h2 data-lang="gallery-title">גלריה</h2>
             <p data-lang="gallery-subtitle">טעימה מהאווירה והמנות שלנו</p>
             <div class="gallery-grid">
                 <div class="gallery-item">
-            <img src="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&h=300&fit=crop" alt="Restaurant atmosphere" width="400" height="300" loading="lazy" decoding="async" fetchpriority="low"
-                 srcset="https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=400&h=300&fit=crop 400w,
-                         https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=800&h=600&fit=crop 800w,
-                         https://images.unsplash.com/photo-1555939594-58d7cb561ad1?w=1200&h=900&fit=crop 1200w"
-                 sizes="(max-width: 600px) 90vw, 400px">
+                    <img src="images/gallery-1.jpg" alt="Greek Sovlaki dish" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-            <img src="https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=400&h=300&fit=crop" alt="Souvlaki plate" width="400" height="300" loading="lazy" decoding="async" fetchpriority="low"
-                 srcset="https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=400&h=300&fit=crop 400w,
-                         https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=800&h=600&fit=crop 800w,
-                         https://images.unsplash.com/photo-1603360946369-dc9bb6258143?w=1200&h=900&fit=crop 1200w"
-                 sizes="(max-width: 600px) 90vw, 400px">
+                    <img src="images/gallery-2.jpg" alt="Greek Sovlaki dish" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-            <img src="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400&h=300&fit=crop" alt="Greek salad" width="400" height="300" loading="lazy" decoding="async" fetchpriority="low"
-                 srcset="https://images.unsplash.com/photo-1540420773420-3366772f4999?w=400&h=300&fit=crop 400w,
-                         https://images.unsplash.com/photo-1540420773420-3366772f4999?w=800&h=600&fit=crop 800w,
-                         https://images.unsplash.com/photo-1540420773420-3366772f4999?w=1200&h=900&fit=crop 1200w"
-                 sizes="(max-width: 600px) 90vw, 400px">
+                    <img src="images/gallery-3.jpg" alt="Greek Sovlaki dish" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-            <img src="https://images.unsplash.com/photo-1544124094-8aea0374da93?w=400&h=300&fit=crop" alt="Restaurant interior" width="400" height="300" loading="lazy" decoding="async" fetchpriority="low"
-                 srcset="https://images.unsplash.com/photo-1544124094-8aea0374da93?w=400&h=300&fit=crop 400w,
-                         https://images.unsplash.com/photo-1544124094-8aea0374da93?w=800&h=600&fit=crop 800w,
-                         https://images.unsplash.com/photo-1544124094-8aea0374da93?w=1200&h=900&fit=crop 1200w"
-                 sizes="(max-width: 600px) 90vw, 400px">
+                    <img src="images/gallery-4.jpg" alt="Greek Sovlaki dish" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-            <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&h=300&fit=crop" alt="Greek dishes" width="400" height="300" loading="lazy" decoding="async" fetchpriority="low"
-                 srcset="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=400&h=300&fit=crop 400w,
-                         https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&h=600&fit=crop 800w,
-                         https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1200&h=900&fit=crop 1200w"
-                 sizes="(max-width: 600px) 90vw, 400px">
+                    <img src="images/gallery-5.jpg" alt="Greek Sovlaki dish" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-            <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400&h=300&fit=crop" alt="Dining atmosphere" width="400" height="300" loading="lazy" decoding="async" fetchpriority="low"
-                 srcset="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=400&h=300&fit=crop 400w,
-                         https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&h=600&fit=crop 800w,
-                         https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&h=900&fit=crop 1200w"
-                 sizes="(max-width: 600px) 90vw, 400px">
+                    <img src="images/gallery-6.jpg" alt="Greek Sovlaki dish" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/gallery-7.jpg" alt="Greek Sovlaki dish" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/gallery-8.jpg" alt="Greek Sovlaki dish" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/gallery-9.jpg" alt="Greek Sovlaki dish" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/gallery-10.jpg" alt="Greek Sovlaki dish" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/gallery-11.jpg" alt="Greek Sovlaki dish" loading="lazy" decoding="async">
                 </div>
             </div>
         </div>
@@ -494,5 +468,283 @@
             });
         }
     </script>
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox-modal" id="lightbox">
+        <button class="lightbox-close" aria-label="Close">&times;</button>
+        <div class="lightbox-counter"><span id="lightbox-current">1</span> / <span id="lightbox-total">11</span></div>
+        <button class="lightbox-nav lightbox-prev" aria-label="Previous">&#10094;</button>
+        <button class="lightbox-nav lightbox-next" aria-label="Next">&#10095;</button>
+
+        <div class="lightbox-content">
+            <div class="lightbox-image-container">
+                <img src="" alt="Gallery image enlarged" id="lightbox-img">
+            </div>
+        </div>
+
+        <div class="lightbox-toolbar">
+            <button id="zoom-out" aria-label="Zoom out">&#8722;</button>
+            <span class="lightbox-zoom-level" id="zoom-level">100%</span>
+            <button id="zoom-in" aria-label="Zoom in">&#43;</button>
+            <button id="rotate-left" aria-label="Rotate left">&#8634;</button>
+            <button id="rotate-right" aria-label="Rotate right">&#8635;</button>
+            <button id="reset-view" aria-label="Reset view">&#8634;&#8635;</button>
+        </div>
+    </div>
+
+    <script>
+        // Lightbox Gallery Functionality with Zoom, Rotate and Pan
+        (function() {
+            const lightbox = document.getElementById('lightbox');
+            const lightboxImg = document.getElementById('lightbox-img');
+            const lightboxCurrent = document.getElementById('lightbox-current');
+            const lightboxTotal = document.getElementById('lightbox-total');
+            const zoomLevelDisplay = document.getElementById('zoom-level');
+
+            const closeBtn = lightbox.querySelector('.lightbox-close');
+            const prevBtn = lightbox.querySelector('.lightbox-prev');
+            const nextBtn = lightbox.querySelector('.lightbox-next');
+            const zoomInBtn = document.getElementById('zoom-in');
+            const zoomOutBtn = document.getElementById('zoom-out');
+            const rotateLeftBtn = document.getElementById('rotate-left');
+            const rotateRightBtn = document.getElementById('rotate-right');
+            const resetBtn = document.getElementById('reset-view');
+
+            const galleryItems = document.querySelectorAll('.gallery-item img');
+            let currentIndex = 0;
+            let currentZoom = 1;
+            let currentRotation = 0;
+            let posX = 0;
+            let posY = 0;
+            const minZoom = 0.5;
+            const maxZoom = 4;
+            const zoomStep = 0.25;
+
+            // Drag/Pan variables
+            let isDragging = false;
+            let startX = 0;
+            let startY = 0;
+            let dragStartX = 0;
+            let dragStartY = 0;
+
+            // Update total count
+            lightboxTotal.textContent = galleryItems.length;
+
+            // Open lightbox on image click
+            galleryItems.forEach((img, index) => {
+                img.addEventListener('click', () => {
+                    currentIndex = index;
+                    openLightbox();
+                });
+            });
+
+            function updateTransform() {
+                lightboxImg.style.transform = `translate(${posX}px, ${posY}px) scale(${currentZoom}) rotate(${currentRotation}deg)`;
+                zoomLevelDisplay.textContent = Math.round(currentZoom * 100) + '%';
+
+                // Update button states
+                zoomOutBtn.disabled = currentZoom <= minZoom;
+                zoomInBtn.disabled = currentZoom >= maxZoom;
+
+                // Update cursor based on zoom level
+                if (currentZoom > 1) {
+                    lightboxImg.style.cursor = isDragging ? 'grabbing' : 'grab';
+                } else {
+                    lightboxImg.style.cursor = 'default';
+                }
+            }
+
+            function resetView() {
+                currentZoom = 1;
+                currentRotation = 0;
+                posX = 0;
+                posY = 0;
+                updateTransform();
+            }
+
+            function openLightbox() {
+                lightboxImg.src = galleryItems[currentIndex].src;
+                lightboxCurrent.textContent = currentIndex + 1;
+                resetView();
+                lightbox.classList.add('active');
+                document.body.style.overflow = 'hidden';
+            }
+
+            function closeLightbox() {
+                lightbox.classList.remove('active');
+                document.body.style.overflow = '';
+                resetView();
+            }
+
+            function showPrev() {
+                currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
+                lightboxImg.src = galleryItems[currentIndex].src;
+                lightboxCurrent.textContent = currentIndex + 1;
+                resetView();
+            }
+
+            function showNext() {
+                currentIndex = (currentIndex + 1) % galleryItems.length;
+                lightboxImg.src = galleryItems[currentIndex].src;
+                lightboxCurrent.textContent = currentIndex + 1;
+                resetView();
+            }
+
+            function zoomIn() {
+                if (currentZoom < maxZoom) {
+                    currentZoom = Math.min(currentZoom + zoomStep, maxZoom);
+                    updateTransform();
+                }
+            }
+
+            function zoomOut() {
+                if (currentZoom > minZoom) {
+                    currentZoom = Math.max(currentZoom - zoomStep, minZoom);
+                    // Reset position when zooming out to 100% or less
+                    if (currentZoom <= 1) {
+                        posX = 0;
+                        posY = 0;
+                    }
+                    updateTransform();
+                }
+            }
+
+            function rotateLeft() {
+                currentRotation -= 90;
+                updateTransform();
+            }
+
+            function rotateRight() {
+                currentRotation += 90;
+                updateTransform();
+            }
+
+            // Mouse drag functionality
+            lightboxImg.addEventListener('mousedown', (e) => {
+                if (currentZoom > 1) {
+                    isDragging = true;
+                    startX = e.clientX;
+                    startY = e.clientY;
+                    dragStartX = posX;
+                    dragStartY = posY;
+                    lightboxImg.style.cursor = 'grabbing';
+                    e.preventDefault();
+                }
+            });
+
+            document.addEventListener('mousemove', (e) => {
+                if (!isDragging) return;
+
+                const deltaX = e.clientX - startX;
+                const deltaY = e.clientY - startY;
+
+                posX = dragStartX + deltaX;
+                posY = dragStartY + deltaY;
+
+                updateTransform();
+            });
+
+            document.addEventListener('mouseup', () => {
+                if (isDragging) {
+                    isDragging = false;
+                    if (currentZoom > 1) {
+                        lightboxImg.style.cursor = 'grab';
+                    }
+                }
+            });
+
+            // Touch drag functionality for mobile
+            let touchStartX = 0;
+            let touchStartY = 0;
+
+            lightboxImg.addEventListener('touchstart', (e) => {
+                if (currentZoom > 1 && e.touches.length === 1) {
+                    isDragging = true;
+                    touchStartX = e.touches[0].clientX;
+                    touchStartY = e.touches[0].clientY;
+                    dragStartX = posX;
+                    dragStartY = posY;
+                }
+            }, { passive: true });
+
+            lightboxImg.addEventListener('touchmove', (e) => {
+                if (!isDragging || e.touches.length !== 1) return;
+
+                const deltaX = e.touches[0].clientX - touchStartX;
+                const deltaY = e.touches[0].clientY - touchStartY;
+
+                posX = dragStartX + deltaX;
+                posY = dragStartY + deltaY;
+
+                updateTransform();
+                e.preventDefault();
+            }, { passive: false });
+
+            lightboxImg.addEventListener('touchend', () => {
+                isDragging = false;
+            });
+
+            // Double-click to zoom
+            lightboxImg.addEventListener('dblclick', (e) => {
+                e.preventDefault();
+                if (currentZoom === 1) {
+                    currentZoom = 2;
+                } else {
+                    currentZoom = 1;
+                    posX = 0;
+                    posY = 0;
+                }
+                updateTransform();
+            });
+
+            // Event listeners
+            closeBtn.addEventListener('click', closeLightbox);
+            prevBtn.addEventListener('click', showPrev);
+            nextBtn.addEventListener('click', showNext);
+            zoomInBtn.addEventListener('click', zoomIn);
+            zoomOutBtn.addEventListener('click', zoomOut);
+            rotateLeftBtn.addEventListener('click', rotateLeft);
+            rotateRightBtn.addEventListener('click', rotateRight);
+            resetBtn.addEventListener('click', resetView);
+
+            // Close on background click (but not on image or toolbar)
+            lightbox.addEventListener('click', (e) => {
+                if (e.target === lightbox || e.target.classList.contains('lightbox-content')) {
+                    closeLightbox();
+                }
+            });
+
+            // Mouse wheel zoom
+            lightbox.addEventListener('wheel', (e) => {
+                if (!lightbox.classList.contains('active')) return;
+                e.preventDefault();
+                if (e.deltaY < 0) {
+                    zoomIn();
+                } else {
+                    zoomOut();
+                }
+            }, { passive: false });
+
+            // Keyboard navigation
+            document.addEventListener('keydown', (e) => {
+                if (!lightbox.classList.contains('active')) return;
+
+                switch(e.key) {
+                    case 'Escape': closeLightbox(); break;
+                    case 'ArrowLeft': showPrev(); break;
+                    case 'ArrowRight': showNext(); break;
+                    case '+':
+                    case '=': zoomIn(); break;
+                    case '-': zoomOut(); break;
+                    case 'r': rotateRight(); break;
+                    case 'R': rotateLeft(); break;
+                    case '0': resetView(); break;
+                }
+            });
+        })();
+    </script>
+
+    <!-- Menu Tabs -->
+    <script src="js/menu-tabs.js"></script>
 </body>
 </html>
