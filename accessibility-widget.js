@@ -12,10 +12,12 @@
     },
 
     init() {
+      console.log('Accessibility widget initializing...');
       this.createWidget();
       this.applySettings();
       this.attachEventListeners();
       this.initBadge();
+      console.log('Accessibility widget initialized!');
     },
 
     initBadge() {
@@ -36,29 +38,7 @@
         });
       }
 
-      // Hide badge on scroll
-      const toggle = document.getElementById('a11y-toggle');
-      let lastScrollY = window.scrollY;
-
-      window.addEventListener('scroll', () => {
-        const currentScrollY = window.scrollY;
-
-        if (currentScrollY > 100) {
-          // Scrolled down - hide the toggle button
-          if (toggle) {
-            toggle.style.opacity = '0';
-            toggle.style.pointerEvents = 'none';
-          }
-        } else {
-          // At top - show the toggle button
-          if (toggle) {
-            toggle.style.opacity = '1';
-            toggle.style.pointerEvents = 'auto';
-          }
-        }
-
-        lastScrollY = currentScrollY;
-      }, { passive: true });
+      // Keep toggle button always visible (removed scroll hiding)
     },
 
     hideBadge() {
@@ -130,52 +110,81 @@
       const close = document.getElementById('a11y-close');
       const panel = document.getElementById('a11y-panel');
       const widgetElement = document.getElementById('a11y-widget');
+      const self = this;
 
-      toggle.addEventListener('click', () => {
-        const isOpen = panel.classList.toggle('open');
-        toggle.setAttribute('aria-expanded', isOpen);
-        widgetElement.setAttribute('aria-hidden', !isOpen);
-        // Lock/unlock body scroll
-        document.body.style.overflow = isOpen ? 'hidden' : '';
-      });
-
-      close.addEventListener('click', () => {
+      // Store reference for closing
+      this.closePanel = () => {
         panel.classList.remove('open');
         toggle.setAttribute('aria-expanded', 'false');
         widgetElement.setAttribute('aria-hidden', 'true');
-        // Unlock body scroll
-        document.body.style.overflow = '';
+      };
+
+      // Toggle button
+      toggle.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+        const isOpen = panel.classList.toggle('open');
+        toggle.setAttribute('aria-expanded', isOpen);
+        widgetElement.setAttribute('aria-hidden', !isOpen);
       });
 
-      // Action buttons
-      document.querySelectorAll('[data-action]').forEach(button => {
-        button.addEventListener('click', (e) => {
-          const action = e.target.dataset.action;
-          this.handleAction(action);
+      // Close button
+      close.addEventListener('click', (e) => {
+        e.preventDefault();
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+        self.closePanel();
+      });
+
+      // Action buttons - use event delegation on the controls container
+      const controls = panel.querySelector('.a11y-controls');
+      if (controls) {
+        controls.addEventListener('click', (e) => {
+          const button = e.target.closest('[data-action]');
+          if (button) {
+            e.preventDefault();
+            e.stopPropagation();
+            e.stopImmediatePropagation();
+            const action = button.getAttribute('data-action');
+            console.log('Action clicked:', action);
+            // Save scroll position
+            const scrollY = window.scrollY;
+            self.handleAction(action);
+            // Restore scroll position
+            window.scrollTo(0, scrollY);
+          }
         });
+      }
+
+      // Prevent panel clicks from closing
+      panel.addEventListener('mousedown', (e) => {
+        e.stopPropagation();
+        e.stopImmediatePropagation();
+      });
+      panel.addEventListener('click', (e) => {
+        e.stopPropagation();
+        e.stopImmediatePropagation();
       });
 
       // Close on Escape key
       document.addEventListener('keydown', (e) => {
         if (e.key === 'Escape' && panel.classList.contains('open')) {
-          panel.classList.remove('open');
-          toggle.setAttribute('aria-expanded', 'false');
-          widgetElement.setAttribute('aria-hidden', 'true');
-          // Unlock body scroll
-          document.body.style.overflow = '';
+          self.closePanel();
         }
       });
 
-      // Close on click outside
+      // Close on click outside - only in bubble phase
       document.addEventListener('click', (e) => {
-        if (panel.classList.contains('open') && !widgetElement.contains(e.target)) {
-          panel.classList.remove('open');
-          toggle.setAttribute('aria-expanded', 'false');
-          widgetElement.setAttribute('aria-hidden', 'true');
-          // Unlock body scroll
-          document.body.style.overflow = '';
+        // Check if click is inside widget
+        if (widgetElement.contains(e.target)) {
+          return; // Do nothing, let widget handle it
         }
-      });
+        // Close panel if open and click is outside
+        if (panel.classList.contains('open')) {
+          self.closePanel();
+        }
+      }, false); // Bubble phase
     },
 
     handleAction(action) {
@@ -222,19 +231,16 @@
       this.applySettings();
       this.saveSettings();
       this.updateUI();
-
-      // Hide badge after user makes any changes
-      if (action !== 'reset') {
-        this.hideBadge();
-        localStorage.setItem('a11y-badge-hidden', 'true');
-      }
     },
 
     applySettings() {
       const root = document.documentElement;
+      console.log('Applying settings:', this.settings);
 
-      // Font size
-      root.style.fontSize = this.settings.fontSize + '%';
+      // Font size - apply to html element for better inheritance
+      const fontSize = parseInt(this.settings.fontSize);
+      root.style.fontSize = fontSize + '%';
+      console.log('Font size set to:', fontSize + '%');
 
       // Contrast
       document.body.classList.remove('a11y-high-contrast', 'a11y-invert-contrast');
