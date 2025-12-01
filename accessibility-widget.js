@@ -50,8 +50,8 @@
 
     createWidget() {
       const widgetHTML = `
-        <div id="a11y-widget" class="a11y-widget" role="dialog" aria-label="Accessibility Options" aria-hidden="true">
-          <button id="a11y-toggle" class="a11y-toggle" aria-label="Open accessibility options" aria-expanded="false">
+        <div id="a11y-widget" class="a11y-widget">
+          <button id="a11y-toggle" class="a11y-toggle" aria-label="Open accessibility options" aria-expanded="false" aria-controls="a11y-panel">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <circle cx="12" cy="12" r="10"></circle>
               <circle cx="12" cy="8" r="1"></circle>
@@ -59,7 +59,7 @@
               <line x1="8" y1="14" x2="16" y2="14"></line>
             </svg>
           </button>
-          <div id="a11y-panel" class="a11y-panel">
+          <div id="a11y-panel" class="a11y-panel" role="dialog" aria-label="Accessibility Options" aria-hidden="true">
             <div class="a11y-header">
               <h3>אפשרויות נגישות</h3>
               <button id="a11y-close" class="a11y-close" aria-label="Close accessibility options">✕</button>
@@ -98,6 +98,13 @@
               <div class="a11y-control">
                 <button data-action="reset" class="a11y-reset">איפוס הגדרות</button>
               </div>
+              <div class="a11y-visibility-prompt" id="a11y-visibility-prompt" style="display: none;">
+                <p>להשאיר את כפתור הנגישות גלוי?</p>
+                <div class="a11y-buttons">
+                  <button data-visibility="visible" class="a11y-keep-visible">כן, השאר גלוי</button>
+                  <button data-visibility="hidden" class="a11y-hide-widget">הסתר</button>
+                </div>
+              </div>
             </div>
           </div>
         </div>
@@ -110,13 +117,51 @@
       const close = document.getElementById('a11y-close');
       const panel = document.getElementById('a11y-panel');
       const widgetElement = document.getElementById('a11y-widget');
+      const visibilityPrompt = document.getElementById('a11y-visibility-prompt');
       const self = this;
+
+      // Track if user has made a choice about visibility (session only)
+      this.visibilityDecided = false;
+      this.widgetHidden = false;
+
+      // Sections with dark/blue backgrounds where widget needs light color
+      const darkSections = ['footer', '.footer-compact', '#contact'];
+
+      // Check if widget is over a dark section
+      function isOverDarkSection() {
+        const toggleRect = toggle.getBoundingClientRect();
+
+        for (const selector of darkSections) {
+          const section = document.querySelector(selector);
+          if (section) {
+            const sectionRect = section.getBoundingClientRect();
+            // Check if toggle overlaps with this section (when toggle bottom reaches section top)
+            if (toggleRect.bottom >= sectionRect.top && toggleRect.top <= sectionRect.bottom) {
+              return true;
+            }
+          }
+        }
+        return false;
+      }
+
+      // Check and update widget color based on background
+      function checkBackground() {
+        if (isOverDarkSection()) {
+          toggle.classList.add('light-mode');
+        } else {
+          toggle.classList.remove('light-mode');
+        }
+      }
+
+      // Listen for scroll to update color
+      window.addEventListener('scroll', checkBackground, { passive: true });
+      checkBackground();
 
       // Store reference for closing
       this.closePanel = () => {
         panel.classList.remove('open');
         toggle.setAttribute('aria-expanded', 'false');
-        widgetElement.setAttribute('aria-hidden', 'true');
+        panel.setAttribute('aria-hidden', 'true');
       };
 
       // Toggle button
@@ -126,7 +171,7 @@
         e.stopImmediatePropagation();
         const isOpen = panel.classList.toggle('open');
         toggle.setAttribute('aria-expanded', isOpen);
-        widgetElement.setAttribute('aria-hidden', !isOpen);
+        panel.setAttribute('aria-hidden', !isOpen);
       });
 
       // Close button
@@ -185,6 +230,39 @@
           self.closePanel();
         }
       }, false); // Bubble phase
+
+      // Visibility prompt buttons
+      visibilityPrompt.addEventListener('click', (e) => {
+        const btn = e.target.closest('[data-visibility]');
+        if (btn) {
+          e.preventDefault();
+          e.stopPropagation();
+          const choice = btn.getAttribute('data-visibility');
+
+          // Session only - don't save to localStorage
+          self.visibilityDecided = true;
+
+          // Remove focus before closing to avoid aria-hidden warning
+          btn.blur();
+
+          if (choice === 'hidden') {
+            self.widgetHidden = true;
+            self.closePanel();
+            // Remove the entire widget from the DOM
+            widgetElement.remove();
+          } else {
+            self.widgetHidden = false;
+            visibilityPrompt.style.display = 'none';
+          }
+        }
+      });
+    },
+
+    showVisibilityPrompt() {
+      const visibilityPrompt = document.getElementById('a11y-visibility-prompt');
+      if (visibilityPrompt && !this.visibilityDecided) {
+        visibilityPrompt.style.display = 'block';
+      }
     },
 
     handleAction(action) {
@@ -231,6 +309,11 @@
       this.applySettings();
       this.saveSettings();
       this.updateUI();
+
+      // Show visibility prompt after any setting change (except reset to default)
+      if (action !== 'reset') {
+        this.showVisibilityPrompt();
+      }
     },
 
     applySettings() {

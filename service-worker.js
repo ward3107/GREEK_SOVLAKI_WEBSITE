@@ -1,16 +1,22 @@
-const CACHE_NAME = 'greek-souvlaki-wow-v13';
+const CACHE_NAME = 'greek-souvlaki-wow-v26';
 const urlsToCache = [
   '/',
   '/index.html',
   '/styles.css',
   '/animations.css',
   '/accessibility-widget.css',
+  '/theme-christmas.css',
   '/script.js',
   '/toggles.js',
   '/scroll-button.js',
   '/translations-new.js',
   '/wow-animations.js',
   '/accessibility-widget.js',
+  '/cookie-consent.js',
+  '/cookie-consent.css',
+  '/theme-manager.js',
+  '/pwa-install.js',
+  '/storage-utils.js',
   '/restaurant-logo.jpg',
   '/en.json',
   '/he.json',
@@ -19,7 +25,8 @@ const urlsToCache = [
   '/legal-he.json',
   '/privacy.html',
   '/terms.html',
-  '/accessibility.html'
+  '/accessibility.html',
+  '/404.html'
 ];
 
 // Install event - cache files
@@ -34,34 +41,34 @@ self.addEventListener('install', (event) => {
   self.skipWaiting();
 });
 
-// Fetch event - serve from cache, fallback to network
+// Fetch event - network first, fallback to cache
 self.addEventListener('fetch', (event) => {
+  // Skip non-GET requests
+  if (event.request.method !== 'GET') {
+    return;
+  }
+
   event.respondWith(
-    caches.match(event.request)
+    fetch(event.request)
       .then((response) => {
-        // Cache hit - return response
-        if (response) {
+        // Check if we received a valid response
+        if (!response || response.status !== 200) {
           return response;
         }
 
-        return fetch(event.request).then(
-          (response) => {
-            // Check if we received a valid response
-            if (!response || response.status !== 200 || response.type !== 'basic') {
-              return response;
-            }
+        // Clone the response
+        const responseToCache = response.clone();
 
-            // Clone the response
-            const responseToCache = response.clone();
+        caches.open(CACHE_NAME)
+          .then((cache) => {
+            cache.put(event.request, responseToCache);
+          });
 
-            caches.open(CACHE_NAME)
-              .then((cache) => {
-                cache.put(event.request, responseToCache);
-              });
-
-            return response;
-          }
-        );
+        return response;
+      })
+      .catch(() => {
+        // Network failed, try cache
+        return caches.match(event.request);
       })
   );
 });

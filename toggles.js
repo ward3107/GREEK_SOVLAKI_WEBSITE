@@ -24,29 +24,28 @@
 
         const sunIcon = themeBtn.querySelector('.sun-icon');
         const moonIcon = themeBtn.querySelector('.moon-icon');
-        const html = document.documentElement;
 
         // Load saved theme or default to light
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        applyTheme(savedTheme);
+        const savedTheme = localStorage.getItem('a11y-darkMode') || 'off';
+        applyTheme(savedTheme === 'on' ? 'dark' : 'light');
 
         function applyTheme(theme) {
             if (theme === 'dark') {
-                html.setAttribute('data-theme', 'dark');
+                document.body.classList.add('a11y-dark-mode');
                 if (sunIcon) sunIcon.style.display = 'none';
                 if (moonIcon) moonIcon.style.display = 'block';
+                localStorage.setItem('a11y-darkMode', 'on');
             } else {
-                html.setAttribute('data-theme', 'light');
+                document.body.classList.remove('a11y-dark-mode');
                 if (sunIcon) sunIcon.style.display = 'block';
                 if (moonIcon) moonIcon.style.display = 'none';
+                localStorage.setItem('a11y-darkMode', 'off');
             }
-            localStorage.setItem('theme', theme);
         }
 
         themeBtn.addEventListener('click', function() {
-            const currentTheme = html.getAttribute('data-theme');
-            const newTheme = currentTheme === 'dark' ? 'light' : 'dark';
-            applyTheme(newTheme);
+            const isDark = document.body.classList.contains('a11y-dark-mode');
+            applyTheme(isDark ? 'light' : 'dark');
         });
 
         console.log('Theme toggle initialized');

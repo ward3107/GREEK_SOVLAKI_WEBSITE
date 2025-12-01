@@ -3,21 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self';
+        script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com;
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+        font-src 'self' https://fonts.gstatic.com;
+        img-src 'self' data: blob: https://images.unsplash.com https://flagcdn.com https://*.google-analytics.com;
+        connect-src 'self' https://images.unsplash.com https://flagcdn.com https://www.google-analytics.com https://*.google-analytics.com;
+        frame-src 'self' https://www.google.com;
+        object-src 'none';
+        base-uri 'self';
+        form-action 'self';
+        upgrade-insecure-requests;
+    ">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
     <style id="i18n-hide">body{visibility:hidden}</style>
     <title>Greek Souvlaki - סובלאקי יווני | מסעדה יוונית אותנטית בכפר יאסיף</title>
     <meta name="description" content="מסעדה יוונית אותנטית בכפר יאסיף. סובלקי, גירוס ומטעמים יווניים מסורתיים באווירה חמה ומזמינה">
 
     <!-- PWA Meta Tags -->
     <meta name="theme-color" content="#1e3a8a">
-    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Greek Souvlaki">
+    <link rel="icon" type="image/jpeg" href="restaurant-logo.jpg">
     <link rel="apple-touch-icon" href="restaurant-logo.jpg">
     <link rel="manifest" href="manifest.json">
 
-    <link rel="stylesheet" href="styles.css">
-    <link rel="stylesheet" href="animations.css">
-    <link rel="stylesheet" href="accessibility-widget.css?v=2">
+    <link rel="stylesheet" href="styles.css?v=14">
+    <link rel="stylesheet" href="animations.css?v=14">
+    <link rel="stylesheet" href="accessibility-widget.css?v=21">
+    <link rel="stylesheet" href="cookie-consent.css?v=15">
     <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
     <link rel="preconnect" href="https://flagcdn.com" crossorigin>
 
@@ -71,14 +89,7 @@
     </script> -->
 </head>
 <body>
-    <!-- Floating Side Logos -->
-    <div class="side-logo side-logo-left" aria-hidden="true">
-        <img src="restaurant-logo.jpg" alt="" loading="lazy">
-    </div>
-    <div class="side-logo side-logo-right" aria-hidden="true">
-        <img src="restaurant-logo.jpg" alt="" loading="lazy">
-    </div>
-
+    <div class="page-content">
     <header>
         <nav class="navbar">
             <div class="container">
@@ -417,8 +428,8 @@
                 <div class="contact-col">
                     <span class="contact-icon">📞</span>
                     <div class="contact-phones-inline">
-                        <a href="tel:04-8122980" dir="ltr">04-812-2980</a>
-                        <a href="tel:052-8921454" dir="ltr">052-892-1454</a>
+                        <a href="tel:+97248122980" dir="ltr">04-812-2980</a>
+                        <a href="tel:+972528921454" dir="ltr">052-892-1454</a>
                     </div>
                 </div>
                 <div class="contact-col">
@@ -445,13 +456,18 @@
         </div>
         <p>&copy; 2024 Greek Souvlaki - סובלאקי יווני</p>
     </footer>
+    </div><!-- end page-content -->
 
-    <script defer src="translations-new.js"></script>
-    <script defer src="script.js"></script>
-    <script defer src="toggles.js"></script>
-    <script src="scroll-button.js?v=2"></script>
-    <script defer src="accessibility-widget.js?v=5"></script>
-    <script defer src="wow-animations.js"></script>
+    <script src="storage-utils.js?v=1"></script>
+    <script defer src="translations-new.js?v=14"></script>
+    <script defer src="script.js?v=15"></script>
+    <script defer src="toggles.js?v=15"></script>
+    <script src="scroll-button.js?v=14"></script>
+    <script defer src="accessibility-widget.js?v=16"></script>
+    <script defer src="cookie-consent.js?v=15"></script>
+    <script defer src="wow-animations.js?v=14"></script>
+    <script defer src="theme-manager.js?v=1"></script>
+    <script defer src="pwa-install.js?v=1"></script>
 
     <!-- Service Worker Registration -->
     <script>

@@ -1,0 +1,22 @@
+# robots.txt for Greek Souvlaki Restaurant Website
+# https://greek-souvlaki.com
+
+User-agent: *
+Allow: /
+
+# Sitemap location
+Sitemap: https://greek-souvlaki.com/sitemap.xml
+
+# Disallow access to development/config files
+Disallow: /CLAUDE.md
+Disallow: /*.json$
+Disallow: /service-worker.js
+
+# Allow all images
+Allow: /images/
+Allow: /*.jpg$
+Allow: /*.png$
+Allow: /*.webp$
+
+# Crawl-delay for polite crawling
+Crawl-delay: 1

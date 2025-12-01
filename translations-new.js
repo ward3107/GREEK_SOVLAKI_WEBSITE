@@ -145,7 +145,23 @@ function applyTranslations(langData) {
     // Update all elements with data-lang attribute
     document.querySelectorAll('[data-lang]').forEach(element => {
         const key = element.getAttribute('data-lang');
-        const value = getNestedValue(langData, key);
+        let value = getNestedValue(langData, key);
+
+        // Fallback to Hebrew if translation missing
+        if (!value && translations['he']) {
+            value = getNestedValue(translations['he'], key);
+            if (value) {
+                console.warn(`Missing translation for key "${key}" in current language, using Hebrew fallback`);
+            }
+        }
+
+        // Fallback to English if still missing
+        if (!value && translations['en']) {
+            value = getNestedValue(translations['en'], key);
+            if (value) {
+                console.warn(`Missing translation for key "${key}", using English fallback`);
+            }
+        }
 
         if (value) {
             if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
@@ -153,6 +169,9 @@ function applyTranslations(langData) {
             } else {
                 element.textContent = value;
             }
+        } else {
+            // Log missing translation but keep existing content
+            console.warn(`No translation found for key: "${key}"`);
         }
     });
 

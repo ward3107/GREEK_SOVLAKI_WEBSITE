@@ -1,0 +1,194 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>404 - הדף לא נמצא | Greek Souvlaki</title>
+    <meta name="robots" content="noindex, nofollow">
+    <link rel="icon" type="image/jpeg" href="restaurant-logo.jpg">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, sans-serif;
+            background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%);
+            min-height: 100vh;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            padding: 2rem;
+            color: white;
+        }
+
+        .error-container {
+            text-align: center;
+            max-width: 500px;
+        }
+
+        .error-code {
+            font-size: 8rem;
+            font-weight: 800;
+            line-height: 1;
+            margin-bottom: 1rem;
+            text-shadow: 4px 4px 0 rgba(0, 0, 0, 0.2);
+        }
+
+        .error-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+        }
+
+        .error-title {
+            font-size: 1.8rem;
+            margin-bottom: 1rem;
+            font-weight: 600;
+        }
+
+        .error-message {
+            font-size: 1.1rem;
+            opacity: 0.9;
+            margin-bottom: 2rem;
+            line-height: 1.6;
+        }
+
+        .error-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
+        }
+
+        .btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            padding: 0.875rem 1.75rem;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-primary {
+            background: #fbbf24;
+            color: #1e3a8a;
+        }
+
+        .btn-primary:hover {
+            background: #f59e0b;
+            transform: translateY(-2px);
+            box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4);
+        }
+
+        .btn-secondary {
+            background: transparent;
+            color: white;
+            border: 2px solid rgba(255, 255, 255, 0.5);
+        }
+
+        .btn-secondary:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-color: white;
+        }
+
+        .logo {
+            margin-top: 3rem;
+            opacity: 0.8;
+        }
+
+        .logo img {
+            width: 60px;
+            height: 60px;
+            border-radius: 50%;
+        }
+
+        .logo-text {
+            margin-top: 0.5rem;
+            font-size: 0.9rem;
+            opacity: 0.7;
+        }
+
+        /* LTR support for English */
+        [dir="ltr"] {
+            direction: ltr;
+        }
+
+        @media (max-width: 480px) {
+            .error-code {
+                font-size: 5rem;
+            }
+
+            .error-title {
+                font-size: 1.4rem;
+            }
+
+            .error-buttons {
+                flex-direction: column;
+            }
+
+            .btn {
+                width: 100%;
+                justify-content: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="error-container">
+        <div class="error-icon">🍽️</div>
+        <div class="error-code">404</div>
+        <h1 class="error-title">אופס! הדף לא נמצא</h1>
+        <p class="error-message">
+            נראה שהדף שחיפשת עבר למקום אחר או שהוא לא קיים.
+            <br>
+            אל דאגה, האוכל הטעים שלנו עדיין כאן!
+        </p>
+        <div class="error-buttons">
+            <a href="/" class="btn btn-primary">
+                🏠 חזרה לדף הבית
+            </a>
+            <a href="/#menu" class="btn btn-secondary">
+                📋 צפה בתפריט
+            </a>
+        </div>
+        <div class="logo">
+            <img src="restaurant-logo.jpg" alt="Greek Souvlaki Logo">
+            <div class="logo-text">Greek Souvlaki - סובלאקי יווני</div>
+        </div>
+    </div>
+
+    <script>
+        // Detect language preference
+        const savedLang = localStorage.getItem('preferredLanguage');
+        if (savedLang === 'en') {
+            document.documentElement.lang = 'en';
+            document.documentElement.dir = 'ltr';
+            document.querySelector('.error-title').textContent = 'Oops! Page Not Found';
+            document.querySelector('.error-message').innerHTML =
+                "The page you're looking for doesn't exist or has been moved.<br>Don't worry, our delicious food is still here!";
+            document.querySelector('.btn-primary').innerHTML = '🏠 Back to Home';
+            document.querySelector('.btn-secondary').innerHTML = '📋 View Menu';
+        } else if (savedLang === 'ar') {
+            document.documentElement.lang = 'ar';
+            document.querySelector('.error-title').textContent = 'عفواً! الصفحة غير موجودة';
+            document.querySelector('.error-message').innerHTML =
+                'يبدو أن الصفحة التي تبحث عنها غير موجودة أو تم نقلها.<br>لا تقلق، طعامنا اللذيذ لا يزال هنا!';
+            document.querySelector('.btn-primary').innerHTML = '🏠 العودة للرئيسية';
+            document.querySelector('.btn-secondary').innerHTML = '📋 عرض القائمة';
+        } else if (savedLang === 'ru') {
+            document.documentElement.lang = 'ru';
+            document.documentElement.dir = 'ltr';
+            document.querySelector('.error-title').textContent = 'Ой! Страница не найдена';
+            document.querySelector('.error-message').innerHTML =
+                'Страница, которую вы ищете, не существует или была перемещена.<br>Не волнуйтесь, наша вкусная еда всё ещё здесь!';
+            document.querySelector('.btn-primary').innerHTML = '🏠 На главную';
+            document.querySelector('.btn-secondary').innerHTML = '📋 Меню';
+        }
+    </script>
+</body>
+</html>

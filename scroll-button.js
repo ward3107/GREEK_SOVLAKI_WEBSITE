@@ -1,4 +1,4 @@
-// Simple scroll to top button - always visible
+// Scroll to top button - visible after scrolling past hero section
 (function() {
     'use strict';
 
@@ -14,8 +14,62 @@
         `;
         scrollBtn.setAttribute('aria-label', 'Scroll to top');
 
+        // Start hidden
+        scrollBtn.style.opacity = '0';
+        scrollBtn.style.visibility = 'hidden';
+
         // Add to page
         document.body.appendChild(scrollBtn);
+
+        // Get hero section
+        const heroSection = document.querySelector('.hero, #home');
+
+        // Sections with dark/blue backgrounds where widgets need light color
+        const darkSections = ['footer', '.footer-compact', '#contact'];
+
+        // Check if element is over a dark section
+        function isOverDarkSection() {
+            const btnRect = scrollBtn.getBoundingClientRect();
+
+            for (const selector of darkSections) {
+                const section = document.querySelector(selector);
+                if (section) {
+                    const sectionRect = section.getBoundingClientRect();
+                    // Check if button overlaps with this section (when button bottom reaches section top)
+                    if (btnRect.bottom >= sectionRect.top && btnRect.top <= sectionRect.bottom) {
+                        return true;
+                    }
+                }
+            }
+            return false;
+        }
+
+        // Show/hide based on scroll position and adjust color
+        function checkScroll() {
+            if (heroSection) {
+                const heroBottom = heroSection.offsetTop + heroSection.offsetHeight;
+                if (window.scrollY > heroBottom) {
+                    scrollBtn.style.opacity = '1';
+                    scrollBtn.style.visibility = 'visible';
+
+                    // Check background and adjust color
+                    if (isOverDarkSection()) {
+                        scrollBtn.classList.add('light-mode');
+                    } else {
+                        scrollBtn.classList.remove('light-mode');
+                    }
+                } else {
+                    scrollBtn.style.opacity = '0';
+                    scrollBtn.style.visibility = 'hidden';
+                }
+            }
+        }
+
+        // Listen for scroll events
+        window.addEventListener('scroll', checkScroll, { passive: true });
+
+        // Check initial position
+        checkScroll();
 
         // Click handler with smooth scroll
         scrollBtn.addEventListener('click', function() {
