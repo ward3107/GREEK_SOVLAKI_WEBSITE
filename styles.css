@@ -345,6 +345,7 @@ section:not(.hero) > * {
     justify-content: space-between;
     align-items: center;
     padding: 1rem var(--space-5);
+    position: relative;
 }
 
 /* Language Switcher */
@@ -902,7 +903,7 @@ body.rtl .contact-info {
     box-shadow: none !important;
     position: relative;
     overflow: hidden;
-    padding: 0;
+    padding-top: 80px;
 }
 
 /* Food Image on Left Side */
@@ -1044,12 +1045,7 @@ body.rtl .contact-info {
     align-items: center;
     justify-content: center;
     padding: 2.5rem;
-    background: linear-gradient(
-        135deg,
-        rgba(255, 251, 235, 0.97) 0%,
-        rgba(254, 243, 199, 0.95) 50%,
-        rgba(253, 230, 138, 0.9) 100%
-    );
+    background: rgba(255, 255, 255, 0.95);
 }
 
 /* RTL adjustment */
@@ -1062,9 +1058,16 @@ body.rtl .contact-info {
 
 /* Responsive Hero Layout */
 @media (max-width: 992px) {
+    .hero {
+        flex-direction: column;
+        padding-top: 70px;
+        min-height: 100vh;
+        min-height: 100dvh;
+    }
+
     .hero::before {
         width: 100%;
-        height: 45%;
+        height: 40%;
         top: auto;
         bottom: 0;
     }
@@ -1077,12 +1080,12 @@ body.rtl .contact-info {
         position: relative;
         width: 100%;
         height: auto;
-        padding: 30px 20px;
+        padding: 20px 15px;
     }
 
     .hero-logo {
-        width: 60%;
-        max-width: 250px;
+        width: 55%;
+        max-width: 220px;
     }
 
     .hero-content {
@@ -1091,52 +1094,104 @@ body.rtl .contact-info {
         right: auto;
         transform: none;
         width: 100%;
+        height: auto;
         max-width: 90%;
         margin: 0 auto;
-        padding-bottom: 50vh;
+        padding: 2rem 1rem;
+        padding-bottom: 45vh;
+        text-align: center;
+        background: rgba(255, 255, 255, 0.95);
+        border-radius: 20px;
+        margin-top: 1rem;
     }
 
     [dir="rtl"] .hero-content {
         right: auto;
         left: auto;
     }
-
-    .hero {
-        flex-direction: column;
-    }
 }
 
 @media (max-width: 768px) {
     .hero {
         min-height: 100vh;
+        min-height: 100dvh;
+        padding-top: 60px;
+    }
+
+    .hero::before {
+        height: 35%;
     }
 
     .hero-logo {
-        width: 50%;
-        max-width: 200px;
+        width: 45%;
+        max-width: 180px;
     }
 
-    .hero-content h2 {
-        font-size: 1.75rem;
-    }
-
-    .hero-content p {
-        font-size: 0.9rem;
-    }
-}
-
-@media (max-width: 480px) {
-    .hero-logo {
-        width: 50%;
-        max-width: 160px;
+    .hero-content {
+        padding: 1.5rem 1rem;
+        padding-bottom: 38vh;
+        margin-top: 0.75rem;
     }
 
     .hero-content h2 {
         font-size: 1.5rem;
+        letter-spacing: -0.5px;
+        margin-bottom: 0.75rem;
+    }
+
+    .hero-content p {
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .hero-description {
+        font-size: 0.85rem !important;
+        line-height: 1.4;
+    }
+}
+
+@media (max-width: 480px) {
+    .hero {
+        padding-top: 55px;
+    }
+
+    .hero::before {
+        height: 30%;
+    }
+
+    .hero-logo {
+        width: 40%;
+        max-width: 140px;
+    }
+
+    .hero-content {
+        padding: 1.25rem 0.75rem;
+        padding-bottom: 33vh;
+        max-width: 95%;
+        margin-top: 0.5rem;
+    }
+
+    .hero-content h2 {
+        font-size: 1.3rem;
+        letter-spacing: 0;
+        margin-bottom: 0.5rem;
     }
 
     .hero-content p {
         font-size: 0.85rem;
+    }
+
+    .hero-description {
+        font-size: 0.8rem !important;
+    }
+
+    .hero-buttons {
+        margin-top: 0.75rem;
+    }
+
+    .hero-buttons .cta-btn {
+        padding: 0.6rem 1.25rem;
+        font-size: 0.9rem;
     }
 
     .hero-description {
@@ -1393,13 +1448,9 @@ a.cta-btn {
     font-family: 'Poppins', sans-serif;
     font-weight: 700;
     font-size: 1.2rem;
-    color: var(--color-accent);
+    color: white;
     white-space: nowrap;
     grid-column: 3;
-    background: var(--gradient-accent);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
 }
 
 .item-desc {
@@ -1611,19 +1662,34 @@ footer {
 
 /* Responsive Design */
 @media (max-width: 768px) {
+    .navbar .container {
+        padding: 0.75rem 1rem;
+    }
+
+    .navbar {
+        position: fixed;
+    }
+
     .nav-menu {
         display: none;
-        position: absolute;
-        top: 100%;
+        position: fixed;
+        top: 60px;
         left: 0;
         right: 0;
         background: var(--color-primary);
         flex-direction: column;
         padding: 1rem;
+        box-shadow: 0 4px 20px rgba(0,0,0,0.2);
+        z-index: 9998;
     }
 
     .nav-menu.active {
         display: flex;
+    }
+
+    .nav-menu a {
+        padding: 0.75rem 1rem;
+        font-size: 1rem;
     }
 
     [dir="rtl"] .nav-menu {
@@ -1634,38 +1700,38 @@ footer {
         display: flex;
     }
 
-    .hero-content h2 {
-        font-size: 2rem;
-    }
-
-    .hero-content p {
-        font-size: 1.1rem;
-    }
-
     .language-switcher {
-        margin: 0 1rem;
+        margin: 0 0.5rem;
+        gap: 0.5rem;
+    }
+
+    .language-switcher button {
+        padding: 0.4rem 0.6rem;
+        font-size: 0.8rem;
     }
 
     .menu-section {
-        padding: var(--space-7-5) 0;
+        padding: 2.5rem 0;
     }
 
     .menu-section h2 {
-        font-size: 2rem;
+        font-size: 1.75rem;
+        margin-bottom: 1.5rem;
     }
 
     .menu-category {
-        padding: 1.2rem;
-        margin-bottom: 2rem;
+        padding: 1rem;
+        margin-bottom: 1.5rem;
+        border-radius: 12px;
     }
 
     .category-title {
-        font-size: 1.4rem;
+        font-size: 1.25rem;
         flex-wrap: wrap;
     }
 
     .category-icon {
-        font-size: 1.8rem;
+        font-size: 1.5rem;
     }
 
     .category-price {
@@ -1676,13 +1742,13 @@ footer {
     }
 
     .menu-item-row {
-        padding: 0.8rem 1rem;
+        padding: 0.6rem 0.8rem;
         grid-template-columns: 1fr;
-        gap: 0.3rem;
+        gap: 0.25rem;
     }
 
     .item-name {
-        font-size: 1rem;
+        font-size: 0.95rem;
         white-space: normal;
         grid-column: 1;
     }
@@ -1694,7 +1760,8 @@ footer {
     .item-price {
         grid-column: 1;
         text-align: left;
-        margin-top: 0.3rem;
+        margin-top: 0.2rem;
+        font-size: 0.9rem;
     }
 
     [dir="rtl"] .item-price {
@@ -2165,6 +2232,11 @@ footer {
     font-family: 'Poppins', sans-serif;
 }
 
+.tab-icon {
+    font-size: 1.6rem;
+    line-height: 1;
+}
+
 .menu-tab:hover {
     background: rgba(99, 102, 241, 0.1);
     color: #6366f1;
@@ -2208,14 +2280,14 @@ footer {
 
 .tab-price-range {
     display: inline-block;
-    background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);
-    color: white;
+    background: white;
+    color: #1e3a8a;
     padding: 0.75rem 2rem;
     border-radius: 50px;
     font-size: 1.3rem;
     font-weight: 700;
     font-family: 'Poppins', sans-serif;
-    box-shadow: 0 4px 15px rgba(251, 191, 36, 0.4);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
 }
 
 /* Subcategory within tabs */
@@ -2388,13 +2460,13 @@ footer {
 /* Modern Card Grid */
 .menu-card-grid {
     display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
-    gap: 1.5rem;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: 1rem;
 }
 
 .menu-card-grid.compact {
-    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: 1rem;
+    grid-template-columns: repeat(auto-fill, minmax(240px, 1fr));
+    gap: 0.75rem;
 }
 
 /* Menu Card - Modern Glassmorphism Design */
@@ -2402,8 +2474,8 @@ footer {
     background: rgba(255, 255, 255, 0.7);
     backdrop-filter: blur(20px);
     -webkit-backdrop-filter: blur(20px);
-    border-radius: 24px;
-    padding: 2rem;
+    border-radius: 16px;
+    padding: 1.25rem;
     box-shadow:
         0 8px 32px rgba(31, 38, 135, 0.08),
         inset 0 0 0 1px rgba(255, 255, 255, 0.6);
@@ -2602,6 +2674,42 @@ footer {
     text-decoration: underline;
 }
 
+.contact-phones-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.phone-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.phone-item a {
+    color: white;
+    text-decoration: none;
+    font-weight: 500;
+    transition: opacity 0.2s;
+}
+
+.phone-item a:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+}
+
+.contact-hours-vertical {
+    display: flex;
+    flex-direction: column;
+    gap: 0.4rem;
+}
+
+.hours-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
 .contact-buttons-row {
     display: flex;
     justify-content: center;
@@ -2640,20 +2748,46 @@ footer {
 }
 
 @media (max-width: 600px) {
+    footer {
+        padding: 1.5rem 1rem;
+    }
+
     .contact-row {
         flex-direction: column;
-        gap: 0.75rem;
+        gap: 0.5rem;
+        font-size: 0.9rem;
     }
 
     .contact-buttons-row {
-        flex-direction: column;
-        align-items: center;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: 0.5rem;
     }
 
     .contact-btn {
-        width: 100%;
-        max-width: 200px;
-        justify-content: center;
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+        min-width: auto;
+    }
+
+    .contact-slogan {
+        font-size: 1rem;
+        margin-bottom: 0.75rem;
+    }
+
+    .footer-row {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+        font-size: 0.8rem;
+    }
+
+    .footer-row span {
+        display: none;
+    }
+
+    .footer-row a {
+        padding: 0.25rem 0.5rem;
     }
 }
 
@@ -3076,4 +3210,166 @@ body {
     100% {
         background-position: 200% 0;
     }
+}
+
+/* Additional Mobile Fixes - Small Screens */
+@media (max-width: 480px) {
+    .container {
+        padding: 0 0.75rem;
+    }
+
+    .navbar .container {
+        padding: 0.5rem 0.75rem;
+    }
+
+    .menu-tabs {
+        gap: 0.25rem;
+        padding: 0.25rem;
+    }
+
+    .menu-tab {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.8rem;
+    }
+
+    .reservation-section {
+        padding: 1.5rem 1rem;
+        margin: 0 0.5rem 1.5rem;
+        border-radius: 16px;
+    }
+
+    .reservation-section h3 {
+        font-size: 1.4rem;
+    }
+
+    .reservation-section p {
+        font-size: 1rem;
+    }
+
+    .reservation-buttons {
+        gap: 0.75rem;
+    }
+
+    .phone-btn, .whatsapp-btn {
+        padding: 0.75rem 1.25rem;
+        font-size: 0.95rem;
+    }
+
+    .gallery-section {
+        padding: 2rem 0;
+    }
+
+    .gallery-grid {
+        gap: 0.5rem;
+        padding: 0 0.5rem;
+    }
+
+    .gallery-item {
+        border-radius: 8px;
+    }
+
+    .category-header-img {
+        height: 150px;
+        border-radius: 16px;
+        margin-bottom: 1.5rem;
+    }
+
+    .menu-category-modern {
+        margin-bottom: 2rem;
+    }
+}
+
+/* Very Small Screens */
+@media (max-width: 360px) {
+    .hero-content h2 {
+        font-size: 1.2rem;
+    }
+
+    .hero-logo {
+        max-width: 120px;
+    }
+
+    .menu-tab {
+        padding: 0.4rem 0.5rem;
+        font-size: 0.75rem;
+    }
+
+    .contact-btn {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.8rem;
+    }
+}
+
+/* Mobile Menu Cards - Single Column Layout */
+@media (max-width: 600px) {
+    .menu-card-grid {
+        grid-template-columns: 1fr;
+        gap: 0.75rem;
+    }
+
+    .menu-card {
+        padding: 1rem;
+        border-radius: 12px;
+    }
+
+    .menu-card h4 {
+        font-size: 1rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .menu-card p {
+        font-size: 0.8rem;
+        margin-bottom: 0.5rem;
+    }
+
+    .menu-card .price {
+        font-size: 1.1rem;
+    }
+
+    .menu-tabs {
+        gap: 0.25rem;
+        padding: 0.5rem;
+        border-radius: 20px;
+    }
+
+    .menu-tab {
+        padding: 0.5rem 0.75rem;
+        font-size: 0.85rem;
+        border-radius: 15px;
+    }
+
+    .tab-icon {
+        font-size: 1.2rem;
+    }
+
+    .menu-section-modern {
+        padding: 1.5rem 0;
+    }
+
+    .menu-section-modern .container {
+        padding: 0 0.75rem;
+    }
+
+    .menu-section-modern h2 {
+        font-size: 1.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .tab-header {
+        margin-bottom: 1rem;
+    }
+
+    .tab-price-range {
+        font-size: 1rem;
+        padding: 0.4rem 1rem;
+    }
+}
+
+/* Prevent horizontal overflow on mobile */
+html, body {
+    overflow-x: hidden;
+}
+
+* {
+    max-width: 100%;
 }
