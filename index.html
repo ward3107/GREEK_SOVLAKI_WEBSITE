@@ -32,7 +32,7 @@
     <link rel="apple-touch-icon" href="restaurant-logo.jpg">
     <link rel="manifest" href="manifest.json">
 
-    <link rel="stylesheet" href="styles.css?v=14">
+    <link rel="stylesheet" href="styles.css?v=16">
     <link rel="stylesheet" href="animations.css?v=14">
     <link rel="stylesheet" href="accessibility-widget.css?v=21">
     <link rel="stylesheet" href="cookie-consent.css?v=15">
@@ -159,11 +159,11 @@
 
         <!-- Menu Tabs Navigation -->
         <div class="menu-tabs">
-            <button class="menu-tab active" data-tab="pita"><span class="tab-icon">🥙</span> <span data-lang="cat-pita-title">סובלאקי בפיתה</span></button>
-            <button class="menu-tab" data-tab="plates"><span class="tab-icon">🍽</span> <span data-lang="cat-plates-title">צלחות</span></button>
-            <button class="menu-tab" data-tab="platters"><span class="tab-icon">🍖</span> <span data-lang="cat-platters-title">מגשים</span></button>
-            <button class="menu-tab" data-tab="more"><span class="tab-icon">🍕</span> <span data-lang="tab-more">עוד</span></button>
-            <button class="menu-tab" data-tab="drinks"><span class="tab-icon">🥤</span> <span data-lang="cat-drinks-title">משקאות</span></button>
+            <button type="button" class="menu-tab active" data-tab="pita"><span class="tab-icon">🥙</span> <span data-lang="cat-pita-title">סובלאקי בפיתה</span></button>
+            <button type="button" class="menu-tab" data-tab="plates"><span class="tab-icon">🍽</span> <span data-lang="cat-plates-title">צלחות</span></button>
+            <button type="button" class="menu-tab" data-tab="platters"><span class="tab-icon">🍖</span> <span data-lang="cat-platters-title">מגשים</span></button>
+            <button type="button" class="menu-tab" data-tab="more"><span class="tab-icon">🍕</span> <span data-lang="tab-more">עוד</span></button>
+            <button type="button" class="menu-tab" data-tab="drinks"><span class="tab-icon">🥤</span> <span data-lang="cat-drinks-title">משקאות</span></button>
         </div>
 
         <!-- Tab Content: Souvlaki in Pita -->
@@ -485,24 +485,24 @@
 
     <!-- Lightbox Modal -->
     <div class="lightbox-modal" id="lightbox">
-        <button class="lightbox-close" aria-label="Close">&times;</button>
+        <button type="button" class="lightbox-close" aria-label="Close">&times;</button>
         <div class="lightbox-counter"><span id="lightbox-current">1</span> / <span id="lightbox-total">11</span></div>
-        <button class="lightbox-nav lightbox-prev" aria-label="Previous">&#10094;</button>
-        <button class="lightbox-nav lightbox-next" aria-label="Next">&#10095;</button>
+        <button type="button" class="lightbox-nav lightbox-prev" aria-label="Previous">&#10094;</button>
+        <button type="button" class="lightbox-nav lightbox-next" aria-label="Next">&#10095;</button>
 
         <div class="lightbox-content">
             <div class="lightbox-image-container">
-                <img src="" alt="Gallery image enlarged" id="lightbox-img">
+                <img src="" alt="Gallery photo enlarged" id="lightbox-img">
             </div>
         </div>
 
         <div class="lightbox-toolbar">
-            <button id="zoom-out" aria-label="Zoom out">&#8722;</button>
+            <button type="button" id="zoom-out" aria-label="Zoom out">&#8722;</button>
             <span class="lightbox-zoom-level" id="zoom-level">100%</span>
-            <button id="zoom-in" aria-label="Zoom in">&#43;</button>
-            <button id="rotate-left" aria-label="Rotate left">&#8634;</button>
-            <button id="rotate-right" aria-label="Rotate right">&#8635;</button>
-            <button id="reset-view" aria-label="Reset view">&#8634;&#8635;</button>
+            <button type="button" id="zoom-in" aria-label="Zoom in">&#43;</button>
+            <button type="button" id="rotate-left" aria-label="Rotate left">&#8634;</button>
+            <button type="button" id="rotate-right" aria-label="Rotate right">&#8635;</button>
+            <button type="button" id="reset-view" aria-label="Reset view">&#8634;&#8635;</button>
         </div>
     </div>
 
