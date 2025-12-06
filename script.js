@@ -327,7 +327,8 @@ document.addEventListener('DOMContentLoaded', () => {
           en: '🇬🇧 EN',
           he: '🇮🇱 HE',
           ar: '🇸🇦 AR',
-          ru: '🇷🇺 RU'
+          ru: '🇷🇺 RU',
+          el: '🇬🇷 GR'
         };
         if (currentLangSpan) currentLangSpan.textContent = displayMap[lang] || '🇮🇱 HE';
 
@@ -421,7 +422,7 @@ document.addEventListener('DOMContentLoaded', () => {
   try { normalizeCurrency(); } catch(e){}
   try { enhanceImages(); } catch(e){}
   try { normalizePhones(); } catch(e){}
-  try { menuScrollArrow(); } catch(e){}
+  // try { menuScrollArrow(); } catch(e){} // Disabled - scroll to top button removed
   // themeToggle handled by toggles.js
   
   function menuScrollArrow(){

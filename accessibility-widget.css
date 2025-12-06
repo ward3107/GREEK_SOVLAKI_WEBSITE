@@ -491,7 +491,7 @@ body .a11y-panel {
   }
 
   body:not(.a11y-dark-mode) .page-content .menu-card .price {
-    color: #f59e0b !important;
+    color: #ffffff !important;
   }
 }
 

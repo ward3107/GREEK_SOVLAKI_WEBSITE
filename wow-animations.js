@@ -351,7 +351,7 @@
         // Initialize all effects
         initScrollAnimations();
         initParallax();
-        createParticles();
+        // createParticles(); // Disabled - floating particles removed
         initCursorTrail();
         initColorShift();
         initTypewriter();

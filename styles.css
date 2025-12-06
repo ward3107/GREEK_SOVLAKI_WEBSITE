@@ -805,6 +805,18 @@ body.rtl .contact-info {
     border-radius: 8px;
 }
 
+.nav-logo {
+    height: 45px;
+    width: auto;
+    object-fit: contain;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+.nav-logo:hover {
+    transform: scale(1.05);
+}
+
 .logo h1 {
     color: var(--color-white);
     font-size: 1.8rem;
@@ -1196,6 +1208,66 @@ body.rtl .contact-info {
 
     .hero-description {
         font-size: 0.8rem !important;
+    }
+}
+
+/* PWA Standalone Mode Fixes */
+@media (display-mode: standalone) {
+    body {
+        padding-top: env(safe-area-inset-top);
+        padding-bottom: env(safe-area-inset-bottom);
+    }
+
+    .hero {
+        min-height: 100vh;
+        min-height: 100dvh;
+        padding-top: calc(80px + env(safe-area-inset-top));
+    }
+
+    .hero-content {
+        position: relative;
+        padding-bottom: 2rem;
+        margin-bottom: 40vh;
+        background: rgba(255, 255, 255, 0.98);
+        z-index: 5;
+    }
+
+    .hero::before {
+        position: absolute;
+        bottom: 0;
+        top: auto;
+        height: 38vh;
+        z-index: 1;
+    }
+}
+
+@media (display-mode: standalone) and (max-width: 768px) {
+    .hero {
+        padding-top: calc(60px + env(safe-area-inset-top));
+    }
+
+    .hero-content {
+        padding-bottom: 1.5rem;
+        margin-bottom: 35vh;
+    }
+
+    .hero::before {
+        height: 33vh;
+    }
+}
+
+@media (display-mode: standalone) and (max-width: 480px) {
+    .hero {
+        padding-top: calc(55px + env(safe-area-inset-top));
+    }
+
+    .hero-content {
+        padding-bottom: 1rem;
+        margin-bottom: 30vh;
+    }
+
+    .hero::before {
+        height: 28vh;
     }
 }
 
@@ -1658,6 +1730,57 @@ footer {
     margin: 0;
     font-size: 0.8rem;
     opacity: 0.8;
+}
+
+.footer-bottom {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    padding: 0 1rem;
+    margin-top: 0.5rem;
+    position: relative;
+}
+
+.footer-bottom p {
+    text-align: center;
+}
+
+.footer-developer {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    font-size: 0.75rem;
+    opacity: 0.7;
+    position: absolute;
+    right: 1rem;
+    top: -5rem;
+}
+
+.footer-developer span {
+    color: white;
+}
+
+.location-link {
+    color: white;
+    text-decoration: none;
+    transition: opacity 0.2s;
+}
+
+.location-link:hover {
+    opacity: 0.8;
+    text-decoration: underline;
+}
+
+.ws-logo {
+    height: 70px;
+    width: auto;
+    border-radius: 50%;
+    transition: transform 0.3s ease;
+}
+
+.ws-logo:hover {
+    transform: scale(1.15);
 }
 
 /* Responsive Design */
@@ -2740,6 +2863,10 @@ footer {
 
 .contact-btn.facebook {
     background: #1877F2;
+}
+
+.contact-btn.waze {
+    background: #33CCFF;
 }
 
 .contact-btn:hover {

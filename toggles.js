@@ -106,7 +106,8 @@
                     'en': '🇬🇧 EN',
                     'he': '🇮🇱 HE',
                     'ar': '🇸🇦 AR',
-                    'ru': '🇷🇺 RU'
+                    'ru': '🇷🇺 RU',
+                    'el': '🇬🇷 GR'
                 };
                 if (currentLangSpan) {
                     currentLangSpan.textContent = flagMap[lang] || '🇮🇱 HE';
