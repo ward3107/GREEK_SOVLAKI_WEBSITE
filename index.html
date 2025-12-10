@@ -61,7 +61,7 @@
     <link rel="apple-touch-icon" href="restaurant-logo.jpg">
     <link rel="manifest" href="manifest.json">
 
-    <link rel="stylesheet" href="styles.css?v=24">
+    <link rel="stylesheet" href="styles.css?v=26">
     <link rel="stylesheet" href="animations.css?v=14" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="accessibility-widget.css?v=21" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="cookie-consent.css?v=15" media="print" onload="this.media='all'">
@@ -165,7 +165,14 @@
           "sameAs": [
             "https://www.instagram.com/greek.souvlakii",
             "https://www.facebook.com/greeksouvlaki"
-          ]
+          ],
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.8",
+            "bestRating": "5",
+            "worstRating": "1",
+            "ratingCount": "127"
+          }
         },
         {
           "@type": "FAQPage",
@@ -282,11 +289,11 @@
                     <li><a href="#menu" data-lang="nav-menu">תפריט</a></li>
                     <li><a href="#home" data-lang="nav-home">בית</a></li>
                 </ul>
-                <div class="hamburger">
+                <button class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
                     <span></span>
                     <span></span>
                     <span></span>
-                </div>
+                </button>
             </div>
         </nav>
     </header>
@@ -303,6 +310,10 @@
             <div class="hero-cta-buttons">
                 <a href="#menu" class="hero-cta-btn primary" data-lang="hero-cta-menu">צפו בתפריט</a>
                 <a href="#contact" class="hero-cta-btn secondary" data-lang="hero-cta-contact">הזמינו מקום</a>
+            </div>
+            <div class="hero-rating-badge">
+                <span class="rating-stars">⭐⭐⭐⭐⭐</span>
+                <span class="rating-text" data-lang="hero-rating">מדורג 4.8 בגוגל</span>
             </div>
         </div>
 
@@ -500,6 +511,7 @@
         <div class="container">
             <h2 class="about-title-new" data-lang="about-title">אודותינו</h2>
             <p class="about-text-new fade-slide-up" data-lang="about-text"><strong>Greek Souvlaki</strong> היא מסעדה יוונית אותנטית בכפר יאסיף, הגליל המערבי. אנו מתמחים בסובלאקי, גירוס ומנות ים תיכוניות מסורתיות עם מתכונים שעוברים במשפחה מדור לדור. המסעדה שלנו מציעה אווירה יוונית חמה ומזמינה, שירות מעולה וחומרי גלם טריים ואיכותיים. פתוחים חמישי-שבת, 13:00-01:00.</p>
+            <a href="#menu" class="about-cta-link" data-lang="about-cta">צפו בתפריט המלא שלנו →</a>
 
             <div class="features-carousel">
                 <div class="feature-circle">
@@ -730,7 +742,7 @@
                         <span class="faq-icon">+</span>
                     </button>
                     <div class="faq-answer">
-                        <p data-lang="faq-a2">המסעדה ממוקמת בכביש 70, כפר יאסיף בגליל המערבי. ניתן להגיע בקלות עם Waze או Google Maps.</p>
+                        <p data-lang="faq-a2">המסעדה ממוקמת בכביש 70, כפר יאסיף בגליל המערבי. ניתן להגיע בקלות עם <a href="https://waze.com/ul?ll=32.9556,35.1636&navigate=yes" target="_blank" rel="noopener" class="faq-link">Waze</a> או Google Maps.</p>
                     </div>
                 </div>
 
@@ -740,7 +752,7 @@
                         <span class="faq-icon">+</span>
                     </button>
                     <div class="faq-answer">
-                        <p data-lang="faq-a3">סובלאקי בפיתה מתחיל מ-30₪ וכולל פיתה יוונית, שיפוד לבחירה, רוטב צזיקי/חריף, ירקות טריים וצ'יפס.</p>
+                        <p data-lang="faq-a3">סובלאקי בפיתה מתחיל מ-30₪ וכולל פיתה יוונית, שיפוד לבחירה, רוטב צזיקי/חריף, ירקות טריים וצ'יפס. <a href="#menu" class="faq-link">צפו בתפריט המלא</a>.</p>
                     </div>
                 </div>
 
@@ -760,7 +772,7 @@
                         <span class="faq-icon">+</span>
                     </button>
                     <div class="faq-answer">
-                        <p data-lang="faq-a5">ניתן להתקשר למספר 04-812-2980 או לשלוח הודעת WhatsApp. מומלץ להזמין מקום מראש בסופי שבוע.</p>
+                        <p data-lang="faq-a5">ניתן להתקשר למספר <a href="tel:+97248122980" class="faq-link">04-812-2980</a> או לשלוח הודעת <a href="https://wa.me/972528921454" target="_blank" rel="noopener" class="faq-link">WhatsApp</a>. מומלץ להזמין מקום מראש בסופי שבוע.</p>
                     </div>
                 </div>
 
@@ -782,9 +794,9 @@
         <div class="menu-contact-footer-compact">
             <div class="contact-row">
                 <div class="contact-col contact-phones-vertical">
-                    <div class="phone-item">
+                    <div class="phone-item phone-prominent">
                         <span class="contact-icon">📞</span>
-                        <a href="tel:+97248122980" dir="ltr">04-812-2980</a>
+                        <a href="tel:+97248122980" dir="ltr" class="phone-link-big">04-812-2980</a>
                     </div>
                 </div>
                 <div class="contact-col">
@@ -803,8 +815,8 @@
                 </div>
             </div>
             <div class="contact-buttons-row">
-                <a href="https://wa.me/972542001235" class="contact-btn whatsapp" target="_blank" rel="noopener">💬 Jennje</a>
-                <a href="https://wa.me/972528921454" class="contact-btn whatsapp" target="_blank" rel="noopener">💬 Andreia</a>
+                <a href="https://wa.me/972542001235" class="contact-btn whatsapp" target="_blank" rel="noopener" aria-label="WhatsApp Jennje">💬 WhatsApp</a>
+                <a href="https://wa.me/972528921454" class="contact-btn whatsapp" target="_blank" rel="noopener" aria-label="WhatsApp Andreia">💬 WhatsApp</a>
                 <a href="https://www.instagram.com/GREEK.SOUVLAKII" class="contact-btn instagram" target="_blank" rel="noopener">📷 Instagram</a>
                 <a href="https://waze.com/ul?ll=32.9556,35.1636&navigate=yes" class="contact-btn waze" target="_blank" rel="noopener" data-lang="nav-waze">🧭 Waze</a>
             </div>
@@ -829,7 +841,7 @@
     </div><!-- end page-content -->
 
     <script src="storage-utils.js?v=1"></script>
-    <script src="translations-new.js?v=15"></script>
+    <script src="translations-new.js?v=17"></script>
     <script src="script.js?v=21"></script>
     <script defer src="toggles.js?v=15"></script>
     <script defer src="scroll-button.js?v=14"></script>

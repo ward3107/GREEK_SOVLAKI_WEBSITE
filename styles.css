@@ -1151,10 +1151,39 @@ body.rtl .contact-info {
     transform: translateY(-3px);
 }
 
+/* Hero Rating Badge */
+.hero-rating-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    margin-top: 1.5rem;
+    padding: 0.75rem 1.5rem;
+    background: rgba(255, 255, 255, 0.2);
+    backdrop-filter: blur(10px);
+    border-radius: 50px;
+    width: fit-content;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.rating-stars {
+    font-size: 1.5rem;
+    letter-spacing: 3px;
+}
+
+.rating-text {
+    color: #ffffff;
+    font-size: 1.2rem;
+    font-weight: 600;
+}
+
 @media (max-width: 480px) {
     .hero-cta-buttons {
         flex-direction: column;
         width: 100%;
+    }
+
+    .hero-rating-badge {
+        margin: 1rem auto 0;
     }
 
     .hero-cta-btn {
@@ -2256,6 +2285,17 @@ footer {
     margin: 0;
 }
 
+.faq-link {
+    color: var(--color-primary, #1e3a8a);
+    text-decoration: underline;
+    font-weight: 500;
+    transition: color 0.2s ease;
+}
+
+.faq-link:hover {
+    color: var(--color-accent, #d4af37);
+}
+
 @media (max-width: 768px) {
     .faq-section h2 {
         font-size: 2rem;
@@ -3131,6 +3171,24 @@ footer {
 .phone-item a:hover {
     opacity: 0.8;
     text-decoration: underline;
+}
+
+/* Prominent Phone Styling */
+.phone-prominent {
+    background: linear-gradient(135deg, #d4af37, #f4d03f);
+    padding: 0.75rem 1.25rem;
+    border-radius: 50px;
+    margin-bottom: 0.5rem;
+}
+
+.phone-link-big {
+    font-size: 1.2rem !important;
+    font-weight: 700 !important;
+    color: #1e3a8a !important;
+}
+
+.phone-prominent .contact-icon {
+    font-size: 1.3rem;
 }
 
 .contact-hours-vertical {
@@ -4616,8 +4674,28 @@ html, body {
     color: #475569;
     text-align: center;
     max-width: 800px;
-    margin: 0 auto 3rem;
+    margin: 0 auto 1.5rem;
     line-height: 1.8;
+}
+
+.about-cta-link {
+    display: inline-block;
+    margin: 0 auto 3rem;
+    padding: 0.75rem 1.5rem;
+    color: var(--color-primary, #1e3a8a);
+    font-weight: 600;
+    font-size: 1.1rem;
+    text-decoration: none;
+    border: 2px solid var(--color-primary, #1e3a8a);
+    border-radius: 50px;
+    transition: all 0.3s ease;
+    text-align: center;
+}
+
+.about-cta-link:hover {
+    background: var(--color-primary, #1e3a8a);
+    color: #ffffff;
+    transform: translateY(-2px);
 }
 
 /* Fade In & Slide Up Animation */
@@ -4638,6 +4716,51 @@ html, body {
     gap: 2rem;
     flex-wrap: wrap;
     padding: 1rem 0;
+}
+
+/* Trust Badges */
+.trust-badges {
+    display: flex;
+    justify-content: center;
+    gap: 1.5rem;
+    flex-wrap: wrap;
+    margin-top: 3rem;
+    padding-top: 2rem;
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.trust-badge {
+    display: flex;
+    align-items: center;
+    gap: 0.75rem;
+    padding: 1rem 1.5rem;
+    background: linear-gradient(135deg, #1e3a8a, #2563eb);
+    border-radius: 50px;
+    box-shadow: 0 4px 15px rgba(30, 58, 138, 0.3);
+}
+
+.badge-icon {
+    font-size: 1.5rem;
+}
+
+.badge-text {
+    font-size: 1rem;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+@media (max-width: 768px) {
+    .trust-badges {
+        gap: 1rem;
+    }
+
+    .trust-badge {
+        padding: 0.6rem 1rem;
+    }
+
+    .badge-text {
+        font-size: 0.85rem;
+    }
 }
 
 .feature-circle {

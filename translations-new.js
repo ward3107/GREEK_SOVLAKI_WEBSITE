@@ -82,6 +82,7 @@ let translations = {
         "contact-slogan": "אהבתם? תייגו אותנו!",
         "about-title": "אודותינו",
         "about-text": "חווית קולינרית יוונית אמיתית בלב כפר יאסיף. אנו מביאים את הטעמים האותנטיים של יוון עם מתכונים מסורתיים שעוברים במשפחה מדור לדור. המסעדה שלנו מציעה אווירה חמה ומזמינה, שירות מעולה וחומרי גלם טריים ואיכותיים.",
+        "about-cta": "צפו בתפריט המלא שלנו →",
         "quality-title": "בשרים איכותיים",
         "quality-desc": "בשרים טריים ואיכותיים מספקים מובחרים",
         "fresh-title": "חומרי גלם טריים",
@@ -132,7 +133,11 @@ let translations = {
         "faq-a6": "סובלאקי הוא שיפוד בשר צלוי על האש, בעוד גירוס (שווארמה יוונית) הוא בשר שנחתך משיפוד מסתובב. שניהם מוגשים בפיתה יוונית עם ירקות ורטבים.",
         "skip-to-content": "דלג לתוכן הראשי",
         "hero-cta-menu": "צפו בתפריט",
-        "hero-cta-contact": "הזמינו מקום"
+        "hero-cta-contact": "הזמינו מקום",
+        "hero-rating": "מדורג 4.8 בגוגל",
+        "badge-fresh": "חומרי גלם טריים מדי יום",
+        "badge-family": "עסק משפחתי מאז 2020",
+        "badge-rated": "מדורג 4.8 ב-Google"
     },
     'en': {
         "logo": "Greek Souvlaki",
@@ -214,6 +219,7 @@ let translations = {
         "contact-slogan": "Enjoyed it? Tag us!",
         "about-title": "About Us",
         "about-text": "A genuine Greek culinary experience in the heart of Kafr Yasif. We bring authentic Greek flavors with traditional family recipes passed down through generations.",
+        "about-cta": "View Our Full Menu →",
         "quality-title": "Quality Meats",
         "quality-desc": "Fresh quality meats from premium suppliers",
         "fresh-title": "Fresh Ingredients",
@@ -262,7 +268,11 @@ let translations = {
         "faq-a6": "Souvlaki is grilled meat skewer, while gyros (Greek shawarma) is meat sliced from a rotating spit. Both are served in Greek pita with vegetables and sauces.",
         "skip-to-content": "Skip to main content",
         "hero-cta-menu": "View Menu",
-        "hero-cta-contact": "Make Reservation"
+        "hero-cta-contact": "Make Reservation",
+        "hero-rating": "Rated 4.8 on Google",
+        "badge-fresh": "Fresh ingredients daily",
+        "badge-family": "Family business since 2020",
+        "badge-rated": "Rated 4.8 on Google"
     },
     'ar': {
         "logo": "سوفلاكي يوناني",
@@ -344,6 +354,7 @@ let translations = {
         "contact-slogan": "أعجبكم؟ ضعوا علامة لنا!",
         "about-title": "من نحن",
         "about-text": "تجربة طهي يونانية حقيقية في قلب كفر ياسيف. نقدم النكهات اليونانية الأصيلة مع وصفات عائلية تقليدية تنتقل عبر الأجيال.",
+        "about-cta": "شاهد قائمتنا الكاملة ←",
         "quality-title": "لحوم عالية الجودة",
         "quality-desc": "لحوم طازجة وعالية الجودة من موردين متميزين",
         "fresh-title": "مكونات طازجة",
@@ -392,7 +403,11 @@ let translations = {
         "faq-a6": "السوفلاكي هو سيخ لحم مشوي على النار، بينما الجيروس (شاورما يونانية) هو لحم يُقطع من سيخ دوار. كلاهما يُقدم في بيتا يونانية مع الخضروات والصلصات.",
         "skip-to-content": "انتقل إلى المحتوى الرئيسي",
         "hero-cta-menu": "عرض القائمة",
-        "hero-cta-contact": "احجز طاولة"
+        "hero-cta-contact": "احجز طاولة",
+        "hero-rating": "تقييم 4.8 على جوجل",
+        "badge-fresh": "مكونات طازجة يومياً",
+        "badge-family": "عمل عائلي منذ 2020",
+        "badge-rated": "تقييم 4.8 على Google"
     },
     'ru': {
         "logo": "Греческий Сувлаки",
@@ -474,6 +489,7 @@ let translations = {
         "contact-slogan": "Понравилось? Отметьте нас!",
         "about-title": "О нас",
         "about-text": "Настоящий греческий кулинарный опыт в сердце Кфар Ясифа. Мы предлагаем аутентичные греческие вкусы с традиционными семейными рецептами, передаваемыми из поколения в поколение.",
+        "about-cta": "Смотреть полное меню →",
         "quality-title": "Качественное мясо",
         "quality-desc": "Свежее качественное мясо от премиальных поставщиков",
         "fresh-title": "Свежие ингредиенты",
@@ -522,7 +538,11 @@ let translations = {
         "faq-a6": "Сувлаки - это шашлык на гриле, а гирос (греческая шаурма) - мясо, нарезанное с вращающегося вертела. Оба подаются в греческой пите с овощами и соусами.",
         "skip-to-content": "Перейти к содержимому",
         "hero-cta-menu": "Посмотреть меню",
-        "hero-cta-contact": "Забронировать"
+        "hero-cta-contact": "Забронировать",
+        "hero-rating": "Рейтинг 4.8 в Google",
+        "badge-fresh": "Свежие ингредиенты ежедневно",
+        "badge-family": "Семейный бизнес с 2020",
+        "badge-rated": "Рейтинг 4.8 в Google"
     },
     'el': {
         "logo": "Ελληνικό Σουβλάκι",
@@ -604,6 +624,7 @@ let translations = {
         "contact-slogan": "Σας άρεσε; Κάντε μας tag!",
         "about-title": "Σχετικά με εμάς",
         "about-text": "Μια γνήσια ελληνική γαστρονομική εμπειρία στην καρδιά του Καφρ Γιασίφ. Φέρνουμε αυθεντικές ελληνικές γεύσεις με παραδοσιακές οικογενειακές συνταγές.",
+        "about-cta": "Δείτε το Πλήρες Μενού →",
         "quality-title": "Ποιοτικά Κρέατα",
         "quality-desc": "Φρέσκα ποιοτικά κρέατα από κορυφαίους προμηθευτές",
         "fresh-title": "Φρέσκα Υλικά",
@@ -652,7 +673,11 @@ let translations = {
         "faq-a6": "Το σουβλάκι είναι ψητό κρέας σε σουβλάκι, ενώ ο γύρος είναι κρέας κομμένο από περιστρεφόμενο σουβλάκι. Και τα δύο σερβίρονται σε ελληνική πίτα με λαχανικά και σάλτσες.",
         "skip-to-content": "Μετάβαση στο κύριο περιεχόμενο",
         "hero-cta-menu": "Δείτε το Μενού",
-        "hero-cta-contact": "Κάντε Κράτηση"
+        "hero-cta-contact": "Κάντε Κράτηση",
+        "hero-rating": "Βαθμολογία 4.8 στο Google",
+        "badge-fresh": "Φρέσκα υλικά καθημερινά",
+        "badge-family": "Οικογενειακή επιχείρηση από το 2020",
+        "badge-rated": "Βαθμολογία 4.8 στο Google"
     }
 };
 
