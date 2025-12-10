@@ -1,34 +1,64 @@
-﻿// Mobile menu toggle - runs immediately
+// Mobile menu toggle - runs immediately
 (function() {
+    let menuInitialized = false;
+    let touchHandled = false;
+
     function initMobileMenu() {
+        if (menuInitialized) return;
+
         const hamburger = document.querySelector('.hamburger');
         const navMenu = document.querySelector('.nav-menu');
 
         if (!hamburger || !navMenu) {
+            console.log('Hamburger or navMenu not found');
             return;
         }
 
+        console.log('Mobile menu initialized');
+        menuInitialized = true;
+
         // Toggle function
-        function toggleMenu(e) {
-            if (e) {
-                e.preventDefault();
-                e.stopPropagation();
-            }
+        function toggleMenu() {
+            console.log('Toggle menu called');
             hamburger.classList.toggle('active');
             navMenu.classList.toggle('active');
         }
 
-        // Click event
-        hamburger.onclick = toggleMenu;
+        // Handle touch events - prevent double firing with click
+        hamburger.addEventListener('touchstart', function(e) {
+            e.preventDefault();
+            touchHandled = true;
+            toggleMenu();
+        }, { passive: false });
+
+        // Handle click for non-touch devices
+        hamburger.addEventListener('click', function(e) {
+            e.preventDefault();
+            e.stopPropagation();
+            // Skip if touch already handled this interaction
+            if (touchHandled) {
+                touchHandled = false;
+                return;
+            }
+            toggleMenu();
+        });
 
         // Close menu when clicking a nav link
         const links = navMenu.querySelectorAll('a');
-        for (let i = 0; i < links.length; i++) {
-            links[i].addEventListener('click', function() {
+        links.forEach(function(link) {
+            link.addEventListener('click', function() {
                 hamburger.classList.remove('active');
                 navMenu.classList.remove('active');
             });
-        }
+        });
+
+        // Close menu when clicking outside
+        document.addEventListener('click', function(e) {
+            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                hamburger.classList.remove('active');
+                navMenu.classList.remove('active');
+            }
+        });
     }
 
     // Try to init now

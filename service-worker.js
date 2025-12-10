@@ -1,4 +1,4 @@
-const CACHE_NAME = 'greek-souvlaki-wow-v26';
+const CACHE_NAME = 'greek-souvlaki-wow-v29';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -48,11 +48,17 @@ self.addEventListener('fetch', (event) => {
     return;
   }
 
+  // Skip chrome-extension and other non-http(s) requests
+  const url = new URL(event.request.url);
+  if (!url.protocol.startsWith('http')) {
+    return;
+  }
+
   event.respondWith(
     fetch(event.request)
       .then((response) => {
         // Check if we received a valid response
-        if (!response || response.status !== 200) {
+        if (!response || response.status !== 200 || response.type !== 'basic') {
           return response;
         }
 
@@ -68,7 +74,18 @@ self.addEventListener('fetch', (event) => {
       })
       .catch(() => {
         // Network failed, try cache
-        return caches.match(event.request);
+        return caches.match(event.request).then((cachedResponse) => {
+          // Return cached response or a proper error response
+          if (cachedResponse) {
+            return cachedResponse;
+          }
+          // Return a proper 503 response if nothing in cache
+          return new Response('Offline - Resource not available', {
+            status: 503,
+            statusText: 'Service Unavailable',
+            headers: new Headers({ 'Content-Type': 'text/plain' })
+          });
+        });
       })
   );
 });
