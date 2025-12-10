@@ -562,6 +562,58 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   try { initFadeSlideAnimation(); } catch(e) { console.error('Fade animation error:', e); }
+
+  // Gallery flip animation on scroll
+  function initGalleryFlipAnimation() {
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    if (!galleryItems.length) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          // Staggered delay based on position in viewport
+          const delay = Array.from(galleryItems).indexOf(entry.target) % 6 * 100;
+          setTimeout(() => {
+            entry.target.classList.add('flip-in');
+          }, delay);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    galleryItems.forEach(el => observer.observe(el));
+  }
+
+  try { initGalleryFlipAnimation(); } catch(e) { console.error('Gallery flip animation error:', e); }
+
+  // FAQ Accordion
+  function initFaqAccordion() {
+    const faqItems = document.querySelectorAll('.faq-item');
+    if (!faqItems.length) return;
+
+    faqItems.forEach(item => {
+      const question = item.querySelector('.faq-question');
+      if (question) {
+        question.addEventListener('click', () => {
+          const isActive = item.classList.contains('active');
+
+          // Close all other items
+          faqItems.forEach(other => {
+            if (other !== item) {
+              other.classList.remove('active');
+              other.querySelector('.faq-question')?.setAttribute('aria-expanded', 'false');
+            }
+          });
+
+          // Toggle current item
+          item.classList.toggle('active');
+          question.setAttribute('aria-expanded', !isActive);
+        });
+      }
+    });
+  }
+
+  try { initFaqAccordion(); } catch(e) { console.error('FAQ accordion error:', e); }
 });
 
 
