@@ -543,6 +543,25 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Theme toggle is handled by toggles.js
+
+  // Fade in & slide up animation for about section
+  function initFadeSlideAnimation() {
+    const fadeElements = document.querySelectorAll('.fade-slide-up');
+    if (!fadeElements.length) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    fadeElements.forEach(el => observer.observe(el));
+  }
+
+  try { initFadeSlideAnimation(); } catch(e) { console.error('Fade animation error:', e); }
 });
 
 
