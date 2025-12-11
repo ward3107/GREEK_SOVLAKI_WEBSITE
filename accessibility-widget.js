@@ -13,6 +13,13 @@
 
     init() {
       console.log('Accessibility widget initializing...');
+
+      // Check if widget was closed this session
+      if (sessionStorage.getItem('accessibilityWidgetClosed') === 'true') {
+        console.log('Accessibility widget hidden for this session');
+        return; // Don't create widget if closed this session
+      }
+
       this.createWidget();
       this.applySettings();
       this.attachEventListeners();
@@ -51,6 +58,7 @@
     createWidget() {
       const widgetHTML = `
         <div id="a11y-widget" class="a11y-widget">
+          <button id="a11y-widget-close" class="a11y-widget-close" aria-label="Close accessibility widget" title="הסתר כפתור נגישות">×</button>
           <button id="a11y-toggle" class="a11y-toggle" aria-label="Open accessibility options" aria-expanded="false" aria-controls="a11y-panel">
             <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
               <circle cx="12" cy="12" r="10"></circle>
@@ -118,7 +126,22 @@
       const panel = document.getElementById('a11y-panel');
       const widgetElement = document.getElementById('a11y-widget');
       const visibilityPrompt = document.getElementById('a11y-visibility-prompt');
+      const widgetCloseBtn = document.getElementById('a11y-widget-close');
       const self = this;
+
+      // Widget close button (X) - hides widget for this session
+      if (widgetCloseBtn) {
+        widgetCloseBtn.addEventListener('click', (e) => {
+          e.preventDefault();
+          e.stopPropagation();
+          sessionStorage.setItem('accessibilityWidgetClosed', 'true');
+          widgetElement.classList.add('a11y-widget-hidden');
+          // Remove after animation
+          setTimeout(() => {
+            widgetElement.remove();
+          }, 300);
+        });
+      }
 
       // Track if user has made a choice about visibility (session only)
       this.visibilityDecided = false;
