@@ -127,9 +127,10 @@
         color: white;
         padding: 1rem;
         z-index: 999999;
-        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3);
-        animation: slideUp 0.4s ease-out;
+        box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(251, 191, 36, 0.3);
+        animation: slideUp 0.4s ease-out, subtlePulse 2s ease-in-out infinite 1s;
         font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+        border-top: 3px solid #fbbf24;
       }
 
       @keyframes slideUp {
@@ -140,6 +141,15 @@
         to {
           transform: translateY(0);
           opacity: 1;
+        }
+      }
+
+      @keyframes subtlePulse {
+        0%, 100% {
+          box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.3), 0 0 0 2px rgba(251, 191, 36, 0.3);
+        }
+        50% {
+          box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.35), 0 0 0 3px rgba(251, 191, 36, 0.5);
         }
       }
 
@@ -324,15 +334,19 @@
 
   // Show banner after delay
   function showBannerWithDelay(isIOSDevice = false) {
-    // Wait 5 seconds before showing the banner
+    // Wait 2 seconds before showing the banner (reduced for better visibility)
     setTimeout(() => {
+      console.log('📱 Showing PWA install banner now...');
       createInstallBanner(isIOSDevice);
-    }, 5000);
+    }, 2000);
   }
 
   // Initialize
   function init() {
     console.log('📱 PWA Install script initialized');
+    console.log('📱 Current URL:', window.location.href);
+    console.log('📱 Is HTTPS:', window.location.protocol === 'https:');
+    console.log('📱 User Agent:', navigator.userAgent);
 
     // Don't show if already installed
     if (isAppInstalled()) {
@@ -342,7 +356,10 @@
 
     // Don't show if recently dismissed
     if (wasRecentlyDismissed()) {
-      console.log('📱 Install prompt recently dismissed, skipping');
+      const dismissed = localStorage.getItem('pwa-install-dismissed');
+      const dismissedTime = new Date(parseInt(dismissed, 10));
+      console.log('📱 Install prompt recently dismissed on:', dismissedTime.toLocaleString());
+      console.log('📱 Will show again after 3 days');
       return;
     }
 
@@ -361,7 +378,7 @@
       // Store the event for later use
       deferredPrompt = e;
 
-      console.log('📱 beforeinstallprompt event captured');
+      console.log('📱 ✅ beforeinstallprompt event captured - PWA is installable!');
 
       // Show the install banner
       showBannerWithDelay(false);
@@ -369,7 +386,7 @@
 
     // Listen for successful installation
     window.addEventListener('appinstalled', () => {
-      console.log('📱 App was installed');
+      console.log('📱 🎉 App was installed successfully!');
       deferredPrompt = null;
 
       if (installBanner) {
@@ -380,6 +397,9 @@
 
     console.log('📱 Waiting for beforeinstallprompt event...');
     console.log('📱 Note: This event only fires on HTTPS or localhost in supported browsers');
+    console.log('📱 Android Chrome/Edge: Will show automatically');
+    console.log('📱 iOS Safari: Will show manual instructions');
+    console.log('📱 Desktop: May not show (PWA install typically for mobile)');
     console.log('📱 Tip: Run testPWAInstall() in console to test the banner manually');
   }
 

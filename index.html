@@ -77,6 +77,11 @@
     <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
     <link rel="preconnect" href="https://flagcdn.com" crossorigin>
 
+    <!-- Preload critical gallery images for faster initial load -->
+    <link rel="preload" as="image" href="images/gallery-1.webp" fetchpriority="high">
+    <link rel="preload" as="image" href="images/gallery-2.webp" fetchpriority="high">
+    <link rel="preload" as="image" href="images/gallery-3.webp">
+
     <!-- Structured Data for SEO -->
     <script type="application/ld+json">
     {
@@ -543,22 +548,22 @@
             <p data-lang="gallery-subtitle">טעימה מהאווירה והמנות שלנו</p>
             <div class="gallery-grid">
                 <div class="gallery-item">
-                    <img src="images/gallery-1.webp" alt="סובלאקי עוף בפיתה יוונית עם צזיקי וירקות טריים" loading="lazy" decoding="async">
+                    <img src="images/gallery-1.webp" alt="סובלאקי עוף בפיתה יוונית עם צזיקי וירקות טריים" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/gallery-2.webp" alt="מגש בשרים יווני עם שיפודים וסטייקים" loading="lazy" decoding="async">
+                    <img src="images/gallery-2.webp" alt="מגש בשרים יווני עם שיפודים וסטייקים" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/gallery-3.webp" alt="גירוס יווני עם צ'יפס ורוטב צזיקי" loading="lazy" decoding="async">
+                    <img src="images/gallery-3.webp" alt="גירוס יווני עם צ'יפס ורוטב צזיקי" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/gallery-4.webp" alt="סלט יווני עם גבינת פטה וזיתי קלמטה" loading="lazy" decoding="async">
+                    <img src="images/gallery-4.webp" alt="סלט יווני עם גבינת פטה וזיתי קלמטה" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/gallery-5.webp" alt="שיפודי בשר על האש במסעדה יוונית" loading="lazy" decoding="async">
+                    <img src="images/gallery-5.webp" alt="שיפודי בשר על האש במסעדה יוונית" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/gallery-6.webp" alt="פיתה יוונית במילוי סובלאקי וירקות" loading="lazy" decoding="async">
+                    <img src="images/gallery-6.webp" alt="פיתה יוונית במילוי סובלאקי וירקות" decoding="async">
                 </div>
                 <div class="gallery-item">
                     <img src="images/gallery-7.webp" alt="אווירת המסעדה היוונית בכפר יאסיף" loading="lazy" decoding="async">

@@ -1,4 +1,4 @@
-const CACHE_NAME = 'greek-souvlaki-wow-v29';
+const CACHE_NAME = 'greek-souvlaki-wow-v30';
 const urlsToCache = [
   '/',
   '/index.html',
@@ -26,7 +26,13 @@ const urlsToCache = [
   '/privacy.html',
   '/terms.html',
   '/accessibility.html',
-  '/404.html'
+  '/404.html',
+  '/images/gallery-1.webp',
+  '/images/gallery-2.webp',
+  '/images/gallery-3.webp',
+  '/images/gallery-4.webp',
+  '/images/gallery-5.webp',
+  '/images/gallery-6.webp'
 ];
 
 // Install event - cache files
