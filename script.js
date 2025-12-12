@@ -543,6 +543,147 @@ document.addEventListener('DOMContentLoaded', () => {
   }
 
   // Theme toggle is handled by toggles.js
+
+  // Fade in & slide up animation for about section
+  function initFadeSlideAnimation() {
+    const fadeElements = document.querySelectorAll('.fade-slide-up');
+    if (!fadeElements.length) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach(entry => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add('animate');
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.2 });
+
+    fadeElements.forEach(el => observer.observe(el));
+  }
+
+  try { initFadeSlideAnimation(); } catch(e) { console.error('Fade animation error:', e); }
+
+  // Gallery flip animation on scroll
+  function initGalleryFlipAnimation() {
+    const galleryItems = document.querySelectorAll('.gallery-item');
+    if (!galleryItems.length) return;
+
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry, index) => {
+        if (entry.isIntersecting) {
+          // Staggered delay based on position in viewport
+          const delay = Array.from(galleryItems).indexOf(entry.target) % 6 * 100;
+          setTimeout(() => {
+            entry.target.classList.add('flip-in');
+          }, delay);
+          observer.unobserve(entry.target);
+        }
+      });
+    }, { threshold: 0.1 });
+
+    galleryItems.forEach(el => observer.observe(el));
+  }
+
+  try { initGalleryFlipAnimation(); } catch(e) { console.error('Gallery flip animation error:', e); }
+
+  // FAQ Accordion
+  function initFaqAccordion() {
+    const faqItems = document.querySelectorAll('.faq-item');
+    if (!faqItems.length) return;
+
+    faqItems.forEach(item => {
+      const question = item.querySelector('.faq-question');
+      if (question) {
+        question.addEventListener('click', () => {
+          const isActive = item.classList.contains('active');
+
+          // Close all other items
+          faqItems.forEach(other => {
+            if (other !== item) {
+              other.classList.remove('active');
+              other.querySelector('.faq-question')?.setAttribute('aria-expanded', 'false');
+            }
+          });
+
+          // Toggle current item
+          item.classList.toggle('active');
+          question.setAttribute('aria-expanded', !isActive);
+        });
+      }
+    });
+  }
+
+  try { initFaqAccordion(); } catch(e) { console.error('FAQ accordion error:', e); }
+
+  // Mobile Menu Swipe Hints - Only show for categories with more than 1 item
+  function initMenuSwipeHints() {
+    // Only on mobile
+    if (window.innerWidth > 768) return;
+
+    const isRTL = document.documentElement.dir === 'rtl' || document.documentElement.lang === 'he';
+
+    // Handle subcategories (Pizza, Salads, Sides, Drinks, Alcohol)
+    const subcategories = document.querySelectorAll('.menu-subcategory');
+    subcategories.forEach(subcategory => {
+      const cards = subcategory.querySelectorAll('.menu-card');
+      const title = subcategory.querySelector('.subcategory-title');
+
+      if (cards.length > 1) {
+        subcategory.classList.add('has-more-items');
+        if (title && !title.querySelector('.swipe-hint')) {
+          const hint = document.createElement('span');
+          hint.className = 'swipe-hint';
+          hint.textContent = isRTL ? '👆 החלק' : 'Swipe 👆';
+          title.appendChild(hint);
+        }
+      }
+    });
+
+    // Handle main tab contents (Pita, Plates, Platters) - these don't have subcategory wrapper
+    const tabContents = document.querySelectorAll('.menu-tab-content');
+    tabContents.forEach(tabContent => {
+      // Skip if this tab has subcategories (they're handled above)
+      if (tabContent.querySelector('.menu-subcategory')) return;
+
+      const cardGrid = tabContent.querySelector('.menu-card-grid');
+      if (!cardGrid) return;
+
+      const cards = cardGrid.querySelectorAll('.menu-card');
+      if (cards.length > 1) {
+        // Add class to tab content for fade gradient
+        tabContent.classList.add('has-more-items');
+
+        // Find the corresponding tab button text for the hint
+        const tabId = tabContent.id;
+        const tabButton = document.querySelector(`.menu-tab[data-tab="${tabId.replace('tab-', '')}"]`);
+
+        // Add hint after the tab button text (inside tab content, before grid)
+        if (!tabContent.querySelector('.swipe-hint-banner')) {
+          const hintBanner = document.createElement('div');
+          hintBanner.className = 'swipe-hint-banner';
+          hintBanner.innerHTML = isRTL ? '<span class="swipe-hint">👆 החלק לצפות בעוד</span>' : '<span class="swipe-hint">Swipe for more 👆</span>';
+          tabContent.insertBefore(hintBanner, cardGrid);
+        }
+      }
+    });
+  }
+
+  try { initMenuSwipeHints(); } catch(e) { console.error('Menu swipe hints error:', e); }
+
+  // Re-run on resize (desktop/mobile switch)
+  let resizeTimeout;
+  window.addEventListener('resize', function() {
+    clearTimeout(resizeTimeout);
+    resizeTimeout = setTimeout(function() {
+      // Remove existing hints first
+      document.querySelectorAll('.menu-subcategory').forEach(el => el.classList.remove('has-more-items'));
+      document.querySelectorAll('.menu-tab-content').forEach(el => el.classList.remove('has-more-items'));
+      document.querySelectorAll('.swipe-hint').forEach(el => el.remove());
+      document.querySelectorAll('.swipe-hint-banner').forEach(el => el.remove());
+      // Re-initialize
+      try { initMenuSwipeHints(); } catch(e) {}
+    }, 250);
+  });
 });
 
 
