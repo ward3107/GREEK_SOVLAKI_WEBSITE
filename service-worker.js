@@ -1,7 +1,8 @@
-const CACHE_NAME = 'greek-souvlaki-wow-v29';
+const CACHE_NAME = 'greek-souvlaki-wow-v30';
 const urlsToCache = [
   '/',
   '/index.html',
+  '/critical.css',
   '/styles.css',
   '/animations.css',
   '/accessibility-widget.css',
@@ -18,6 +19,7 @@ const urlsToCache = [
   '/pwa-install.js',
   '/storage-utils.js',
   '/restaurant-logo.jpg',
+  '/images/hero-bg.webp',
   '/en.json',
   '/he.json',
   '/ar.json',

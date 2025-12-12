@@ -32,11 +32,21 @@
     <link rel="apple-touch-icon" href="restaurant-logo.jpg">
     <link rel="manifest" href="manifest.json">
 
-    <link rel="stylesheet" href="styles.css?v=17">
+    <!-- Preload critical resources -->
+    <link rel="preload" href="images/hero-bg.webp" as="image" type="image/webp" fetchpriority="high">
+    <link rel="preload" href="critical.css?v=1" as="style">
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" as="style">
+
+    <!-- Critical CSS inlined -->
+    <link rel="stylesheet" href="critical.css?v=1">
+
+    <!-- Deferred non-critical CSS -->
+    <link rel="stylesheet" href="styles.css?v=18" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="animations.css?v=14" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="accessibility-widget.css?v=21" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="cookie-consent.css?v=15" media="print" onload="this.media='all'">
     <noscript>
+        <link rel="stylesheet" href="styles.css?v=18">
         <link rel="stylesheet" href="animations.css?v=14">
         <link rel="stylesheet" href="accessibility-widget.css?v=21">
         <link rel="stylesheet" href="cookie-consent.css?v=15">
@@ -45,7 +55,6 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap"></noscript>
-    <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
     <link rel="preconnect" href="https://flagcdn.com" crossorigin>
 
     <!-- Structured Data for SEO -->
@@ -386,37 +395,37 @@
             <p data-lang="gallery-subtitle">טעימה מהאווירה והמנות שלנו</p>
             <div class="gallery-grid">
                 <div class="gallery-item">
-                    <img src="images/gallery-1.jpg" alt="Greek Sovlaki dish" loading="lazy" decoding="async">
+                    <img src="images/gallery-1.jpg" alt="Greek Sovlaki dish" loading="lazy" decoding="async" width="800" height="600">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/gallery-2.jpg" alt="Greek Sovlaki dish" loading="lazy" decoding="async">
+                    <img src="images/gallery-2.jpg" alt="Greek Sovlaki dish" loading="lazy" decoding="async" width="800" height="600">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/gallery-3.jpg" alt="Greek Sovlaki dish" loading="lazy" decoding="async">
+                    <img src="images/gallery-3.jpg" alt="Greek Sovlaki dish" loading="lazy" decoding="async" width="800" height="600">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/gallery-4.jpg" alt="Greek Sovlaki dish" loading="lazy" decoding="async">
+                    <img src="images/gallery-4.jpg" alt="Greek Sovlaki dish" loading="lazy" decoding="async" width="800" height="600">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/gallery-5.jpg" alt="Greek Sovlaki dish" loading="lazy" decoding="async">
+                    <img src="images/gallery-5.jpg" alt="Greek Sovlaki dish" loading="lazy" decoding="async" width="800" height="600">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/gallery-6.jpg" alt="Greek Sovlaki dish" loading="lazy" decoding="async">
+                    <img src="images/gallery-6.jpg" alt="Greek Sovlaki dish" loading="lazy" decoding="async" width="800" height="600">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/gallery-7.jpg" alt="Greek Sovlaki dish" loading="lazy" decoding="async">
+                    <img src="images/gallery-7.jpg" alt="Greek Sovlaki dish" loading="lazy" decoding="async" width="800" height="600">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/gallery-8.jpg" alt="Greek Sovlaki dish" loading="lazy" decoding="async">
+                    <img src="images/gallery-8.jpg" alt="Greek Sovlaki dish" loading="lazy" decoding="async" width="800" height="600">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/gallery-9.jpg" alt="Greek Sovlaki dish" loading="lazy" decoding="async">
+                    <img src="images/gallery-9.jpg" alt="Greek Sovlaki dish" loading="lazy" decoding="async" width="800" height="600">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/gallery-10.jpg" alt="Greek Sovlaki dish" loading="lazy" decoding="async">
+                    <img src="images/gallery-10.jpg" alt="Greek Sovlaki dish" loading="lazy" decoding="async" width="800" height="600">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/gallery-11.jpg" alt="Greek Sovlaki dish" loading="lazy" decoding="async">
+                    <img src="images/gallery-11.jpg" alt="Greek Sovlaki dish" loading="lazy" decoding="async" width="800" height="600">
                 </div>
             </div>
         </div>
@@ -473,9 +482,10 @@
     </footer>
     </div><!-- end page-content -->
 
-    <script src="storage-utils.js?v=1"></script>
-    <script src="translations-new.js?v=14"></script>
-    <script src="script.js?v=17"></script>
+    <!-- Core scripts - load with defer for better performance -->
+    <script defer src="storage-utils.js?v=1"></script>
+    <script defer src="translations-new.js?v=14"></script>
+    <script defer src="script.js?v=18"></script>
     <script defer src="toggles.js?v=15"></script>
     <script defer src="scroll-button.js?v=14"></script>
     <script defer src="accessibility-widget.js?v=16"></script>
@@ -767,141 +777,5 @@
 
     <!-- Menu Tabs -->
     <script defer src="js/menu-tabs.js"></script>
-
-    <!-- Image Lightbox Modal -->
-    <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
-        <button class="lightbox-close" aria-label="Close">&times;</button>
-        <button class="lightbox-nav lightbox-prev" aria-label="Previous image">&#10094;</button>
-        <div class="lightbox-content">
-            <img class="lightbox-image" src="" alt="Enlarged image">
-        </div>
-        <button class="lightbox-nav lightbox-next" aria-label="Next image">&#10095;</button>
-    </div>
-
-    <!-- Lightbox Script -->
-    <script>
-    (function() {
-        'use strict';
-
-        let lightbox, lightboxImage, lightboxClose, lightboxPrev, lightboxNext;
-        let galleryImages = [];
-        let currentIndex = 0;
-
-        function initLightbox() {
-            lightbox = document.getElementById('lightbox');
-            if (!lightbox) {
-                console.error('Lightbox element not found');
-                return false;
-            }
-            lightboxImage = lightbox.querySelector('.lightbox-image');
-            lightboxClose = lightbox.querySelector('.lightbox-close');
-            lightboxPrev = lightbox.querySelector('.lightbox-prev');
-            lightboxNext = lightbox.querySelector('.lightbox-next');
-
-            // Event listeners
-            if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
-            if (lightboxPrev) lightboxPrev.addEventListener('click', prevImage);
-            if (lightboxNext) lightboxNext.addEventListener('click', nextImage);
-
-            // Close on background click
-            lightbox.addEventListener('click', (e) => {
-                if (e.target === lightbox) closeLightbox();
-            });
-
-            // Keyboard navigation
-            document.addEventListener('keydown', (e) => {
-                if (!lightbox.classList.contains('active')) return;
-                switch(e.key) {
-                    case 'Escape': closeLightbox(); break;
-                    case 'ArrowLeft': prevImage(); break;
-                    case 'ArrowRight': nextImage(); break;
-                }
-            });
-
-            // Touch swipe support for mobile
-            let touchStartX = 0;
-            lightbox.addEventListener('touchstart', (e) => {
-                touchStartX = e.changedTouches[0].screenX;
-            }, { passive: true });
-
-            lightbox.addEventListener('touchend', (e) => {
-                const touchEndX = e.changedTouches[0].screenX;
-                const diff = touchStartX - touchEndX;
-                if (Math.abs(diff) > 50) {
-                    if (diff > 0) nextImage();
-                    else prevImage();
-                }
-            }, { passive: true });
-
-            return true;
-        }
-
-        // Collect all gallery images
-        function initGallery() {
-            if (!initLightbox()) return;
-
-            const galleryItems = document.querySelectorAll('.gallery-item');
-            console.log('Lightbox: Found', galleryItems.length, 'gallery items');
-
-            galleryItems.forEach((item, index) => {
-                item.style.cursor = 'pointer';
-                item.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    const img = item.querySelector('img');
-                    if (img && img.src) {
-                        openLightbox(index);
-                    }
-                });
-            });
-        }
-
-        function openLightbox(index) {
-            if (!lightbox || !lightboxImage) return;
-            currentIndex = index;
-            galleryImages = Array.from(document.querySelectorAll('.gallery-item img')).map(img => ({
-                src: img.src,
-                alt: img.alt || 'Gallery image'
-            }));
-            updateLightbox();
-            lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeLightbox() {
-            if (!lightbox) return;
-            lightbox.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        function updateLightbox() {
-            if (!lightboxImage) return;
-            const currentImage = galleryImages[currentIndex];
-            if (currentImage && currentImage.src) {
-                lightboxImage.src = currentImage.src;
-                lightboxImage.alt = currentImage.alt || 'Gallery image';
-            }
-        }
-
-        function prevImage() {
-            if (galleryImages.length === 0) return;
-            currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
-            updateLightbox();
-        }
-
-        function nextImage() {
-            if (galleryImages.length === 0) return;
-            currentIndex = (currentIndex + 1) % galleryImages.length;
-            updateLightbox();
-        }
-
-        // Initialize on DOM ready
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initGallery);
-        } else {
-            initGallery();
-        }
-    })();
-    </script>
 </body>
 </html>
