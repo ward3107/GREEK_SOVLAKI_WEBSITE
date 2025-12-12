@@ -2228,7 +2228,7 @@ footer {
 .faq-section h2 {
     text-align: center;
     font-size: 2.5rem;
-    color: var(--color-primary);
+    color: var(--color-text);
     margin-bottom: 3rem;
 }
 
@@ -3844,6 +3844,18 @@ footer {
 html {
     scroll-behavior: smooth;
     overflow-x: hidden;
+    /* Enhanced GPU acceleration for ultra-smooth scrolling */
+    -webkit-overflow-scrolling: touch;
+}
+
+body {
+    /* Optimize scroll performance */
+    transform: translateZ(0);
+    -webkit-transform: translateZ(0);
+    backface-visibility: hidden;
+    -webkit-backface-visibility: hidden;
+    perspective: 1000px;
+    -webkit-perspective: 1000px;
 }
 
 /* Hide scrollbars for all browsers */
@@ -4717,13 +4729,22 @@ html, body {
 }
 
 /* Image loading placeholder shimmer */
-.gallery-item img {
-    background: linear-gradient(90deg, #f0f0f0 25%, #e0e0e0 50%, #f0f0f0 75%);
+.gallery-item {
+    background: linear-gradient(90deg, #f0f0f0 25%, #e5e5e5 50%, #f0f0f0 75%);
     background-size: 200% 100%;
-    animation: imageShimmer 1.5s infinite;
+    animation: imageShimmer 1.2s ease-in-out infinite;
 }
 
-.gallery-item img[src] {
+.gallery-item img {
+    opacity: 0;
+    transition: opacity 0.4s ease-in;
+}
+
+.gallery-item img.loaded {
+    opacity: 1;
+}
+
+.gallery-item.loaded {
     animation: none;
     background: transparent;
 }
@@ -5201,10 +5222,17 @@ html, body {
 /* Make gallery images clickable */
 .gallery-item {
     cursor: pointer;
+    /* Performance optimizations for smooth scrolling */
+    content-visibility: auto;
+    contain-intrinsic-size: 280px;
+    transform: translateZ(0);
+    backface-visibility: hidden;
 }
 
 .gallery-item img {
     cursor: zoom-in;
+    /* GPU acceleration */
+    transform: translateZ(0);
 }
 
 /* Mobile lightbox adjustments */

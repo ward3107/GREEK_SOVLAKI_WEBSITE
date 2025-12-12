@@ -61,7 +61,9 @@
     <link rel="apple-touch-icon" href="restaurant-logo.jpg">
     <link rel="manifest" href="manifest.json">
 
-    <link rel="stylesheet" href="styles.css?v=38">
+    <!-- Preload critical CSS for faster rendering -->
+    <link rel="preload" href="styles.css?v=43" as="style">
+    <link rel="stylesheet" href="styles.css?v=43">
     <link rel="stylesheet" href="animations.css?v=14" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="accessibility-widget.css?v=22" media="print" onload="this.media='all'">
     <link rel="stylesheet" href="cookie-consent.css?v=15" media="print" onload="this.media='all'">
@@ -72,6 +74,8 @@
     </noscript>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Optimized font loading with font-display=swap for better performance -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" as="style">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap"></noscript>
     <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
@@ -232,6 +236,75 @@
               }
             }
           ]
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Menu",
+              "item": "https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/#menu"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "About",
+              "item": "https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/#about"
+            },
+            {
+              "@type": "ListItem",
+              "position": 4,
+              "name": "Gallery",
+              "item": "https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/#gallery"
+            },
+            {
+              "@type": "ListItem",
+              "position": 5,
+              "name": "FAQ",
+              "item": "https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/#faq"
+            },
+            {
+              "@type": "ListItem",
+              "position": 6,
+              "name": "Contact",
+              "item": "https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/#contact"
+            }
+          ]
+        },
+        {
+          "@type": "Article",
+          "@id": "https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/#about-article",
+          "headline": "Greek Souvlaki - Authentic Greek Cuisine in Kfar Yasif",
+          "description": "Experience authentic Greek souvlaki and gyros at our traditional Greek restaurant in Kfar Yasif, Galilee. Fresh ingredients, traditional recipes, warm atmosphere.",
+          "author": {
+            "@type": "Organization",
+            "name": "Greek Souvlaki - סובלאקי יווני"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Greek Souvlaki - סובלאקי יווני",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/restaurant-logo.jpg"
+            }
+          },
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/"
+          },
+          "datePublished": "2024-01-01",
+          "dateModified": "2024-12-12",
+          "image": "https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/images/gallery-1.webp",
+          "articleSection": "Greek Cuisine",
+          "keywords": "Greek souvlaki, gyros, Greek restaurant, Kfar Yasif, Mediterranean food, Greek food Israel"
         }
       ]
     }
@@ -287,12 +360,12 @@
                     </div>
                 </div>
                 <ul class="nav-menu">
-                    <li><a href="#home" data-lang="nav-home">בית</a></li>
-                    <li><a href="#menu" data-lang="nav-menu">תפריט</a></li>
-                    <li><a href="#about" data-lang="nav-about">אודות</a></li>
-                    <li><a href="#gallery" data-lang="nav-gallery">גלריה</a></li>
-                    <li><a href="#faq" data-lang="nav-faq">שאלות נפוצות</a></li>
                     <li><a href="#contact" data-lang="nav-contact">צור קשר</a></li>
+                    <li><a href="#faq" data-lang="nav-faq">שאלות נפוצות</a></li>
+                    <li><a href="#gallery" data-lang="nav-gallery">גלריה</a></li>
+                    <li><a href="#about" data-lang="nav-about">אודות</a></li>
+                    <li><a href="#menu" data-lang="nav-menu">תפריט</a></li>
+                    <li><a href="#home" data-lang="nav-home">בית</a></li>
                 </ul>
                 <button class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
                     <span></span>
@@ -548,37 +621,37 @@
             <p data-lang="gallery-subtitle">טעימה מהאווירה והמנות שלנו</p>
             <div class="gallery-grid">
                 <div class="gallery-item">
-                    <img src="images/gallery-1.webp" alt="סובלאקי עוף בפיתה יוונית עם צזיקי וירקות טריים" decoding="async">
+                    <img src="images/gallery-1.webp" alt="סובלאקי עוף בפיתה יוונית עם צזיקי וירקות טריים" width="800" height="1732" fetchpriority="high" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/gallery-2.webp" alt="מגש בשרים יווני עם שיפודים וסטייקים" decoding="async">
+                    <img src="images/gallery-2.webp" alt="מגש בשרים יווני עם שיפודים וסטייקים" width="800" height="1732" fetchpriority="high" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/gallery-3.webp" alt="גירוס יווני עם צ'יפס ורוטב צזיקי" decoding="async">
+                    <img src="images/gallery-3.webp" alt="גירוס יווני עם צ'יפס ורוטב צזיקי" width="800" height="369" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/gallery-4.webp" alt="סלט יווני עם גבינת פטה וזיתי קלמטה" decoding="async">
+                    <img src="images/gallery-4.webp" alt="סלט יווני עם גבינת פטה וזיתי קלמטה" width="800" height="1732" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/gallery-5.webp" alt="שיפודי בשר על האש במסעדה יוונית" decoding="async">
+                    <img src="images/gallery-5.webp" alt="שיפודי בשר על האש במסעדה יוונית" width="800" height="369" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/gallery-6.webp" alt="פיתה יוונית במילוי סובלאקי וירקות" decoding="async">
+                    <img src="images/gallery-6.webp" alt="פיתה יוונית במילוי סובלאקי וירקות" width="800" height="1732" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/gallery-7.webp" alt="אווירת המסעדה היוונית בכפר יאסיף" loading="lazy" decoding="async">
+                    <img src="images/gallery-7.webp" alt="אווירת המסעדה היוונית בכפר יאסיף" width="800" height="369" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/gallery-8.webp" alt="צלחת סובלאקי עם תוספות יווניות" loading="lazy" decoding="async">
+                    <img src="images/gallery-8.webp" alt="צלחת סובלאקי עם תוספות יווניות" width="800" height="369" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/gallery-9.webp" alt="פיצה גירוס עם שווארמה יוונית" loading="lazy" decoding="async">
+                    <img src="images/gallery-9.webp" alt="פיצה גירוס עם שווארמה יוונית" width="800" height="1732" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/gallery-10.webp" alt="מנות יווניות מסורתיות במסעדת Greek Souvlaki" loading="lazy" decoding="async">
+                    <img src="images/gallery-10.webp" alt="מנות יווניות מסורתיות במסעדת Greek Souvlaki" width="800" height="1732" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/gallery-11.webp" alt="עיצוב ים תיכוני במסעדה היוונית" loading="lazy" decoding="async">
+                    <img src="images/gallery-11.webp" alt="עיצוב ים תיכוני במסעדה היוונית" width="800" height="369" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
                     <img src="images/IMG-20251205-WA0032.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
@@ -612,9 +685,6 @@
                 </div>
                 <div class="gallery-item">
                     <img src="images/IMG-20251205-WA0042.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
-                </div>
-                <div class="gallery-item">
-                    <img src="images/IMG-20251205-WA0043.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
                     <img src="images/IMG-20251205-WA0044.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
@@ -677,19 +747,7 @@
                     <img src="images/IMG-20251205-WA0064.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/IMG-20251205-WA0065.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
-                </div>
-                <div class="gallery-item">
                     <img src="images/IMG-20251205-WA0066.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
-                </div>
-                <div class="gallery-item">
-                    <img src="images/IMG-20251205-WA0067.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
-                </div>
-                <div class="gallery-item">
-                    <img src="images/IMG-20251205-WA0068.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
-                </div>
-                <div class="gallery-item">
-                    <img src="images/IMG-20251205-WA0069.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
                     <img src="images/IMG-20251205-WA0070.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
@@ -836,17 +894,17 @@
             <p data-lang="footer-copyright">&copy; 2024 Greek Souvlaki - סובלאקי יווני</p>
             <div class="footer-developer">
                 <span data-lang="footer-developed-by">Developed by</span>
-                <a href="https://waseem-io.vercel.app/" target="_blank" rel="noopener">
-                    <img src="images/ws-logo.png" alt="WS Logo" class="ws-logo">
+                <a href="https://wwebsie.vercel.app" target="_blank" rel="noopener">
+                    <img src="images/ws-logo.png" alt="WS Logo" class="ws-logo" width="1024" height="1024">
                 </a>
             </div>
         </div>
     </footer>
     </div><!-- end page-content -->
 
-    <script src="storage-utils.js?v=1"></script>
-    <script src="translations-new.js?v=17"></script>
-    <script src="script.js?v=23"></script>
+    <script defer src="storage-utils.js?v=1"></script>
+    <script defer src="translations-new.js?v=17"></script>
+    <script defer src="script.js?v=23"></script>
     <script defer src="toggles.js?v=15"></script>
     <script defer src="scroll-button.js?v=14"></script>
     <script defer src="accessibility-widget.js?v=17"></script>
@@ -1342,6 +1400,93 @@
             document.addEventListener('DOMContentLoaded', initGallery);
         } else {
             initGallery();
+        }
+    })();
+    </script>
+
+    <!-- Preemptive Image Loading with Intersection Observer -->
+    <script>
+    (function() {
+        'use strict';
+
+        // Custom lazy loading with early trigger (1000px before viewport)
+        const lazyImageObserver = new IntersectionObserver(function(entries) {
+            entries.forEach(function(entry) {
+                if (entry.isIntersecting) {
+                    const img = entry.target;
+
+                    // Load the image if it has loading="lazy"
+                    if (img.loading === 'lazy') {
+                        // Force immediate loading
+                        img.loading = 'eager';
+
+                        // If image hasn't started loading, trigger it
+                        if (!img.src && img.dataset.src) {
+                            img.src = img.dataset.src;
+                        }
+                    }
+
+                    // Stop observing this image
+                    lazyImageObserver.unobserve(img);
+                }
+            });
+        }, {
+            // Load images 2000px before they enter viewport (much earlier)
+            rootMargin: '2000px 0px',
+            threshold: 0.01
+        });
+
+        // Observe all lazy-loaded images
+        document.querySelectorAll('.gallery-item img[loading="lazy"]').forEach(function(img) {
+            lazyImageObserver.observe(img);
+        });
+    })();
+    </script>
+
+    <!-- Image Fade-In Handler -->
+    <script>
+    (function() {
+        'use strict';
+
+        // Add fade-in effect when images load
+        function handleImageLoad(img) {
+            const galleryItem = img.closest('.gallery-item');
+
+            if (img.complete) {
+                img.classList.add('loaded');
+                if (galleryItem) galleryItem.classList.add('loaded');
+            } else {
+                img.addEventListener('load', function() {
+                    this.classList.add('loaded');
+                    if (galleryItem) galleryItem.classList.add('loaded');
+                }, { once: true });
+
+                // Fallback in case load event doesn't fire
+                img.addEventListener('error', function() {
+                    this.classList.add('loaded');
+                    if (galleryItem) galleryItem.classList.add('loaded');
+                }, { once: true });
+            }
+        }
+
+        // Apply to all gallery images
+        const galleryImages = document.querySelectorAll('.gallery-item img');
+        galleryImages.forEach(handleImageLoad);
+
+        // Handle dynamically loaded images (if any)
+        const observer = new MutationObserver(function(mutations) {
+            mutations.forEach(function(mutation) {
+                mutation.addedNodes.forEach(function(node) {
+                    if (node.tagName === 'IMG' && node.closest('.gallery-item')) {
+                        handleImageLoad(node);
+                    }
+                });
+            });
+        });
+
+        const galleryGrid = document.querySelector('.gallery-grid');
+        if (galleryGrid) {
+            observer.observe(galleryGrid, { childList: true, subtree: true });
         }
     })();
     </script>

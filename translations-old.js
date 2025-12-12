@@ -74,8 +74,8 @@ const translations = {
 
         // Menu Section
         'menu-title': 'התפריט שלנו',
-        'pork-title': 'סובלקי חזיר',
-        'pork-desc': 'שיפודי חזיר במרינדה רכים צלויים לשלמות',
+        'pork-title': 'סובלקי בשר לבן',
+        'pork-desc': 'שיפודי בשר לבן במרינדה רכים צלויים לשלמות',
         'pork-price': '₪45',
         'chicken-title': 'סובלקי עוף',
         'chicken-desc': 'חתיכות עוף עסיסיות עם עשבי תיבול ולימון',
