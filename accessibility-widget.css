@@ -1,6 +1,6 @@
 /* Accessibility Widget Styles - Completely isolated from page styles */
 .a11y-widget {
-  position: fixed !important;
+  position: absolute !important;
   bottom: 20px !important;
   left: 20px !important;
   z-index: 999999 !important;
@@ -127,7 +127,7 @@
 }
 
 .a11y-panel {
-  position: fixed !important;
+  position: absolute !important;
   bottom: 90px !important;
   left: 20px !important;
   width: 320px !important;

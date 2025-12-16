@@ -52,6 +52,10 @@
                     scrollBtn.style.opacity = '1';
                     scrollBtn.style.visibility = 'visible';
 
+                    // Update position to move with scroll
+                    const scrollOffset = window.scrollY;
+                    scrollBtn.style.transform = `translateY(${scrollOffset}px)`;
+
                     // Check background and adjust color
                     if (isOverDarkSection()) {
                         scrollBtn.classList.add('light-mode');
@@ -61,6 +65,7 @@
                 } else {
                     scrollBtn.style.opacity = '0';
                     scrollBtn.style.visibility = 'hidden';
+                    scrollBtn.style.transform = 'translateY(0)';
                 }
             }
         }

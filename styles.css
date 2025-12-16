@@ -556,9 +556,9 @@ body.rtl .contact-info {
 
 /* Scroll to top button - Modern Premium Design */
 .scroll-top-btn {
-    position: fixed !important;
+    position: absolute !important;
     right: 2rem !important;
-    bottom: 6rem !important;
+    bottom: 2rem !important;
     width: 60px !important;
     height: 60px !important;
     border-radius: 50% !important;
@@ -648,7 +648,7 @@ body.rtl .contact-info {
 @media (max-width: 768px) {
     .scroll-top-btn {
         right: 1rem !important;
-        bottom: 5rem !important;
+        bottom: 1rem !important;
         width: 50px !important;
         height: 50px !important;
     }

@@ -169,6 +169,10 @@
 
       // Check and update widget color based on background
       function checkBackground() {
+        // Update position to move with scroll
+        const scrollOffset = window.scrollY;
+        widgetElement.style.transform = `translateY(${scrollOffset}px)`;
+
         if (isOverDarkSection()) {
           toggle.classList.add('light-mode');
         } else {
