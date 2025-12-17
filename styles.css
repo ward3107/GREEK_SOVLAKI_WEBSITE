@@ -142,9 +142,6 @@ body {
     line-height: 1.7;
     color: var(--color-white);
     direction: rtl;
-    background:
-        linear-gradient(rgba(30, 58, 138, 0.78), rgba(30, 58, 138, 0.78)),
-        url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1280&q=60&fm=webp') center/cover fixed;
     background-color: #1e3a8a;
     position: relative;
     font-size: 16px;
@@ -154,18 +151,13 @@ body {
     overflow-x: hidden;
 }
 
-/* Clean Page Background */
-body::before {
-    content: '';
-    position: fixed;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background: linear-gradient(180deg, #f8fafc 0%, #e2e8f0 100%);
-    pointer-events: none;
-    z-index: -1;
+.page-content {
+    position: relative;
 }
+
+/* Flex layout removed to prevent page overflow */
+
+/* Clean Page Background - Removed */
 
 
 body[dir="ltr"] {
@@ -968,7 +960,7 @@ body.rtl .contact-info {
 
 /* Hero Section - Full Image with Text Overlay */
 .hero {
-    min-height: 100vh;
+    min-height: 80vh;
     display: flex;
     align-items: center;
     justify-content: center;
@@ -1747,27 +1739,11 @@ a.cta-btn {
 /* About Section - Modern Premium */
 .about-section {
     padding: var(--space-20) 0;
-    background:
-        linear-gradient(rgba(30, 58, 138, 0.78), rgba(30, 58, 138, 0.78)),
-        url('https://images.unsplash.com/photo-1533777324565-a040eb52facd?w=1280&q=60&fm=webp') center/cover;
-    background-color: #1e3a8a; /* Fallback color */
-    background-attachment: fixed;
+    background-color: #1e3a8a;
     position: relative;
 }
 
-.about-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background:
-        radial-gradient(circle at 20% 30%, rgba(37, 99, 235, 0.05) 0%, transparent 50%),
-        radial-gradient(circle at 80% 70%, rgba(251, 191, 36, 0.05) 0%, transparent 50%);
-    pointer-events: none;
-    z-index: 0;
-}
+/* About section overlay removed */
 
 .about-section > * {
     position: relative;
@@ -2135,32 +2111,11 @@ footer {
 /* Gallery Section Styles */
 .gallery-section {
     padding: 4rem 0;
-    background:
-        linear-gradient(rgba(30, 58, 138, 0.78), rgba(30, 58, 138, 0.78)),
-        url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1280&q=60&fm=webp') center/cover;
-    background-color: #1e3a8a; /* Fallback color */
-    background-attachment: fixed;
+    background-color: #1e3a8a;
     position: relative;
 }
 
-.gallery-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background:
-        repeating-linear-gradient(
-            90deg,
-            transparent,
-            transparent 40px,
-            rgba(251, 191, 36, 0.02) 40px,
-            rgba(251, 191, 36, 0.02) 80px
-        );
-    pointer-events: none;
-    z-index: 0;
-}
+/* Gallery section overlay removed */
 
 .gallery-section > * {
     position: relative;
@@ -4303,20 +4258,7 @@ html, body {
 }
 
 /* === GREEK TILE PATTERN BACKGROUND === */
-.greek-pattern::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    right: 0;
-    bottom: 0;
-    background-image:
-        linear-gradient(45deg, transparent 45%, rgba(59, 130, 246, 0.03) 45%, rgba(59, 130, 246, 0.03) 55%, transparent 55%),
-        linear-gradient(-45deg, transparent 45%, rgba(59, 130, 246, 0.03) 45%, rgba(59, 130, 246, 0.03) 55%, transparent 55%);
-    background-size: 30px 30px;
-    pointer-events: none;
-    z-index: 0;
-}
+/* Greek pattern overlay removed */
 
 /* === UPGRADED MENU CARDS WITH GOLDEN ACCENTS === */
 .menu-card {

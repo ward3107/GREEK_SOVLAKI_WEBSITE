@@ -14,7 +14,18 @@
     "test:animations": "playwright test --grep @animations",
     "test:pwa": "playwright test --grep @pwa",
     "test:mobile": "playwright test --project=mobile",
-    "test:all": "playwright test --project=chromium --project=firefox --project=webkit"
+    "test:i18n": "playwright test --grep @i18n",
+    "test:responsive": "playwright test --grep @responsive",
+    "test:performance": "playwright test --grep @performance",
+    "test:workflows": "playwright test --grep @workflows",
+    "test:security": "playwright test --grep @security",
+    "test:content": "playwright test --grep @content",
+    "test:smoke": "playwright test --grep @smoke",
+    "test:critical": "playwright test --grep @critical",
+    "test:full": "playwright test --project=chromium --project=firefox --project=webkit",
+    "test:ci": "playwright test --reporter=html --reporter=json",
+    "test:install": "playwright install",
+    "test:run-all": "npm run test && npm run test:mobile && npm run test:accessibility && npm run test:performance"
   },
   "keywords": [
     "restaurant",

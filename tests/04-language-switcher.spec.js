@@ -1,6 +1,6 @@
 const { test, expect } = require('@playwright/test');
 
-test.describe('Language Switcher Tests', () => {
+test.describe('Language Switcher Tests @smoke @critical @i18n', () => {
   test.beforeEach(async ({ page }) => {
     await page.goto('/');
   });
