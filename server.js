@@ -10,7 +10,7 @@ const mimeTypes = {
   '.css': 'text/css',
   '.json': 'application/json',
   '.png': 'image/png',
-  '.jpg': 'image/jpg',
+  '.jpg': 'image/jpeg',
   '.jpeg': 'image/jpeg',
   '.gif': 'image/gif',
   '.svg': 'image/svg+xml',
@@ -50,18 +50,64 @@ const cacheDurations = {
   '.webmanifest': 86400
 };
 
-const server = http.createServer((req, res) => {
-  let filePath = '.' + req.url;
-
+// Security: Validate and sanitize file paths
+function validateFilePath(reqUrl) {
   // Remove query string for file path
-  const queryIndex = filePath.indexOf('?');
-  if (queryIndex !== -1) {
-    filePath = filePath.substring(0, queryIndex);
+  const queryIndex = reqUrl.indexOf('?');
+  let filePath = queryIndex !== -1 ? reqUrl.substring(0, queryIndex) : reqUrl;
+
+  // Ensure path starts with /
+  if (!filePath.startsWith('/')) {
+    filePath = '/' + filePath;
   }
 
+  // SECURITY: Prevent directory traversal attacks
+  if (filePath.includes('..') || filePath.includes('\\')) {
+    return null; // Invalid path
+  }
+
+  // Normalize path to prevent encoded traversal
+  const decodedPath = decodeURIComponent(filePath);
+  if (decodedPath.includes('..') || decodedPath.includes('\\')) {
+    return null; // Invalid path after decoding
+  }
+
+  // Build full file path
+  let fullPath = '.' + filePath;
+
   // Default to index.html
-  if (filePath === './') {
-    filePath = './index.html';
+  if (fullPath === './') {
+    fullPath = './index.html';
+  }
+
+  // Resolve the path to get absolute path and check it's within our directory
+  const resolvedPath = path.resolve(fullPath);
+  const currentDir = path.resolve('.');
+
+  // Ensure the resolved path is within the current directory
+  if (!resolvedPath.startsWith(currentDir)) {
+    return null; // Path traversal attempt
+  }
+
+  // Additional: Only allow specific file extensions
+  const allowedExtensions = Object.keys(mimeTypes);
+  const extname = String(path.extname(resolvedPath)).toLowerCase();
+
+  if (!allowedExtensions.includes(extname)) {
+    return null; // File type not allowed
+  }
+
+  return fullPath;
+}
+
+const server = http.createServer((req, res) => {
+  const filePath = validateFilePath(req.url);
+
+  // If validation fails, return 403 Forbidden
+  if (!filePath) {
+    res.writeHead(403, { 'Content-Type': 'text/html' });
+    res.end('<h1>403 - Access Denied</h1>', 'utf-8');
+    return;
   }
 
   const extname = String(path.extname(filePath)).toLowerCase();

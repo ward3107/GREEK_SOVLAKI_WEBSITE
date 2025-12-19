@@ -18,8 +18,8 @@
         scrollBtn.style.opacity = '0';
         scrollBtn.style.visibility = 'hidden';
 
-        // Add to page
-        document.body.appendChild(scrollBtn);
+        // Add to page outside .page-content filters
+        document.documentElement.appendChild(scrollBtn);
 
         // Get hero section
         const heroSection = document.querySelector('.hero, #home');

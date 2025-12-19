@@ -560,6 +560,7 @@ body.rtl .contact-info {
     right: 2rem !important;
     bottom: 6rem !important;
     width: 60px !important;
+    z-index: 9999 !important;
     height: 60px !important;
     border-radius: 50% !important;
     background: linear-gradient(135deg, #1e3a8a 0%, #2563eb 100%) !important;
@@ -1751,7 +1752,7 @@ a.cta-btn {
         linear-gradient(rgba(30, 58, 138, 0.78), rgba(30, 58, 138, 0.78)),
         url('https://images.unsplash.com/photo-1533777324565-a040eb52facd?w=1280&q=60&fm=webp') center/cover;
     background-color: #1e3a8a; /* Fallback color */
-    background-attachment: fixed;
+    background-attachment: scroll;
     position: relative;
 }
 
@@ -2002,7 +2003,7 @@ footer {
         gap: 0;
         /* Flip animation */
         transform-origin: top center;
-        transform: perspective(800px) rotateX(-90deg);
+        transform: rotateX(-45deg);
         opacity: 0;
         visibility: hidden;
         transition: transform 0.4s ease, opacity 0.4s ease, visibility 0.4s;
@@ -2010,7 +2011,7 @@ footer {
 
     .nav-menu.active {
         display: flex;
-        transform: perspective(800px) rotateX(0deg);
+        transform: rotateX(0deg);
         opacity: 1;
         visibility: visible;
     }
@@ -2139,7 +2140,7 @@ footer {
         linear-gradient(rgba(30, 58, 138, 0.78), rgba(30, 58, 138, 0.78)),
         url('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1280&q=60&fm=webp') center/cover;
     background-color: #1e3a8a; /* Fallback color */
-    background-attachment: fixed;
+    background-attachment: scroll;
     position: relative;
 }
 
@@ -2202,12 +2203,12 @@ footer {
 }
 
 .gallery-item.flip-in {
-    transform: perspective(800px) rotateX(0deg);
+    transform: rotateX(0deg);
     opacity: 1;
 }
 
 .gallery-item.flip-in:hover {
-    transform: perspective(800px) rotateX(0deg) translateY(-8px) scale(1.02);
+    transform: rotateX(0deg) translateY(-4px) scale(1.01);
     box-shadow: var(--shadow-card-hover);
     border-color: var(--color-primary);
 }
@@ -4774,7 +4775,7 @@ html, body {
 .gallery-item,
 .cta-btn,
 .contact-btn {
-    will-change: transform;
+    /* will-change: transform; Removed for performance */
     transform: translateZ(0);
 }
 

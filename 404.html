@@ -164,33 +164,6 @@
         </div>
     </div>
 
-    <script>
-        // Detect language preference
-        const savedLang = localStorage.getItem('preferredLanguage');
-        if (savedLang === 'en') {
-            document.documentElement.lang = 'en';
-            document.documentElement.dir = 'ltr';
-            document.querySelector('.error-title').textContent = 'Oops! Page Not Found';
-            document.querySelector('.error-message').innerHTML =
-                "The page you're looking for doesn't exist or has been moved.<br>Don't worry, our delicious food is still here!";
-            document.querySelector('.btn-primary').innerHTML = '🏠 Back to Home';
-            document.querySelector('.btn-secondary').innerHTML = '📋 View Menu';
-        } else if (savedLang === 'ar') {
-            document.documentElement.lang = 'ar';
-            document.querySelector('.error-title').textContent = 'عفواً! الصفحة غير موجودة';
-            document.querySelector('.error-message').innerHTML =
-                'يبدو أن الصفحة التي تبحث عنها غير موجودة أو تم نقلها.<br>لا تقلق، طعامنا اللذيذ لا يزال هنا!';
-            document.querySelector('.btn-primary').innerHTML = '🏠 العودة للرئيسية';
-            document.querySelector('.btn-secondary').innerHTML = '📋 عرض القائمة';
-        } else if (savedLang === 'ru') {
-            document.documentElement.lang = 'ru';
-            document.documentElement.dir = 'ltr';
-            document.querySelector('.error-title').textContent = 'Ой! Страница не найдена';
-            document.querySelector('.error-message').innerHTML =
-                'Страница, которую вы ищете, не существует или была перемещена.<br>Не волнуйтесь, наша вкусная еда всё ещё здесь!';
-            document.querySelector('.btn-primary').innerHTML = '🏠 На главную';
-            document.querySelector('.btn-secondary').innerHTML = '📋 Меню';
-        }
-    </script>
+    <script src="js/404-language.js"></script>
 </body>
 </html>

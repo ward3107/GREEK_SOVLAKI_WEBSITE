@@ -1,12 +1,13 @@
 <!DOCTYPE html>
+
 <html lang="he" dir="rtl">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <!-- Content Security Policy -->
+    <!-- Content Security Policy - Secure CSP with limited unsafe-inline for styles -->
     <meta http-equiv="Content-Security-Policy" content="
         default-src 'self';
-        script-src 'self' 'unsafe-inline' https://www.googletagmanager.com https://www.google-analytics.com;
+        script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com;
         style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
         font-src 'self' https://fonts.gstatic.com;
         img-src 'self' data: blob: https://images.unsplash.com https://flagcdn.com https://*.google-analytics.com;
@@ -21,14 +22,14 @@
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <!-- <style id="i18n-hide">body{visibility:hidden}</style> -->
     <title>סובלאקי יווני כפר יאסיף | מסעדה יוונית אותנטית - Greek Souvlaki</title>
-    <meta name="description" content="מסעדה יוונית אותנטית בכפר יאסיף. סובלאקי, גירוס, פיתות יווניות ומגשי בשרים במחירים נוחים. פתוח חמישי-שבת 13:00-01:00. ☎️ 04-812-2980">
+    <meta name="description" content="מסעדה יוונית אותנטית בכפר יאסיף. סובלאקי, גירוס, פיתות יווניות ומגשי בשרים במחירים נוחים. פתוח רביעי-שבת 13:00-01:00. ☎️ 04-812-2980">
     <meta name="keywords" content="סובלאקי יווני, מסעדה יוונית, כפר יאסיף, גירוס, אוכל יווני, Greek Souvlaki, מסעדה בצפון, אוכל ים תיכוני">
     <link rel="canonical" href="https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/">
 
     <!-- Open Graph Meta Tags -->
     <meta property="og:type" content="restaurant">
     <meta property="og:title" content="סובלאקי יווני כפר יאסיף | מסעדה יוונית אותנטית">
-    <meta property="og:description" content="מסעדה יוונית אותנטית בכפר יאסיף. סובלאקי, גירוס, פיתות יווניות ומגשי בשרים. פתוח חמישי-שבת 13:00-01:00">
+    <meta property="og:description" content="מסעדה יוונית אותנטית בכפר יאסיף. סובלאקי, גירוס, פיתות יווניות ומגשי בשרים. פתוח רביעי-שבת 13:00-01:00">
     <meta property="og:image" content="https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/images/gallery-1.webp">
     <meta property="og:url" content="https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/">
     <meta property="og:site_name" content="Greek Souvlaki - סובלאקי יווני">
@@ -41,7 +42,7 @@
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="סובלאקי יווני כפר יאסיף | מסעדה יוונית אותנטית">
-    <meta name="twitter:description" content="מסעדה יוונית אותנטית בכפר יאסיף. סובלאקי, גירוס ומגשי בשרים. פתוח חמישי-שבת">
+    <meta name="twitter:description" content=מסעדה יוונית אותנטית בכפר יאסיף. סובלאקי, גירוס ומגשי בשרים. פתוח רביעי-שבתרביעי-שבתת">
     <meta name="twitter:image" content="https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/images/gallery-1.webp">
 
     <!-- Hreflang Tags for Multi-language -->
@@ -57,16 +58,17 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Greek Souvlaki">
-    <link rel="icon" type="image/jpeg" href="restaurant-logo.jpg">
-    <link rel="apple-touch-icon" href="restaurant-logo.jpg">
     <link rel="manifest" href="manifest.json">
 
     <!-- Preload critical CSS for faster rendering -->
     <link rel="preload" href="styles.css?v=43" as="style">
     <link rel="stylesheet" href="styles.css?v=43">
-    <link rel="stylesheet" href="animations.css?v=14" media="print" onload="this.media='all'">
-    <link rel="stylesheet" href="accessibility-widget.css?v=22" media="print" onload="this.media='all'">
-    <link rel="stylesheet" href="cookie-consent.css?v=15" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="css/inline-styles.css">
+    <link rel="stylesheet" href="animations.css?v=14" media="print">
+    <link rel="stylesheet" href="accessibility-widget.css?v=22" media="print">
+    <link rel="stylesheet" href="cookie-consent.css?v=15" media="print">
+    <script defer src="js/css-loader.js"></script>
+    <script defer src="js/gallery-performance.js"></script>
     <noscript>
         <link rel="stylesheet" href="animations.css?v=14">
         <link rel="stylesheet" href="accessibility-widget.css?v=22">
@@ -76,7 +78,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <!-- Optimized font loading with font-display=swap for better performance -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" as="style">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" media="print" onload="this.media='all'">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" media="print">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap"></noscript>
     <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
     <link rel="preconnect" href="https://flagcdn.com" crossorigin>
@@ -341,7 +343,7 @@
                             <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
                             <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
                         </svg>
-                        <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" style="display: none;">
+                        <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                             <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
                         </svg>
                     </button>
@@ -621,43 +623,43 @@
             <p data-lang="gallery-subtitle">טעימה מהאווירה והמנות שלנו</p>
             <div class="gallery-grid">
                 <div class="gallery-item">
-                    <img src="images/gallery-1.webp" alt="סובלאקי עוף בפיתה יוונית עם צזיקי וירקות טריים" width="800" height="1732" fetchpriority="high" decoding="async">
+                    <img src="images/gallery-1.webp" alt="סובלאקי עוף בפיתה יוונית עם צזיקי וירקות טריים" width="400" height="600" fetchpriority="high" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/gallery-2.webp" alt="מגש בשרים יווני עם שיפודים וסטייקים" width="800" height="1732" fetchpriority="high" decoding="async">
+                    <img src="images/gallery-2.webp" alt="מגש בשרים יווני עם שיפודים וסטייקים" width="400" height="600" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/gallery-3.webp" alt="גירוס יווני עם צ'יפס ורוטב צזיקי" width="800" height="369" decoding="async">
+                    <img src="images/gallery-3.webp" alt="גירוס יווני עם צ'יפס ורוטב צזיקי" width="800" height="369" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/gallery-4.webp" alt="סלט יווני עם גבינת פטה וזיתי קלמטה" width="800" height="1732" decoding="async">
+                    <img src="images/gallery-4.webp" alt="סלט יווני עם גבינת פטה וזיתי קלמטה" width="400" height="600" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/gallery-5.webp" alt="שיפודי בשר על האש במסעדה יוונית" width="800" height="369" decoding="async">
+                    <img src="images/gallery-5.webp" alt="שיפודי בשר על האש במסעדה יוונית" width="800" height="369" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/gallery-6.webp" alt="פיתה יוונית במילוי סובלאקי וירקות" width="800" height="1732" decoding="async">
+                    <img src="images/gallery-6.webp" alt="פיתה יוונית במילוי סובלאקי וירקות" width="400" height="600" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/gallery-7.webp" alt="אווירת המסעדה היוונית בכפר יאסיף" width="800" height="369" decoding="async">
+                    <img src="images/gallery-7.webp" alt="אווירת המסעדה היוונית בכפר יאסיף" width="800" height="369" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/gallery-8.webp" alt="צלחת סובלאקי עם תוספות יווניות" width="800" height="369" decoding="async">
+                    <img src="images/gallery-8.webp" alt="צלחת סובלאקי עם תוספות יווניות" width="800" height="369" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/gallery-9.webp" alt="פיצה גירוס עם שווארמה יוונית" width="800" height="1732" decoding="async">
+                    <img src="images/gallery-9.webp" alt="פיצה גירוס עם שווארמה יוונית" width="400" height="600" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/gallery-10.webp" alt="מנות יווניות מסורתיות במסעדת Greek Souvlaki" width="800" height="1732" loading="lazy" decoding="async">
+                    <img src="images/gallery-10.webp" alt="מנות יווניות מסורתיות במסעדת Greek Souvlaki" width="400" height="600" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
                     <img src="images/gallery-11.webp" alt="עיצוב ים תיכוני במסעדה היוונית" width="800" height="369" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/IMG-20251205-WA0032.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                    <img src="images/IMG-20251205-WA0032.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" width="400" height="600" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/IMG-20251205-WA0033.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                    <img src="images/IMG-20251205-WA0033.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" width="400" height="600" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
                     <img src="images/IMG-20251205-WA0034.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
@@ -912,21 +914,7 @@
     <script defer src="wow-animations.js?v=14"></script>
     <script defer src="theme-manager.js?v=1"></script>
     <script defer src="pwa-install.js?v=1"></script>
-
-    <!-- Service Worker Registration -->
-    <script>
-        if ('serviceWorker' in navigator) {
-            window.addEventListener('load', () => {
-                navigator.serviceWorker.register('/service-worker.js')
-                    .then((registration) => {
-                        console.log('Service Worker registered successfully:', registration.scope);
-                    })
-                    .catch((error) => {
-                        console.log('Service Worker registration failed:', error);
-                    });
-            });
-        }
-    </script>
+    <script defer src="js/index-scripts.js"></script>
 
     <!-- Lightbox Modal -->
     <div class="lightbox-modal" id="lightbox">
@@ -950,545 +938,18 @@
         </div>
     </div>
 
-    <script>
-        // Lightbox Gallery Functionality with Zoom, Rotate and Pan
-        (function() {
-            const lightbox = document.getElementById('lightbox');
-            const lightboxImg = document.getElementById('lightbox-img');
-            const zoomLevelDisplay = document.getElementById('zoom-level');
-
-            const closeBtn = lightbox.querySelector('.lightbox-close');
-            const prevBtn = lightbox.querySelector('.lightbox-prev');
-            const nextBtn = lightbox.querySelector('.lightbox-next');
-            const zoomInBtn = document.getElementById('zoom-in');
-            const zoomOutBtn = document.getElementById('zoom-out');
-            const rotateLeftBtn = document.getElementById('rotate-left');
-            const rotateRightBtn = document.getElementById('rotate-right');
-            const resetBtn = document.getElementById('reset-view');
-
-            const galleryItems = document.querySelectorAll('.gallery-item img');
-            let currentIndex = 0;
-            let currentZoom = 1;
-            let currentRotation = 0;
-            let posX = 0;
-            let posY = 0;
-            const minZoom = 0.5;
-            const maxZoom = 4;
-            const zoomStep = 0.25;
-
-            // Drag/Pan variables
-            let isDragging = false;
-            let startX = 0;
-            let startY = 0;
-            let dragStartX = 0;
-            let dragStartY = 0;
-
-            // Open lightbox on image click
-            galleryItems.forEach((img, index) => {
-                img.addEventListener('click', () => {
-                    currentIndex = index;
-                    openLightbox();
-                });
-            });
-
-            function updateTransform() {
-                lightboxImg.style.transform = `translate(${posX}px, ${posY}px) scale(${currentZoom}) rotate(${currentRotation}deg)`;
-                zoomLevelDisplay.textContent = Math.round(currentZoom * 100) + '%';
-
-                // Update button states
-                zoomOutBtn.disabled = currentZoom <= minZoom;
-                zoomInBtn.disabled = currentZoom >= maxZoom;
-
-                // Update cursor based on zoom level
-                if (currentZoom > 1) {
-                    lightboxImg.style.cursor = isDragging ? 'grabbing' : 'grab';
-                } else {
-                    lightboxImg.style.cursor = 'default';
-                }
-            }
-
-            function resetView() {
-                currentZoom = 1;
-                currentRotation = 0;
-                posX = 0;
-                posY = 0;
-                updateTransform();
-            }
-
-            function openLightbox() {
-                lightboxImg.src = galleryItems[currentIndex].src;
-                resetView();
-                lightbox.classList.add('active');
-                document.body.style.overflow = 'hidden';
-            }
-
-            function closeLightbox() {
-                lightbox.classList.remove('active');
-                document.body.style.overflow = '';
-                resetView();
-            }
-
-            function showPrev() {
-                currentIndex = (currentIndex - 1 + galleryItems.length) % galleryItems.length;
-                lightboxImg.src = galleryItems[currentIndex].src;
-                resetView();
-            }
-
-            function showNext() {
-                currentIndex = (currentIndex + 1) % galleryItems.length;
-                lightboxImg.src = galleryItems[currentIndex].src;
-                resetView();
-            }
-
-            function zoomIn() {
-                if (currentZoom < maxZoom) {
-                    currentZoom = Math.min(currentZoom + zoomStep, maxZoom);
-                    updateTransform();
-                }
-            }
-
-            function zoomOut() {
-                if (currentZoom > minZoom) {
-                    currentZoom = Math.max(currentZoom - zoomStep, minZoom);
-                    // Reset position when zooming out to 100% or less
-                    if (currentZoom <= 1) {
-                        posX = 0;
-                        posY = 0;
-                    }
-                    updateTransform();
-                }
-            }
-
-            function rotateLeft() {
-                currentRotation -= 90;
-                updateTransform();
-            }
-
-            function rotateRight() {
-                currentRotation += 90;
-                updateTransform();
-            }
-
-            // Mouse drag functionality
-            lightboxImg.addEventListener('mousedown', (e) => {
-                if (currentZoom > 1) {
-                    isDragging = true;
-                    startX = e.clientX;
-                    startY = e.clientY;
-                    dragStartX = posX;
-                    dragStartY = posY;
-                    lightboxImg.style.cursor = 'grabbing';
-                    e.preventDefault();
-                }
-            });
-
-            document.addEventListener('mousemove', (e) => {
-                if (!isDragging) return;
-
-                const deltaX = e.clientX - startX;
-                const deltaY = e.clientY - startY;
-
-                posX = dragStartX + deltaX;
-                posY = dragStartY + deltaY;
-
-                updateTransform();
-            });
-
-            document.addEventListener('mouseup', () => {
-                if (isDragging) {
-                    isDragging = false;
-                    if (currentZoom > 1) {
-                        lightboxImg.style.cursor = 'grab';
-                    }
-                }
-            });
-
-            // Touch/Swipe functionality for mobile
-            let touchStartX = 0;
-            let touchStartY = 0;
-            let touchEndX = 0;
-            let touchEndY = 0;
-            let isSwiping = false;
-            const swipeThreshold = 50; // Minimum distance for swipe
-
-            lightboxImg.addEventListener('touchstart', (e) => {
-                if (e.touches.length === 1) {
-                    touchStartX = e.touches[0].clientX;
-                    touchStartY = e.touches[0].clientY;
-                    touchEndX = touchStartX;
-                    touchEndY = touchStartY;
-
-                    if (currentZoom > 1) {
-                        // Panning mode when zoomed in
-                        isDragging = true;
-                        dragStartX = posX;
-                        dragStartY = posY;
-                    } else {
-                        // Swipe mode when at normal zoom
-                        isSwiping = true;
-                    }
-                }
-            }, { passive: true });
-
-            lightboxImg.addEventListener('touchmove', (e) => {
-                if (e.touches.length !== 1) return;
-
-                touchEndX = e.touches[0].clientX;
-                touchEndY = e.touches[0].clientY;
-
-                if (isDragging && currentZoom > 1) {
-                    // Panning when zoomed in
-                    const deltaX = touchEndX - touchStartX;
-                    const deltaY = touchEndY - touchStartY;
-                    posX = dragStartX + deltaX;
-                    posY = dragStartY + deltaY;
-                    updateTransform();
-                    e.preventDefault();
-                } else if (isSwiping) {
-                    // Prevent vertical scroll during horizontal swipe
-                    const deltaX = Math.abs(touchEndX - touchStartX);
-                    const deltaY = Math.abs(touchEndY - touchStartY);
-                    if (deltaX > deltaY && deltaX > 10) {
-                        e.preventDefault();
-                    }
-                }
-            }, { passive: false });
-
-            lightboxImg.addEventListener('touchend', () => {
-                if (isSwiping && currentZoom <= 1) {
-                    const deltaX = touchEndX - touchStartX;
-                    const deltaY = touchEndY - touchStartY;
-
-                    // Only trigger swipe if horizontal movement is greater than vertical
-                    if (Math.abs(deltaX) > Math.abs(deltaY) && Math.abs(deltaX) > swipeThreshold) {
-                        if (deltaX > 0) {
-                            // Swipe right - show previous (RTL friendly)
-                            showPrev();
-                        } else {
-                            // Swipe left - show next
-                            showNext();
-                        }
-                    }
-                }
-                isDragging = false;
-                isSwiping = false;
-            });
-
-            // Double-click to zoom
-            lightboxImg.addEventListener('dblclick', (e) => {
-                e.preventDefault();
-                if (currentZoom === 1) {
-                    currentZoom = 2;
-                } else {
-                    currentZoom = 1;
-                    posX = 0;
-                    posY = 0;
-                }
-                updateTransform();
-            });
-
-            // Event listeners
-            closeBtn.addEventListener('click', closeLightbox);
-            prevBtn.addEventListener('click', showPrev);
-            nextBtn.addEventListener('click', showNext);
-            zoomInBtn.addEventListener('click', zoomIn);
-            zoomOutBtn.addEventListener('click', zoomOut);
-            rotateLeftBtn.addEventListener('click', rotateLeft);
-            rotateRightBtn.addEventListener('click', rotateRight);
-            resetBtn.addEventListener('click', resetView);
-
-            // Close on background click (but not on image or toolbar)
-            lightbox.addEventListener('click', (e) => {
-                if (e.target === lightbox || e.target.classList.contains('lightbox-content')) {
-                    closeLightbox();
-                }
-            });
-
-            // Swipe on lightbox container (for swiping outside the image)
-            let containerTouchStartX = 0;
-            let containerTouchEndX = 0;
-
-            lightbox.addEventListener('touchstart', (e) => {
-                if (e.touches.length === 1 && currentZoom <= 1) {
-                    containerTouchStartX = e.touches[0].clientX;
-                    containerTouchEndX = containerTouchStartX;
-                }
-            }, { passive: true });
-
-            lightbox.addEventListener('touchmove', (e) => {
-                if (e.touches.length === 1 && currentZoom <= 1) {
-                    containerTouchEndX = e.touches[0].clientX;
-                }
-            }, { passive: true });
-
-            lightbox.addEventListener('touchend', (e) => {
-                // Only process if not from the image itself (image has its own handler)
-                if (e.target !== lightboxImg && currentZoom <= 1) {
-                    const deltaX = containerTouchEndX - containerTouchStartX;
-                    if (Math.abs(deltaX) > swipeThreshold) {
-                        if (deltaX > 0) {
-                            showPrev();
-                        } else {
-                            showNext();
-                        }
-                    }
-                }
-            });
-
-            // Mouse wheel zoom
-            lightbox.addEventListener('wheel', (e) => {
-                if (!lightbox.classList.contains('active')) return;
-                e.preventDefault();
-                if (e.deltaY < 0) {
-                    zoomIn();
-                } else {
-                    zoomOut();
-                }
-            }, { passive: false });
-
-            // Keyboard navigation
-            document.addEventListener('keydown', (e) => {
-                if (!lightbox.classList.contains('active')) return;
-
-                switch(e.key) {
-                    case 'Escape': closeLightbox(); break;
-                    case 'ArrowLeft': showPrev(); break;
-                    case 'ArrowRight': showNext(); break;
-                    case '+':
-                    case '=': zoomIn(); break;
-                    case '-': zoomOut(); break;
-                    case 'r': rotateRight(); break;
-                    case 'R': rotateLeft(); break;
-                    case '0': resetView(); break;
-                }
-            });
-        })();
-    </script>
-
+    <script defer src="js/lightbox.js"></script>
+  
     <!-- Menu Tabs -->
     <script defer src="js/menu-tabs.js"></script>
 
-    <!-- Image Lightbox Modal -->
-    <div id="lightbox" class="lightbox" role="dialog" aria-modal="true" aria-label="Image viewer">
-        <button class="lightbox-close" aria-label="Close">&times;</button>
-        <button class="lightbox-nav lightbox-prev" aria-label="Previous image">&#10094;</button>
-        <div class="lightbox-content">
-            <img class="lightbox-image" src="" alt="Enlarged image">
-        </div>
-        <button class="lightbox-nav lightbox-next" aria-label="Next image">&#10095;</button>
-    </div>
-
-    <!-- Lightbox Script -->
-    <script>
-    (function() {
-        'use strict';
-
-        let lightbox, lightboxImage, lightboxClose, lightboxPrev, lightboxNext;
-        let galleryImages = [];
-        let currentIndex = 0;
-
-        function initLightbox() {
-            lightbox = document.getElementById('lightbox');
-            if (!lightbox) {
-                console.error('Lightbox element not found');
-                return false;
-            }
-            lightboxImage = lightbox.querySelector('.lightbox-image');
-            lightboxClose = lightbox.querySelector('.lightbox-close');
-            lightboxPrev = lightbox.querySelector('.lightbox-prev');
-            lightboxNext = lightbox.querySelector('.lightbox-next');
-
-            // Event listeners
-            if (lightboxClose) lightboxClose.addEventListener('click', closeLightbox);
-            if (lightboxPrev) lightboxPrev.addEventListener('click', prevImage);
-            if (lightboxNext) lightboxNext.addEventListener('click', nextImage);
-
-            // Close on background click
-            lightbox.addEventListener('click', (e) => {
-                if (e.target === lightbox) closeLightbox();
-            });
-
-            // Keyboard navigation
-            document.addEventListener('keydown', (e) => {
-                if (!lightbox.classList.contains('active')) return;
-                switch(e.key) {
-                    case 'Escape': closeLightbox(); break;
-                    case 'ArrowLeft': prevImage(); break;
-                    case 'ArrowRight': nextImage(); break;
-                }
-            });
-
-            // Touch swipe support for mobile
-            let touchStartX = 0;
-            lightbox.addEventListener('touchstart', (e) => {
-                touchStartX = e.changedTouches[0].screenX;
-            }, { passive: true });
-
-            lightbox.addEventListener('touchend', (e) => {
-                const touchEndX = e.changedTouches[0].screenX;
-                const diff = touchStartX - touchEndX;
-                if (Math.abs(diff) > 50) {
-                    if (diff > 0) nextImage();
-                    else prevImage();
-                }
-            }, { passive: true });
-
-            return true;
-        }
-
-        // Collect all gallery images
-        function initGallery() {
-            if (!initLightbox()) return;
-
-            const galleryItems = document.querySelectorAll('.gallery-item');
-            console.log('Lightbox: Found', galleryItems.length, 'gallery items');
-
-            galleryItems.forEach((item, index) => {
-                item.style.cursor = 'pointer';
-                item.addEventListener('click', (e) => {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    const img = item.querySelector('img');
-                    if (img && img.src) {
-                        openLightbox(index);
-                    }
-                });
-            });
-        }
-
-        function openLightbox(index) {
-            if (!lightbox || !lightboxImage) return;
-            currentIndex = index;
-            galleryImages = Array.from(document.querySelectorAll('.gallery-item img')).map(img => ({
-                src: img.src,
-                alt: img.alt || 'Gallery image'
-            }));
-            updateLightbox();
-            lightbox.classList.add('active');
-            document.body.style.overflow = 'hidden';
-        }
-
-        function closeLightbox() {
-            if (!lightbox) return;
-            lightbox.classList.remove('active');
-            document.body.style.overflow = '';
-        }
-
-        function updateLightbox() {
-            if (!lightboxImage) return;
-            const currentImage = galleryImages[currentIndex];
-            if (currentImage && currentImage.src) {
-                lightboxImage.src = currentImage.src;
-                lightboxImage.alt = currentImage.alt || 'Gallery image';
-            }
-        }
-
-        function prevImage() {
-            if (galleryImages.length === 0) return;
-            currentIndex = (currentIndex - 1 + galleryImages.length) % galleryImages.length;
-            updateLightbox();
-        }
-
-        function nextImage() {
-            if (galleryImages.length === 0) return;
-            currentIndex = (currentIndex + 1) % galleryImages.length;
-            updateLightbox();
-        }
-
-        // Initialize on DOM ready
-        if (document.readyState === 'loading') {
-            document.addEventListener('DOMContentLoaded', initGallery);
-        } else {
-            initGallery();
-        }
-    })();
-    </script>
-
+  
+  
+  
     <!-- Preemptive Image Loading with Intersection Observer -->
-    <script>
-    (function() {
-        'use strict';
-
-        // Custom lazy loading with early trigger (1000px before viewport)
-        const lazyImageObserver = new IntersectionObserver(function(entries) {
-            entries.forEach(function(entry) {
-                if (entry.isIntersecting) {
-                    const img = entry.target;
-
-                    // Load the image if it has loading="lazy"
-                    if (img.loading === 'lazy') {
-                        // Force immediate loading
-                        img.loading = 'eager';
-
-                        // If image hasn't started loading, trigger it
-                        if (!img.src && img.dataset.src) {
-                            img.src = img.dataset.src;
-                        }
-                    }
-
-                    // Stop observing this image
-                    lazyImageObserver.unobserve(img);
-                }
-            });
-        }, {
-            // Load images 2000px before they enter viewport (much earlier)
-            rootMargin: '2000px 0px',
-            threshold: 0.01
-        });
-
-        // Observe all lazy-loaded images
-        document.querySelectorAll('.gallery-item img[loading="lazy"]').forEach(function(img) {
-            lazyImageObserver.observe(img);
-        });
-    })();
-    </script>
+    <script defer src="js/image-loader.js"></script>
 
     <!-- Image Fade-In Handler -->
-    <script>
-    (function() {
-        'use strict';
-
-        // Add fade-in effect when images load
-        function handleImageLoad(img) {
-            const galleryItem = img.closest('.gallery-item');
-
-            if (img.complete) {
-                img.classList.add('loaded');
-                if (galleryItem) galleryItem.classList.add('loaded');
-            } else {
-                img.addEventListener('load', function() {
-                    this.classList.add('loaded');
-                    if (galleryItem) galleryItem.classList.add('loaded');
-                }, { once: true });
-
-                // Fallback in case load event doesn't fire
-                img.addEventListener('error', function() {
-                    this.classList.add('loaded');
-                    if (galleryItem) galleryItem.classList.add('loaded');
-                }, { once: true });
-            }
-        }
-
-        // Apply to all gallery images
-        const galleryImages = document.querySelectorAll('.gallery-item img');
-        galleryImages.forEach(handleImageLoad);
-
-        // Handle dynamically loaded images (if any)
-        const observer = new MutationObserver(function(mutations) {
-            mutations.forEach(function(mutation) {
-                mutation.addedNodes.forEach(function(node) {
-                    if (node.tagName === 'IMG' && node.closest('.gallery-item')) {
-                        handleImageLoad(node);
-                    }
-                });
-            });
-        });
-
-        const galleryGrid = document.querySelector('.gallery-grid');
-        if (galleryGrid) {
-            observer.observe(galleryGrid, { childList: true, subtree: true });
-        }
-    })();
-    </script>
+    <script defer src="js/image-fade.js"></script>
 </body>
 </html>

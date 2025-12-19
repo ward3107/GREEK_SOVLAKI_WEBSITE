@@ -117,7 +117,7 @@
           </div>
         </div>
       `;
-      document.body.insertAdjacentHTML('beforeend', widgetHTML);
+      document.documentElement.insertAdjacentHTML('beforeend', widgetHTML);
     },
 
     attachEventListeners() {

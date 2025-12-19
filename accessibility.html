@@ -3,12 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Content Security Policy -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests;">
+    <!-- Content Security Policy - Secure CSP without unsafe-inline -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests;">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta name="referrer" content="strict-origin-when-cross-origin">
     <title>Accessibility Statement - Greek Souvlaki</title>
     <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/inline-styles.css">
     <style>
         body { background: #f9fafb; }
         .legal-container {
@@ -149,99 +150,99 @@
 </head>
 <body>
     <div class="lang-switcher" id="langSwitcher">
-        <button class="lang-toggle" onclick="toggleLangDropdown()" aria-label="Change language" id="langToggle">🇮🇱</button>
+        <button class="lang-toggle" id="langToggle" aria-label="Change language">ðŸ‡®ðŸ‡±</button>
         <div class="lang-dropdown">
-            <button onclick="switchPageLang('he')" class="lang-btn active" data-lang="he">
-                <span class="flag">🇮🇱</span> עברית
+            <button class="lang-btn active" data-lang="he">
+                <span class="flag">ðŸ‡®ðŸ‡±</span> ×¢×‘×¨×™×ª
             </button>
-            <button onclick="switchPageLang('ar')" class="lang-btn" data-lang="ar">
-                <span class="flag">🇸🇦</span> العربية
+            <button class="lang-btn" data-lang="ar">
+                <span class="flag">ðŸ‡¸ðŸ‡¦</span> Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©
             </button>
-            <button onclick="switchPageLang('en')" class="lang-btn" data-lang="en">
-                <span class="flag">🇬🇧</span> English
+            <button class="lang-btn" data-lang="en">
+                <span class="flag">ðŸ‡¬ðŸ‡§</span> English
             </button>
-            <button onclick="switchPageLang('ru')" class="lang-btn" data-lang="ru">
-                <span class="flag">🇷🇺</span> Русский
+            <button class="lang-btn" data-lang="ru">
+                <span class="flag">ðŸ‡·ðŸ‡º</span> Ð ÑƒÑÑÐºÐ¸Ð¹
             </button>
         </div>
     </div>
 
     <div class="legal-container">
-        <a href="index.html" class="back-link">← <span class="back-text">Back</span></a>
+        <a href="index.html" class="back-link">â† <span class="back-text">Back</span></a>
 
         <!-- HEBREW -->
         <div class="lang-content lang-he">
-            <h1>הצהרת נגישות</h1>
-            <p class="update-date">תאריך עדכון: 1 בדצמבר 2025</p>
+            <h1>×”×¦×”×¨×ª × ×’×™×©×•×ª</h1>
+            <p class="update-date">×ª××¨×™×š ×¢×“×›×•×Ÿ: 1 ×‘×“×¦×ž×‘×¨ 2025</p>
 
-            <h2>1. מחויבות לנגישות</h2>
-            <p>Greek Souvlaki מחויב להנגשת האתר לאנשים עם מוגבלות, בהתאם לתקנות שוויון זכויות לאנשים עם מוגבלות (התאמות נגישות לשירות), התשע"ג-2013.</p>
-            <p>האתר נבנה על פי <strong>תקן ישראלי ת"י 5568</strong> ו-<strong>WCAG 2.1</strong> ברמת <strong>AA</strong>.</p>
+            <h2>1. ×ž×—×•×™×‘×•×ª ×œ× ×’×™×©×•×ª</h2>
+            <p>Greek Souvlaki ×ž×—×•×™×‘ ×œ×”× ×’×©×ª ×”××ª×¨ ×œ×× ×©×™× ×¢× ×ž×•×’×‘×œ×•×ª, ×‘×”×ª×× ×œ×ª×§× ×•×ª ×©×•×•×™×•×Ÿ ×–×›×•×™×•×ª ×œ×× ×©×™× ×¢× ×ž×•×’×‘×œ×•×ª (×”×ª××ž×•×ª × ×’×™×©×•×ª ×œ×©×™×¨×•×ª), ×”×ª×©×¢"×’-2013.</p>
+            <p>×”××ª×¨ × ×‘× ×” ×¢×œ ×¤×™ <strong>×ª×§×Ÿ ×™×©×¨××œ×™ ×ª"×™ 5568</strong> ×•-<strong>WCAG 2.1</strong> ×‘×¨×ž×ª <strong>AA</strong>.</p>
 
-            <h2>2. אמצעי נגישות</h2>
+            <h2>2. ××ž×¦×¢×™ × ×’×™×©×•×ª</h2>
             <ul>
-                <li><strong>ניווט במקלדת:</strong> ניווט מלא עם סימון חזותי (Focus)</li>
-                <li><strong>קוראי מסך:</strong> כותרות סמנטיות, ARIA landmarks, טקסט חלופי לתמונות</li>
-                <li><strong>ניגודיות:</strong> יחס 4.5:1 לטקסט רגיל</li>
-                <li><strong>הגדלת טקסט:</strong> עד 200% ללא אובדן תפקוד</li>
-                <li><strong>תמיכה בשפות:</strong> עברית, ערבית, אנגלית, רוסית עם RTL/LTR</li>
+                <li><strong>× ×™×•×•×˜ ×‘×ž×§×œ×“×ª:</strong> × ×™×•×•×˜ ×ž×œ× ×¢× ×¡×™×ž×•×Ÿ ×—×–×•×ª×™ (Focus)</li>
+                <li><strong>×§×•×¨××™ ×ž×¡×š:</strong> ×›×•×ª×¨×•×ª ×¡×ž× ×˜×™×•×ª, ARIA landmarks, ×˜×§×¡×˜ ×—×œ×•×¤×™ ×œ×ª×ž×•× ×•×ª</li>
+                <li><strong>× ×™×’×•×“×™×•×ª:</strong> ×™×—×¡ 4.5:1 ×œ×˜×§×¡×˜ ×¨×’×™×œ</li>
+                <li><strong>×”×’×“×œ×ª ×˜×§×¡×˜:</strong> ×¢×“ 200% ×œ×œ× ××•×‘×“×Ÿ ×ª×¤×§×•×“</li>
+                <li><strong>×ª×ž×™×›×” ×‘×©×¤×•×ª:</strong> ×¢×‘×¨×™×ª, ×¢×¨×‘×™×ª, ×× ×’×œ×™×ª, ×¨×•×¡×™×ª ×¢× RTL/LTR</li>
             </ul>
 
-            <h2>3. פלטפורמות נתמכות</h2>
+            <h2>3. ×¤×œ×˜×¤×•×¨×ž×•×ª × ×ª×ž×›×•×ª</h2>
             <ul>
-                <li><strong>דפדפנים:</strong> Chrome, Firefox, Edge, Safari (גרסאות אחרונות)</li>
-                <li><strong>קוראי מסך:</strong> NVDA, JAWS, VoiceOver, TalkBack</li>
-                <li><strong>מכשירים ניידים:</strong> iOS, Android</li>
+                <li><strong>×“×¤×“×¤× ×™×:</strong> Chrome, Firefox, Edge, Safari (×’×¨×¡××•×ª ××—×¨×•× ×•×ª)</li>
+                <li><strong>×§×•×¨××™ ×ž×¡×š:</strong> NVDA, JAWS, VoiceOver, TalkBack</li>
+                <li><strong>×ž×›×©×™×¨×™× × ×™×™×“×™×:</strong> iOS, Android</li>
             </ul>
 
-            <h2>4. מגבלות ידועות</h2>
+            <h2>4. ×ž×’×‘×œ×•×ª ×™×“×•×¢×•×ª</h2>
             <ul>
-                <li>תמונות חיצוניות (Unsplash) עשויות להיות ללא טקסט חלופי מפורט</li>
-                <li>אינטגרציות חיצוניות (מפות, סרטונים) בשליטה חלקית</li>
+                <li>×ª×ž×•× ×•×ª ×—×™×¦×•× ×™×•×ª (Unsplash) ×¢×©×•×™×•×ª ×œ×”×™×•×ª ×œ×œ× ×˜×§×¡×˜ ×—×œ×•×¤×™ ×ž×¤×•×¨×˜</li>
+                <li>××™× ×˜×’×¨×¦×™×•×ª ×—×™×¦×•× ×™×•×ª (×ž×¤×•×ª, ×¡×¨×˜×•× ×™×) ×‘×©×œ×™×˜×” ×—×œ×§×™×ª</li>
             </ul>
 
             <div class="contact-box">
-                <h2 style="margin-top: 0;">📞 רכז/ת נגישות</h2>
-                <p><strong>שם:</strong> Greek Souvlaki Management<br>
-                <strong>טלפון:</strong> 04-8122980<br>
-                <strong>דוא"ל:</strong> [accessibility@greeksouvlaki.co.il]<br>
-                <strong>כתובת:</strong> כביש 70, כפר יאסיף</p>
-                <p><strong>זמן תגובה:</strong> 7 ימי עסקים</p>
+                <h2 class="contact-coordinator-heading">ðŸ“ž ×¨×›×–/×ª × ×’×™×©×•×ª</h2>
+                <p><strong>×©×:</strong> Greek Souvlaki Management<br>
+                <strong>×˜×œ×¤×•×Ÿ:</strong> 04-8122980<br>
+                <strong>×“×•×"×œ:</strong> [accessibility@greeksouvlaki.co.il]<br>
+                <strong>×›×ª×•×‘×ª:</strong> ×›×‘×™×© 70, ×›×¤×¨ ×™××¡×™×£</p>
+                <p><strong>×–×ž×Ÿ ×ª×’×•×‘×”:</strong> 7 ×™×ž×™ ×¢×¡×§×™×</p>
             </div>
 
-            <h2>5. דיווח על בעיות</h2>
-            <p>ניתן לדווח על בעיות נגישות דרך:</p>
+            <h2>5. ×“×™×•×•×— ×¢×œ ×‘×¢×™×•×ª</h2>
+            <p>× ×™×ª×Ÿ ×œ×“×•×•×— ×¢×œ ×‘×¢×™×•×ª × ×’×™×©×•×ª ×“×¨×š:</p>
             <ul>
-                <li>טלפון: 04-8122980</li>
-                <li>דוא"ל: [accessibility@greeksouvlaki.co.il]</li>
-                <li>דואר: כביש 70, כפר יאסיף</li>
+                <li>×˜×œ×¤×•×Ÿ: 04-8122980</li>
+                <li>×“×•×"×œ: [accessibility@greeksouvlaki.co.il]</li>
+                <li>×“×•××¨: ×›×‘×™×© 70, ×›×¤×¨ ×™××¡×™×£</li>
             </ul>
 
-            <p><strong>תודה על עזרתך בהפיכת האתר לנגיש יותר!</strong></p>
+            <p><strong>×ª×•×“×” ×¢×œ ×¢×–×¨×ª×š ×‘×”×¤×™×›×ª ×”××ª×¨ ×œ× ×’×™×© ×™×•×ª×¨!</strong></p>
         </div>
 
         <!-- ARABIC -->
         <div class="lang-content lang-ar">
-            <h1>بيان إمكانية الوصول</h1>
-            <p class="update-date">آخر تحديث: 1 ديسمبر 2025</p>
+            <h1>Ø¨ÙŠØ§Ù† Ø¥Ù…ÙƒØ§Ù†ÙŠØ© Ø§Ù„ÙˆØµÙˆÙ„</h1>
+            <p class="update-date">Ø¢Ø®Ø± ØªØ­Ø¯ÙŠØ«: 1 Ø¯ÙŠØ³Ù…Ø¨Ø± 2025</p>
 
-            <h2>1. الالتزام بإمكانية الوصول</h2>
-            <p>Greek Souvlaki ملتزم بجعل موقعه الإلكتروني متاحاً للأشخاص ذوي الإعاقة، وفقاً للوائح المساواة في الحقوق.</p>
+            <h2>1. Ø§Ù„Ø§Ù„ØªØ²Ø§Ù… Ø¨Ø¥Ù…ÙƒØ§Ù†ÙŠØ© Ø§Ù„ÙˆØµÙˆÙ„</h2>
+            <p>Greek Souvlaki Ù…Ù„ØªØ²Ù… Ø¨Ø¬Ø¹Ù„ Ù…ÙˆÙ‚Ø¹Ù‡ Ø§Ù„Ø¥Ù„ÙƒØªØ±ÙˆÙ†ÙŠ Ù…ØªØ§Ø­Ø§Ù‹ Ù„Ù„Ø£Ø´Ø®Ø§Øµ Ø°ÙˆÙŠ Ø§Ù„Ø¥Ø¹Ø§Ù‚Ø©ØŒ ÙˆÙÙ‚Ø§Ù‹ Ù„Ù„ÙˆØ§Ø¦Ø­ Ø§Ù„Ù…Ø³Ø§ÙˆØ§Ø© ÙÙŠ Ø§Ù„Ø­Ù‚ÙˆÙ‚.</p>
 
-            <h2>2. ميزات إمكانية الوصول</h2>
+            <h2>2. Ù…ÙŠØ²Ø§Øª Ø¥Ù…ÙƒØ§Ù†ÙŠØ© Ø§Ù„ÙˆØµÙˆÙ„</h2>
             <ul>
-                <li>التنقل بلوحة المفاتيح الكاملة</li>
-                <li>دعم قارئات الشاشة</li>
-                <li>تباين اللون المناسب</li>
-                <li>تكبير النص حتى 200%</li>
+                <li>Ø§Ù„ØªÙ†Ù‚Ù„ Ø¨Ù„ÙˆØ­Ø© Ø§Ù„Ù…ÙØ§ØªÙŠØ­ Ø§Ù„ÙƒØ§Ù…Ù„Ø©</li>
+                <li>Ø¯Ø¹Ù… Ù‚Ø§Ø±Ø¦Ø§Øª Ø§Ù„Ø´Ø§Ø´Ø©</li>
+                <li>ØªØ¨Ø§ÙŠÙ† Ø§Ù„Ù„ÙˆÙ† Ø§Ù„Ù…Ù†Ø§Ø³Ø¨</li>
+                <li>ØªÙƒØ¨ÙŠØ± Ø§Ù„Ù†Øµ Ø­ØªÙ‰ 200%</li>
             </ul>
 
             <div class="contact-box">
-                <h2 style="margin-top: 0;">📞 منسق إمكانية الوصول</h2>
-                <p><strong>الاسم:</strong> Greek Souvlaki Management<br>
-                <strong>الهاتف:</strong> 04-8122980<br>
-                <strong>البريد الإلكتروني:</strong> [accessibility@greeksouvlaki.co.il]<br>
-                <strong>وقت الرد:</strong> 7 أيام عمل</p>
+                <h2 class="contact-coordinator-heading">ðŸ“ž Ù…Ù†Ø³Ù‚ Ø¥Ù…ÙƒØ§Ù†ÙŠØ© Ø§Ù„ÙˆØµÙˆÙ„</h2>
+                <p><strong>Ø§Ù„Ø§Ø³Ù…:</strong> Greek Souvlaki Management<br>
+                <strong>Ø§Ù„Ù‡Ø§ØªÙ:</strong> 04-8122980<br>
+                <strong>Ø§Ù„Ø¨Ø±ÙŠØ¯ Ø§Ù„Ø¥Ù„ÙƒØªØ±ÙˆÙ†ÙŠ:</strong> [accessibility@greeksouvlaki.co.il]<br>
+                <strong>ÙˆÙ‚Øª Ø§Ù„Ø±Ø¯:</strong> 7 Ø£ÙŠØ§Ù… Ø¹Ù…Ù„</p>
             </div>
         </div>
 
@@ -276,7 +277,7 @@
             </ul>
 
             <div class="contact-box">
-                <h2 style="margin-top: 0;">📞 Accessibility Coordinator</h2>
+                <h2 class="contact-coordinator-heading">ðŸ“ž Accessibility Coordinator</h2>
                 <p><strong>Name:</strong> Greek Souvlaki Management<br>
                 <strong>Phone:</strong> 04-8122980<br>
                 <strong>Email:</strong> [accessibility@greeksouvlaki.co.il]<br>
@@ -297,73 +298,31 @@
 
         <!-- RUSSIAN -->
         <div class="lang-content lang-ru">
-            <h1>Заявление о доступности</h1>
-            <p class="update-date">Обновлено: 1 декабря 2025</p>
+            <h1>Ð—Ð°ÑÐ²Ð»ÐµÐ½Ð¸Ðµ Ð¾ Ð´Ð¾ÑÑ‚ÑƒÐ¿Ð½Ð¾ÑÑ‚Ð¸</h1>
+            <p class="update-date">ÐžÐ±Ð½Ð¾Ð²Ð»ÐµÐ½Ð¾: 1 Ð´ÐµÐºÐ°Ð±Ñ€Ñ 2025</p>
 
-            <h2>1. Обязательство</h2>
-            <p>Greek Souvlaki стремится сделать свой веб-сайт доступным для людей с ограниченными возможностями в соответствии с израильскими правилами и международными стандартами (WCAG 2.1 уровень AA).</p>
+            <h2>1. ÐžÐ±ÑÐ·Ð°Ñ‚ÐµÐ»ÑŒÑÑ‚Ð²Ð¾</h2>
+            <p>Greek Souvlaki ÑÑ‚Ñ€ÐµÐ¼Ð¸Ñ‚ÑÑ ÑÐ´ÐµÐ»Ð°Ñ‚ÑŒ ÑÐ²Ð¾Ð¹ Ð²ÐµÐ±-ÑÐ°Ð¹Ñ‚ Ð´Ð¾ÑÑ‚ÑƒÐ¿Ð½Ñ‹Ð¼ Ð´Ð»Ñ Ð»ÑŽÐ´ÐµÐ¹ Ñ Ð¾Ð³Ñ€Ð°Ð½Ð¸Ñ‡ÐµÐ½Ð½Ñ‹Ð¼Ð¸ Ð²Ð¾Ð·Ð¼Ð¾Ð¶Ð½Ð¾ÑÑ‚ÑÐ¼Ð¸ Ð² ÑÐ¾Ð¾Ñ‚Ð²ÐµÑ‚ÑÑ‚Ð²Ð¸Ð¸ Ñ Ð¸Ð·Ñ€Ð°Ð¸Ð»ÑŒÑÐºÐ¸Ð¼Ð¸ Ð¿Ñ€Ð°Ð²Ð¸Ð»Ð°Ð¼Ð¸ Ð¸ Ð¼ÐµÐ¶Ð´ÑƒÐ½Ð°Ñ€Ð¾Ð´Ð½Ñ‹Ð¼Ð¸ ÑÑ‚Ð°Ð½Ð´Ð°Ñ€Ñ‚Ð°Ð¼Ð¸ (WCAG 2.1 ÑƒÑ€Ð¾Ð²ÐµÐ½ÑŒ AA).</p>
 
-            <h2>2. Функции доступности</h2>
+            <h2>2. Ð¤ÑƒÐ½ÐºÑ†Ð¸Ð¸ Ð´Ð¾ÑÑ‚ÑƒÐ¿Ð½Ð¾ÑÑ‚Ð¸</h2>
             <ul>
-                <li>Навигация с клавиатуры</li>
-                <li>Поддержка программ чтения с экрана</li>
-                <li>Контрастность цветов</li>
-                <li>Масштабирование текста до 200%</li>
+                <li>ÐÐ°Ð²Ð¸Ð³Ð°Ñ†Ð¸Ñ Ñ ÐºÐ»Ð°Ð²Ð¸Ð°Ñ‚ÑƒÑ€Ñ‹</li>
+                <li>ÐŸÐ¾Ð´Ð´ÐµÑ€Ð¶ÐºÐ° Ð¿Ñ€Ð¾Ð³Ñ€Ð°Ð¼Ð¼ Ñ‡Ñ‚ÐµÐ½Ð¸Ñ Ñ ÑÐºÑ€Ð°Ð½Ð°</li>
+                <li>ÐšÐ¾Ð½Ñ‚Ñ€Ð°ÑÑ‚Ð½Ð¾ÑÑ‚ÑŒ Ñ†Ð²ÐµÑ‚Ð¾Ð²</li>
+                <li>ÐœÐ°ÑÑˆÑ‚Ð°Ð±Ð¸Ñ€Ð¾Ð²Ð°Ð½Ð¸Ðµ Ñ‚ÐµÐºÑÑ‚Ð° Ð´Ð¾ 200%</li>
             </ul>
 
             <div class="contact-box">
-                <h2 style="margin-top: 0;">📞 Координатор доступности</h2>
-                <p><strong>Имя:</strong> Greek Souvlaki Management<br>
-                <strong>Телефон:</strong> 04-8122980<br>
+                <h2 class="contact-coordinator-heading">ðŸ“ž ÐšÐ¾Ð¾Ñ€Ð´Ð¸Ð½Ð°Ñ‚Ð¾Ñ€ Ð´Ð¾ÑÑ‚ÑƒÐ¿Ð½Ð¾ÑÑ‚Ð¸</h2>
+                <p><strong>Ð˜Ð¼Ñ:</strong> Greek Souvlaki Management<br>
+                <strong>Ð¢ÐµÐ»ÐµÑ„Ð¾Ð½:</strong> 04-8122980<br>
                 <strong>Email:</strong> [accessibility@greeksouvlaki.co.il]<br>
-                <strong>Время ответа:</strong> 7 рабочих дней</p>
+                <strong>Ð’Ñ€ÐµÐ¼Ñ Ð¾Ñ‚Ð²ÐµÑ‚Ð°:</strong> 7 Ñ€Ð°Ð±Ð¾Ñ‡Ð¸Ñ… Ð´Ð½ÐµÐ¹</p>
             </div>
         </div>
     </div>
 
-    <script>
-        const savedLang = localStorage.getItem('preferredLanguage') || 'he';
-        switchPageLang(savedLang);
-
-        const langFlags = { 'he': '🇮🇱', 'ar': '🇸🇦', 'en': '🇬🇧', 'ru': '🇷🇺' };
-
-        function toggleLangDropdown() {
-            document.getElementById('langSwitcher').classList.toggle('open');
-        }
-
-        // Close dropdown when clicking outside
-        document.addEventListener('click', (e) => {
-            const switcher = document.getElementById('langSwitcher');
-            if (!switcher.contains(e.target)) {
-                switcher.classList.remove('open');
-            }
-        });
-
-        function switchPageLang(lang) {
-            const html = document.documentElement;
-            html.setAttribute('lang', lang);
-            html.setAttribute('dir', ['he', 'ar'].includes(lang) ? 'rtl' : 'ltr');
-
-            document.querySelectorAll('.lang-btn').forEach(btn => {
-                btn.classList.toggle('active', btn.dataset.lang === lang);
-            });
-
-            // Update toggle button flag
-            document.getElementById('langToggle').textContent = langFlags[lang];
-
-            // Close dropdown
-            document.getElementById('langSwitcher').classList.remove('open');
-
-            const backTexts = {
-                'he': 'חזרה לאתר',
-                'ar': 'العودة إلى الموقع',
-                'en': 'Back to site',
-                'ru': 'Вернуться на сайт'
-            };
-            document.querySelector('.back-text').textContent = backTexts[lang];
-
-            localStorage.setItem('preferredLanguage', lang);
-        }
-    </script>
+    <script src="js/page-scripts.js"></script>
+    <script src="js/language-switch.js"></script>
 </body>
 </html>
