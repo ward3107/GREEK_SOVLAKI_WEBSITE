@@ -1,4 +1,6 @@
 {
+  "version": 2,
+  "name": "greek-souvlaki-website",
   "headers": [
     {
       "source": "/images/(.*)",
