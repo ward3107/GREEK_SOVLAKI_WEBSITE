@@ -1,6 +1,9 @@
 {
   "version": 2,
-  "name": "greek-souvlaki-website",
+  "buildCommand": null,
+  "outputDirectory": null,
+  "installCommand": null,
+  "framework": null,
   "headers": [
     {
       "source": "/images/(.*)",
