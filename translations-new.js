@@ -134,10 +134,10 @@ let translations = {
         "skip-to-content": "דלג לתוכן הראשי",
         "hero-cta-menu": "צפו בתפריט",
         "hero-cta-contact": "הזמינו מקום",
-        "hero-rating": "מדורג 4.8 בגוגל",
+        "hero-rating": "מדורג 4.9 בגוגל",
         "badge-fresh": "חומרי גלם טריים מדי יום",
         "badge-family": "עסק משפחתי מאז 2020",
-        "badge-rated": "מדורג 4.8 ב-Google"
+        "badge-rated": "מדורג 4.9 ב-Google"
     },
     'en': {
         "logo": "Greek Souvlaki",
@@ -269,10 +269,10 @@ let translations = {
         "skip-to-content": "Skip to main content",
         "hero-cta-menu": "View Menu",
         "hero-cta-contact": "Make Reservation",
-        "hero-rating": "Rated 4.8 on Google",
+        "hero-rating": "Rated 4.9 on Google",
         "badge-fresh": "Fresh ingredients daily",
         "badge-family": "Family business since 2020",
-        "badge-rated": "Rated 4.8 on Google"
+        "badge-rated": "Rated 4.9 on Google"
     },
     'ar': {
         "logo": "سوفلاكي يوناني",
@@ -404,10 +404,10 @@ let translations = {
         "skip-to-content": "انتقل إلى المحتوى الرئيسي",
         "hero-cta-menu": "عرض القائمة",
         "hero-cta-contact": "احجز طاولة",
-        "hero-rating": "تقييم 4.8 على جوجل",
+        "hero-rating": "تقييم 4.9 على جوجل",
         "badge-fresh": "مكونات طازجة يومياً",
         "badge-family": "عمل عائلي منذ 2020",
-        "badge-rated": "تقييم 4.8 على Google"
+        "badge-rated": "تقييم 4.9 على Google"
     },
     'ru': {
         "logo": "Греческий Сувлаки",
@@ -539,10 +539,10 @@ let translations = {
         "skip-to-content": "Перейти к содержимому",
         "hero-cta-menu": "Посмотреть меню",
         "hero-cta-contact": "Забронировать",
-        "hero-rating": "Рейтинг 4.8 в Google",
+        "hero-rating": "Рейтинг 4.9 в Google",
         "badge-fresh": "Свежие ингредиенты ежедневно",
         "badge-family": "Семейный бизнес с 2020",
-        "badge-rated": "Рейтинг 4.8 в Google"
+        "badge-rated": "Рейтинг 4.9 в Google"
     },
     'el': {
         "logo": "Ελληνικό Σουβλάκι",
@@ -674,10 +674,10 @@ let translations = {
         "skip-to-content": "Μετάβαση στο κύριο περιεχόμενο",
         "hero-cta-menu": "Δείτε το Μενού",
         "hero-cta-contact": "Κάντε Κράτηση",
-        "hero-rating": "Βαθμολογία 4.8 στο Google",
+        "hero-rating": "Βαθμολογία 4.9 στο Google",
         "badge-fresh": "Φρέσκα υλικά καθημερινά",
         "badge-family": "Οικογενειακή επιχείρηση από το 2020",
-        "badge-rated": "Βαθμολογία 4.8 στο Google"
+        "badge-rated": "Βαθμολογία 4.9 στο Google"
     }
 };
 
