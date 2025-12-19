@@ -142,9 +142,7 @@ body {
     line-height: 1.7;
     color: var(--color-white);
     direction: rtl;
-    background:
-        linear-gradient(rgba(30, 58, 138, 0.78), rgba(30, 58, 138, 0.78)),
-        url('https://images.unsplash.com/photo-1517248135467-4c7edcad34c4?w=1280&q=60&fm=webp') center/cover fixed;
+    background: linear-gradient(rgba(30, 58, 138, 0.78), rgba(30, 58, 138, 0.78));
     background-color: #1e3a8a;
     position: relative;
     font-size: 16px;
@@ -460,7 +458,14 @@ body.rtl .contact-info {
     padding: 8px 0;
     z-index: 10000;
 }
-.language-dropdown.active .language-dropdown-content { display: block; }
+.language-dropdown.active .language-dropdown-content {
+    display: block;
+}
+
+/* Also support .show class for compatibility */
+.language-dropdown-content.show {
+    display: block;
+}
 
 .lang-option {
     display: flex;
@@ -928,6 +933,604 @@ body.rtl .contact-info {
 
 .nav-menu a.active::after {
     width: 0;
+}
+
+/* Navigation Dropdown Styles */
+.nav-dropdown {
+    position: relative;
+}
+
+.nav-dropdown-toggle {
+    background: rgba(255, 255, 255, 0.1);
+    backdrop-filter: blur(10px);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    color: var(--color-white);
+    cursor: pointer;
+    font-size: 15px;
+    font-weight: 500;
+    padding: 0.6rem 1.2rem;
+    border-radius: 25px;
+    transition: all var(--transition-base);
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    width: 100%;
+    min-width: 80px;
+    justify-content: center;
+    position: relative;
+}
+
+.nav-dropdown-toggle::after {
+    content: '▼';
+    font-size: 10px;
+    transition: transform var(--transition-base);
+    margin-right: 4px;
+}
+
+.nav-dropdown-toggle[aria-expanded="true"]::after {
+    transform: rotate(180deg);
+}
+
+.nav-dropdown-toggle:hover,
+.nav-dropdown-toggle:focus {
+    background: rgba(255, 255, 255, 0.2);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+}
+
+.nav-dropdown-toggle:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+.nav-dropdown-panel {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 160px;
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-md);
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+    transition: all var(--transition-base);
+    z-index: 1001;
+    padding: 0.5rem 0;
+    margin-top: 0.5rem;
+}
+
+.nav-dropdown-panel[aria-hidden="false"] {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.nav-dropdown-item {
+    display: block;
+    padding: 0.7rem 1.2rem;
+    color: var(--color-text);
+    text-decoration: none;
+    font-size: 14px;
+    font-weight: 400;
+    transition: all var(--transition-base);
+    border: none;
+    background: transparent;
+    width: 100%;
+    text-align: left;
+    cursor: pointer;
+}
+
+.nav-dropdown-item:hover,
+.nav-dropdown-item:focus {
+    background: var(--color-primary);
+    color: var(--color-white);
+    text-decoration: none;
+}
+
+.nav-dropdown-item:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: -2px;
+}
+
+.nav-dropdown-item:first-child {
+    border-radius: var(--radius-md) var(--radius-md) 0 0;
+}
+
+.nav-dropdown-item:last-child {
+    border-radius: 0 0 var(--radius-md) var(--radius-md);
+}
+
+/* RTL Support for Dropdowns */
+[dir="rtl"] .nav-dropdown-toggle::after {
+    margin-right: 0;
+    margin-left: 4px;
+}
+
+[dir="rtl"] .nav-dropdown-panel {
+    left: auto;
+    right: 0;
+    transform: none;
+}
+
+[dir="rtl"] .nav-dropdown-panel[aria-hidden="false"] {
+    transform: none;
+}
+
+[dir="rtl"] .nav-dropdown-item {
+    text-align: right;
+}
+
+/* Dark Mode Support */
+body.dark-mode .nav-dropdown-panel {
+    background: var(--surface-dark);
+    border-color: var(--border-dark);
+}
+
+body.dark-mode .nav-dropdown-item {
+    color: var(--text-light);
+}
+
+body.dark-mode .nav-dropdown-item:hover,
+body.dark-mode .nav-dropdown-item:focus {
+    background: var(--primary-dark);
+}
+
+/* PWA Install Prompt Styles */
+.pwa-install-prompt {
+    position: fixed;
+    top: 100px; /* Position below header */
+    left: 50%;
+    transform: translateX(-50%) translateY(-20px);
+    background: var(--color-surface);
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.2);
+    z-index: 10000;
+    opacity: 0;
+    visibility: hidden;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
+    width: 90%;
+    max-width: 420px;
+    min-width: 320px;
+}
+
+.pwa-install-prompt.show {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(-50%) translateY(0);
+}
+
+.pwa-prompt-content {
+    display: flex;
+    align-items: center;
+    gap: 1rem;
+    padding: 1rem;
+    position: relative;
+}
+
+.pwa-prompt-close {
+    position: absolute;
+    top: 8px;
+    right: 8px;
+    background: none;
+    border: none;
+    font-size: 1.5rem;
+    color: var(--color-text);
+    cursor: pointer;
+    padding: 4px;
+    border-radius: 50%;
+    width: 28px;
+    height: 28px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    transition: all var(--transition-base);
+    z-index: 1;
+}
+
+.pwa-prompt-close:hover,
+.pwa-prompt-close:focus {
+    background: var(--color-border);
+    color: var(--color-text);
+}
+
+.pwa-prompt-image {
+    width: 72px;
+    height: 72px;
+    border-radius: var(--radius-md);
+    object-fit: cover;
+    flex-shrink: 0;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.15);
+}
+
+.pwa-prompt-text {
+    flex: 1;
+    min-width: 0;
+}
+
+.pwa-prompt-text h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.1rem;
+    font-weight: 600;
+    color: var(--color-text);
+    line-height: 1.3;
+}
+
+.pwa-prompt-text p {
+    margin: 0;
+    font-size: 0.9rem;
+    color: var(--color-text-secondary);
+    line-height: 1.4;
+}
+
+.pwa-install-button {
+    background: var(--color-primary);
+    color: var(--color-white);
+    border: none;
+    padding: 0.7rem 1.2rem;
+    border-radius: var(--radius-md);
+    font-size: 0.9rem;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all var(--transition-base);
+    white-space: nowrap;
+    flex-shrink: 0;
+}
+
+.pwa-install-button:hover,
+.pwa-install-button:focus {
+    background: var(--color-primary-dark);
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(var(--color-primary-rgb), 0.3);
+}
+
+.pwa-install-button:active {
+    transform: translateY(0);
+}
+
+.pwa-install-button:focus-visible {
+    outline: 2px solid var(--color-accent);
+    outline-offset: 2px;
+}
+
+/* Dark Mode for PWA Prompt */
+body.dark-mode .pwa-install-prompt {
+    background: var(--surface-dark);
+    border-color: var(--border-dark);
+    box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
+}
+
+body.dark-mode .pwa-prompt-close {
+    color: var(--text-light);
+}
+
+body.dark-mode .pwa-prompt-close:hover,
+body.dark-mode .pwa-prompt-close:focus {
+    background: var(--border-dark);
+    color: var(--text-light);
+}
+
+body.dark-mode .pwa-prompt-text h3,
+body.dark-mode .pwa-prompt-text p {
+    color: var(--text-light);
+}
+
+body.dark-mode .pwa-prompt-text p {
+    color: var(--text-secondary-light);
+}
+
+/* Mobile Responsive PWA Prompt */
+@media (max-width: 768px) {
+    .pwa-install-prompt {
+        top: 80px; /* Slightly lower on mobile */
+        width: 90%;
+        max-width: 360px;
+        min-width: 280px;
+    }
+
+    .pwa-prompt-content {
+        gap: 0.875rem;
+        padding: 1rem;
+        flex-direction: column;
+        text-align: center;
+    }
+
+    .pwa-prompt-image {
+        width: 64px;
+        height: 64px;
+        margin-bottom: 0.25rem;
+    }
+
+    .pwa-prompt-text {
+        text-align: center;
+    }
+
+    .pwa-prompt-text h3 {
+        font-size: 1rem;
+        margin-bottom: 0.25rem;
+    }
+
+    .pwa-prompt-text p {
+        font-size: 0.85rem;
+    }
+
+    .pwa-install-button {
+        padding: 0.6rem 1rem;
+        font-size: 0.85rem;
+        width: 100%;
+    }
+}
+
+/* PWA Install Banner (small mobile optimization) */
+@media (max-width: 480px) {
+    .pwa-install-prompt {
+        border-radius: var(--radius-lg);
+        top: 70px;
+        width: 95%;
+        max-width: 320px;
+        min-width: 260px;
+    }
+
+    .pwa-prompt-content {
+        padding: 0.875rem;
+        gap: 0.75rem;
+    }
+
+    .pwa-prompt-image {
+        width: 56px;
+        height: 56px;
+    }
+
+    .pwa-prompt-text h3 {
+        font-size: 0.95rem;
+    }
+
+    .pwa-prompt-text p {
+        font-size: 0.8rem;
+    }
+}
+
+/* WhatsApp Floating Circle Buttons */
+.whatsapp-floating {
+    position: fixed;
+    bottom: 120px; /* Initial position above accessibility widget */
+    right: 20px;
+    z-index: 9998; /* Below accessibility widget (9999) */
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    align-items: center;
+    transition: transform 0.3s ease, opacity 0.3s ease;
+}
+
+/* Scrolling behavior - buttons follow user scroll */
+.whatsapp-floating.scrolling {
+    transform: translateY(-20px);
+}
+
+.whatsapp-circle {
+    width: 64px; /* Equal size for both circles */
+    height: 64px;
+    border-radius: 50%;
+    background: #25D366; /* WhatsApp green */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    text-decoration: none;
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.4);
+    transition: all var(--transition-base);
+    position: relative;
+    overflow: hidden;
+    flex-direction: column;
+    opacity: 0.5; /* 50% transparency */
+}
+
+.whatsapp-circle:hover,
+.whatsapp-circle:focus {
+    transform: translateY(-2px) scale(1.05);
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.5);
+    background: #128C7E; /* Darker WhatsApp green */
+    opacity: 1.0; /* Fully opaque on hover */
+}
+
+.whatsapp-circle:active {
+    transform: translateY(-1px) scale(1.02);
+    opacity: 1.0; /* Fully opaque when active */
+}
+
+.whatsapp-content {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 2px;
+    height: 100%;
+}
+
+.whatsapp-icon {
+    font-size: 18px;
+    filter: brightness(0) invert(1);
+    user-select: none;
+    pointer-events: none;
+    line-height: 1;
+}
+
+.whatsapp-name {
+    font-size: 10px;
+    font-weight: 600;
+    color: white;
+    text-align: center;
+    line-height: 1;
+    margin-top: 1px;
+    text-shadow: 0 1px 2px rgba(0, 0, 0, 0.3);
+}
+
+/* Remove secondary styling - both circles are equal */
+.whatsapp-circle-secondary {
+    /* No different size - both are equal */
+}
+
+/* Pulse animation for first WhatsApp button */
+.whatsapp-circle::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    border-radius: 50%;
+    background: #25D366;
+    animation: whatsappPulse 2s infinite;
+    opacity: 0.7;
+    z-index: -1;
+}
+
+@keyframes whatsappPulse {
+    0% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+    50% {
+        transform: scale(1.1);
+        opacity: 0.3;
+    }
+    100% {
+        transform: scale(1);
+        opacity: 0.7;
+    }
+}
+
+/* Hover effect - show phone numbers */
+.whatsapp-circle::after {
+    content: attr(data-phone);
+    position: absolute;
+    right: 100%;
+    top: 50%;
+    transform: translateY(-50%);
+    background: rgba(0, 0, 0, 0.8);
+    color: white;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 500;
+    white-space: nowrap;
+    opacity: 0;
+    visibility: hidden;
+    transition: all var(--transition-base);
+    margin-right: 10px;
+}
+
+.whatsapp-circle:hover::after {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* RTL Support */
+[dir="rtl"] .whatsapp-floating {
+    right: auto;
+    left: 20px;
+}
+
+[dir="rtl"] .whatsapp-circle::after {
+    right: auto;
+    left: 100%;
+    margin-right: 0;
+    margin-left: 10px;
+}
+
+/* Dark Mode Support */
+body.dark-mode .whatsapp-circle {
+    box-shadow: 0 4px 12px rgba(37, 211, 102, 0.3);
+}
+
+body.dark-mode .whatsapp-circle:hover,
+body.dark-mode .whatsapp-circle:focus {
+    box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+}
+
+body.dark-mode .whatsapp-circle::after {
+    background: rgba(255, 255, 255, 0.9);
+    color: #1a1a1a;
+}
+
+/* Mobile Responsive */
+@media (max-width: 768px) {
+    .whatsapp-floating {
+        bottom: 100px; /* Adjust for mobile accessibility widget */
+        right: 15px;
+    }
+
+    .whatsapp-circle {
+        width: 56px; /* Equal size for both */
+        height: 56px;
+    }
+
+    .whatsapp-icon {
+        font-size: 16px;
+    }
+
+    .whatsapp-name {
+        font-size: 9px;
+    }
+
+    [dir="rtl"] .whatsapp-floating {
+        right: auto;
+        left: 15px;
+    }
+}
+
+/* Small Mobile */
+@media (max-width: 480px) {
+    .whatsapp-floating {
+        bottom: 90px;
+        gap: 10px;
+    }
+
+    .whatsapp-circle {
+        width: 52px; /* Equal size for both */
+        height: 52px;
+    }
+
+    .whatsapp-icon {
+        font-size: 14px;
+    }
+
+    .whatsapp-name {
+        font-size: 8px;
+    }
+}
+
+/* High contrast mode for accessibility */
+@media (prefers-contrast: high) {
+    .whatsapp-circle {
+        border: 2px solid #000;
+    }
+
+    .whatsapp-circle:hover,
+    .whatsapp-circle:focus {
+        outline: 3px solid #fff;
+        outline-offset: 2px;
+    }
+}
+
+/* Reduced motion for accessibility */
+@media (prefers-reduced-motion: reduce) {
+    .whatsapp-circle {
+        transition: none;
+    }
+
+    .whatsapp-circle::before {
+        animation: none;
+        opacity: 0;
+    }
+
+    .whatsapp-circle:hover,
+    .whatsapp-circle:focus {
+        transform: none;
+    }
 }
 
 .hamburger {
@@ -2045,6 +2648,82 @@ footer {
 
     [dir="rtl"] .nav-menu li {
         text-align: right;
+    }
+
+    /* Mobile Navigation Dropdown Styles */
+    .nav-dropdown-toggle {
+        justify-content: space-between;
+        padding: 1rem 1.5rem;
+        font-size: 1rem;
+        min-width: auto;
+        border-radius: 0;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+    }
+
+    .nav-dropdown-toggle::after {
+        margin-right: 0;
+        font-size: 12px;
+    }
+
+    .nav-dropdown-panel {
+        position: static;
+        transform: none;
+        opacity: 1;
+        visibility: visible;
+        background: rgba(0, 0, 0, 0.2);
+        border: none;
+        border-radius: 0;
+        box-shadow: none;
+        padding: 0;
+        margin: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.3s ease;
+        display: none;
+    }
+
+    .nav-dropdown-panel[aria-hidden="false"] {
+        max-height: 500px;
+        display: block;
+        transform: none;
+    }
+
+    .nav-dropdown-item {
+        padding: 0.8rem 2rem;
+        font-size: 0.9rem;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        background: rgba(255, 255, 255, 0.05);
+        color: rgba(255, 255, 255, 0.9);
+    }
+
+    .nav-dropdown-item:hover,
+    .nav-dropdown-item:focus {
+        background: rgba(255, 255, 255, 0.15);
+        color: #ffffff;
+    }
+
+    .nav-dropdown-item:first-child,
+    .nav-dropdown-item:last-child {
+        border-radius: 0;
+    }
+
+    [dir="rtl"] .nav-dropdown-panel {
+        left: 0;
+        right: 0;
+        transform: none;
+    }
+
+    [dir="rtl"] .nav-dropdown-panel[aria-hidden="false"] {
+        transform: none;
+    }
+
+    [dir="rtl"] .nav-dropdown-item {
+        text-align: right;
+        padding-right: 2rem;
+    }
+
+    [dir="rtl"] .nav-dropdown-toggle::after {
+        margin-left: 0;
     }
 
     .hamburger {

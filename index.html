@@ -7,7 +7,7 @@
     <!-- Content Security Policy - Secure CSP with limited unsafe-inline for styles -->
     <meta http-equiv="Content-Security-Policy" content="
         default-src 'self';
-        script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com;
+        script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com 'sha256-vvt4KWwuNr51XfE5m+hzeNEGhiOfZzG97ccfqGsPwvE=';
         style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
         font-src 'self' https://fonts.gstatic.com;
         img-src 'self' data: blob: https://images.unsplash.com https://flagcdn.com https://*.google-analytics.com;
@@ -136,7 +136,7 @@
                   {
                     "@type": "MenuItem",
                     "name": "Souvlaki Pita Chicken",
-                    "description": "פיתה יוונית, שיפוד עוף, רוטב צזיקי/חריף, כרוב, בצל, עגבנייה, חסה, צ'יפס",
+                    "description": "פיתה יוונית, שיפוד עוף, רוטב צזיקי/חריף,  בצל, עגבנייה, חסה, צ'יפס",
                     "offers": {
                       "@type": "Offer",
                       "price": "30",
@@ -146,7 +146,7 @@
                   {
                     "@type": "MenuItem",
                     "name": "Souvlaki Pita Gyros",
-                    "description": "פיתה יוונית, גירוס לבן (שווארמה), רוטב צזיקי/חריף, כרוב, בצל, עגבנייה, חסה, צ'יפס",
+                    "description": "פיתה יוונית, גירוס לבן (שווארמה), רוטב צזיקי/חריף,  בצל, עגבנייה, חסה, צ'יפס",
                     "offers": {
                       "@type": "Offer",
                       "price": "30",
@@ -362,12 +362,17 @@
                     </div>
                 </div>
                 <ul class="nav-menu">
-                    <li><a href="#contact" data-lang="nav-contact">צור קשר</a></li>
-                    <li><a href="#faq" data-lang="nav-faq">שאלות נפוצות</a></li>
-                    <li><a href="#gallery" data-lang="nav-gallery">גלריה</a></li>
-                    <li><a href="#about" data-lang="nav-about">אודות</a></li>
-                    <li><a href="#menu" data-lang="nav-menu">תפריט</a></li>
-                    <li><a href="#home" data-lang="nav-home">בית</a></li>
+                    <li class="nav-dropdown">
+                        <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-controls="nav-dropdown" aria-haspopup="true">תפריט</button>
+                        <div class="nav-dropdown-panel" id="nav-dropdown" role="menu" aria-hidden="true">
+                            <a href="#home" class="nav-dropdown-item" role="menuitem" data-lang="nav-home">בית</a>
+                            <a href="#menu" class="nav-dropdown-item" role="menuitem" data-lang="nav-menu">תפריט</a>
+                            <a href="#gallery" class="nav-dropdown-item" role="menuitem" data-lang="nav-gallery">גלריה</a>
+                            <a href="#about" class="nav-dropdown-item" role="menuitem" data-lang="nav-about">אודות</a>
+                            <a href="#faq" class="nav-dropdown-item" role="menuitem" data-lang="nav-faq">שאלות נפוצות</a>
+                            <a href="#contact" class="nav-dropdown-item" role="menuitem" data-lang="nav-contact">צור קשר</a>
+                        </div>
+                    </li>
                 </ul>
                 <button class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
                     <span></span>
@@ -417,42 +422,42 @@
             <div class="menu-card-grid">
                 <div class="menu-card">
                     <h3 data-lang="item-pita-chicken">Souvlaki Peta Chicken</h3>
-                    <p data-lang="desc-pita-chicken">פיתה יוונית, שיפוד עוף, רוטב צזיקי/חריף, כרוב, בצל, עגבנייה, חסה, צ'יפס</p>
+                    <p data-lang="desc-pita-chicken">פיתה יוונית, שיפוד עוף, רוטב צזיקי/חריף,  בצל, עגבנייה, חסה, צ'יפס</p>
                     <span class="price">30 ₪</span>
                 </div>
                 <div class="menu-card">
                     <h3 data-lang="item-pita-pork">Souvlaki Peta Pork</h3>
-                    <p data-lang="desc-pita-pork">פיתה יוונית, שיפוד לבן, רוטב צזיקי/חריף, כרוב, בצל, עגבנייה, חסה, צ'יפס</p>
+                    <p data-lang="desc-pita-pork">פיתה יוונית, שיפוד לבן, רוטב צזיקי/חריף,  בצל, עגבנייה, חסה, צ'יפס</p>
                     <span class="price">30 ₪</span>
                 </div>
                 <div class="menu-card">
                     <h3 data-lang="item-pita-gyros">Souvlaki Peta Pork Gyros</h3>
-                    <p data-lang="desc-pita-gyros">פיתה יוונית, גירוס לבן (שווארמה), רוטב צזיקי/חריף, כרוב, בצל, עגבנייה, חסה, צ'יפס</p>
+                    <p data-lang="desc-pita-gyros">פיתה יוונית, גירוס לבן (שווארמה), רוטב צזיקי/חריף,  בצל, עגבנייה, חסה, צ'יפס</p>
                     <span class="price">30 ₪</span>
                 </div>
                 <div class="menu-card">
                     <h3 data-lang="item-pita-kebab">Souvlaki Peta Kebab</h3>
-                    <p data-lang="desc-pita-kebab">פיתה יוונית, קבב רגל טלה, רוטב צזיקי/חריף, כרוב, בצל, עגבנייה, חסה, צ'יפס</p>
+                    <p data-lang="desc-pita-kebab">פיתה יוונית, קבב רגל טלה, רוטב צזיקי/חריף,  בצל, עגבנייה, חסה, צ'יפס</p>
                     <span class="price">30 ₪</span>
                 </div>
                 <div class="menu-card">
                     <h3 data-lang="item-pita-sausage">Souvlaki Peta Sausage</h3>
-                    <p data-lang="desc-pita-sausage">פיתה יוונית, נקניקיות, רוטב צזיקי/חריף, כרוב, בצל, עגבנייה, חסה, צ'יפס</p>
+                    <p data-lang="desc-pita-sausage">פיתה יוונית, נקניקיות, רוטב צזיקי/חריף,  בצל, עגבנייה, חסה, צ'יפס</p>
                     <span class="price">30 ₪</span>
                 </div>
                 <div class="menu-card">
                     <h3 data-lang="item-pita-vegan">Souvlaki Peta Vegan</h3>
-                    <p data-lang="desc-pita-vegan">פיתה יוונית, שיפוד טבעוני, רוטב צזיקי/חריף, כרוב, בצל, עגבנייה, חסה, צ'יפס</p>
+                    <p data-lang="desc-pita-vegan">פיתה יוונית, שיפוד טבעוני, רוטב צזיקי/חריף,  בצל, עגבנייה, חסה, צ'יפס</p>
                     <span class="price">30 ₪</span>
                 </div>
                 <div class="menu-card">
                     <h3 data-lang="item-pita-steak">Souvlaki Peta Pork Steak</h3>
-                    <p data-lang="desc-pita-steak">פיתה יוונית, סטייק לבן סינטה, רוטב צזיקי/חריף, כרוב, בצל, עגבנייה, חסה, צ'יפס</p>
+                    <p data-lang="desc-pita-steak">פיתה יוונית, סטייק לבן סינטה, רוטב צזיקי/חריף,  בצל, עגבנייה, חסה, צ'יפס</p>
                     <span class="price">35 ₪</span>
                 </div>
                 <div class="menu-card">
                     <h3 data-lang="item-pita-glutenfree">Souvlaki Peta Gluten Free</h3>
-                    <p data-lang="desc-pita-glutenfree">פיתה ללא גלוטן, שיפוד לבחירה, רוטב צזיקי/חריף, כרוב, בצל, עגבנייה, חסה, צ'יפס</p>
+                    <p data-lang="desc-pita-glutenfree">פיתה ללא גלוטן, שיפוד לבחירה, רוטב צזיקי/חריף,  בצל, עגבנייה, חסה, צ'יפס</p>
                     <span class="price">40 ₪</span>
                 </div>
                 <div class="menu-card special">
@@ -468,12 +473,12 @@
             <div class="menu-card-grid">
                 <div class="menu-card">
                     <h3 data-lang="item-plate-souvlaki">Souvlaki Plate</h3>
-                    <p data-lang="desc-plate-souvlaki">שיפודים לבחירה, רוטב צזיקי/חריף, כרוב, בצל, עגבנייה, חסה, צ'יפס</p>
+                    <p data-lang="desc-plate-souvlaki">שיפודים לבחירה, רוטב צזיקי/חריף,  בצל, עגבנייה, חסה, צ'יפס</p>
                     <span class="price">35 ₪</span>
                 </div>
                 <div class="menu-card">
                     <h3 data-lang="item-plate-gyros">Souvlaki Plate Gyros</h3>
-                    <p data-lang="desc-plate-gyros">שווארמה לבן, רוטב צזיקי/חריף, כרוב, בצל, עגבנייה, חסה, צ'יפס</p>
+                    <p data-lang="desc-plate-gyros">שווארמה לבן, רוטב צזיקי/חריף,  בצל, עגבנייה, חסה, צ'יפס</p>
                     <span class="price">40 ₪</span>
                 </div>
             </div>
@@ -870,11 +875,11 @@
                 <div class="contact-col contact-hours-vertical">
                     <div class="hours-item">
                         <span class="contact-icon">🚫</span>
-                        <span data-lang="hours-closed">ראשון-רביעי: סגור</span>
+                        <span data-lang="hours-closed">ראשון-שלישי: סגור</span>
                     </div>
                     <div class="hours-item">
                         <span class="contact-icon">🕐</span>
-                        <span data-lang="hours-open">חמישי-שבת: 13:00-01:00</span>
+                        <span data-lang="hours-open">רביעי-שבת: 13:00-01:00</span>
                     </div>
                 </div>
             </div>
@@ -905,7 +910,7 @@
     </div><!-- end page-content -->
 
     <script defer src="storage-utils.js?v=1"></script>
-    <script defer src="translations-new.js?v=17"></script>
+    <script defer src="translations-new.js?v=18"></script>
     <script defer src="script.js?v=23"></script>
     <script defer src="toggles.js?v=15"></script>
     <script defer src="scroll-button.js?v=14"></script>
@@ -951,5 +956,43 @@
 
     <!-- Image Fade-In Handler -->
     <script defer src="js/image-fade.js"></script>
+
+    <!-- Navigation Dropdown Handler -->
+    <script defer src="js/navigation-dropdown.js?v=2"></script>
+
+    <!-- PWA Install Prompt -->
+    <div id="pwa-install-prompt" class="pwa-install-prompt" style="display: none;">
+        <div class="pwa-prompt-content">
+            <button class="pwa-prompt-close" aria-label="Close install prompt">×</button>
+            <img src="images/pwa-install-prompt.webp" alt="Install Greek Souvlaki App" class="pwa-prompt-image">
+            <div class="pwa-prompt-text">
+                <h3>התקן אפליקציית סובלאקי יווני</h3>
+                <p>גישה מהירה לתפריט, הזמנות ועדכונים</p>
+            </div>
+            <button id="pwa-install-button" class="pwa-install-button">התקן עכשיו</button>
+        </div>
+    </div>
+
+    <!-- PWA Install Handler -->
+    <script defer src="js/pwa-install.js"></script>
+
+    <!-- WhatsApp Floating Buttons -->
+    <div class="whatsapp-floating" id="whatsapp-floating">
+        <a href="https://wa.me/972542001235" target="_blank" rel="noopener" class="whatsapp-circle" aria-label="WhatsApp Jennje" data-phone="054-2001235">
+            <div class="whatsapp-content">
+                <div class="whatsapp-icon">💬</div>
+                <div class="whatsapp-name">Jennje</div>
+            </div>
+        </a>
+        <a href="https://wa.me/972528921454" target="_blank" rel="noopener" class="whatsapp-circle" aria-label="WhatsApp Andreia" data-phone="052-8921454">
+            <div class="whatsapp-content">
+                <div class="whatsapp-icon">💬</div>
+                <div class="whatsapp-name">Andreia</div>
+            </div>
+        </a>
+    </div>
+
+    <!-- WhatsApp Buttons Handler -->
+    <script defer src="js/whatsapp-buttons.js?v=4"></script>
 </body>
 </html>

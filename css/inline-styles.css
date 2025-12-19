@@ -59,23 +59,7 @@
     outline-offset: 2px;
 }
 
-/* Language dropdown */
-.language-dropdown-content {
-    display: none;
-    position: absolute;
-    top: 100%;
-    right: 0;
-    background: white;
-    border: 1px solid #ddd;
-    border-radius: 4px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-    z-index: 1000;
-    min-width: 120px;
-}
-
-.language-dropdown-content.show {
-    display: block;
-}
+/* Language dropdown styling is handled in main styles.css */
 
 /* RTL support for language dropdown */
 [dir="rtl"] .language-dropdown-content {
