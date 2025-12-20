@@ -30,6 +30,12 @@
     let dragStartX = 0;
     let dragStartY = 0;
 
+    // Focus management variables
+    let previouslyFocusedElement = null;
+    let focusableElements = [];
+    let firstFocusableElement = null;
+    let lastFocusableElement = null;
+
     // Open lightbox on image click
     galleryItems.forEach((img, index) => {
         img.addEventListener('click', () => {
@@ -55,19 +61,36 @@
     }
 
     function openLightbox() {
+        // Store current focus
+        previouslyFocusedElement = document.activeElement;
+
         const img = galleryItems[currentIndex];
         lightboxImg.src = img.src;
         lightboxImg.alt = img.alt || 'Gallery image';
         lightbox.classList.add('active');
         document.body.style.overflow = 'hidden';
+
+        // Initialize focus management
+        setupFocusTrap();
         resetView();
         updateNavButtons();
         updateAccessibilityAttributes();
+
+        // Set focus to close button for keyboard users
+        setTimeout(() => {
+            closeBtn.focus();
+        }, 100);
     }
 
     function closeLightbox() {
         lightbox.classList.remove('active');
         document.body.style.overflow = '';
+
+        // Restore focus to previously focused element
+        if (previouslyFocusedElement && previouslyFocusedElement.focus) {
+            previouslyFocusedElement.focus();
+        }
+
         resetView();
     }
 
@@ -76,15 +99,48 @@
         nextBtn.disabled = currentIndex === galleryItems.length - 1;
     }
 
+    function setupFocusTrap() {
+        // Get all focusable elements within the lightbox
+        const focusableSelectors = [
+            'button:not([disabled])',
+            '[href]',
+            'input:not([disabled])',
+            'select:not([disabled])',
+            'textarea:not([disabled])',
+            '[tabindex]:not([tabindex="-1"])'
+        ];
+
+        focusableElements = Array.from(lightbox.querySelectorAll(focusableSelectors.join(', ')));
+        firstFocusableElement = focusableElements[0];
+        lastFocusableElement = focusableElements[focusableElements.length - 1];
+    }
+
     function updateAccessibilityAttributes() {
         lightboxImg.setAttribute('role', 'img');
         lightbox.setAttribute('aria-modal', 'true');
         lightbox.setAttribute('role', 'dialog');
-        lightbox.setAttribute('aria-label', 'Image gallery lightbox');
+        lightbox.setAttribute('aria-label', `Image gallery lightbox - Image ${currentIndex + 1} of ${galleryItems.length}`);
+        lightbox.setAttribute('aria-describedby', 'lightbox-instructions');
 
         // Update navigation button accessibility
-        prevBtn.setAttribute('aria-label', `Previous image (${currentIndex + 1}/${galleryItems.length})`);
-        nextBtn.setAttribute('aria-label', `Next image (${currentIndex + 1}/${galleryItems.length})`);
+        prevBtn.setAttribute('aria-label', `Previous image (${currentIndex + 1} of ${galleryItems.length})`);
+        nextBtn.setAttribute('aria-label', `Next image (${currentIndex + 1} of ${galleryItems.length})`);
+
+        // Add accessibility attributes to zoom controls
+        zoomInBtn.setAttribute('aria-label', 'Zoom in');
+        zoomOutBtn.setAttribute('aria-label', 'Zoom out');
+        rotateLeftBtn.setAttribute('aria-label', 'Rotate left');
+        rotateRightBtn.setAttribute('aria-label', 'Rotate right');
+        resetBtn.setAttribute('aria-label', 'Reset view');
+
+        // Add keyboard navigation instructions
+        if (!document.getElementById('lightbox-instructions')) {
+            const instructions = document.createElement('div');
+            instructions.id = 'lightbox-instructions';
+            instructions.setAttribute('class', 'sr-only');
+            instructions.textContent = 'Use arrow keys to navigate images, Escape to close, plus and minus to zoom, R to rotate';
+            lightbox.appendChild(instructions);
+        }
     }
 
     function showPrev() {
@@ -96,6 +152,9 @@
             resetView();
             updateNavButtons();
             updateAccessibilityAttributes();
+
+            // Reinitialize focus trap when image changes
+            setupFocusTrap();
         }
     }
 
@@ -108,6 +167,9 @@
             resetView();
             updateNavButtons();
             updateAccessibilityAttributes();
+
+            // Reinitialize focus trap when image changes
+            setupFocusTrap();
         }
     }
 
@@ -242,16 +304,60 @@
     document.addEventListener('keydown', (e) => {
         if (!lightbox.classList.contains('active')) return;
 
+        // Handle focus trap (Tab and Shift+Tab)
+        if (e.key === 'Tab') {
+            if (e.shiftKey) {
+                // Shift+Tab going backwards
+                if (document.activeElement === firstFocusableElement) {
+                    e.preventDefault();
+                    lastFocusableElement.focus();
+                }
+            } else {
+                // Tab going forwards
+                if (document.activeElement === lastFocusableElement) {
+                    e.preventDefault();
+                    firstFocusableElement.focus();
+                }
+            }
+            return;
+        }
+
+        // Handle other keyboard shortcuts
         switch(e.key) {
-            case 'Escape': closeLightbox(); break;
-            case 'ArrowLeft': showPrev(); break;
-            case 'ArrowRight': showNext(); break;
+            case 'Escape':
+                e.preventDefault();
+                closeLightbox();
+                break;
+            case 'ArrowLeft':
+                e.preventDefault();
+                showPrev();
+                break;
+            case 'ArrowRight':
+                e.preventDefault();
+                showNext();
+                break;
             case '+':
-            case '=': zoomIn(); break;
-            case '-': zoomOut(); break;
-            case 'r': rotateRight(); break;
-            case 'R': rotateLeft(); break;
-            case '0': resetView(); break;
+            case '=':
+                e.preventDefault();
+                zoomIn();
+                break;
+            case '-':
+                e.preventDefault();
+                zoomOut();
+                break;
+            case 'r':
+            case 'R':
+                e.preventDefault();
+                if (e.shiftKey) {
+                    rotateLeft();
+                } else {
+                    rotateRight();
+                }
+                break;
+            case '0':
+                e.preventDefault();
+                resetView();
+                break;
         }
     });
 

@@ -29,8 +29,8 @@ const CHRISTMAS_CONFIG = {
   christmasStylesheet: 'theme-christmas.css',
 
   // Logo paths (change if you have different logos)
-  defaultLogo: 'restaurant-logo.jpg',
-  christmasLogo: 'restaurant-logo-christmas.jpg', // Create this file for a festive logo
+  defaultLogo: 'images/ws-logo.png',
+  christmasLogo: 'images/ws-logo-christmas.png', // Create this file for a festive logo
 
   // Body classes
   defaultClass: 'is-default',
@@ -150,88 +150,193 @@ class ThemeManager {
   }
 
   /**
+   * Check if user has closed the Christmas banner
+   * @returns {boolean}
+   */
+  hasUserClosedBanner() {
+    try {
+      return localStorage.getItem('christmas-banner-closed') === 'true';
+    } catch (e) {
+      console.warn('Could not access localStorage for banner preference:', e);
+      return false;
+    }
+  }
+
+  /**
+   * Mark that user has closed the Christmas banner
+   */
+  setBannerClosed() {
+    try {
+      localStorage.setItem('christmas-banner-closed', 'true');
+      console.log('🎄 Christmas banner preference saved');
+    } catch (e) {
+      console.warn('Could not save banner preference:', e);
+    }
+  }
+
+  /**
    * Add Christmas announcement banner
    * @param {boolean} isChristmas
    */
   addChristmasBanner(isChristmas) {
     const existingBanner = document.getElementById('christmas-banner');
 
-    if (isChristmas) {
+    if (isChristmas && !this.hasUserClosedBanner()) {
       if (!existingBanner) {
         const banner = document.createElement('div');
         banner.id = 'christmas-banner';
+        banner.setAttribute('role', 'alert');
+        banner.setAttribute('aria-live', 'polite');
         banner.innerHTML = `
           <span class="christmas-banner-text">
             🎄 Christmas Menu Available 20/12/2025 - 15/1/2026! Book Your Table Now! 🎄
           </span>
-          <button class="christmas-banner-close" onclick="this.parentElement.remove()" aria-label="Close banner">×</button>
-        `;
-        banner.style.cssText = `
-          position: fixed;
-          top: 0;
-          left: 0;
-          right: 0;
-          background: linear-gradient(135deg, #b22222 0%, #8b0000 100%);
-          color: #fdf5e6;
-          text-align: center;
-          padding: 0.75rem 2rem;
-          font-weight: 600;
-          z-index: 10000;
-          display: flex;
-          justify-content: center;
-          align-items: center;
-          gap: 1rem;
-          border-bottom: 3px solid #d4af37;
-          box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-          animation: slideDown 0.5s ease-out;
+          <button class="christmas-banner-close" aria-label="Close Christmas announcement" title="Close announcement">×</button>
         `;
 
-        // Add close button styles
-        const style = document.createElement('style');
-        style.textContent = `
-          @keyframes slideDown {
-            from { transform: translateY(-100%); }
-            to { transform: translateY(0); }
-          }
-          .christmas-banner-close {
-            background: transparent;
-            border: 2px solid #d4af37;
-            color: #fdf5e6;
-            width: 28px;
-            height: 28px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 1.2rem;
-            line-height: 1;
-            transition: all 0.2s ease;
-          }
-          .christmas-banner-close:hover {
-            background: rgba(212, 175, 55, 0.3);
-          }
-          .christmas-banner-text {
-            animation: pulse 2s ease-in-out infinite;
-          }
-          @keyframes pulse {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0.8; }
-          }
-        `;
-        document.head.appendChild(style);
+        // Banner styles
+        Object.assign(banner.style, {
+          position: 'fixed',
+          top: '0',
+          left: '0',
+          right: '0',
+          background: 'linear-gradient(135deg, #b22222 0%, #8b0000 100%)',
+          color: '#fdf5e6',
+          textAlign: 'center',
+          padding: '0.75rem 2rem',
+          fontWeight: '600',
+          zIndex: '10000',
+          display: 'flex',
+          justifyContent: 'center',
+          alignItems: 'center',
+          gap: '1rem',
+          borderBottom: '3px solid #d4af37',
+          boxShadow: '0 4px 15px rgba(0,0,0,0.2)',
+          animation: 'slideDown 0.5s ease-out',
+          fontFamily: "'Inter', 'Rubik', 'Arial Hebrew', sans-serif",
+          fontSize: '0.95rem'
+        });
+
+        // Add styles if not already present
+        if (!document.getElementById('christmas-banner-styles')) {
+          const style = document.createElement('style');
+          style.id = 'christmas-banner-styles';
+          style.textContent = `
+            @keyframes slideDown {
+              from { transform: translateY(-100%); opacity: 0; }
+              to { transform: translateY(0); opacity: 1; }
+            }
+            @keyframes slideUp {
+              from { transform: translateY(0); opacity: 1; }
+              to { transform: translateY(-100%); opacity: 0; }
+            }
+            .christmas-banner-close {
+              background: transparent;
+              border: 2px solid #d4af37;
+              color: #fdf5e6;
+              width: 32px;
+              height: 32px;
+              border-radius: 50%;
+              cursor: pointer;
+              font-size: 1.2rem;
+              line-height: 1;
+              transition: all 0.2s ease;
+              display: flex;
+              align-items: center;
+              justify-content: center;
+              font-weight: bold;
+              min-width: 32px;
+              min-height: 32px;
+            }
+            .christmas-banner-close:hover {
+              background: rgba(212, 175, 55, 0.3);
+              transform: scale(1.1);
+            }
+            .christmas-banner-close:focus {
+              outline: 2px solid #d4af37;
+              outline-offset: 2px;
+            }
+            .christmas-banner-text {
+              animation: pulse 2s ease-in-out infinite;
+            }
+            @keyframes pulse {
+              0%, 100% { opacity: 1; }
+              50% { opacity: 0.8; }
+            }
+            .christmas-banner.closing {
+              animation: slideUp 0.3s ease-out forwards;
+            }
+            @media (max-width: 768px) {
+              .christmas-banner {
+                padding: 0.5rem 1rem;
+                font-size: 0.85rem;
+                flex-direction: column;
+                gap: 0.5rem;
+              }
+              .christmas-banner-close {
+                width: 28px;
+                height: 28px;
+                font-size: 1rem;
+              }
+            }
+          `;
+          document.head.appendChild(style);
+        }
 
         // Insert banner at the very top of body
         document.body.insertBefore(banner, document.body.firstChild);
 
+        // Add event listener for close button
+        const closeButton = banner.querySelector('.christmas-banner-close');
+        closeButton.addEventListener('click', (e) => {
+          e.preventDefault();
+          this.closeChristmasBanner();
+        });
+
         // Adjust body padding to account for banner
-        document.body.style.paddingTop = banner.offsetHeight + 'px';
+        setTimeout(() => {
+          if (document.body.style.paddingTop === '' || document.body.style.paddingTop === '0px') {
+            document.body.style.paddingTop = banner.offsetHeight + 'px';
+          }
+        }, 100);
 
         console.log('🎄 Christmas banner added');
       }
     } else {
       if (existingBanner) {
-        existingBanner.remove();
-        document.body.style.paddingTop = '';
-        console.log('🌿 Christmas banner removed');
+        this.closeChristmasBanner();
       }
+    }
+  }
+
+  /**
+   * Close the Christmas banner with animation
+   */
+  closeChristmasBanner() {
+    const banner = document.getElementById('christmas-banner');
+    if (banner) {
+      // Add closing animation
+      banner.classList.add('closing');
+
+      // Remove banner after animation and save preference
+      setTimeout(() => {
+        banner.remove();
+        document.body.style.paddingTop = '';
+        this.setBannerClosed();
+        console.log('🌿 Christmas banner closed');
+      }, 300);
+    }
+  }
+
+  /**
+   * Reset banner preference (for testing)
+   */
+  resetBannerPreference() {
+    try {
+      localStorage.removeItem('christmas-banner-closed');
+      console.log('🔄 Christmas banner preference reset');
+    } catch (e) {
+      console.warn('Could not reset banner preference:', e);
     }
   }
 
@@ -333,7 +438,48 @@ window.checkThemeStatus = function() {
   console.log(`Christmas period: ${config.startDay}/${config.startMonth + 1}/${config.startYear} - ${config.endDay}/${config.endMonth + 1}/${config.endYear}`);
   console.log(`Is Christmas active: ${isChristmas}`);
   console.log(`Body class: ${document.body.className}`);
+  console.log(`Banner closed by user: ${window.themeManager.hasUserClosedBanner()}`);
   console.log('==================');
 
-  return { isChristmas, config };
+  return { isChristmas, config, bannerClosed: window.themeManager.hasUserClosedBanner() };
+};
+
+/**
+ * Test Christmas banner specifically
+ * Call from browser console: testChristmasBanner()
+ */
+window.testChristmasBanner = function() {
+  window.themeManager.addChristmasBanner(true);
+  console.log('🎄 Christmas banner test added');
+};
+
+/**
+ * Close Christmas banner test
+ * Call from browser console: closeChristmasBanner()
+ */
+window.closeChristmasBanner = function() {
+  window.themeManager.closeChristmasBanner();
+  console.log('🌿 Christmas banner test closed');
+};
+
+/**
+ * Reset banner preference (show banner again)
+ * Call from browser console: resetChristmasBanner()
+ */
+window.resetChristmasBanner = function() {
+  window.themeManager.resetBannerPreference();
+  console.log('🔄 Christmas banner preference reset - banner will show again');
+};
+
+/**
+ * Toggle Christmas banner
+ * Call from browser console: toggleChristmasBanner()
+ */
+window.toggleChristmasBanner = function() {
+  const banner = document.getElementById('christmas-banner');
+  if (banner) {
+    window.themeManager.closeChristmasBanner();
+  } else {
+    window.themeManager.addChristmasBanner(true);
+  }
 };

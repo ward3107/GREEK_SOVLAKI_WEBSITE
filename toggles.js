@@ -10,15 +10,21 @@
     }
 
     function init() {
-        initThemeToggle();
-        initLanguageToggle();
+        // Add a small delay to ensure all elements are loaded
+        setTimeout(() => {
+            initThemeToggle();
+            initLanguageToggle();
+        }, 100);
     }
 
     // THEME TOGGLE
     function initThemeToggle() {
         const themeBtn = document.getElementById('theme-toggle');
         if (!themeBtn) {
-            console.error('Theme toggle button not found');
+            // Only log error in development/debug mode
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                console.warn('Theme toggle button not found - skipping dark mode toggle');
+            }
             return;
         }
 
@@ -48,7 +54,6 @@
             applyTheme(isDark ? 'light' : 'dark');
         });
 
-        console.log('Theme toggle initialized');
     }
 
     // LANGUAGE TOGGLE
@@ -59,7 +64,10 @@
         const langOptions = document.querySelectorAll('.lang-option');
 
         if (!dropdown || !btn || langOptions.length === 0) {
-            console.error('Language toggle elements not found');
+            // Only log error in development/debug mode
+            if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+                console.warn('Language toggle elements not found - skipping language toggle');
+            }
             return;
         }
 
@@ -68,7 +76,6 @@
             e.stopPropagation();
             const isActive = dropdown.classList.toggle('active');
             btn.setAttribute('aria-expanded', isActive);
-            console.log('Dropdown toggled:', isActive);
         });
 
         // Close dropdown when clicking outside
@@ -92,8 +99,6 @@
             option.addEventListener('click', function(e) {
                 e.stopPropagation();
                 const lang = this.getAttribute('data-lang-switch');
-
-                console.log('Language selected:', lang);
 
                 // Update active state
                 langOptions.forEach(function(opt) {
@@ -125,7 +130,5 @@
                 }
             });
         });
-
-        console.log('Language toggle initialized');
     }
 })();

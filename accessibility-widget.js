@@ -74,43 +74,43 @@
             </div>
             <div class="a11y-controls">
               <div class="a11y-control">
-                <label for="font-size">גודל טקסט</label>
+                <label>גודל טקסט</label>
                 <div class="a11y-buttons">
-                  <button data-action="decreaseFontSize" aria-label="Decrease font size">A-</button>
-                  <span id="font-size-value">${this.settings.fontSize}%</span>
-                  <button data-action="increaseFontSize" aria-label="Increase font size">A+</button>
+                  <button data-action="decreaseFontSize" aria-label="הקטן גודל טקסט">A-</button>
+                  <span id="font-size-value" aria-live="polite" aria-atomic="true">${this.settings.fontSize}%</span>
+                  <button data-action="increaseFontSize" aria-label="הגדל גודל טקסט">A+</button>
                 </div>
               </div>
               <div class="a11y-control">
                 <label>ניגודיות</label>
                 <div class="a11y-buttons">
-                  <button data-action="normalContrast" class="${this.settings.contrast === 'normal' ? 'active' : ''}">רגיל</button>
-                  <button data-action="highContrast" class="${this.settings.contrast === 'high' ? 'active' : ''}">גבוה</button>
-                  <button data-action="invertContrast" class="${this.settings.contrast === 'invert' ? 'active' : ''}">הפוך</button>
+                  <button data-action="normalContrast" class="${this.settings.contrast === 'normal' ? 'active' : ''}" aria-label="ניגודיות רגילה">רגיל</button>
+                  <button data-action="highContrast" class="${this.settings.contrast === 'high' ? 'active' : ''}" aria-label="ניגודיות גבוהה">גבוה</button>
+                  <button data-action="invertContrast" class="${this.settings.contrast === 'invert' ? 'active' : ''}" aria-label="הפוך ניגודיות">הפוך</button>
                 </div>
               </div>
               <div class="a11y-control">
                 <label>ריווח שורות</label>
                 <div class="a11y-buttons">
-                  <button data-action="normalLineSpacing" class="${this.settings.lineSpacing === 'normal' ? 'active' : ''}">רגיל</button>
-                  <button data-action="increaseLineSpacing" class="${this.settings.lineSpacing === 'increased' ? 'active' : ''}">מוגבר</button>
+                  <button data-action="normalLineSpacing" class="${this.settings.lineSpacing === 'normal' ? 'active' : ''}" aria-label="ריווח שורות רגיל">רגיל</button>
+                  <button data-action="increaseLineSpacing" class="${this.settings.lineSpacing === 'increased' ? 'active' : ''}" aria-label="ריווח שורות מוגבר">מוגבר</button>
                 </div>
               </div>
               <div class="a11y-control">
                 <label>ריווח אותיות</label>
                 <div class="a11y-buttons">
-                  <button data-action="normalLetterSpacing" class="${this.settings.letterSpacing === 'normal' ? 'active' : ''}">רגיל</button>
-                  <button data-action="increaseLetterSpacing" class="${this.settings.letterSpacing === 'increased' ? 'active' : ''}">מוגבר</button>
+                  <button data-action="normalLetterSpacing" class="${this.settings.letterSpacing === 'normal' ? 'active' : ''}" aria-label="ריווח אותיות רגיל">רגיל</button>
+                  <button data-action="increaseLetterSpacing" class="${this.settings.letterSpacing === 'increased' ? 'active' : ''}" aria-label="ריווח אותיות מוגבר">מוגבר</button>
                 </div>
               </div>
               <div class="a11y-control">
-                <button data-action="reset" class="a11y-reset">איפוס הגדרות</button>
+                <button data-action="reset" class="a11y-reset" aria-label="איפוס כל הגדרות נגישות">איפוס הגדרות</button>
               </div>
               <div class="a11y-visibility-prompt" id="a11y-visibility-prompt" style="display: none;">
                 <p>להשאיר את כפתור הנגישות גלוי?</p>
                 <div class="a11y-buttons">
-                  <button data-visibility="visible" class="a11y-keep-visible">כן, השאר גלוי</button>
-                  <button data-visibility="hidden" class="a11y-hide-widget">הסתר</button>
+                  <button data-visibility="visible" class="a11y-keep-visible" aria-label="השאר כפתור נגישות גלוי">כן, השאר גלוי</button>
+                  <button data-visibility="hidden" class="a11y-hide-widget" aria-label="הסתר כפתור נגישות">הסתר</button>
                 </div>
               </div>
             </div>
