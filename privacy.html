@@ -3,403 +3,346 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Content Security Policy - Secure CSP without unsafe-inline -->
-    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self'; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests;">
+    <!-- Content Security Policy -->
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self';
+        script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://vercel.live 'sha256-vvt4KWwuNr51XfE5m+hzeNEGhiOfZzG97ccfqGsPwvE=';
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
+        font-src 'self' https://fonts.gstatic.com;
+        img-src 'self' data: blob: https://images.unsplash.com https://flagcdn.com https://*.google-analytics.com;
+        connect-src 'self' https://images.unsplash.com https://flagcdn.com https://www.google-analytics.com https://*.google-analytics.com https://vercel.live;
+        frame-src 'self' https://www.google.com;
+        object-src 'none';
+        base-uri 'self';
+        form-action 'self';
+        upgrade-insecure-requests;
+    ">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta name="referrer" content="strict-origin-when-cross-origin">
-    <title>Privacy Policy - Greek Souvlaki</title>
-    <link rel="stylesheet" href="styles.css">
-    <style>
-        body {
-            background: #f9fafb;
-            font-family: 'Inter', 'Rubik', 'Assistant', 'Arial Hebrew', 'David', sans-serif;
-        }
-        .legal-container {
-            max-width: 900px;
-            margin: 0 auto;
-            padding: 3rem 2rem;
-            background: white;
-            min-height: 100vh;
-            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
-        }
-        .legal-container h1 {
-            color: var(--color-primary, #2563eb);
-            margin-bottom: 2rem;
-            font-size: 2.5rem;
-        }
-        .legal-container h2 {
-            color: var(--color-primary-dark, #1e40af);
-            margin-top: 3rem;
-            margin-bottom: 1.5rem;
-            font-size: 1.8rem;
-        }
-        .legal-container h3 {
-            color: #333;
-            margin-top: 2rem;
-            margin-bottom: 1rem;
-            font-size: 1.4rem;
-        }
-        .legal-container p, .legal-container li {
-            line-height: 1.9;
-            margin-bottom: 1.2rem;
-            color: #444;
-            font-size: 1.05rem;
-        }
-        .legal-container ul {
-            margin: 1.5rem 0 2rem 0;
-        }
-        [dir="rtl"] .legal-container ul {
-            margin-right: 2.5rem;
-            margin-left: 0;
-        }
-        [dir="ltr"] .legal-container ul {
-            margin-left: 2.5rem;
-            margin-right: 0;
-        }
-        .update-date {
-            color: #666;
-            font-style: italic;
-            margin-bottom: 2.5rem;
-            font-size: 0.95rem;
-        }
-        .back-link {
-            display: inline-block;
-            margin-bottom: 2rem;
-            color: var(--color-primary, #2563eb);
-            text-decoration: none;
-            font-weight: 600;
-            font-size: 1.05rem;
-        }
-        .back-link:hover { text-decoration: underline; }
-        .lang-content { display: none; }
-        [lang="he"] .lang-he { display: block; }
-        [lang="ar"] .lang-ar { display: block; }
-        [lang="en"] .lang-en { display: block; }
-        [lang="ru"] .lang-ru { display: block; }
-        .highlight-box {
-            background: #eff6ff;
-            border-right: 4px solid #2563eb;
-            padding: 1.5rem;
-            margin: 2rem 0;
-            border-radius: 4px;
-        }
-        [dir="ltr"] .highlight-box {
-            border-right: none;
-            border-left: 4px solid #2563eb;
-        }
-        .lang-switcher {
-            position: fixed;
-            top: 2rem;
-            left: 2rem;
-            z-index: 1000;
-        }
-        .lang-toggle {
-            width: 48px;
-            height: 48px;
-            border-radius: 50%;
-            background: white;
-            border: none;
-            cursor: pointer;
-            box-shadow: 0 2px 12px rgba(0,0,0,0.15);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.5rem;
-            transition: all 0.3s ease;
-        }
-        .lang-toggle:hover {
-            transform: scale(1.05);
-            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-        }
-        .lang-dropdown {
-            position: absolute;
-            top: 56px;
-            left: 0;
-            background: white;
-            border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
-            overflow: hidden;
-            opacity: 0;
-            visibility: hidden;
-            transform: translateY(-10px);
-            transition: all 0.3s ease;
-        }
-        .lang-switcher.open .lang-dropdown {
-            opacity: 1;
-            visibility: visible;
-            transform: translateY(0);
-        }
-        .lang-dropdown button {
-            display: flex;
-            align-items: center;
-            gap: 10px;
-            width: 100%;
-            padding: 12px 16px;
-            border: none;
-            background: none;
-            cursor: pointer;
-            font-size: 0.95rem;
-            color: #374151;
-            transition: background 0.2s;
-            white-space: nowrap;
-        }
-        .lang-dropdown button:hover {
-            background: #f3f4f6;
-        }
-        .lang-dropdown button.active {
-            background: #eff6ff;
-            color: var(--color-primary, #2563eb);
-            font-weight: 600;
-        }
-        .lang-dropdown button span.flag {
-            font-size: 1.25rem;
-        }
-    </style>
+
+    <title>מדיניות פרטיות | סובלאקי יווני כפר יאסיף</title>
+    <meta name="description" content="מדיניות פרטיות של מסעדת סובלאקי יווני כפר יאסיף - איסוף עיבוד ושימוש במידע אישי לפי חוק הגנת הפרטיות הישראלי">
+    <meta name="keywords" content="מדיניות פרטיות, סובלאקי יווני, כפר יאסיף, חוק הגנת פרטיות, IS 885-6">
+
+    <!-- Preload critical CSS -->
+    <link rel="preload" href="styles.css?v=43" as="style">
+    <link rel="stylesheet" href="styles.css?v=43">
+    <link rel="stylesheet" href="css/inline-styles.css">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="images/favicon.ico">
+    <link rel="apple-touch-icon" href="images/apple-touch-icon.png">
+
+    <!-- Structured Data -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@type": "WebPage",
+      "name": "מדיניות פרטיות",
+      "description": "מדיניות פרטיות של מסעדת סובלאקי יווני כפר יאסיף",
+      "url": "https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/privacy.html",
+      "isPartOf": {
+        "@type": "WebSite",
+        "name": "Greek Souvlaki - סובלאקי יווני",
+        "url": "https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/"
+      },
+      "inLanguage": "he",
+      "dateModified": "2024-12-19"
+    }
+    </script>
 </head>
+
 <body>
-    <div class="lang-switcher" id="langSwitcher">
-        <button class="lang-toggle"  aria-label="Change language" id="langToggle">ðŸ‡®ðŸ‡±</button>
-        <div class="lang-dropdown">
-            <button  class="lang-btn active" data-lang="he">
-                <span class="flag">ðŸ‡®ðŸ‡±</span> ×¢×‘×¨×™×ª
-            </button>
-            <button  class="lang-btn" data-lang="ar">
-                <span class="flag">ðŸ‡¸ðŸ‡¦</span> Ø§Ù„Ø¹Ø±Ø¨ÙŠØ©
-            </button>
-            <button  class="lang-btn" data-lang="en">
-                <span class="flag">ðŸ‡¬ðŸ‡§</span> English
-            </button>
-            <button  class="lang-btn" data-lang="ru">
-                <span class="flag">ðŸ‡·ðŸ‡º</span> Ð ÑƒÑÑÐºÐ¸Ð¹
-            </button>
+    <!-- Skip Navigation Link -->
+    <a href="#main-content" class="skip-link">דלג לתוכן הראשי</a>
+
+    <div class="page-content">
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="nav-menu">
+                    <ul class="nav-menu">
+                        <li><a href="index.html#home">בית</a></li>
+                        <li><a href="index.html#menu">תפריט</a></li>
+                        <li><a href="index.html#contact">צור קשר</a></li>
+                        <li><a href="index.html">מסעדה</a></li>
+                    </ul>
+                </div>
+                <button class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section class="privacy-section">
+            <div class="container">
+                <div class="privacy-content">
+                    <h1>מדיניות פרטיות</h1>
+                    <p class="privacy-updated">עדכון אחרון: 19 בדצמבר 2024</p>
+
+                    <div class="privacy-intro">
+                        <h2>הצהרת פרטיות</h2>
+                        <p>ברוכים הבאים למסעדת "סובלאקי יווני כפר יאסיף" (להלן: "המסעדה"). אנו מחויבים להגן על פרטיותכם ולשמור על המידע האישי שלכם בהתאם לחוק הגנת הפרטיות, תיקון 13 ותקן ישראלי 885-6. מדיניות פרטיות זו מסבירה כיצד אנו אוספים, משתמשים, מאחסנים ומגנים על המידע שלכם כאשר אתם מבקרים באתר שלנו או משתמשים בשירותינו.</p>
+                    </div>
+
+                    <div class="privacy-section-block">
+                        <h3>1. זהות בעל המידע ופרטי תקשרות</h3>
+                        <ul>
+                            <li><strong>שם בעל המידע:</strong> סובלאקי יווני כפר יאסיף</li>
+                            <li><strong>כתובת:</strong> כביש 70, כפר יאסיף, הגליל המערבי, ישראל</li>
+                            <li><strong>מספר טלפון:</strong> 04-812-2980</li>
+                            <li><strong>דוא"ל לפניות פרטיות:</strong> privacy@greeksouvlaki.co.il</li>
+                            <li><strong>אתר אינטרנט:</strong> https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/</li>
+                        </ul>
+                    </div>
+
+                    <div class="privacy-section-block">
+                        <h3>2. סוגי המידע הנאסף</h3>
+                        <p>אנו עשויים לאסוף את סוגי המידע הבאים:</p>
+
+                        <h4>2.1 מידע שאתם מספקים באופן ישיר</h4>
+                        <ul>
+                            <li><strong>שם מלא:</strong> לזיהוי והתאמת</li>
+                            <li><strong>מספר טלפון:</strong> ליצירת קשר ואישור הזמנות</li>
+                            <li><strong>דוא"ל:</strong> לשליחת אישורים ועדכונים</li>
+                            <li><strong>כתובת:</strong> למשלוחים ושירות לקוחות</li>
+                            <li><strong>מידע הזמנה:</strong> תאריך, שעה, מספר סועדים, בקשות מיוחדות</li>
+                        </ul>
+
+                        <h4>2.2 מידע הנאסף באופן אוטומטי</h4>
+                        <ul>
+                            <li><strong>נתוני שימוש:</strong> דפדפנים שנצפו, זמן שהייה באתר, הפעולות שבוצעו</li>
+                            <li><strong>מידע טכני:</strong> סוג דפדפן, מערכת הפעלה, כתובת IP</li>
+                            <li><strong>מידע מקום:</strong> מיקום גיאוגרפי משוער (אם ניתן הסכמה)</li>
+                            <li><strong>מידע על מכשירים:</strong> סוג המכשיר ממנו ניגשתם לאתר</li>
+                        </ul>
+
+                        <h4>2.3 מידע מקובצים ומידע צד-צד</h4>
+                        <ul>
+                            <li><strong>עוגיות (Cookies):</strong> לשיפור החוויה ולניתוח אתר</li>
+                            <li><strong>ניתוחים:</strong> Google Analytics לשיפור האתר והשירות</li>
+                            <li><strong>עוגיות שיווק:</strong> לפרסום ממוקד (אם קיים ובהסכמה)</li>
+                        </ul>
+                    </div>
+
+                    <div class="privacy-section-block">
+                        <h3>3. מטרות העיבוד והבסיס החוקי</h3>
+                        <p>אנו משתמשים במידע שלכם למטרות הבאות:</p>
+
+                        <h4>3.1 מטרות חוזיות (בסיס חוקי: ביצוע חוזה)</h4>
+                        <ul>
+                            <li>עיבוד הזמנות והזמנות מראש</li>
+                            <li>ביצוע ומילוי הזמנות</li>
+                            <li>תיאום עם לקוחות לגבי הזמנות</li>
+                            <li>סיפקת שירותי מסעדה ומשלוחים</li>
+                            <li>תשלומים וחיובים</li>
+                        </ul>
+
+                        <h4>3.2 מטרות שיווקיות (בסיס חוקי: הסכמה חוקית)</h4>
+                        <ul>
+                            <li>שליחת מידע על מבצעים, הטבות ואירועים</li>
+                            <li>שיפור השירות והמוצרים שלנו</li>
+                            <li>ניתוח נתונים להבנת התנהגות לקוחות</li>
+                            <li>שיווק ישיר ללקוחות קיימים (בהסכמה)</li>
+                        </ul>
+
+                        <h4>3.3 מטרות משפטיות וציות</h4>
+                        <ul>
+                            <li>ציות לדיני חובה (חוקי מס, חובות מס, רגולציות)</li>
+                            <li>שמירה על בטיחות המסעדה והלקוחות</li>
+                            <li>מניעת הונאה ופעילות בלתי חוקיות</li>
+                            <li>הגנה על זכויותינו ורכושנו</li>
+                        </ul>
+                    </div>
+
+                    <div class="privacy-section-block">
+                        <h3>4. אחסון וביטחון מידע</h3>
+                        <p>אנו מפעילים אמצעי אבטחה מתקדמים להגנה על המידע שלכם:</p>
+                        <ul>
+                            <li><strong>הצפנה:</strong> הצפנת מידע רגיש באמצעות פרוטוקול SSL/TLS</li>
+                            <li><strong>גישה מוגבלת:</strong> גישה למידע רק לעובדים מוסמכים</li>
+                            <li><strong>שרתים מאובטחים:</strong> אחסון נתונים בשרתים מאובטחים בישראל</li>
+                            <li><strong>גיבויים:</strong> גיבויים סדירים של המידע</li>
+                            <li><strong>עדכונים:</strong> עדכוני אבטחה ותוכנה סדירים</li>
+                        </ul>
+                        <p>אנו שומרים על המידע שלכם לתקופה שלא תעלה על 7 שנים, אלא אם נדרש אחרת על פי חוק או לצרכים עסקיים לגיטימיים.</p>
+                    </div>
+
+                    <div class="privacy-section-block">
+                        <h3>5. שיתוף מידע עם צדדי שלישי</h3>
+                        <p>אנו לא מוכרים, סוחרים או משכירים את המידע האישי שלכם לצדדי שלישי. אנו עשויים לחלוק מידע במקרים הבאים בלבד:</p>
+
+                        <h4>5.1 ספקי שירות</h4>
+                        <ul>
+                            <li><strong>ספקי תשלומים:</strong> חברות אשראיות לעיבוד תשלומים</li>
+                            <li><strong>שירותי משלוח:</strong> חברות משלוב לביצוע משלוחים</li>
+                            <li><strong>פלטפורמות הזמנות:</strong> מערכות הזמנות מקוונות</li>
+                            <li><strong>שירותי שיווק:</strong> ספקי שירותי שיווק דיגיטלי (בהסכמה)</li>
+                        </ul>
+
+                        <h4>5.2 דיני חובה</h4>
+                        <ul>
+                            <li>רשויות ממשלתיות וגופי אכיפתוח</li>
+                            <li>בתי משפט במסגרת הליכים משפטיים</li>
+                            <li>רשויות אכיפתוח ופיקוח על מסעדות</li>
+                        </ul>
+
+                        <p>כל העברת מידע לצדדי שלישי מתבצעת רק על בסיס חוזיות כתובות או הסכמים מתאימים המבטיחים אבטחת המידע.</p>
+                    </div>
+
+                    <div class="privacy-section-block">
+                        <h3>6. זכויותיכם כבעלי מידע</h3>
+                        <p>לפי חוק הגנת הפרטיות, לכם הזכויות הבאות:</p>
+
+                        <h4>6.1 זכות גישה ועיון</h4>
+                        <ul>
+                            <li>בקשת גישה למידע האישי שלנו אחסנו עליכם</li>
+                            <li>קבלת עותק מהמידע הזה בפורמט קריא</li>
+                            <li>מידע על מקורות המידע ומטרות העיבוד</li>
+                        </ul>
+
+                        <h4>6.2 זכות תיקון ומחיקה</h4>
+                        <ul>
+                            <li>תיקון מידע לא מדויק או לא שלם</li>
+                            <li>מחיקת מידע שאינו נחוץ עוד למטרות המותרות</li>
+                            <li>הגבלת עיבוד מידע רגיש (למשל: מידע רפואי)</li>
+                        </ul>
+
+                        <h4>6.3 זכות התנגדות</h4>
+                        <ul>
+                            <li>התנגדות לעיבוד מידע למטרות שיווק (ללא הסכמה נפרדת)</li>
+                            <li>בקשת הסרה מרשימות דיוור ושיווק</li>
+                            <li>בקשת הגבלת שימוש במידע למטרות מסוימות</li>
+                        </ul>
+
+                        <h4>6.4 זכות ניידוד מידע</h4>
+                        <ul>
+                            <li>קבלת המידע האישי שלכם בפורמט ממוחשב</li>
+                            <li>העברת המידע לספק שירות אחר (בתנאים מסוימים)</li>
+                        </ul>
+
+                        <p>למימוש זכויות אלה, אנא פנו אלינו בכתובת: privacy@greeksouvlaki.co.il או בטלפון: 04-812-2980. אנו נגיב בתגובה בתוך 30 ימים.</p>
+                    </div>
+
+                    <div class="privacy-section-block">
+                        <h3>7. עוגיות (Cookies) וטכנולוגיות מעקב</h3>
+
+                        <h4>7.1 סוגי עוגיות</h4>
+                        <ul>
+                            <li><strong>עוגיות הכרחיות:</strong> נדרשות לתפקודת האתר והשירותים הבסיסיים</li>
+                            <li><strong>עוגיות ביצוע:</strong> אוספות מידע על השימוש באתר לשיפור הביצוע</li>
+                            <li><strong>עוגיות פונקציונליות:</strong> שומרות העדפות והגדרות אישיות</li>
+                            <li><strong>עוגיות שיווק:</strong> משמשות לפרסום ממוקד (בהסכמה)</li>
+                        </ul>
+
+                        <h4>7.2 ניהול הסכמת עוגיות</h4>
+                        <p>על ידי המשך השימוש באתר, אתם מסכימים לשימוש בעוגיות הכרחיות וביצוע. לשימוש בסוגים אחרים של עוגיות נדרש הסכמה נפרדת. ניתן לנהל את העדפות העוגיות דרך הגדרות הדפדפן שלכם.</p>
+
+                        <h4>7.3 Google Analytics</h4>
+                        <p>אנו משתמשים ב-Google Analytics לניתוח תנועת האתר. המידע נאסף באופן אנונימי ומצטופג. ניתן לבטל את השתתפות ב-Google Analytics דרך התוסף של Google Analytics Opt-out.</p>
+                    </div>
+
+                    <div class="privacy-section-block">
+                        <h3>8. פרטיות ילדים</h3>
+                        <p>האתר והשירותים שלנו אינם מיועדים לילדים מתחת לגיל 18. אנו לא אוספים בכוונה מידע אישי מילדים. אם נגלה שאספנו בטעות מידע מילד, נפעול מיד למחוק אות.</p>
+                    </div>
+
+                    <div class="privacy-section-block">
+                        <h3>9. שינויים במדיניות פרטיות</h3>
+                        <p>אנו עשויים לעדכן מדיניות פרטיות זו מעת לעת כדי לשקף שינויים בשירותינו, בפרקטיקות, או בדרישות רגולטוריות. כל שינוי מהותי יפורסם באתר וייכנס לתוקף מיד עם הפרסום. לשינויים מהותיים, נשלח הודעה לכתובת הדוא"ל שלכם אם סיפקתם אותה.</p>
+                    </div>
+
+                    <div class="privacy-section-block">
+                        <h3>10. יצירת קשר ותלונות</h3>
+                        <p>אם יש לכם שאלות, חששות או תלונות בנוגע למדיניות פרטיות זו או לשימוש במידע שלכם, אנא פנו אלינו:</p>
+                        <ul>
+                            <li><strong>דוא"ל:</strong> privacy@greeksouvlaki.co.il</li>
+                            <li><strong>טלפון:</strong> 04-812-2980</li>
+                            <li><strong>כתובת:</strong> כביש 70, כפר יאסיף, הגליל המערבי</li>
+                        </ul>
+                        <p>אנו מתחייבים להגיב לכל פנייה בתוך 30 ימים ולטפל בכל תלונה ברצינות ובהתאם לדין.</p>
+                    </div>
+
+                    <div class="privacy-section-block">
+                        <h3>11. זמינות וגרסה</h3>
+                        <p>מדיניות פרטיות זו חלה על השימוש באתר האינטרנט שלנו ועל כל השירותים המוצעים דרכו. היא אינה חלה על אתרים של צדדי שלישי אליהם יש קישורים מאתרנו.</p>
+                        <p>חלקים ממדיניות זו מתייחסים לשירותים ספציפיים כגון משלוחים או הזמנות דרך פלטפורמות צד שלישיות. במקרים אלה, מדיניות הפרטיות של הצד השלישי תחול.</p>
+                    </div>
+
+                    <div class="privacy-section-block">
+                        <h3>12. הוראות אבטחה</h3>
+                        <p>מדיניות פרטיות זו מהווה הסכם מחייב בין מסעדת סובלאקי יווני לבין המשתמש. השימוש באתר מהווה הסכמה לתנאים המפורטים במדיניות זו.</p>
+                        <p>אנו מתכוונים ליישם את מדיניות פרטיות זו בתום לב ובהתאם לעקרונות של תום לב והגינות מקצועית. אם חלק ממדיניות זו יימצא בלתי אכיפה, אותו חלק ייחשב בטל מבחינה משפטית במידת שהאפשרות החוקים מאפשרות זו.</p>
+                    </div>
+
+                    <div class="privacy-footer">
+                        <p><strong>מסמך:</strong> קריאת מדיניות פרטיות זו מהווה הסכם לתנאים ולהוראותיה. המשך השימוש באתר מעיד על הסכמתכם לתנאים המפורטים במסמך זה.</p>
+                    </div>
+
+                    <div class="contact-info">
+                        <h3>פרטי התקשרות לענייני פרטיות</h3>
+                        <p>לכל שאלה או בקשה בנוגע למידע האישי שלך או זכויותיך על פי חוק הגנת הפרטיות:</p>
+                        <ul>
+                            <li><strong>דוא"ל:</strong> <a href="mailto:privacy@greeksouvlaki.co.il">privacy@greeksouvlaki.co.il</a></li>
+                            <li><strong>טלפון:</strong> <a href="tel:+97248122980">04-812-2980</a></li>
+                            <li><strong>שעות פעילות:</strong> רביעי-שבת 13:00-01:00</li>
+                            <li><strong>כתובת:</strong> כביש 70, כפר יאסיף, הגליל המערבי, ישראל</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer class="footer-compact">
+        <div class="menu-contact-footer-compact">
+            <div class="contact-row">
+                <div class="contact-col contact-phones-vertical">
+                    <div class="phone-item phone-prominent">
+                        <span class="contact-icon">📞</span>
+                        <a href="tel:+97248122980" dir="ltr" class="phone-link-big">04-812-2980</a>
+                    </div>
+                </div>
+                <div class="contact-col">
+                    <span class="contact-icon">📍</span>
+                    <a href="https://waze.com/ul?ll=32.9556,35.1636&navigate=yes" target="_blank" rel="noopener" class="location-link">כביש 70, כפר יאסיף</a>
+                </div>
+                <div class="contact-col contact-hours-vertical">
+                    <div class="hours-item">
+                        <span class="contact-icon">🚫</span>
+                        <span>ראשון-שלישי: סגור</span>
+                    </div>
+                    <div class="hours-item">
+                        <span class="contact-icon">🕐</span>
+                        <span>רביעי-שבת: 13:00-01:00</span>
+                    </div>
+                </div>
+            </div>
         </div>
+        <div class="footer-row">
+            <a href="terms.html">תנאי שימוש</a>
+            <span>|</span>
+            <a href="accessibility.html">נגישות</a>
+            <span>|</span>
+            <a href="index.html#contact">צור קשר</a>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2024 Greek Souvlaki - סובלאקי יווני</p>
+        </div>
+    </footer>
     </div>
 
-    <div class="legal-container">
-        <a href="index.html" class="back-link">â† <span class="back-text">Back</span></a>
-
-        <!-- HEBREW -->
-        <div class="lang-content lang-he">
-            <h1>מדיניות פרטיות ואבטחת מידע</h1>
-            <p class="update-date">תאריך עדכון: 1 בדצמבר 2025</p>
-
-            <div class="highlight-box">
-                <strong>חשוב לדעת:</strong> אנו ×‘-Greek Souvlaki מתחייבים להגן על ×”פרטיות שלך בהתאם לחוק הגנת ×”פרטיות, התשמ"א-1981 ותיקון 13.
-            </div>
-
-            <h2>1. זהות ×‘על ×”מאגר</h2>
-            <p><strong>שם:</strong> Greek Souvlaki<br>
-            <strong>כתובת:</strong> כביש 70, כפר יאסיף<br>
-            <strong>טלפון:</strong> 04-8122980<br>
-            <strong>דוא"ל פרטיות:</strong> [privacy@greeksouvlaki.co.il]</p>
-
-            <h2>2. סוגי מידע ×©אנו ××•×¡×¤×™×</h2>
-            <ul>
-                <li><strong>מידע ×©××ª×” ×ž×¡×¤×§:</strong> שם, טלפון, דוא"ל, העדפות</li>
-                <li><strong>מידע ××•×˜×•×ž×˜×™:</strong> IP, דפדפן, מכשיר, עוגיות, Google Analytics</li>
-            </ul>
-
-            <h2>3. מטרות שימוש</h2>
-            <ul>
-                <li>מתן שירות ×•×ª×ž×™×›×” â†’ ×—×•×–×” + אינטרקטיבי</li>
-                <li>אנליטיקס ושיפור â†’ אינטרקטיבי</li>
-                <li>שיווק (SMS, WhatsApp, פרסום) â†’ הסכמה מפורשת (ניתנת לביטול)</li>
-                <li>עמידה בדין â†’ חובה חוקית</li>
-            </ul>
-
-            <h2>4. Cookies (עוגיות)</h2>
-            <p>×ž×©×ª×ž×©×™× ×‘:</p>
-            <ul>
-                <li>עוגיות ×”×›×¨×—×™×•×ª (× ×™×•×•×˜, ×©×¤×”)</li>
-                <li>Google Analytics (× ×™×ª×•×— ×ª× ×•×¢×”)</li>
-                <li>פרסום (Facebook, Instagram)</li>
-            </ul>
-            <p>× ×™×ª×Ÿ ×œ× ×”×œ ×“×¨×š הגדרות ×”דפדפן.</p>
-
-            <h2>5. שיתוף עם צדדים שלישיים</h2>
-            <ul>
-                <li>GitHub Pages, Google Analytics</li>
-                <li>×¡×¤×§×™ SMS/WhatsApp</li>
-                <li>Facebook, Instagram (פרסום)</li>
-                <li>×¨×©×•×™×•×ª (×›××©×¨ × ×“×¨×© על ×¤×™ ×—×•×§)</li>
-            </ul>
-
-            <h2>6. העברה בינלאומית</h2>
-            <p>הנתונים עשויים להישמר בשרתים מחוץ לישראל (GitHub, Google). אנו משתמשים באמצעי הגנה מתאימים.</p>
-
-            <h2>7. תקופות שמירה</h2>
-            <ul>
-                <li>× ×ª×•× ×™ שיווק: 2-3 שנים או עד ביטול הסכמה</li>
-                <li>לוגים: 24 חודשים</li>
-            </ul>
-
-            <h2>8. זכויותיך</h2>
-            <ul>
-                <li>×’×™×©×” ×œמידע שלך</li>
-                <li>×ª×™×§×•×Ÿ מידע ×œ× ×ž×“×•×™×§</li>
-                <li>×ž×—×™×§×ª מידע (בכפוף לחובות חוקיות)</li>
-                <li>ניידות נתונים</li>
-                <li>×”×ª× ×’×“×•×ª ×œשיווק ×‘×›×œ ×¢×ª</li>
-                <li>ביטול הסכמה</li>
-                <li>×”×’×©×ª ×ª×œ×•× ×” ×œ×¨×©×•×ª ×œהגנת ×”פרטיות</li>
-            </ul>
-
-            <h2>9. אבטחה</h2>
-            <p>משתמשים ב-HTTPS, ×‘×§×¨×ª ×’×™×©×”, עדכונים שוטפים. אבטחה 100% לא ניתנת להבטחה.</p>
-
-            <h2>10. יצירת קשר</h2>
-            <p>דוא"ל: [privacy@greeksouvlaki.co.il]<br>
-            טלפון: 04-8122980</p>
-        </div>
-
-        <!-- ARABIC -->
-        <div class="lang-content lang-ar">
-            <h1>Ø³ÙŠØ§Ø³Ø© Ø§Ù„Ø®ØµÙˆØµÙŠØ©</h1>
-            <p class="update-date">Ø¢Ø®Ø± ØªØ­Ø¯ÙŠØ«: 1 Ø¯ÙŠØ³Ù…Ø¨Ø± 2025</p>
-
-            <h2>1. Ù‡ÙˆÙŠØ© Ù…Ø§Ù„Ùƒ Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª</h2>
-            <p><strong>Ø§Ù„Ø§Ø³Ù…:</strong> Greek Souvlaki<br>
-            <strong>Ø§Ù„Ø¹Ù†ÙˆØ§Ù†:</strong> Ø·Ø±ÙŠÙ‚ 70ØŒ ÙƒÙØ± ÙŠØ§Ø³ÙŠÙ<br>
-            <strong>Ø§Ù„Ù‡Ø§ØªÙ:</strong> 04-8122980<br>
-            <strong>Ø§Ù„Ø¨Ø±ÙŠØ¯ Ø§Ù„Ø¥Ù„ÙƒØªØ±ÙˆÙ†ÙŠ:</strong> [privacy@greeksouvlaki.co.il]</p>
-
-            <h2>2. Ø£Ù†ÙˆØ§Ø¹ Ø§Ù„Ù…Ø¹Ù„ÙˆÙ…Ø§Øª</h2>
-            <ul>
-                <li>Ø§Ù„Ù…Ø¹Ù„ÙˆÙ…Ø§Øª Ø§Ù„ØªÙŠ ØªÙ‚Ø¯Ù…Ù‡Ø§: Ø§Ù„Ø§Ø³Ù…ØŒ Ø§Ù„Ù‡Ø§ØªÙØŒ Ø§Ù„Ø¨Ø±ÙŠØ¯ Ø§Ù„Ø¥Ù„ÙƒØªØ±ÙˆÙ†ÙŠ</li>
-                <li>Ø§Ù„Ù…Ø¹Ù„ÙˆÙ…Ø§Øª Ø§Ù„ØªÙ„Ù‚Ø§Ø¦ÙŠØ©: IPØŒ Ø§Ù„Ù…ØªØµÙØ­ØŒ Ø§Ù„Ø¬Ù‡Ø§Ø²ØŒ Ù…Ù„ÙØ§Øª ØªØ¹Ø±ÙŠÙ Ø§Ù„Ø§Ø±ØªØ¨Ø§Ø·</li>
-            </ul>
-
-            <h2>3. Ø§Ù„Ø£ØºØ±Ø§Ø¶</h2>
-            <ul>
-                <li>ØªÙ‚Ø¯ÙŠÙ… Ø§Ù„Ø®Ø¯Ù…Ø© ÙˆØ§Ù„Ø¯Ø¹Ù…</li>
-                <li>Ø§Ù„ØªØ­Ù„ÙŠÙ„Ø§Øª ÙˆØ§Ù„ØªØ­Ø³ÙŠÙ†</li>
-                <li>Ø§Ù„ØªØ³ÙˆÙŠÙ‚ (Ù…ÙˆØ§ÙÙ‚Ø© ØµØ±ÙŠØ­Ø©)</li>
-            </ul>
-
-            <h2>4. Ø­Ù‚ÙˆÙ‚Ùƒ</h2>
-            <ul>
-                <li>Ø§Ù„ÙˆØµÙˆÙ„ Ø¥Ù„Ù‰ Ø¨ÙŠØ§Ù†Ø§ØªÙƒ</li>
-                <li>ØªØµØ­ÙŠØ­ Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª ØºÙŠØ± Ø§Ù„Ø¯Ù‚ÙŠÙ‚Ø©</li>
-                <li>Ø­Ø°Ù Ø§Ù„Ø¨ÙŠØ§Ù†Ø§Øª</li>
-                <li>Ø§Ù„Ø§Ø¹ØªØ±Ø§Ø¶ Ø¹Ù„Ù‰ Ø§Ù„ØªØ³ÙˆÙŠÙ‚</li>
-            </ul>
-
-            <h2>5. Ø§Ù„Ø§ØªØµØ§Ù„</h2>
-            <p>Ø§Ù„Ø¨Ø±ÙŠØ¯ Ø§Ù„Ø¥Ù„ÙƒØªØ±ÙˆÙ†ÙŠ: [privacy@greeksouvlaki.co.il]<br>
-            Ø§Ù„Ù‡Ø§ØªÙ: 04-8122980</p>
-        </div>
-
-        <!-- ENGLISH -->
-        <div class="lang-content lang-en">
-            <h1>Privacy Policy</h1>
-            <p class="update-date">Last updated: December 1, 2025</p>
-
-            <div class="highlight-box">
-                <strong>Important:</strong> Greek Souvlaki is committed to protecting your privacy in accordance with Israeli Privacy Protection Law and Amendment 13.
-            </div>
-
-            <h2>1. Data Controller</h2>
-            <p><strong>Name:</strong> Greek Souvlaki<br>
-            <strong>Address:</strong> Route 70, Kafr Yasif<br>
-            <strong>Phone:</strong> 04-8122980<br>
-            <strong>Privacy Email:</strong> [privacy@greeksouvlaki.co.il]</p>
-
-            <h2>2. Information We Collect</h2>
-            <ul>
-                <li><strong>You provide:</strong> Name, phone, email, preferences</li>
-                <li><strong>Automatic:</strong> IP, browser, device, cookies, Google Analytics</li>
-            </ul>
-
-            <h2>3. Purposes & Legal Basis</h2>
-            <ul>
-                <li>Service delivery â†’ Contract + Legitimate interest</li>
-                <li>Analytics â†’ Legitimate interest</li>
-                <li>Marketing (SMS, WhatsApp, ads) â†’ Explicit consent (revocable)</li>
-                <li>Legal compliance â†’ Legal obligation</li>
-            </ul>
-
-            <h2>4. Cookies</h2>
-            <ul>
-                <li>Essential cookies (navigation, language)</li>
-                <li>Google Analytics</li>
-                <li>Marketing (Facebook, Instagram)</li>
-            </ul>
-            <p>Manage via browser settings.</p>
-
-            <h2>5. Third-Party Sharing</h2>
-            <ul>
-                <li>GitHub Pages, Google Analytics</li>
-                <li>SMS/WhatsApp providers</li>
-                <li>Facebook, Instagram (ads)</li>
-                <li>Authorities (when legally required)</li>
-            </ul>
-
-            <h2>6. International Transfers</h2>
-            <p>Data may be stored on servers outside Israel (GitHub, Google). We use appropriate safeguards.</p>
-
-            <h2>7. Retention</h2>
-            <ul>
-                <li>Marketing data: 2-3 years or until consent withdrawal</li>
-                <li>Logs: 24 months</li>
-            </ul>
-
-            <h2>8. Your Rights</h2>
-            <ul>
-                <li>Access your data</li>
-                <li>Rectify inaccurate data</li>
-                <li>Delete data (subject to legal obligations)</li>
-                <li>Data portability</li>
-                <li>Object to marketing anytime</li>
-                <li>Withdraw consent</li>
-                <li>Complain to Privacy Protection Authority</li>
-            </ul>
-
-            <h2>9. Security</h2>
-            <p>HTTPS encryption, access controls, regular updates. 100% security cannot be guaranteed.</p>
-
-            <h2>10. Contact</h2>
-            <p>Email: [privacy@greeksouvlaki.co.il]<br>
-            Phone: 04-8122980</p>
-        </div>
-
-        <!-- RUSSIAN -->
-        <div class="lang-content lang-ru">
-            <h1>ÐŸÐ¾Ð»Ð¸Ñ‚Ð¸ÐºÐ° ÐºÐ¾Ð½Ñ„Ð¸Ð´ÐµÐ½Ñ†Ð¸Ð°Ð»ÑŒÐ½Ð¾ÑÑ‚Ð¸</h1>
-            <p class="update-date">ÐžÐ±Ð½Ð¾Ð²Ð»ÐµÐ½Ð¾: 1 Ð´ÐµÐºÐ°Ð±Ñ€Ñ 2025</p>
-
-            <h2>1. ÐšÐ¾Ð½Ñ‚Ñ€Ð¾Ð»Ð»ÐµÑ€ Ð´Ð°Ð½Ð½Ñ‹Ñ…</h2>
-            <p><strong>ÐÐ°Ð·Ð²Ð°Ð½Ð¸Ðµ:</strong> Greek Souvlaki<br>
-            <strong>ÐÐ´Ñ€ÐµÑ:</strong> ÐœÐ°Ñ€ÑˆÑ€ÑƒÑ‚ 70, ÐšÑ„Ð°Ñ€-Ð¯ÑÐ¸Ñ„<br>
-            <strong>Ð¢ÐµÐ»ÐµÑ„Ð¾Ð½:</strong> 04-8122980<br>
-            <strong>Email:</strong> [privacy@greeksouvlaki.co.il]</p>
-
-            <h2>2. Ð¡Ð¾Ð±Ð¸Ñ€Ð°ÐµÐ¼Ð°Ñ Ð¸Ð½Ñ„Ð¾Ñ€Ð¼Ð°Ñ†Ð¸Ñ</h2>
-            <ul>
-                <li>Ð’Ñ‹ Ð¿Ñ€ÐµÐ´Ð¾ÑÑ‚Ð°Ð²Ð»ÑÐµÑ‚Ðµ: Ð¸Ð¼Ñ, Ñ‚ÐµÐ»ÐµÑ„Ð¾Ð½, email</li>
-                <li>ÐÐ²Ñ‚Ð¾Ð¼Ð°Ñ‚Ð¸Ñ‡ÐµÑÐºÐ¸: IP, Ð±Ñ€Ð°ÑƒÐ·ÐµÑ€, ÑƒÑÑ‚Ñ€Ð¾Ð¹ÑÑ‚Ð²Ð¾, cookies</li>
-            </ul>
-
-            <h2>3. Ð¦ÐµÐ»Ð¸</h2>
-            <ul>
-                <li>ÐŸÑ€ÐµÐ´Ð¾ÑÑ‚Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ ÑƒÑÐ»ÑƒÐ³</li>
-                <li>ÐÐ½Ð°Ð»Ð¸Ñ‚Ð¸ÐºÐ°</li>
-                <li>ÐœÐ°Ñ€ÐºÐµÑ‚Ð¸Ð½Ð³ (ÑÐ¾Ð³Ð»Ð°ÑÐ¸Ðµ)</li>
-            </ul>
-
-            <h2>4. Ð’Ð°ÑˆÐ¸ Ð¿Ñ€Ð°Ð²Ð°</h2>
-            <ul>
-                <li>Ð”Ð¾ÑÑ‚ÑƒÐ¿ Ðº Ð´Ð°Ð½Ð½Ñ‹Ð¼</li>
-                <li>Ð˜ÑÐ¿Ñ€Ð°Ð²Ð»ÐµÐ½Ð¸Ðµ Ð´Ð°Ð½Ð½Ñ‹Ñ…</li>
-                <li>Ð£Ð´Ð°Ð»ÐµÐ½Ð¸Ðµ Ð´Ð°Ð½Ð½Ñ‹Ñ…</li>
-                <li>ÐžÑ‚ÐºÐ°Ð· Ð¾Ñ‚ Ð¼Ð°Ñ€ÐºÐµÑ‚Ð¸Ð½Ð³Ð°</li>
-            </ul>
-
-            <h2>5. ÐšÐ¾Ð½Ñ‚Ð°ÐºÑ‚Ñ‹</h2>
-            <p>Email: [privacy@greeksouvlaki.co.il]<br>
-            Ð¢ÐµÐ»ÐµÑ„Ð¾Ð½: 04-8122980</p>
-        </div>
-    </div>
-
-    <script src="js/language-switch.js"></script>
+    <!-- Scripts -->
+    <script defer src="script.js?v=23"></script>
+    <script defer src="toggles.js?v=15"></script>
 </body>
 </html>

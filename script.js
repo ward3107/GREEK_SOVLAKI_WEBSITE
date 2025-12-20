@@ -14,13 +14,11 @@
             return;
         }
 
-        console.log('Mobile menu initialized');
-        menuInitialized = true;
+          menuInitialized = true;
 
         // Toggle function
         function toggleMenu() {
-            console.log('Toggle menu called');
-            hamburger.classList.toggle('active');
+                    hamburger.classList.toggle('active');
             navMenu.classList.toggle('active');
         }
 
@@ -591,26 +589,88 @@ document.addEventListener('DOMContentLoaded', () => {
     const faqItems = document.querySelectorAll('.faq-item');
     if (!faqItems.length) return;
 
-    faqItems.forEach(item => {
+    faqItems.forEach((item, index) => {
       const question = item.querySelector('.faq-question');
-      if (question) {
+      const answer = item.querySelector('.faq-answer');
+
+      if (question && answer) {
+        // Add keyboard navigation support
         question.addEventListener('click', () => {
-          const isActive = item.classList.contains('active');
+          toggleFaqItem(item, question, answer);
+        });
 
-          // Close all other items
-          faqItems.forEach(other => {
-            if (other !== item) {
-              other.classList.remove('active');
-              other.querySelector('.faq-question')?.setAttribute('aria-expanded', 'false');
-            }
-          });
+        // Keyboard navigation for FAQ questions
+        question.addEventListener('keydown', (e) => {
+          let targetQuestion = null;
 
-          // Toggle current item
-          item.classList.toggle('active');
-          question.setAttribute('aria-expanded', !isActive);
+          switch(e.key) {
+            case 'ArrowDown':
+              e.preventDefault();
+              // Move to next question, wrap around if at end
+              const nextItem = faqItems[index + 1] || faqItems[0];
+              targetQuestion = nextItem.querySelector('.faq-question');
+              break;
+            case 'ArrowUp':
+              e.preventDefault();
+              // Move to previous question, wrap around if at start
+              const prevItem = faqItems[index - 1] || faqItems[faqItems.length - 1];
+              targetQuestion = prevItem.querySelector('.faq-question');
+              break;
+            case 'Home':
+              e.preventDefault();
+              targetQuestion = faqItems[0].querySelector('.faq-question');
+              break;
+            case 'End':
+              e.preventDefault();
+              targetQuestion = faqItems[faqItems.length - 1].querySelector('.faq-question');
+              break;
+            case 'Enter':
+            case ' ':
+              e.preventDefault();
+              toggleFaqItem(item, question, answer);
+              return;
+          }
+
+          if (targetQuestion) {
+            targetQuestion.focus();
+          }
         });
       }
     });
+
+    function toggleFaqItem(item, question, answer) {
+      const isActive = item.classList.contains('active');
+
+      // Close all other items
+      faqItems.forEach(other => {
+        if (other !== item) {
+          other.classList.remove('active');
+          const otherQuestion = other.querySelector('.faq-question');
+          const otherAnswer = other.querySelector('.faq-answer');
+
+          if (otherQuestion && otherAnswer) {
+            otherQuestion.setAttribute('aria-expanded', 'false');
+            otherAnswer.setAttribute('hidden', '');
+          }
+        }
+      });
+
+      // Toggle current item
+      if (isActive) {
+        item.classList.remove('active');
+        question.setAttribute('aria-expanded', 'false');
+        answer.setAttribute('hidden', '');
+      } else {
+        item.classList.add('active');
+        question.setAttribute('aria-expanded', 'true');
+        answer.removeAttribute('hidden');
+
+        // Move focus to the answer content for screen readers after a short delay
+        setTimeout(() => {
+          answer.focus();
+        }, 100);
+      }
+    }
   }
 
   try { initFaqAccordion(); } catch(e) { console.error('FAQ accordion error:', e); }

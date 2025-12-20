@@ -53,43 +53,48 @@ body.is-christmas::before {
    CHRISTMAS HEADER & NAVIGATION
    ======================================== */
 
-body.is-christmas .navbar {
+body.is-christmas .page-content .navbar {
   background: linear-gradient(135deg, #0f3d2e 0%, #1a5c42 100%) !important;
   border-bottom: 3px solid var(--christmas-gold) !important;
   box-shadow: 0 4px 20px rgba(15, 61, 46, 0.3) !important;
 }
 
-body.is-christmas .navbar.scrolled {
+body.is-christmas .page-content .navbar.scrolled {
   background: rgba(15, 61, 46, 0.98) !important;
 }
 
-body.is-christmas .logo h1,
-body.is-christmas .logo span {
+body.is-christmas .page-content .navbar .logo h1,
+body.is-christmas .page-content .navbar .logo span,
+body.is-christmas .page-content .hero-content h1,
+body.is-christmas .page-content .hero-content h2 {
   color: var(--christmas-cream) !important;
-  text-shadow: 0 0 10px rgba(212, 175, 55, 0.3);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5) !important;
 }
 
-body.is-christmas .nav-menu a {
+body.is-christmas .page-content .navbar .nav-menu a,
+body.is-christmas .page-content .navbar .nav-dropdown-toggle {
   color: var(--christmas-cream) !important;
 }
 
-body.is-christmas .nav-menu a:hover {
+body.is-christmas .page-content .navbar .nav-menu a:hover,
+body.is-christmas .page-content .navbar .nav-dropdown-toggle:hover {
   color: var(--christmas-gold) !important;
   text-shadow: 0 0 8px rgba(212, 175, 55, 0.5);
 }
 
-body.is-christmas .hamburger span {
+body.is-christmas .page-content .navbar .hamburger span {
   background-color: var(--christmas-cream) !important;
 }
 
 /* Christmas badge for logo */
-body.is-christmas .logo::after {
+body.is-christmas .page-content .navbar .logo::after {
   content: '🎄';
   position: absolute;
   top: -5px;
   right: -20px;
   font-size: 1.2rem;
   animation: christmas-bounce 2s ease-in-out infinite;
+  z-index: 10;
 }
 
 @keyframes christmas-bounce {
@@ -101,31 +106,34 @@ body.is-christmas .logo::after {
    CHRISTMAS HERO SECTION
    ======================================== */
 
-body.is-christmas .hero {
-  background: linear-gradient(135deg, #0f3d2e 0%, #1a5c42 50%, #0f3d2e 100%) !important;
+body.is-christmas .page-content .hero {
+  background:
+      linear-gradient(135deg, rgba(15, 61, 46, 0.9) 0%, rgba(26, 92, 66, 0.8) 50%, rgba(15, 61, 46, 0.9) 100%),
+      url('images/IMG-20251205-WA0032.webp') center/cover no-repeat !important;
   position: relative;
 }
 
-body.is-christmas .hero::before {
+body.is-christmas .page-content .hero::before {
   filter: brightness(0.6) saturate(0.8) !important;
 }
 
-body.is-christmas .hero::after {
+body.is-christmas .page-content .hero::after {
   border-color: rgba(212, 175, 55, 0.4) !important;
 }
 
-body.is-christmas .hero-content h1,
-body.is-christmas .hero-content h2 {
+body.is-christmas .page-content .hero-content h1,
+body.is-christmas .page-content .hero-content h2 {
   color: var(--christmas-cream) !important;
-  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.3);
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5);
 }
 
-body.is-christmas .hero-content p {
+body.is-christmas .page-content .hero-content p,
+body.is-christmas .page-content .hero-description {
   color: var(--christmas-snow) !important;
 }
 
 /* Christmas banner in hero */
-body.is-christmas .hero-content::before {
+body.is-christmas .page-content .hero-content::before {
   content: '🎄 Christmas Tasting Menu Available 20/12/2025 - 15/1/2026! 🎄';
   display: block;
   background: linear-gradient(135deg, var(--christmas-red) 0%, #8b0000 100%);
@@ -138,6 +146,8 @@ body.is-christmas .hero-content::before {
   box-shadow: 0 4px 15px rgba(178, 34, 34, 0.4);
   border: 2px solid var(--christmas-gold);
   animation: christmas-glow 2s ease-in-out infinite alternate;
+  z-index: 10;
+  position: relative;
 }
 
 @keyframes christmas-glow {
@@ -181,23 +191,25 @@ body.is-christmas .hero-buttons .btn:last-child:hover {
    CHRISTMAS MENU SECTION
    ======================================== */
 
-body.is-christmas #menu,
-body.is-christmas .menu-section-modern {
+body.is-christmas .page-content #menu,
+body.is-christmas .page-content .menu-section-modern {
   background: linear-gradient(180deg, #fdf5e6 0%, #fff 50%, #fdf5e6 100%) !important;
   position: relative;
 }
 
-/* Decorative holly corners */
-body.is-christmas .menu-section-modern::before {
+/* Decorative holly corners - preserve existing animations */
+body.is-christmas .page-content .menu-section-modern::before {
   content: '🎄';
   position: absolute;
   top: 20px;
   left: 20px;
   font-size: 2rem;
   opacity: 0.6;
+  z-index: 5;
+  pointer-events: none;
 }
 
-body.is-christmas .menu-section-modern::after {
+body.is-christmas .page-content .menu-section-modern::after {
   content: '🎄';
   position: absolute;
   top: 20px;
@@ -205,51 +217,57 @@ body.is-christmas .menu-section-modern::after {
   font-size: 2rem;
   opacity: 0.6;
   transform: scaleX(-1);
+  z-index: 5;
+  pointer-events: none;
 }
 
-body.is-christmas .menu-tabs-wrapper,
-body.is-christmas .menu-tabs {
+body.is-christmas .page-content .menu-tabs-wrapper,
+body.is-christmas .page-content .menu-tabs {
   background: linear-gradient(135deg, #0f3d2e 0%, #1a5c42 100%) !important;
   border: 2px solid var(--christmas-gold) !important;
 }
 
-body.is-christmas .menu-tab-btn {
+body.is-christmas .page-content .menu-tab,
+body.is-christmas .page-content .menu-tab-btn {
   color: var(--christmas-cream) !important;
 }
 
-body.is-christmas .menu-tab-btn:hover {
+body.is-christmas .page-content .menu-tab:hover,
+body.is-christmas .page-content .menu-tab-btn:hover {
   background: rgba(212, 175, 55, 0.2) !important;
   color: var(--christmas-gold) !important;
 }
 
-body.is-christmas .menu-tab-btn.active {
+body.is-christmas .page-content .menu-tab.active,
+body.is-christmas .page-content .menu-tab-btn.active {
   background: linear-gradient(135deg, var(--christmas-red) 0%, #8b0000 100%) !important;
   color: var(--christmas-cream) !important;
   border: 1px solid var(--christmas-gold) !important;
 }
 
 /* Menu cards */
-body.is-christmas .menu-card {
+body.is-christmas .page-content .menu-card {
   background: rgba(255, 255, 255, 0.95) !important;
   border: 2px solid rgba(212, 175, 55, 0.3) !important;
   box-shadow: 0 4px 20px rgba(15, 61, 46, 0.1) !important;
 }
 
-body.is-christmas .menu-card:hover {
+body.is-christmas .page-content .menu-card:hover {
   border-color: var(--christmas-gold) !important;
   box-shadow: 0 8px 30px rgba(212, 175, 55, 0.3) !important;
   transform: translateY(-5px);
 }
 
-body.is-christmas .menu-card::before {
+body.is-christmas .page-content .menu-card::before {
   background: linear-gradient(90deg, var(--christmas-red), var(--christmas-gold), var(--christmas-green)) !important;
 }
 
-body.is-christmas .menu-card h4 {
+body.is-christmas .page-content .menu-card .menu-item-title,
+body.is-christmas .page-content .menu-card h4 {
   color: #0f3d2e !important;
 }
 
-body.is-christmas .menu-card .price {
+body.is-christmas .page-content .menu-card .price {
   color: var(--christmas-red) !important;
   font-weight: 700;
 }
@@ -361,23 +379,28 @@ body.is-christmas .contact-section a:hover {
    CHRISTMAS FOOTER
    ======================================== */
 
-body.is-christmas footer,
-body.is-christmas .site-footer {
+body.is-christmas .page-content footer,
+body.is-christmas .page-content .footer-compact,
+body.is-christmas .page-content .site-footer {
   background: linear-gradient(135deg, #0a2a1f 0%, #0f3d2e 100%) !important;
   border-top: 3px solid var(--christmas-gold) !important;
 }
 
-body.is-christmas footer p,
-body.is-christmas footer a {
+body.is-christmas .page-content footer p,
+body.is-christmas .page-content footer a,
+body.is-christmas .page-content .footer-compact p,
+body.is-christmas .page-content .footer-compact a {
   color: var(--christmas-cream) !important;
 }
 
-body.is-christmas footer a:hover {
+body.is-christmas .page-content footer a:hover,
+body.is-christmas .page-content .footer-compact a:hover {
   color: var(--christmas-gold) !important;
 }
 
 /* Footer Christmas message */
-body.is-christmas footer::before {
+body.is-christmas .page-content footer::before,
+body.is-christmas .page-content .footer-compact::before {
   content: '🎄 Wishing you a Merry Christmas from our family to yours! 🎄';
   display: block;
   text-align: center;
@@ -462,20 +485,51 @@ body.is-christmas .gallery-section h2 {
    ======================================== */
 
 @media (max-width: 768px) {
-  body.is-christmas .hero-content::before {
+  body.is-christmas .page-content .hero-content::before {
     font-size: 0.8rem;
     padding: 0.5rem 1rem;
+    margin-bottom: 1rem;
   }
 
-  body.is-christmas .menu-section-modern::before,
-  body.is-christmas .menu-section-modern::after {
+  body.is-christmas .page-content .navbar .logo::after {
+    font-size: 1rem;
+    top: -3px;
+    right: -15px;
+  }
+
+  body.is-christmas .page-content .menu-section-modern::before,
+  body.is-christmas .page-content .menu-section-modern::after {
     font-size: 1.5rem;
     top: 10px;
+    left: 10px;
+    right: 10px;
   }
 
-  body.is-christmas footer::before {
+  body.is-christmas .page-content footer::before,
+  body.is-christmas .page-content .footer-compact::before {
     font-size: 0.85rem;
     padding: 0.75rem;
+  }
+
+  body.is-christmas .page-content .menu-card:hover {
+    transform: translateY(-3px);
+  }
+}
+
+@media (max-width: 480px) {
+  body.is-christmas .page-content .hero-content::before {
+    font-size: 0.7rem;
+    padding: 0.4rem 0.8rem;
+  }
+
+  body.is-christmas .page-content .navbar .logo::after {
+    font-size: 0.9rem;
+    display: none; /* Hide on very small screens */
+  }
+
+  body.is-christmas .page-content .menu-section-modern::before,
+  body.is-christmas .page-content .menu-section-modern::after {
+    font-size: 1.2rem;
   }
 }
 
@@ -487,27 +541,39 @@ body.is-christmas.a11y-dark-mode .page-content {
   background: linear-gradient(180deg, #0a1f17 0%, #0f3d2e 50%, #0a1f17 100%) !important;
 }
 
-body.is-christmas.a11y-dark-mode .menu-card {
+body.is-christmas.a11y-dark-mode .page-content .menu-card {
   background: rgba(15, 61, 46, 0.9) !important;
   border-color: rgba(212, 175, 55, 0.5) !important;
 }
 
-body.is-christmas.a11y-dark-mode .menu-card h4 {
+body.is-christmas.a11y-dark-mode .page-content .menu-card .menu-item-title,
+body.is-christmas.a11y-dark-mode .page-content .menu-card h4 {
   color: var(--christmas-cream) !important;
 }
 
-body.is-christmas.a11y-dark-mode .menu-card p {
+body.is-christmas.a11y-dark-mode .page-content .menu-card p {
   color: #a1a1aa !important;
 }
 
-body.is-christmas.a11y-dark-mode .feature {
+body.is-christmas.a11y-dark-mode .page-content .feature {
   background: rgba(15, 61, 46, 0.9) !important;
 }
 
-body.is-christmas.a11y-dark-mode .feature h3 {
+body.is-christmas.a11y-dark-mode .page-content .feature h3 {
   color: var(--christmas-gold) !important;
 }
 
-body.is-christmas.a11y-dark-mode .feature p {
+body.is-christmas.a11y-dark-mode .page-content .feature p {
   color: var(--christmas-snow) !important;
+}
+
+/* Ensure proper contrast in dark + christmas mode */
+body.is-christmas.a11y-dark-mode .page-content .navbar {
+  background: linear-gradient(135deg, #0a2a1f 0%, #0f3d2e 100%) !important;
+}
+
+body.is-christmas.a11y-dark-mode .page-content .hero {
+  background:
+      linear-gradient(135deg, rgba(10, 31, 23, 0.95) 0%, rgba(15, 61, 46, 0.9) 50%, rgba(10, 31, 23, 0.95) 100%),
+      url('images/IMG-20251205-WA0032.webp') center/cover no-repeat !important;
 }
