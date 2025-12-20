@@ -1,4 +1,4 @@
-const CACHE_NAME = 'greek-souvlaki-v32';
+const CACHE_NAME = 'greek-souvlaki-v33';
 
 // Only cache essential files that actually exist
 const urlsToCache = [

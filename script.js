@@ -746,6 +746,197 @@ document.addEventListener('DOMContentLoaded', () => {
   });
 });
 
+// ===== PREMIUM SNOW EFFECT =====
+// Added to script.js to ensure it loads properly
+
+(function() {
+    'use strict';
+
+    // Snow configuration
+    const CONFIG = {
+        desktopDensity: 150,
+        mobileDensity: 60,
+        speedMultiplier: 0.8,
+        opacity: 0.8,
+        minSize: 2,
+        maxSize: 6,
+        disableOnMobile: false,
+        mobileBreakpoint: 768
+    };
+
+    let canvas, ctx, snowflakes = [];
+    let animationId;
+    let isReducedMotion = false;
+    let isMobile = false;
+
+    // Check for accessibility preference
+    function checkAccessibility() {
+        if (window.matchMedia && window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+            isReducedMotion = true;
+        }
+    }
+
+    // Check if mobile device
+    function checkMobile() {
+        isMobile = window.innerWidth <= CONFIG.mobileBreakpoint;
+    }
+
+    // Snowflake class
+    class Snowflake {
+        constructor() {
+            this.reset();
+            this.y = Math.random() * window.innerHeight;
+        }
+
+        reset() {
+            this.x = Math.random() * window.innerWidth;
+            this.y = -10;
+            this.size = Math.random() * (CONFIG.maxSize - CONFIG.minSize) + CONFIG.minSize;
+            this.speed = Math.random() * 2 + 1;
+            this.wind = Math.random() * 0.5 - 0.25;
+            this.opacity = Math.random() * 0.5 + CONFIG.opacity * 0.5;
+        }
+
+        update() {
+            this.y += this.speed * CONFIG.speedMultiplier;
+            this.x += this.wind;
+            this.x += Math.sin(this.y * 0.01) * 0.3;
+
+            if (this.y > window.innerHeight + 10) {
+                this.reset();
+            }
+            if (this.x > window.innerWidth + 10 || this.x < -10) {
+                this.x = Math.random() * window.innerWidth;
+            }
+        }
+
+        draw() {
+            ctx.save();
+            ctx.globalAlpha = this.opacity;
+            ctx.fillStyle = '#ffffff';
+            ctx.beginPath();
+            ctx.arc(this.x, this.y, this.size, 0, Math.PI * 2);
+            ctx.fill();
+            ctx.restore();
+        }
+    }
+
+    // Initialize canvas
+    function initCanvas() {
+        canvas = document.createElement('canvas');
+        canvas.id = 'snow-canvas';
+        canvas.style.cssText = `
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100vw;
+            height: 100vh;
+            pointer-events: none;
+            z-index: 1000;
+            opacity: 1.0;
+        `;
+
+        const dpr = window.devicePixelRatio || 1;
+        canvas.width = window.innerWidth * dpr;
+        canvas.height = window.innerHeight * dpr;
+        canvas.style.width = window.innerWidth + 'px';
+        canvas.style.height = window.innerHeight + 'px';
+
+        ctx = canvas.getContext('2d');
+        ctx.scale(dpr, dpr);
+    }
+
+    // Create snowflakes
+    function createSnowflakes() {
+        const density = isMobile ? CONFIG.mobileDensity : CONFIG.desktopDensity;
+        const count = isReducedMotion ? Math.floor(density * 0.3) : density;
+
+        snowflakes = [];
+        for (let i = 0; i < count; i++) {
+            snowflakes.push(new Snowflake());
+        }
+    }
+
+    // Animation loop
+    function animate() {
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+
+        snowflakes.forEach(snowflake => {
+            snowflake.update();
+            snowflake.draw();
+        });
+
+        animationId = requestAnimationFrame(animate);
+    }
+
+    // Handle window resize
+    function handleResize() {
+        const dpr = window.devicePixelRatio || 1;
+        canvas.width = window.innerWidth * dpr;
+        canvas.height = window.innerHeight * dpr;
+        canvas.style.width = window.innerWidth + 'px';
+        canvas.style.height = window.innerHeight + 'px';
+        ctx.scale(dpr, dpr);
+
+        checkMobile();
+        createSnowflakes();
+    }
+
+    // Initialize snow effect
+    function init() {
+        if (isReducedMotion) {
+            console.log('Snow effect disabled: prefers-reduced-motion');
+            return;
+        }
+
+        if (isMobile && CONFIG.disableOnMobile) {
+            console.log('Snow effect disabled: on mobile');
+            return;
+        }
+
+        try {
+            initCanvas();
+            createSnowflakes();
+            animate();
+            document.body.appendChild(canvas);
+            window.addEventListener('resize', handleResize);
+
+            if (window.matchMedia) {
+                const motionQuery = window.matchMedia('(prefers-reduced-motion: reduce)');
+                motionQuery.addListener((e) => {
+                    if (e.matches) {
+                        if (animationId) {
+                            cancelAnimationFrame(animationId);
+                        }
+                        if (canvas && canvas.parentNode) {
+                            canvas.parentNode.removeChild(canvas);
+                        }
+                    } else {
+                        init();
+                    }
+                });
+            }
+
+        } catch (error) {
+            console.warn('Snow effect initialization failed:', error);
+        }
+    }
+
+    // Start when DOM is ready
+    function ready() {
+        checkAccessibility();
+        checkMobile();
+        init();
+    }
+
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', ready);
+    } else {
+        ready();
+    }
+
+})();
+
 
 
 
