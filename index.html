@@ -7,16 +7,15 @@
     <!-- Content Security Policy - Secure CSP with limited unsafe-inline for styles -->
     <meta http-equiv="Content-Security-Policy" content="
         default-src 'self';
-        script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://vercel.live 'sha256-vvt4KWwuNr51XfE5m+hzeNEGhiOfZzG97ccfqGsPwvE=';
-        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com;
-        font-src 'self' https://fonts.gstatic.com;
+        script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://vercel.live;
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com http://fonts.googleapis.com;
+        font-src 'self' https://fonts.gstatic.com http://fonts.gstatic.com;
         img-src 'self' data: blob: https://images.unsplash.com https://flagcdn.com https://*.google-analytics.com;
         connect-src 'self' https://images.unsplash.com https://flagcdn.com https://www.google-analytics.com https://*.google-analytics.com https://vercel.live;
         frame-src 'self' https://www.google.com;
         object-src 'none';
         base-uri 'self';
         form-action 'self';
-        upgrade-insecure-requests;
     ">
     <meta http-equiv="X-Content-Type-Options" content="nosniff">
     <meta name="referrer" content="strict-origin-when-cross-origin">
@@ -62,15 +61,22 @@
     <meta name="mobile-web-app-capable" content="yes">
     <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
     <meta name="apple-mobile-web-app-title" content="Greek Souvlaki">
-    <link rel="manifest" href="manifest.json">
+    <meta name="application-name" content="Greek Souvlaki">
+    <meta name="msapplication-TileColor" content="#1e3a8a">
+    <meta name="msapplication-config" content="/browserconfig.xml">
+    <link rel="manifest" href="/manifest.json">
+    <link rel="apple-touch-icon" href="/logo.jpg">
+    <link rel="apple-touch-icon" sizes="192x192" href="/logo.jpg">
+    <link rel="apple-touch-icon" sizes="512x512" href="/logo.jpg">
+    <link rel="icon" type="image/jpeg" href="/logo.jpg">
 
     <!-- Preload critical CSS for faster rendering -->
     <link rel="preload" href="styles.css?v=43" as="style">
     <link rel="stylesheet" href="styles.css?v=43">
     <link rel="stylesheet" href="css/inline-styles.css">
-    <link rel="stylesheet" href="animations.css?v=14" media="print">
-    <link rel="stylesheet" href="accessibility-widget.css?v=22" media="print">
-    <link rel="stylesheet" href="cookie-consent.css?v=15" media="print">
+    <link rel="stylesheet" href="animations.css?v=14">
+    <link rel="stylesheet" href="accessibility-widget.css?v=22">
+    <link rel="stylesheet" href="cookie-consent.css?v=15">
     <script defer src="js/css-loader.js"></script>
     <script defer src="js/gallery-performance.js"></script>
     <noscript>
@@ -82,7 +88,7 @@
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <!-- Optimized font loading with font-display=swap for better performance -->
     <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" as="style">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" media="print">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap">
     <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap"></noscript>
     <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
     <link rel="preconnect" href="https://flagcdn.com" crossorigin>
@@ -318,13 +324,7 @@
 
     <!-- Google Analytics Placeholder -->
     <!-- Replace G-XXXXXXXXXX with your actual Google Analytics ID -->
-    <!-- <script async src="https://www.googletagmanager.com/gtag/js?id=G-XXXXXXXXXX"></script>
-    <script>
-      window.dataLayer = window.dataLayer || [];
-      function gtag(){dataLayer.push(arguments);}
-      gtag('js', new Date());
-      gtag('config', 'G-XXXXXXXXXX');
-    </script> -->
+    <!-- Google Analytics will be added later when tracking ID is available -->
 </head>
 <body>
     <!-- Skip Navigation Link for Accessibility -->
@@ -366,17 +366,12 @@
                     </div>
                 </div>
                 <ul class="nav-menu">
-                    <li class="nav-dropdown">
-                        <button type="button" class="nav-dropdown-toggle" aria-expanded="false" aria-controls="nav-dropdown" aria-haspopup="true">תפריט</button>
-                        <div class="nav-dropdown-panel" id="nav-dropdown" role="menu" aria-hidden="true">
-                            <a href="#home" class="nav-dropdown-item" role="menuitem" data-lang="nav-home">בית</a>
-                            <a href="#menu" class="nav-dropdown-item" role="menuitem" data-lang="nav-menu">תפריט</a>
-                            <a href="#gallery" class="nav-dropdown-item" role="menuitem" data-lang="nav-gallery">גלריה</a>
-                            <a href="#about" class="nav-dropdown-item" role="menuitem" data-lang="nav-about">אודות</a>
-                            <a href="#faq" class="nav-dropdown-item" role="menuitem" data-lang="nav-faq">שאלות נפוצות</a>
-                            <a href="#contact" class="nav-dropdown-item" role="menuitem" data-lang="nav-contact">צור קשר</a>
-                        </div>
-                    </li>
+                    <li><a href="#home" data-lang="nav-home">בית</a></li>
+                    <li><a href="#menu" data-lang="nav-menu">תפריט</a></li>
+                    <li><a href="#gallery" data-lang="nav-gallery">גלריה</a></li>
+                    <li><a href="#about" data-lang="nav-about">אודות</a></li>
+                    <li><a href="#faq" data-lang="nav-faq">שאלות נפוצות</a></li>
+                    <li><a href="#contact" data-lang="nav-contact">צור קשר</a></li>
                 </ul>
                 <button class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
                     <span></span>
@@ -431,12 +426,12 @@
                 </div>
                 <div class="menu-card">
                     <div class="menu-item-title" data-lang="item-pita-pork">Souvlaki Pita White Meat</div>
-                    <p data-lang="desc-pita-pork">פיתה יוונית, שיפוד לבן, רוטב צזיקי/חריף,  בצל, עגבנייה, חסה, צ'יפס</p>
+                    <p data-lang="desc-pita-pork">פיתה יוונית, שיפוד בשר לבן, רוטב צזיקי/חריף,  בצל, עגבנייה, חסה, צ'יפס</p>
                     <span class="price">30 ₪</span>
                 </div>
                 <div class="menu-card">
                     <div class="menu-item-title" data-lang="item-pita-gyros">Souvlaki Pita Gyros</div>
-                    <p data-lang="desc-pita-gyros">פיתה יוונית, גירוס לבן (שווארמה), רוטב צזיקי/חריף,  בצל, עגבנייה, חסה, צ'יפס</p>
+                    <p data-lang="desc-pita-gyros">פיתה יוונית, גירוס בשר לבן (שווארמה), רוטב צזיקי/חריף,  בצל, עגבנייה, חסה, צ'יפס</p>
                     <span class="price">35 ₪</span>
                 </div>
                 <div class="menu-card">
@@ -456,7 +451,7 @@
                 </div>
                 <div class="menu-card">
                     <div class="menu-item-title" data-lang="item-pita-steak">Souvlaki Pita Steak</div>
-                    <p data-lang="desc-pita-steak">פיתה יוונית, סטייק לבן סינטה, רוטב צזיקי/חריף,  בצל, עגבנייה, חסה, צ'יפס</p>
+                    <p data-lang="desc-pita-steak">פיתה יוונית, סטייק בשר לבן סינטה, רוטב צזיקי/חריף,  בצל, עגבנייה, חסה, צ'יפס</p>
                     <span class="price">35 ₪</span>
                 </div>
                 <div class="menu-card">
@@ -927,8 +922,7 @@
     <script defer src="cookie-consent.js?v=15"></script>
     <script defer src="wow-animations.js?v=14"></script>
     <!-- <script defer src="theme-manager.js?v=1"></script> Christmas theme disabled -->
-    <script defer src="pwa-install.js?v=1"></script>
-    <script defer src="hide-debug-content.js"></script>
+        <script defer src="hide-debug-content.js"></script>
     <script defer src="js/index-scripts.js"></script>
 
     <!-- Premium Snow Effect - Now included in script.js -->
@@ -957,13 +951,13 @@
     </div>
 
     <script defer src="js/lightbox.js"></script>
-  
-    <!-- Menu Tabs -->
-    <script defer src="js/menu-tabs.js"></script>
 
-  
-  
-  
+    <!-- Menu Tabs -->
+    <!-- <script defer src="js/menu-tabs.js"></script> -->
+
+
+
+
     <!-- Preemptive Image Loading with Intersection Observer -->
     <script defer src="js/image-loader.js"></script>
 
@@ -973,21 +967,11 @@
     <!-- Navigation Dropdown Handler -->
     <script defer src="js/navigation-dropdown.js?v=2"></script>
 
-    <!-- PWA Install Prompt -->
-    <div id="pwa-install-prompt" class="pwa-install-prompt" style="display: none;">
-        <div class="pwa-prompt-content">
-            <button class="pwa-prompt-close" aria-label="Close install prompt">×</button>
-            <img src="images/pwa-install-prompt.webp" alt="Install Greek Souvlaki App" class="pwa-prompt-image">
-            <div class="pwa-prompt-text">
-                <h3>התקן אפליקציית סובלאקי יווני</h3>
-                <p>גישה מהירה לתפריט, הזמנות ועדכונים</p>
-            </div>
-            <button id="pwa-install-button" class="pwa-install-button">התקן עכשיו</button>
-        </div>
-    </div>
 
     <!-- PWA Install Handler -->
-    <script defer src="js/pwa-install.js"></script>
+    <script src="js/pwa-install.js"></script>
+
+    <!-- PWA banner will be shown by the main pwa-install.js script -->
 
     <!-- WhatsApp Floating Buttons -->
     <div class="whatsapp-floating" id="whatsapp-floating">
@@ -1008,7 +992,12 @@
     <!-- WhatsApp Buttons Handler -->
     <script defer src="js/whatsapp-buttons.js?v=4"></script>
 
-    <!-- UTF-8 Encoding Validator -->
-    <script defer src="js/encoding-validator.js"></script>
+    <!-- UTF-8 Encoding Validator - Temporarily disabled -->
+    <!-- <script defer src="js/encoding-validator.js"></script> -->
+
+    <!-- Mobile Menu Fix -->
+    <script src="mobile-menu-fix.js"></script>
+    <!-- Force HTTP for local development -->
+    <script src="force-http.js"></script>
 </body>
 </html>

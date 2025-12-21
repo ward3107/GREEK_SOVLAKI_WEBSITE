@@ -1,21 +1,17 @@
-/**
+﻿/**
  * Index page specific scripts extracted from inline HTML
  * This allows removing 'unsafe-inline' from Content Security Policy
  */
 
-// Service Worker Registration
-function registerServiceWorker() {
-    if ('serviceWorker' in navigator) {
-        window.addEventListener('load', () => {
-            navigator.serviceWorker.register('/service-worker.js')
-                .then((registration) => {
-                    console.log('Service Worker registered successfully:', registration.scope);
-                })
-                .catch((error) => {
-                    console.log('Service Worker registration failed:', error);
-                });
-        });
-    }
+// Service Worker Registration (CSP-safe, no inline scripts)
+if ('serviceWorker' in navigator) {
+  navigator.serviceWorker.register('/sw.js')
+      .then((registration) => {
+        console.log("Service Worker registered successfully:", registration.scope);
+      })
+      .catch((error) => {
+        console.log("Service Worker registration failed:", error);
+      });
 }
 
 // Image Fade-In Handler
@@ -75,6 +71,8 @@ function initializeImageFadeIn() {
 
 // Initialize all index page scripts
 document.addEventListener('DOMContentLoaded', function() {
-    registerServiceWorker();
+
     initializeImageFadeIn();
 });
+
+

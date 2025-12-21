@@ -1,373 +1,320 @@
 /**
- * PWA Install Prompt Handler
- * Shows a custom install prompt for Progressive Web App installation
+ * Simple PWA Install Manager
+ * Handles service worker registration and install prompts
  */
 
-(function() {
-    'use strict';
-
-    class PWAInstallPrompt {
-        constructor() {
-            this.prompt = null;
-            this.promptElement = null;
-            this.installButton = null;
-            this.closeButton = null;
-            this.userDismissed = false;
-            this.init();
-        }
-
-        init() {
-            // Check if already installed
-            if (this.isInstalled()) {
-                console.log('PWA is already installed');
-                return;
-            }
-
-            // Check if user previously dismissed the prompt
-            if (localStorage.getItem('pwa-install-dismissed')) {
-                console.log('PWA install prompt previously dismissed');
-                return;
-            }
-
-            // Get DOM elements
-            this.promptElement = document.getElementById('pwa-install-prompt');
-            this.installButton = document.getElementById('pwa-install-button');
-            this.closeButton = document.querySelector('.pwa-prompt-close');
-
-            if (!this.promptElement || !this.installButton || !this.closeButton) {
-                console.log('PWA install prompt elements not found');
-                return;
-            }
-
-            // Setup event listeners
-            this.setupEventListeners();
-            this.setupInstallPromptListener();
-            this.checkInstallConditions();
-        }
-
-        setupEventListeners() {
-            // Install button click
-            this.installButton.addEventListener('click', (e) => {
-                e.preventDefault();
-                this.handleInstallClick();
-            });
-
-            // Close button click
-            this.closeButton.addEventListener('click', (e) => {
-                e.preventDefault();
-                this.dismissPrompt();
-            });
-
-            // Keyboard navigation
-            this.installButton.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    this.handleInstallClick();
-                }
-            });
-
-            this.closeButton.addEventListener('keydown', (e) => {
-                if (e.key === 'Enter' || e.key === ' ') {
-                    e.preventDefault();
-                    this.dismissPrompt();
-                }
-            });
-
-            // Escape key to close
-            document.addEventListener('keydown', (e) => {
-                if (e.key === 'Escape' && this.promptElement.classList.contains('show')) {
-                    this.dismissPrompt();
-                }
-            });
-        }
-
-        setupInstallPromptListener() {
-            // Listen for the beforeinstallprompt event
-            window.addEventListener('beforeinstallprompt', (e) => {
-                e.preventDefault();
-                this.prompt = e;
-                console.log('Install prompt event captured');
-                this.showPrompt();
-            });
-
-            // Listen for successful installation
-            window.addEventListener('appinstalled', () => {
-                console.log('PWA installed successfully');
-                this.hidePrompt();
-                this.showInstallationSuccess();
-            });
-        }
-
-        checkInstallConditions() {
-            // Show prompt after some interaction (delayed to be less intrusive)
-            setTimeout(() => {
-                if (!this.userDismissed && this.shouldShowPrompt()) {
-                    // Check if browser supports PWA installation
-                    if (this.isPWASupported()) {
-                        this.showPrompt();
-                    } else {
-                        this.showManualInstallInstructions();
-                    }
-                }
-            }, 5000); // Show after 5 seconds
-        }
-
-        shouldShowPrompt() {
-            // Don't show on very first visit (let user explore first)
-            const visitCount = parseInt(localStorage.getItem('site-visit-count') || '0');
-            localStorage.setItem('site-visit-count', (visitCount + 1).toString());
-
-            // Only show on 2nd visit or later
-            if (visitCount < 1) {
-                console.log('First visit - will show PWA prompt on next visit');
-                return false;
-            }
-
-            // Only show on mobile devices where PWA makes sense
-            if (!this.isMobileOrTablet()) {
-                console.log('Desktop device - may not show PWA prompt');
-                return false;
-            }
-
-            return true;
-        }
-
-        isMobileOrTablet() {
-            return /Android|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent) ||
-                   (navigator.maxTouchPoints > 0 && window.innerWidth <= 1024);
-        }
-
-        isPWASupported() {
-            // Check if PWA features are supported
-            return 'serviceWorker' in navigator &&
-                   'BeforeInstallPromptEvent' in window &&
-                   !this.isInstalled();
-        }
-
-        isInstalled() {
-            // Check if app is running in standalone mode (installed)
-            return window.matchMedia('(display-mode: standalone)').matches ||
-                   window.navigator.standalone === true ||
-                   document.referrer.includes('android-app://');
-        }
-
-        showPrompt() {
-            if (!this.promptElement || this.userDismissed) return;
-
-            this.promptElement.style.display = 'block';
-            // Force reflow
-            this.promptElement.offsetHeight;
-            this.promptElement.classList.add('show');
-
-            console.log('PWA install prompt shown');
-        }
-
-        hidePrompt() {
-            if (!this.promptElement) return;
-
-            this.promptElement.classList.remove('show');
-            setTimeout(() => {
-                this.promptElement.style.display = 'none';
-            }, 400);
-
-            console.log('PWA install prompt hidden');
-        }
-
-        dismissPrompt() {
-            this.userDismissed = true;
-            localStorage.setItem('pwa-install-dismissed', 'true');
-            this.hidePrompt();
-        }
-
-        async handleInstallClick() {
-            if (this.prompt) {
-                // Use the native browser install prompt
-                try {
-                    const result = await this.prompt.prompt();
-                    console.log('Install prompt result:', result);
-
-                    if (result.outcome === 'accepted') {
-                        console.log('User accepted PWA installation');
-                    } else {
-                        console.log('User dismissed PWA installation');
-                    }
-                } catch (error) {
-                    console.error('Error during PWA installation:', error);
-                }
-            } else {
-                // Show manual install instructions
-                this.showManualInstallInstructions();
-            }
-        }
-
-        showManualInstallInstructions() {
-            // Create a simple modal with instructions
-            const instructions = document.createElement('div');
-            instructions.className = 'pwa-install-instructions';
-            instructions.innerHTML = `
-                <div class="instructions-content">
-                    <h3>כיצד להתקין את האפליקציה</h3>
-                    <div class="instructions-steps">
-                        ${this.isSafari() ? `
-                            <p><strong>iPhone/iPad:</strong></p>
-                            <ol>
-                                <li>לחץ על כפתור השיתוף <span class="icon">📤</span></li>
-                                <li>גלול למטה ובחר "אל המסך הבית" <span class="icon">➕</span></li>
-                                <li>לחץ "הוסף" כדי להתקין</li>
-                            </ol>
-                        ` : `
-                            <p><strong>Android:</strong></p>
-                            <ol>
-                                <li>לחץ על שלוש הנקודות <span class="icon">⋮</span> בפינה הימנית העליונה</li>
-                                <li>בחר "התקן אפליקציה" או "Add to Home screen"</li>
-                                <li>לחץ "התקן" כדי לסיים</li>
-                            </ol>
-                        `}
-                    </div>
-                    <button class="instructions-close">סגור</button>
-                </div>
-            `;
-
-            // Add styles for instructions
-            const style = document.createElement('style');
-            style.textContent = `
-                .pwa-install-instructions {
-                    position: fixed;
-                    top: 0;
-                    left: 0;
-                    right: 0;
-                    bottom: 0;
-                    background: rgba(0, 0, 0, 0.8);
-                    display: flex;
-                    align-items: center;
-                    justify-content: center;
-                    z-index: 10001;
-                    animation: fadeIn 0.3s ease;
-                }
-
-                .instructions-content {
-                    background: var(--color-surface);
-                    padding: 2rem;
-                    border-radius: var(--radius-lg);
-                    max-width: 400px;
-                    margin: 0 1rem;
-                    text-align: center;
-                }
-
-                .instructions-content h3 {
-                    margin-bottom: 1rem;
-                    color: var(--color-text);
-                }
-
-                .instructions-steps {
-                    text-align: right;
-                    margin-bottom: 1.5rem;
-                }
-
-                .instructions-steps ol {
-                    margin: 0.5rem 0;
-                    padding-right: 1.5rem;
-                }
-
-                .instructions-steps li {
-                    margin-bottom: 0.5rem;
-                    line-height: 1.5;
-                }
-
-                .icon {
-                    display: inline-block;
-                    margin: 0 0.25rem;
-                }
-
-                .instructions-close {
-                    background: var(--color-primary);
-                    color: white;
-                    border: none;
-                    padding: 0.7rem 1.5rem;
-                    border-radius: var(--radius-md);
-                    cursor: pointer;
-                    font-weight: 500;
-                }
-            `;
-
-            document.head.appendChild(style);
-            document.body.appendChild(instructions);
-
-            // Handle close
-            const closeBtn = instructions.querySelector('.instructions-close');
-            closeBtn.addEventListener('click', () => {
-                instructions.remove();
-                style.remove();
-            });
-
-            // Close on outside click
-            instructions.addEventListener('click', (e) => {
-                if (e.target === instructions) {
-                    instructions.remove();
-                    style.remove();
-                }
-            });
-        }
-
-        isSafari() {
-            return /^((?!chrome|android).)*safari/i.test(navigator.userAgent);
-        }
-
-        showInstallationSuccess() {
-            // Show success message
-            const successMessage = document.createElement('div');
-            successMessage.className = 'pwa-success-toast';
-            successMessage.textContent = 'האפליקציה הותקנה בהצלחה!';
-
-            // Add styles
-            const style = document.createElement('style');
-            style.textContent = `
-                .pwa-success-toast {
-                    position: fixed;
-                    top: 20px;
-                    left: 50%;
-                    transform: translateX(-50%);
-                    background: #4CAF50;
-                    color: white;
-                    padding: 1rem 2rem;
-                    border-radius: var(--radius-md);
-                    box-shadow: 0 4px 12px rgba(76, 175, 80, 0.3);
-                    z-index: 10002;
-                    animation: slideDown 0.4s ease;
-                }
-
-                @keyframes slideDown {
-                    from {
-                        transform: translateX(-50%) translateY(-100%);
-                        opacity: 0;
-                    }
-                    to {
-                        transform: translateX(-50%) translateY(0);
-                        opacity: 1;
-                    }
-                }
-            `;
-
-            document.head.appendChild(style);
-            document.body.appendChild(successMessage);
-
-            // Remove after 3 seconds
-            setTimeout(() => {
-                successMessage.style.animation = 'slideDown 0.4s ease reverse';
-                setTimeout(() => {
-                    successMessage.remove();
-                    style.remove();
-                }, 400);
-            }, 3000);
-        }
+// PWA Install Manager
+class PWAInstallManager {
+    constructor() {
+        this.installPrompt = null;
+        this.init();
     }
 
-    // Initialize when DOM is ready
-    if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', () => {
-            new PWAInstallPrompt();
+    init() {
+        console.log('[PWA] Initializing...');
+
+        // Register service worker
+        this.registerServiceWorker();
+
+        // Set up install prompt
+        window.addEventListener('beforeinstallprompt', (e) => {
+            console.log('[PWA] Install prompt detected!');
+            e.preventDefault();
+            this.installPrompt = e;
+            this.showInstallButton();
         });
-    } else {
-        new PWAInstallPrompt();
+
+        // Handle app installed
+        window.addEventListener('appinstalled', () => {
+            console.log('[PWA] App installed successfully');
+            this.hideInstallButton();
+        });
+
+        // DEBUG: Force show banner for testing immediately
+        setTimeout(() => {
+            console.log('[PWA] Force showing banner for testing');
+            this.showInstallButton();
+        }, 500);
     }
-})();
+
+    async registerServiceWorker() {
+        if ('serviceWorker' in navigator) {
+            try {
+                const registration = await navigator.serviceWorker.register('/sw.js');
+                console.log('Service Worker registered:', registration);
+                return registration;
+            } catch (error) {
+                console.log('Service Worker registration failed:', error);
+            }
+        }
+        return null;
+    }
+
+    showInstallButton() {
+        console.log('[PWA] Showing install button...');
+
+        // Remove existing banner
+        const existingBanner = document.getElementById('pwa-install-banner');
+        if (existingBanner) existingBanner.remove();
+
+        const banner = document.createElement('div');
+        banner.id = 'pwa-install-banner';
+        banner.className = 'pwa-install-banner';
+        banner.innerHTML = `
+            <div class="pwa-banner-content">
+                <div class="pwa-banner-left">
+                    <span class="pwa-banner-icon">📱</span>
+                    <div class="pwa-banner-text">
+                        <strong>התקן את Greek Souvlaki</strong>
+                        <span>קבלו חוויה מהירה ונוחה יותר!</span>
+                    </div>
+                </div>
+                <div class="pwa-banner-actions">
+                    <button class="pwa-banner-btn-close" id="pwa-close-btn">
+                        ✕
+                    </button>
+                    <button class="pwa-banner-btn-install" id="pwa-install-btn">
+                        התקן עכשיו
+                    </button>
+                </div>
+            </div>
+        `;
+
+        // Add comprehensive styles
+        const style = document.createElement('style');
+        style.textContent = `
+            .pwa-install-banner {
+                position: fixed !important;
+                top: 0 !important;
+                left: 0 !important;
+                right: 0 !important;
+                background: red !important;
+                color: white !important;
+                z-index: 999999 !important;
+                min-height: 100px !important;
+                border-bottom: 5px solid yellow !important;
+                display: block !important;
+                visibility: visible !important;
+            }
+
+            .pwa-banner-content {
+                display: flex;
+                align-items: center;
+                justify-content: space-between;
+                padding: 12px 20px;
+                max-width: 1200px;
+                margin: 0 auto;
+                gap: 20px;
+            }
+
+            .pwa-banner-left {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+                flex: 1;
+            }
+
+            .pwa-banner-icon {
+                font-size: 24px;
+                animation: bounce 2s infinite;
+            }
+
+            .pwa-banner-text {
+                display: flex;
+                flex-direction: column;
+                line-height: 1.3;
+            }
+
+            .pwa-banner-text strong {
+                font-size: 16px;
+                font-weight: 600;
+            }
+
+            .pwa-banner-text span {
+                font-size: 14px;
+                opacity: 0.9;
+            }
+
+            .pwa-banner-actions {
+                display: flex;
+                align-items: center;
+                gap: 12px;
+            }
+
+            .pwa-banner-btn-close {
+                background: rgba(255, 255, 255, 0.1);
+                border: none;
+                color: white;
+                width: 36px;
+                height: 36px;
+                border-radius: 50%;
+                cursor: pointer;
+                font-size: 18px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.3s ease;
+            }
+
+            .pwa-banner-btn-close:hover {
+                background: rgba(255, 255, 255, 0.2);
+                transform: scale(1.1);
+            }
+
+            .pwa-banner-btn-install {
+                background: white;
+                color: #1e40af;
+                border: none;
+                padding: 10px 20px;
+                border-radius: 25px;
+                font-size: 14px;
+                font-weight: 600;
+                cursor: pointer;
+                transition: all 0.3s ease;
+                white-space: nowrap;
+            }
+
+            .pwa-banner-btn-install:hover {
+                background: #f0f0f0;
+                transform: translateY(-2px);
+                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            }
+
+            @keyframes slideDown {
+                from {
+                    transform: translateY(-100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+            }
+
+            @keyframes bounce {
+                0%, 20%, 53%, 80%, 100% {
+                    transform: translateY(0);
+                }
+                40%, 43% {
+                    transform: translateY(-3px);
+                }
+                70% {
+                    transform: translateY(-2px);
+                }
+                90% {
+                    transform: translateY(-1px);
+                }
+            }
+
+            /* Mobile responsiveness */
+            @media (max-width: 768px) {
+                .pwa-banner-content {
+                    flex-direction: column;
+                    text-align: center;
+                    padding: 15px 20px;
+                    gap: 15px;
+                }
+
+                .pwa-banner-left {
+                    flex-direction: column;
+                    gap: 8px;
+                }
+
+                .pwa-banner-text strong {
+                    font-size: 15px;
+                }
+
+                .pwa-banner-text span {
+                    font-size: 13px;
+                }
+
+                .pwa-banner-actions {
+                    width: 100%;
+                    justify-content: center;
+                }
+
+                .pwa-banner-btn-install {
+                    flex: 1;
+                    max-width: 200px;
+                }
+            }
+
+            /* Add space for banner on body */
+            body {
+                padding-top: 0 !important;
+            }
+
+            body.has-pwa-banner {
+                padding-top: 70px !important;
+            }
+
+            @media (max-width: 768px) {
+                body.has-pwa-banner {
+                    padding-top: 110px !important;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Add class to body for spacing
+        document.body.classList.add('has-pwa-banner');
+
+        // Add event listeners for buttons (CSP-safe)
+        const closeBtn = banner.querySelector('#pwa-close-btn');
+        const installBtn = banner.querySelector('#pwa-install-btn');
+
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => {
+                this.hideInstallButton();
+            });
+        }
+
+        if (installBtn) {
+            installBtn.addEventListener('click', () => {
+                this.promptInstall();
+            });
+        }
+
+        // Store reference for promptInstall method
+        this.bannerElement = banner;
+        document.body.appendChild(banner);
+
+        // Make promptInstall available globally for other potential uses
+        window.pwaManager = this;
+
+        console.log('[PWA] Install button banner added to page');
+    }
+
+    hideInstallButton() {
+        const banner = document.getElementById('pwa-install-banner');
+        if (banner) banner.remove();
+
+        // Remove body spacing class
+        document.body.classList.remove('has-pwa-banner');
+    }
+
+    async promptInstall() {
+        if (!this.installPrompt) {
+            alert('ההתקנה אינה זמינה כרגע');
+            return;
+        }
+
+        const result = await this.installPrompt.prompt();
+        this.installPrompt = null;
+        // Don't hide immediately - let onAppInstalled handle it
+        if (result.outcome === 'accepted') {
+            console.log('User accepted the install prompt');
+        } else {
+            console.log('User dismissed the install prompt');
+        }
+    }
+}
+
+// Initialize when DOM is ready
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', () => {
+        new PWAInstallManager();
+    });
+} else {
+    new PWAInstallManager();
+}

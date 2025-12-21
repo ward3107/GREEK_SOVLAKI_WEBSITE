@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>אתה במצב לא מקוון - Greek Souvlaki</title>
+  <meta name="theme-color" content="#1e3a8a">
+  <style>
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    body {
+      font-family: 'Inter', 'Poppins', sans-serif;
+      background: linear-gradient(135deg, #1e3a8a 0%, #3730a3 100%);
+      color: white;
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      padding: 20px;
+      direction: rtl;
+    }
+
+    .offline-container {
+      max-width: 500px;
+      background: rgba(255, 255, 255, 0.1);
+      backdrop-filter: blur(10px);
+      border-radius: 20px;
+      padding: 40px;
+      box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+    }
+
+    .offline-icon {
+      font-size: 80px;
+      margin-bottom: 20px;
+    }
+
+    h1 {
+      font-size: 28px;
+      margin-bottom: 15px;
+      font-weight: 700;
+    }
+
+    p {
+      font-size: 16px;
+      line-height: 1.6;
+      margin-bottom: 25px;
+      opacity: 0.9;
+    }
+
+    .retry-btn {
+      background: #ffffff;
+      color: #1e3a8a;
+      border: none;
+      padding: 15px 30px;
+      border-radius: 50px;
+      font-size: 16px;
+      font-weight: 600;
+      cursor: pointer;
+      transition: all 0.3s ease;
+      text-decoration: none;
+      display: inline-block;
+    }
+
+    .retry-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(0, 0, 0, 0.2);
+    }
+
+    .offline-tips {
+      margin-top: 30px;
+      font-size: 14px;
+      opacity: 0.7;
+    }
+  </style>
+</head>
+<body>
+  <div class="offline-container">
+    <div class="offline-icon">📱</div>
+    <h1>אתה במצב לא מקוון</h1>
+    <p>
+      נראה שאין חיבור לאינטרנט. <br>
+      אפשר לגשת למידע שכבר נשמר במכשיר, או לנסות להתחבר מחדש.
+    </p>
+    <button class="retry-btn" onclick="window.location.reload()">
+      נסה שוב
+    </button>
+    <div class="offline-tips">
+      💡 טיפ: האפליקציה שלנו עובדת גם ללא אינטרנט!
+    </div>
+  </div>
+
+  <script>
+    // Try to reconnect when online
+    window.addEventListener('online', () => {
+      window.location.reload();
+    });
+
+    function updateConnectionStatus() {
+      const tips = document.querySelector('.offline-tips');
+      if (navigator.onLine) {
+        tips.innerHTML = '🟢 מחובר לאינטרנט - מרענן...';
+        setTimeout(() => window.location.reload(), 1000);
+      } else {
+        tips.innerHTML = '💡 טיפ: האפליקציה שלנו עובדת גם ללא אינטרנט!';
+      }
+    }
+
+    window.addEventListener('online', updateConnectionStatus);
+    window.addEventListener('offline', updateConnectionStatus);
+    updateConnectionStatus();
+  </script>
+</body>
+</html>
