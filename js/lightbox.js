@@ -1,5 +1,7 @@
 // Lightbox Gallery Functionality with Zoom, Rotate and Pan
 (function() {
+    console.log('[Lightbox] Initializing lightbox script...');
+
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
     const zoomLevelDisplay = document.getElementById('zoom-level');
@@ -14,6 +16,7 @@
     const resetBtn = document.getElementById('reset-view');
 
     const galleryItems = document.querySelectorAll('.gallery-item img');
+    console.log('[Lightbox] Found gallery items:', galleryItems.length);
     let currentIndex = 0;
     let currentZoom = 1;
     let currentRotation = 0;
@@ -38,7 +41,20 @@
 
     // Open lightbox on image click
     galleryItems.forEach((img, index) => {
-        img.addEventListener('click', () => {
+        console.log('[Lightbox] Found gallery image:', img.src);
+        img.addEventListener('click', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('[Lightbox] Image clicked, opening lightbox for index:', index);
+            currentIndex = index;
+            openLightbox();
+        });
+
+        // Also handle touch events for mobile
+        img.addEventListener('touchend', (e) => {
+            e.preventDefault();
+            e.stopPropagation();
+            console.log('[Lightbox] Image touched, opening lightbox for index:', index);
             currentIndex = index;
             openLightbox();
         });
