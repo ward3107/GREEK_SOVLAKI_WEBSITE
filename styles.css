@@ -1204,6 +1204,118 @@ body.dark-mode .nav-dropdown-item:focus {
     }
 }
 
+/* Main Navigation Dropdown Styles */
+.main-nav-dropdown {
+    margin-right: auto;
+    margin-left: 20px;
+}
+
+.main-nav-toggle {
+    display: flex;
+    align-items: center;
+    padding: 12px 20px;
+    background: rgba(255, 255, 255, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    border-radius: var(--radius-lg);
+    color: white;
+    font-size: 16px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    backdrop-filter: blur(10px);
+}
+
+.main-nav-toggle:hover,
+.main-nav-toggle:focus {
+    background: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.4);
+    transform: translateY(-1px);
+}
+
+.nav-icon {
+    font-size: 18px;
+    margin-right: 8px;
+}
+
+.main-nav-panel {
+    position: absolute;
+    top: 100%;
+    left: 0;
+    min-width: 200px;
+    background: white;
+    border: 1px solid var(--color-border);
+    border-radius: var(--radius-lg);
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+    margin-top: 5px;
+    overflow: hidden;
+    z-index: 1000;
+}
+
+.main-nav-panel[aria-hidden="false"] {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.main-nav-panel[aria-hidden="true"] {
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(-10px);
+}
+
+.main-nav-panel .nav-dropdown-item {
+    display: block;
+    width: 100%;
+    padding: 15px 20px;
+    background: white;
+    border: none;
+    text-align: right;
+    font-size: 15px;
+    font-weight: 500;
+    color: var(--color-text);
+    text-decoration: none;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    border-bottom: 1px solid var(--color-border-light);
+}
+
+.main-nav-panel .nav-dropdown-item:last-child {
+    border-bottom: none;
+}
+
+.main-nav-panel .nav-dropdown-item:hover,
+.main-nav-panel .nav-dropdown-item:focus {
+    background: var(--color-primary);
+    color: white;
+}
+
+.main-nav-panel .nav-dropdown-item.active {
+    background: var(--color-primary);
+    color: white;
+    font-weight: 600;
+}
+
+/* Mobile Responsive for Main Nav */
+@media (max-width: 768px) {
+    .main-nav-dropdown {
+        width: 100%;
+        margin: 10px 0;
+    }
+
+    .main-nav-toggle {
+        width: 100%;
+        justify-content: space-between;
+    }
+
+    .main-nav-panel {
+        position: relative;
+        top: 0;
+        left: 0;
+        width: 100%;
+        margin-top: 10px;
+    }
+}
+
 /* PWA Install Prompt Styles */
 .pwa-install-prompt {
     position: fixed;

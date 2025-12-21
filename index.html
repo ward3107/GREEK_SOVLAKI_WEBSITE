@@ -365,14 +365,21 @@
                         </div>
                     </div>
                 </div>
-                <ul class="nav-menu">
-                    <li><a href="#home" data-lang="nav-home">בית</a></li>
-                    <li><a href="#menu" data-lang="nav-menu">תפריט</a></li>
-                    <li><a href="#gallery" data-lang="nav-gallery">גלריה</a></li>
-                    <li><a href="#about" data-lang="nav-about">אודות</a></li>
-                    <li><a href="#faq" data-lang="nav-faq">שאלות נפוצות</a></li>
-                    <li><a href="#contact" data-lang="nav-contact">צור קשר</a></li>
-                </ul>
+                <div class="nav-dropdown main-nav-dropdown">
+                    <button type="button" class="nav-dropdown-toggle main-nav-toggle" aria-haspopup="true" aria-expanded="false">
+                        <span class="nav-icon">🧭</span>
+                        <span class="current-nav-item" data-lang="nav-menu">תפריט</span>
+                        <span class="dropdown-arrow">▼</span>
+                    </button>
+                    <div class="nav-dropdown-panel main-nav-panel" aria-hidden="true">
+                        <a href="#home" class="nav-dropdown-item" data-lang="nav-home" role="menuitem">בית</a>
+                        <a href="#menu" class="nav-dropdown-item active" data-lang="nav-menu" role="menuitem">תפריט</a>
+                        <a href="#gallery" class="nav-dropdown-item" data-lang="nav-gallery" role="menuitem">גלריה</a>
+                        <a href="#about" class="nav-dropdown-item" data-lang="nav-about" role="menuitem">אודות</a>
+                        <a href="#faq" class="nav-dropdown-item" data-lang="nav-faq" role="menuitem">שאלות נפוצות</a>
+                        <a href="#contact" class="nav-dropdown-item" data-lang="nav-contact" role="menuitem">צור קשר</a>
+                    </div>
+                </div>
                 <button class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
                     <span></span>
                     <span></span>

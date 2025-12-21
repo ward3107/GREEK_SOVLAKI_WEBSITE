@@ -65,6 +65,16 @@
                     item.addEventListener('click', (e) => {
                         const href = item.getAttribute('href');
 
+                        // Update main navigation button text if this is the main nav dropdown
+                        const currentNavItem = dropdown.querySelector('.current-nav-item');
+                        if (currentNavItem) {
+                            currentNavItem.textContent = item.textContent.trim();
+                        }
+
+                        // Update active state
+                        items.forEach(i => i.classList.remove('active'));
+                        item.classList.add('active');
+
                         // Only handle internal hash links
                         if (href && href.startsWith('#')) {
                             e.preventDefault();
