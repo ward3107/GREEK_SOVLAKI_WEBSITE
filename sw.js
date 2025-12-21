@@ -1,4 +1,4 @@
-﻿const VERSION = "pwa-clean-v1";
+﻿const VERSION = "pwa-v2-fixed";
 const PRECACHE = `${VERSION}-precache`;
 const RUNTIME  = `${VERSION}-runtime`;
 
@@ -9,7 +9,6 @@ const PRECACHE_URLS = [
   "/manifest.webmanifest",
   "/offline.html",
   "/styles.css",
-  "/favicon.ico",
   "/logo.jpg",
   "/icons/icon-192.png",
   "/icons/icon-512.png",
@@ -20,7 +19,16 @@ const PRECACHE_URLS = [
 self.addEventListener("install", (event) => {
   event.waitUntil(
     caches.open(PRECACHE)
-      .then((cache) => cache.addAll(PRECACHE_URLS))
+      .then((cache) => {
+        return Promise.allSettled(
+          PRECACHE_URLS.map(url =>
+            cache.add(url).catch(err => {
+              console.warn('[SW] Failed to cache:', url, err);
+              return null;
+            })
+          )
+        );
+      })
       .then(() => self.skipWaiting())
   );
 });
