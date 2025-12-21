@@ -6,7 +6,7 @@
 // PWA Install Manager
 class PWAInstallManager {
     constructor() {
-        installPrompt = null;
+        this.installPrompt = null;
         this.init();
     }
 
@@ -17,7 +17,7 @@ class PWAInstallManager {
         this.registerServiceWorker();
 
         // Set up install prompt
-        window.addEventListener('beforeinstallprompt', (e) => {
+        globalThis.addEventListener('beforeinstallprompt', (e) => {
             console.log('[PWA] Install prompt detected!');
             e.preventDefault();
             this.installPrompt = e;
@@ -25,7 +25,7 @@ class PWAInstallManager {
         });
 
         // Handle app installed
-        window.addEventListener('appinstalled', () => {
+        globalThis.addEventListener('appinstalled', () => {
             console.log('[PWA] App installed successfully');
             localStorage.setItem('pwa-installed', 'true');
             this.hideInstallButton();
@@ -68,8 +68,8 @@ class PWAInstallManager {
         const isHTTPS = location.protocol === 'https:' || location.hostname === 'localhost';
 
         // Check if the site is already installed
-        const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
-        const isInWebApp = window.matchMedia('(display-mode: standalone)').matches || window.matchMedia('(display-mode: minimal-ui)').matches;
+        const isStandalone = globalThis.matchMedia('(display-mode: standalone)').matches;
+        const isInWebApp = globalThis.matchMedia('(display-mode: standalone)').matches || globalThis.matchMedia('(display-mode: minimal-ui)').matches;
         const navigatorStandalone = navigator.standalone;
         const hasAppInstalled = localStorage.getItem('pwa-installed') === 'true';
 
@@ -370,7 +370,7 @@ class PWAInstallManager {
         document.body.appendChild(banner);
 
         // Make promptInstall available globally for other potential uses
-        window.pwaManager = this;
+        globalThis.pwaManager = this;
 
         console.log('[PWA] Install button banner added to page');
     }
@@ -403,10 +403,9 @@ class PWAInstallManager {
 // Initialize when DOM is ready
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
-        new PWAInstallManager();
+        ;
     });
-} else {
-    new PWAInstallManager();
+} else { ;
 }
 
 // Global function for manual testing on mobile
