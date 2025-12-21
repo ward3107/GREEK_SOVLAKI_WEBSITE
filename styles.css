@@ -1207,7 +1207,7 @@ body.dark-mode .nav-dropdown-item:focus {
 /* Main Navigation Dropdown Styles */
 .main-nav-dropdown {
     margin-right: auto;
-    margin-left: 20px;
+    margin-left: 0;
 }
 
 .main-nav-toggle {
