@@ -6,7 +6,7 @@
 // PWA Install Manager
 class PWAInstallManager {
     constructor() {
-        this.installPrompt = null;
+        installPrompt = null;
         this.init();
     }
 
@@ -103,7 +103,7 @@ class PWAInstallManager {
         const existingBanner = document.getElementById('pwa-install-banner');
         const allBanners = document.querySelectorAll('[id*="pwa-install"], [class*="pwa-install"]');
 
-        console.log('[PWA] Existing banners found:', existingBanners);
+        console.log('[PWA] Existing banners found:', existingBanner);
         console.log('[PWA] All PWA-related elements:', allBanners.length);
 
               // Remove all existing PWA banners to prevent duplicates
