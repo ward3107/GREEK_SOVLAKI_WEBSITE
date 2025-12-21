@@ -27,6 +27,7 @@ class PWAInstallManager {
         // Handle app installed
         window.addEventListener('appinstalled', () => {
             console.log('[PWA] App installed successfully');
+            localStorage.setItem('pwa-installed', 'true');
             this.hideInstallButton();
         });
 
@@ -68,25 +69,48 @@ class PWAInstallManager {
 
         // Check if the site is already installed
         const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
-        const isAlreadyInstalled = navigator.standalone || document.referrer.includes('android-app://');
+        const isInWebApp = window.matchMedia('(display-mode: standalone)').matches || window.matchMedia('(display-mode: minimal-ui)').matches;
+        const navigatorStandalone = navigator.standalone;
+        const hasAppInstalled = localStorage.getItem('pwa-installed') === 'true';
 
         console.log('[PWA] Installability Check:', {
             hasServiceWorker,
             hasManifest,
             isHTTPS,
             isStandalone,
-            isAlreadyInstalled
+            isInWebApp,
+            navigatorStandalone,
+            hasAppInstalled,
+            userAgent: navigator.userAgent,
+            referrer: document.referrer
         });
 
-        return hasServiceWorker && hasManifest && isHTTPS && !isAlreadyInstalled;
+        // If any installation indicator is true, don't show banner
+        const isAlreadyInstalled = isStandalone || isInWebApp || navigatorStandalone || hasAppInstalled;
+
+        if (isAlreadyInstalled) {
+            console.log('[PWA] App already installed, hiding banner');
+            return false;
+        }
+
+        return hasServiceWorker && hasManifest && isHTTPS;
     }
 
     showInstallButton() {
         console.log('[PWA] Showing install button...');
 
-        // Remove existing banner
+        // DEBUG: Check for existing banners
         const existingBanner = document.getElementById('pwa-install-banner');
-        if (existingBanner) existingBanner.remove();
+        const allBanners = document.querySelectorAll('[id*="pwa-install"], [class*="pwa-install"]');
+
+        console.log('[PWA] Existing banners found:', existingBanners);
+        console.log('[PWA] All PWA-related elements:', allBanners.length);
+
+              // Remove all existing PWA banners to prevent duplicates
+        allBanners.forEach(banner => {
+            console.log('[PWA] Removing existing banner:', banner);
+            banner.remove();
+        });
 
         const banner = document.createElement('div');
         banner.id = 'pwa-install-banner';
