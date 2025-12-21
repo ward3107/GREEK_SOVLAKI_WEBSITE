@@ -149,15 +149,20 @@ class EncodingValidator {
         // • Common emojis: [\u2600-\u27BF\u1F300-\u1F9FF]
         // • Currency symbols: [\u20A0-\u20CF]
         // • HTML entities (like &copy;, &times;, &nbsp;)
-        // • Right-to-left marks: [\u2005-\u2007]
+        // • Right-to-left marks: [\u2005-\u2007\u200B-\u200F]
         // • Common punctuation and diacritics: [\u2000-\u206F\u0300-\u036F]
 
-        if (/[\u0590-\u05FF\u05EA\u0600-\u06FF\u0400-\u04FF\u0370-\u03FF\u2600-\u27BF\u1F300-\u1F9FF\u20A0-\u20CF\u2005-\u2007\u2000-\u206F\u0300-\u036F&]/.test(text)) {
+        if (/[\u0590-\u05FF\u05EA\u0600-\u06FF\u0400-\u04FF\u0370-\u03FF\u2600-\u27BF\u1F300-\u1F9FF\u20A0-\u20CF\u2005-\u2007\u200B-\u200F\u2000-\u206F\u0300-\u036F&]/.test(text)) {
             return false;
         }
 
         // Additional check: skip if text contains legitimate multilingual content patterns
         if (/[\u05D0-\u05EA]|[\u0621-\u064A]|[\u0410-\u044F]|[\u0391-\u03F1]|©|®|™|°|±|×|÷|≤|≥|≠|≈|∞|∑|∏|∫|∂|∇|∆|∅|∈|∉|∋|⊂|⊃|⊄|⊅|∧|∨|¬|→|←|↑|↓|↔|⇒|⇐|⇑|⇓|⇔|∀|∃|∄|∴|∵|∶|∷|∝|∞|∟|∠|∡|∢|∥|∦|∧|∨|∩|∪|⊂|⊃|⊄|⊅|⊆|⊇|⊈|⊉|⊊|⊋|⊌|⊍|⊎|⊏|⊐|⊑|⊒|⊓|⊔|⊕|⊖|⊗|⊘|⊙|⊚|⊛|⊜|⊝|⊞|⊟|⊠|⊡|⊢|⊣|⊤|⊥|⊦|⊧|⊨|⊩|⊪|⊫|⊬|⊭|⊮|⊯|⊰|⊱|⊲|⊳|⊴|⊵|⊸|⊹|⊺|⊻|⊼|⊽|⊾|⊿|⋀|⋁|⋂|⋃|⋄|⋅|⋆|⋇|⋈|⋉|⋊|⋋|⋌|⋍|⋎|⋏|⋐|⋑|⋒|⋓|⋔|⋕|⋖|⋗|⋘|⋙|⋚|⋛|⋜|⋝|⋞|⋟|⋠|⋡|⋢|⋣|⋤|⋥|⋦|⋧|⋨|⋩|⋪|⋫|⋬|⋭|⋮|⋯|⋰|⋱|⋲|⋳|⋴|⋵|⋶|⋷|⋸|⋹|⋺|⋻|⋼|⋽|⋾|⋿]/.test(text)) {
+            return false;
+        }
+
+        // Skip validation for ANY non-ASCII characters (this is a multilingual site)
+        if (/[^\x00-\x7F]/.test(text)) {
             return false;
         }
 

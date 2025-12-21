@@ -1,0 +1,118 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Force PWA Install</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1e3a8a">
+    <style>
+        body { font-family: Arial, sans-serif; padding: 20px; text-align: center; direction: rtl; }
+        .install-card {
+            background: white;
+            border: 3px solid #1e3a8a;
+            border-radius: 16px;
+            padding: 30px;
+            margin: 20px auto;
+            max-width: 400px;
+            box-shadow: 0 8px 32px rgba(0,0,0,0.2);
+        }
+        .install-btn {
+            background: #1e3a8a;
+            color: white;
+            border: none;
+            padding: 20px 40px;
+            border-radius: 12px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            margin: 15px;
+        }
+        .install-btn:hover { background: #2563eb; }
+        .manual-instructions {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 12px;
+            margin: 20px 0;
+            text-align: right;
+        }
+    </style>
+</head>
+<body>
+    <div class="install-card">
+        <h2>📱 התקן אפליקציית סובלאקי</h2>
+        <p>התקן את האתר כאפליקציה על המכשיר שלך</p>
+
+        <button class="install-btn" onclick="installApp()">התקן אפליקציה</button>
+
+        <div class="manual-instructions">
+            <h3>התקנה ידנית:</h3>
+            <p><strong>Chrome/Edge:</strong> לחץ על כפתור ⬇ בשורת הכתובת</p>
+            <p><strong>Safari iPhone:</strong> לחץ על שיתוף 📤 → "אל המסך הבית"</p>
+            <p><strong>Android:</strong> לחץ על שלוש נקודות ⋮ → "הוסף למסך הבית"</p>
+        </div>
+    </div>
+
+    <script>
+        let deferredPrompt = null;
+
+        function installApp() {
+            console.log('Install clicked');
+
+            if (deferredPrompt) {
+                console.log('Using deferred prompt');
+                deferredPrompt.prompt().then((result) => {
+                    console.log('Install result:', result);
+                    if (result.outcome === 'accepted') {
+                        alert('✅ האפליקציה תותקן בהצלחה!');
+                    } else {
+                        alert('התקנה בוטלה');
+                    }
+                    deferredPrompt = null;
+                });
+            } else {
+                alert('לחץ על כפתור ההתקנה בדפדפן שלך (בשורת הכתובת או בתפריט)');
+
+                // Force show browser install UI for Chrome
+                if (window.chrome && window.chrome.webstore) {
+                    console.log('Chrome detected');
+                }
+
+                // Try to trigger install manually
+                if (window.navigator && window.navigator.install) {
+                    window.navigator.install();
+                }
+            }
+        }
+
+        // Listen for install prompt
+        window.addEventListener('beforeinstallprompt', (e) => {
+            console.log('🎉 beforeinstallprompt fired!');
+            e.preventDefault();
+            deferredPrompt = e;
+
+            // Update button text
+            const btn = document.querySelector('.install-btn');
+            btn.textContent = 'התקן עכשיו (זמין!)';
+            btn.style.background = '#28a745';
+        });
+
+        window.addEventListener('appinstalled', () => {
+            console.log('✅ App installed!');
+            alert('🎉 האפליקציה הותקנה בהצלחה!');
+        });
+
+        // Register service worker
+        if ('serviceWorker' in navigator) {
+            navigator.serviceWorker.register('/service-worker.js').then(reg => {
+                console.log('Service worker registered:', reg);
+            });
+        }
+
+        // Check if already installed
+        if (window.matchMedia('(display-mode: standalone)').matches) {
+            alert('האפליקציה כבר מותקנת!');
+        }
+    </script>
+</body>
+</html>
