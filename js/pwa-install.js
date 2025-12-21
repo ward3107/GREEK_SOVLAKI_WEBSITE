@@ -17,7 +17,7 @@ class PWAInstallManager {
         this.registerServiceWorker();
 
         // Set up install prompt
-        globalThis.addEventListener('beforeinstallprompt', (e) => {
+        window.addEventListener('beforeinstallprompt', (e) => {
             console.log('[PWA] Install prompt detected!');
             e.preventDefault();
             this.installPrompt = e;
@@ -25,7 +25,7 @@ class PWAInstallManager {
         });
 
         // Handle app installed
-        globalThis.addEventListener('appinstalled', () => {
+        window.addEventListener('appinstalled', () => {
             console.log('[PWA] App installed successfully');
             localStorage.setItem('pwa-installed', 'true');
             this.hideInstallButton();

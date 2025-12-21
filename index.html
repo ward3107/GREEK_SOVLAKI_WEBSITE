@@ -407,13 +407,30 @@
     <div class="container">
         <h2 class="fade-in" data-lang="menu-title">התפריט שלנו</h2>
 
-        <!-- Menu Tabs Navigation -->
-        <div class="menu-tabs" role="tablist">
-            <button type="button" id="tab-pita-btn" class="menu-tab active" data-tab="pita" aria-controls="tab-pita" role="tab" aria-selected="true"><span class="tab-icon">🥙</span> <span data-lang="cat-pita-title">סובלאקי בפיתה</span></button>
-            <button type="button" id="tab-plates-btn" class="menu-tab" data-tab="plates" aria-controls="tab-plates" role="tab" aria-selected="false"><span class="tab-icon">🍽</span> <span data-lang="cat-plates-title">צלחות</span></button>
-            <button type="button" id="tab-platters-btn" class="menu-tab" data-tab="platters" aria-controls="tab-platters" role="tab" aria-selected="false"><span class="tab-icon">🍖</span> <span data-lang="cat-platters-title">מגשים</span></button>
-            <button type="button" id="tab-more-btn" class="menu-tab" data-tab="more" aria-controls="tab-more" role="tab" aria-selected="false"><span class="tab-icon">🍕</span> <span data-lang="tab-more">עוד</span></button>
-            <button type="button" id="tab-drinks-btn" class="menu-tab" data-tab="drinks" aria-controls="tab-drinks" role="tab" aria-selected="false"><span class="tab-icon">🥤</span> <span data-lang="cat-drinks-title">משקאות</span></button>
+        <!-- Menu Dropdown Navigation -->
+        <div class="nav-dropdown" id="menu-categories-dropdown">
+            <button type="button" class="nav-dropdown-toggle" id="menu-dropdown-toggle" aria-haspopup="true" aria-expanded="false">
+                <span class="dropdown-icon">📋</span>
+                <span id="current-menu-category" data-lang="cat-pita-title">סובלאקי בפיתה</span>
+                <span class="dropdown-arrow">▼</span>
+            </button>
+            <div class="nav-dropdown-panel" id="menu-dropdown-panel" aria-hidden="true">
+                <button type="button" class="dropdown-item active" data-category="pita" aria-selected="true">
+                    <span class="item-icon">🥙</span> <span data-lang="cat-pita-title">סובלאקי בפיתה</span>
+                </button>
+                <button type="button" class="dropdown-item" data-category="plates" aria-selected="false">
+                    <span class="item-icon">🍽</span> <span data-lang="cat-plates-title">צלחות</span>
+                </button>
+                <button type="button" class="dropdown-item" data-category="platters" aria-selected="false">
+                    <span class="item-icon">🍖</span> <span data-lang="cat-platters-title">מגשים</span>
+                </button>
+                <button type="button" class="dropdown-item" data-category="more" aria-selected="false">
+                    <span class="item-icon">🍕</span> <span data-lang="tab-more">עוד</span>
+                </button>
+                <button type="button" class="dropdown-item" data-category="drinks" aria-selected="false">
+                    <span class="item-icon">🥤</span> <span data-lang="cat-drinks-title">משקאות</span>
+                </button>
+            </div>
         </div>
 
         <!-- Tab Content: Souvlaki in Pita -->
@@ -953,7 +970,7 @@
     <script defer src="js/lightbox.js"></script>
 
     <!-- Menu Tabs -->
-    <!-- <script defer src="js/menu-tabs.js"></script> -->
+    <script defer src="js/menu-tabs.js"></script>
 
 
 

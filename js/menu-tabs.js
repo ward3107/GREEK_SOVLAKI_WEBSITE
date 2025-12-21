@@ -8,17 +8,32 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 function initMenuTabs() {
-    const tabs = document.querySelectorAll('.menu-tab');
+    // Try tabs first (fallback for old structure)
+    let tabs = document.querySelectorAll('.menu-tab');
+    let useDropdown = false;
+
+    // If no tabs, try dropdown items
+    if (tabs.length === 0) {
+        tabs = document.querySelectorAll('.dropdown-item');
+        useDropdown = true;
+    }
+
     const tabContents = document.querySelectorAll('.menu-tab-content');
+    const dropdownToggle = document.getElementById('menu-dropdown-toggle');
+    const currentCategorySpan = document.getElementById('current-menu-category');
 
     if (tabs.length === 0) {
         return;
     }
 
-    // Add keyboard navigation support
+    // Add event listeners
     tabs.forEach(tab => {
         tab.addEventListener('click', function() {
-            switchTab(this);
+            if (useDropdown) {
+                switchDropdownTab(this);
+            } else {
+                switchTab(this);
+            }
         });
 
         // Keyboard navigation
@@ -51,7 +66,11 @@ function initMenuTabs() {
                 case 'Enter':
                 case ' ':
                     e.preventDefault();
-                    switchTab(this);
+                    if (useDropdown) {
+                        switchDropdownTab(this);
+                    } else {
+                        switchTab(this);
+                    }
                     return;
             }
 
@@ -88,6 +107,65 @@ function initMenuTabs() {
 
             // Set focus to the tab panel for screen readers
             targetContent.focus();
+
+            // Re-trigger animations for cards in the new tab
+            const cards = targetContent.querySelectorAll('.menu-card');
+            cards.forEach((card, index) => {
+                card.style.animation = 'none';
+                card.offsetHeight; // Trigger reflow
+                card.style.animation = `fadeInScale 0.5s cubic-bezier(0.4, 0, 0.2, 1) ${index * 0.05}s forwards`;
+            });
+        }
+
+        // Smooth scroll to menu section if needed
+        const menuSection = document.getElementById('menu');
+        if (menuSection) {
+            const rect = menuSection.getBoundingClientRect();
+            if (rect.top < 0 || rect.top > window.innerHeight * 0.3) {
+                menuSection.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+    }
+
+    function switchDropdownTab(selectedItem) {
+        const targetCategory = selectedItem.getAttribute('data-category');
+
+        // Update button text
+        if (currentCategorySpan) {
+            currentCategorySpan.textContent = selectedItem.textContent.trim();
+        }
+
+        // Update ARIA states and visual states for all dropdown items
+        tabs.forEach(t => {
+            t.classList.remove('active');
+            t.setAttribute('aria-selected', 'false');
+        });
+
+        // Update ARIA states and visual states for selected item
+        selectedItem.classList.add('active');
+        selectedItem.setAttribute('aria-selected', 'true');
+
+        // Close dropdown
+        if (dropdownToggle) {
+            dropdownToggle.setAttribute('aria-expanded', 'false');
+        }
+
+        const dropdownPanel = document.getElementById('menu-dropdown-panel');
+        if (dropdownPanel) {
+            dropdownPanel.setAttribute('aria-hidden', 'true');
+        }
+
+        // Hide all tab panels and remove active class
+        tabContents.forEach(content => {
+            content.classList.remove('active');
+            content.setAttribute('hidden', '');
+        });
+
+        // Show corresponding tab panel
+        const targetContent = document.getElementById('tab-' + targetCategory);
+        if (targetContent) {
+            targetContent.classList.add('active');
+            targetContent.removeAttribute('hidden');
 
             // Re-trigger animations for cards in the new tab
             const cards = targetContent.querySelectorAll('.menu-card');
