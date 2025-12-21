@@ -30,11 +30,13 @@ class PWAInstallManager {
             this.hideInstallButton();
         });
 
-        // DEBUG: Force show banner for testing immediately
+        // Show install banner when PWA is installable
         setTimeout(() => {
-            console.log('[PWA] Force showing banner for testing');
-            this.showInstallButton();
-        }, 500);
+            if (this.installPrompt) {
+                console.log('[PWA] Install prompt available, showing banner');
+                this.showInstallButton();
+            }
+        }, 3000);
     }
 
     async registerServiceWorker() {
@@ -88,11 +90,15 @@ class PWAInstallManager {
                 top: 0 !important;
                 left: 0 !important;
                 right: 0 !important;
-                background: red !important;
+                background: linear-gradient(135deg, rgba(30, 64, 175, 0.97) 0%, rgba(55, 48, 163, 0.97) 100%) !important;
                 color: white !important;
-                z-index: 999999 !important;
-                min-height: 100px !important;
-                border-bottom: 5px solid yellow !important;
+                z-index: 9999 !important;
+                box-shadow: 0 4px 20px rgba(30, 58, 138, 0.3) !important;
+                animation: slideDown 0.6s cubic-bezier(0.23, 1, 0.32, 1) !important;
+                font-family: 'Inter', 'Poppins', sans-serif !important;
+                backdrop-filter: blur(10px) !important;
+                min-height: 80px !important;
+                border-bottom: 2px solid rgba(255, 255, 255, 0.3) !important;
                 display: block !important;
                 visibility: visible !important;
             }

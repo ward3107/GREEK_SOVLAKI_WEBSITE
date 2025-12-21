@@ -1,21 +1,26 @@
 ﻿{
-  "name": "סובלאקי יווני כפר יאסיף - Greek Souvlaki Restaurant",
-  "short_name": "Greek Souvlaki",
-  "description": "מסעדה יוונית אותנטית בכפר יאסיף. סובלאקי, גירוס, פיתות יווניות ומגשי בשרים.",
-  "start_url": "/",
+  "name": "Greek Souvlaki",
+  "short_name": "Souvlaki",
+  "description": "Authentic Greek restaurant in Kfar Yasif. Souvlaki, gyros, and traditional Greek dishes.",
+  "start_url": "/?utm_source=pwa",
   "scope": "/",
   "display": "standalone",
-  "orientation": "portrait",
-  "background_color": "#1e3a8a",
+  "orientation": "portrait-primary",
+  "background_color": "#ffffff",
   "theme_color": "#1e3a8a",
-  "lang": "he",
-  "dir": "rtl",
+  "lang": "en",
   "categories": ["restaurant", "food", "greek"],
   "icons": [
     {
       "src": "/logo.jpg",
-      "sizes": "192x192 512x512",
+      "sizes": "512x512",
       "type": "image/jpeg",
+      "purpose": "any maskable"
+    },
+    {
+      "src": "/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
       "purpose": "any maskable"
     },
     {
@@ -25,10 +30,16 @@
       "purpose": "any maskable"
     },
     {
-      "src": "/icons/icon-512.png",
-      "sizes": "512x512",
+      "src": "/icons/icon-128.png",
+      "sizes": "128x128",
       "type": "image/png",
-      "purpose": "any maskable"
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-96.png",
+      "sizes": "96x96",
+      "type": "image/png",
+      "purpose": "any"
     }
   ],
   "shortcuts": [
