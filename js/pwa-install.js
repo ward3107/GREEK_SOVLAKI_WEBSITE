@@ -30,13 +30,21 @@ class PWAInstallManager {
             this.hideInstallButton();
         });
 
-        // Show install banner when PWA is installable
+        // Show install banner after a delay for mobile users
         setTimeout(() => {
-            if (this.installPrompt) {
-                console.log('[PWA] Install prompt available, showing banner');
+            console.log('[PWA] Checking installability...');
+
+            // Check if PWA meets installability criteria
+            const isInstallable = this.checkPWAInstallability();
+
+            if (this.installPrompt || isInstallable) {
+                console.log('[PWA] PWA is installable, showing banner');
+                this.showInstallButton();
+            } else {
+                console.log('[PWA] PWA not installable yet, showing demo banner');
                 this.showInstallButton();
             }
-        }, 3000);
+        }, 2000);
     }
 
     async registerServiceWorker() {
@@ -50,6 +58,27 @@ class PWAInstallManager {
             }
         }
         return null;
+    }
+
+    checkPWAInstallability() {
+        // Check basic PWA requirements
+        const hasServiceWorker = 'serviceWorker' in navigator;
+        const hasManifest = document.querySelector('link[rel="manifest"]');
+        const isHTTPS = location.protocol === 'https:' || location.hostname === 'localhost';
+
+        // Check if the site is already installed
+        const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
+        const isAlreadyInstalled = navigator.standalone || document.referrer.includes('android-app://');
+
+        console.log('[PWA] Installability Check:', {
+            hasServiceWorker,
+            hasManifest,
+            isHTTPS,
+            isStandalone,
+            isAlreadyInstalled
+        });
+
+        return hasServiceWorker && hasManifest && isHTTPS && !isAlreadyInstalled;
     }
 
     showInstallButton() {
@@ -92,15 +121,17 @@ class PWAInstallManager {
                 right: 0 !important;
                 background: linear-gradient(135deg, rgba(30, 64, 175, 0.97) 0%, rgba(55, 48, 163, 0.97) 100%) !important;
                 color: white !important;
-                z-index: 9999 !important;
+                z-index: 999999 !important;
                 box-shadow: 0 4px 20px rgba(30, 58, 138, 0.3) !important;
                 animation: slideDown 0.6s cubic-bezier(0.23, 1, 0.32, 1) !important;
                 font-family: 'Inter', 'Poppins', sans-serif !important;
                 backdrop-filter: blur(10px) !important;
-                min-height: 80px !important;
-                border-bottom: 2px solid rgba(255, 255, 255, 0.3) !important;
+                min-height: 90px !important;
+                border-bottom: 3px solid rgba(255, 255, 255, 0.5) !important;
                 display: block !important;
                 visibility: visible !important;
+                font-size: 14px !important;
+                font-weight: 500 !important;
             }
 
             .pwa-banner-content {
@@ -214,34 +245,63 @@ class PWAInstallManager {
 
             /* Mobile responsiveness */
             @media (max-width: 768px) {
+                .pwa-install-banner {
+                    min-height: 120px !important;
+                    font-size: 16px !important;
+                }
+
                 .pwa-banner-content {
                     flex-direction: column;
                     text-align: center;
-                    padding: 15px 20px;
+                    padding: 20px 15px;
                     gap: 15px;
                 }
 
                 .pwa-banner-left {
                     flex-direction: column;
-                    gap: 8px;
+                    gap: 10px;
+                }
+
+                .pwa-banner-icon {
+                    font-size: 28px !important;
                 }
 
                 .pwa-banner-text strong {
-                    font-size: 15px;
+                    font-size: 16px !important;
                 }
 
                 .pwa-banner-text span {
-                    font-size: 13px;
+                    font-size: 14px !important;
                 }
 
                 .pwa-banner-actions {
                     width: 100%;
                     justify-content: center;
+                    gap: 15px;
+                }
+
+                .pwa-banner-btn-close {
+                    width: 40px !important;
+                    height: 40px !important;
+                    font-size: 20px !important;
                 }
 
                 .pwa-banner-btn-install {
                     flex: 1;
-                    max-width: 200px;
+                    max-width: 250px !important;
+                    padding: 12px 24px !important;
+                    font-size: 16px !important;
+                }
+            }
+
+            /* Extra small mobile devices */
+            @media (max-width: 480px) {
+                .pwa-install-banner {
+                    min-height: 140px !important;
+                }
+
+                .pwa-banner-content {
+                    padding: 25px 10px;
                 }
             }
 
@@ -324,3 +384,11 @@ if (document.readyState === 'loading') {
 } else {
     new PWAInstallManager();
 }
+
+// Global function for manual testing on mobile
+window.showPWAInstallBanner = function() {
+    if (window.pwaManager) {
+        console.log('[PWA] Manual trigger - showing install banner');
+        window.pwaManager.showInstallButton();
+    }
+};
