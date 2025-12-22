@@ -8,7 +8,7 @@
     const galleryImages = document.querySelectorAll('.gallery-item img');
     const lightbox = document.getElementById('lightbox');
     const lightboxImg = document.getElementById('lightbox-img');
-    const closeBtn = lightbox ? lightbox.querySelector('.lightbox-close') : null;
+    const closeBtn = document.querySelector('.lightbox-close'); // Search entire document since I moved it
     const prevBtn = lightbox ? lightbox.querySelector('.lightbox-prev') : null;
     const nextBtn = lightbox ? lightbox.querySelector('.lightbox-next') : null;
 
@@ -16,9 +16,13 @@
 
     console.log('[Gallery Fix] Found images:', galleryImages.length);
     console.log('[Gallery Fix] Lightbox exists:', !!lightbox);
+    console.log('[Gallery Fix] Lightbox image exists:', !!lightboxImg);
+    console.log('[Gallery Fix] Close button exists:', !!closeBtn);
 
     if (!lightbox || !lightboxImg) {
         console.error('[Gallery Fix] Lightbox elements not found!');
+        console.error('[Gallery Fix] lightbox:', lightbox);
+        console.error('[Gallery Fix] lightboxImg:', lightboxImg);
         return;
     }
 
