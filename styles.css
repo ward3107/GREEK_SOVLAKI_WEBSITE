@@ -3572,7 +3572,7 @@ footer {
 }
 
 .lightbox-close {
-    position: fixed;
+    position: absolute;
     top: 20px;
     right: 20px;
     background: rgba(220, 38, 38, 0.95);
@@ -6398,7 +6398,7 @@ html, body {
 /* Mobile lightbox adjustments */
 @media (max-width: 768px) {
     .lightbox-close {
-        position: fixed;
+        position: absolute;
         top: 20px;
         right: 20px;
         width: 65px;
