@@ -3572,7 +3572,7 @@ footer {
 }
 
 .lightbox-close {
-    position: absolute;
+    position: fixed;
     top: 20px;
     right: 20px;
     background: rgba(220, 38, 38, 0.95);
@@ -3582,6 +3582,7 @@ footer {
     height: 60px;
     border-radius: 50%;
     font-size: 32px;
+    z-index: 99999; /* Highest z-index to ensure it's always accessible */
     cursor: pointer;
     display: flex;
     align-items: center;
@@ -6398,7 +6399,7 @@ html, body {
 /* Mobile lightbox adjustments */
 @media (max-width: 768px) {
     .lightbox-close {
-        position: absolute;
+        position: fixed;
         top: 20px;
         right: 20px;
         width: 65px;

@@ -55,7 +55,12 @@
         lightboxImg.src = img.src;
         lightboxImg.alt = img.alt || 'Gallery image';
         lightbox.classList.add('active');
+
+        // Prevent body scrolling when lightbox is open
         document.body.style.overflow = 'hidden';
+        document.body.style.position = 'fixed';
+        document.body.style.width = '100%';
+        document.body.style.top = `-${window.scrollY}px`;
 
         updateNavButtons();
     }
@@ -64,7 +69,17 @@
     function hideLightbox() {
         console.log('[Gallery Fix] Closing lightbox');
         lightbox.classList.remove('active');
+
+        // Restore body scrolling and scroll position
+        const scrollY = document.body.style.top;
         document.body.style.overflow = '';
+        document.body.style.position = '';
+        document.body.style.width = '';
+        document.body.style.top = '';
+
+        if (scrollY) {
+            window.scrollTo(0, parseInt(scrollY || '0') * -1);
+        }
     }
 
     // Update navigation buttons
