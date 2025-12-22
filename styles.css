@@ -3520,7 +3520,7 @@ footer {
 }
 
 .lightbox-toolbar {
-    position: fixed;
+    position: absolute;
     bottom: 30px;
     left: 50%;
     transform: translateX(-50%);
@@ -3601,7 +3601,7 @@ footer {
 }
 
 .lightbox-nav {
-    position: fixed;
+    position: absolute;
     top: 50%;
     transform: translateY(-50%);
     background: var(--color-primary);
@@ -3626,10 +3626,12 @@ footer {
 
 .lightbox-prev {
     left: 20px;
+    z-index: 10001;
 }
 
 .lightbox-next {
     right: 20px;
+    z-index: 10001;
 }
 
 
@@ -6373,10 +6375,12 @@ html, body {
 
 .lightbox-prev {
     left: 20px;
+    z-index: 10001;
 }
 
 .lightbox-next {
     right: 20px;
+    z-index: 10001;
 }
 
 
