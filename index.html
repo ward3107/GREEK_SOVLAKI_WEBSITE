@@ -4,15 +4,18 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-    <!-- Content Security Policy - Secure CSP with limited unsafe-inline for styles -->
+    <!-- Content Security Policy
+         unsafe-inline for styles is required for dynamic toast notification styles
+         (see CSP-ANALYSIS.md for detailed justification)
+    -->
     <meta http-equiv="Content-Security-Policy" content="
         default-src 'self';
-        script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://vercel.live;
+        script-src 'self' https://vercel.live;
         style-src 'self' 'unsafe-inline' https://fonts.googleapis.com http://fonts.googleapis.com;
         font-src 'self' https://fonts.gstatic.com http://fonts.gstatic.com;
-        img-src 'self' data: blob: https://images.unsplash.com https://flagcdn.com https://*.google-analytics.com;
-        connect-src 'self' https://images.unsplash.com https://flagcdn.com https://www.google-analytics.com https://*.google-analytics.com https://vercel.live;
-        frame-src 'self' https://www.google.com;
+        img-src 'self' data: blob: https://images.unsplash.com https://flagcdn.com;
+        connect-src 'self' https://images.unsplash.com https://flagcdn.com https://vercel.live;
+        frame-src 'self';
         object-src 'none';
         base-uri 'self';
         form-action 'self';
@@ -321,10 +324,6 @@
       ]
     }
     </script>
-
-    <!-- Google Analytics Placeholder -->
-    <!-- Replace G-XXXXXXXXXX with your actual Google Analytics ID -->
-    <!-- Google Analytics will be added later when tracking ID is available -->
 </head>
 <body>
     <!-- Skip Navigation Link for Accessibility -->
@@ -708,91 +707,91 @@
                     <img src="images/IMG-20251205-WA0046.webp" alt="מגש קינוחים יווניים עם בקבוק אוזו וכוסות יין ממסעדת Greek Souvlaki" width="400" height="600" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/IMG-20251205-WA0047.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                    <img src="images/IMG-20251205-WA0047.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" width="1512" height="2016" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/IMG-20251205-WA0048.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                    <img src="images/IMG-20251205-WA0048.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" width="2016" height="1512" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/IMG-20251205-WA0049.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                    <img src="images/IMG-20251205-WA0049.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" width="2016" height="1512" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/IMG-20251205-WA0050.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                    <img src="images/IMG-20251205-WA0050.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" width="1600" height="1200" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/IMG-20251205-WA0051.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                    <img src="images/IMG-20251205-WA0051.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" width="1600" height="1200" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/IMG-20251205-WA0052.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                    <img src="images/IMG-20251205-WA0052.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" width="1599" height="899" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/IMG-20251205-WA0053.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                    <img src="images/IMG-20251205-WA0053.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" width="1200" height="1600" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/IMG-20251205-WA0054.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                    <img src="images/IMG-20251205-WA0054.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" width="1600" height="1200" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/IMG-20251205-WA0055.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                    <img src="images/IMG-20251205-WA0055.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" width="900" height="1600" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/IMG-20251205-WA0056.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                    <img src="images/IMG-20251205-WA0056.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" width="900" height="1600" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/IMG-20251205-WA0057.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                    <img src="images/IMG-20251205-WA0057.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" width="1200" height="1600" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/IMG-20251205-WA0058.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                    <img src="images/IMG-20251205-WA0058.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" width="1200" height="1600" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/IMG-20251205-WA0059.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                    <img src="images/IMG-20251205-WA0059.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" width="1600" height="1200" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/IMG-20251205-WA0060.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                    <img src="images/IMG-20251205-WA0060.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" width="1200" height="1600" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/IMG-20251205-WA0061.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                    <img src="images/IMG-20251205-WA0061.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" width="1200" height="1600" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/IMG-20251205-WA0062.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                    <img src="images/IMG-20251205-WA0062.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" width="1200" height="1600" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/IMG-20251205-WA0063.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                    <img src="images/IMG-20251205-WA0063.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" width="757" height="1600" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/IMG-20251205-WA0064.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                    <img src="images/IMG-20251205-WA0064.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" width="949" height="1024" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/IMG-20251205-WA0066.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                    <img src="images/IMG-20251205-WA0066.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" width="1599" height="899" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/IMG-20251205-WA0070.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                    <img src="images/IMG-20251205-WA0070.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" width="1600" height="1200" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/IMG-20251205-WA0072.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                    <img src="images/IMG-20251205-WA0072.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" width="1600" height="1200" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/IMG-20251205-WA0073.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                    <img src="images/IMG-20251205-WA0073.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" width="1600" height="1200" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/IMG-20251205-WA0074.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                    <img src="images/IMG-20251205-WA0074.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" width="1600" height="1200" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/IMG-20251205-WA0075.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                    <img src="images/IMG-20251205-WA0075.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" width="1600" height="1200" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/IMG-20251205-WA0076.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                    <img src="images/IMG-20251205-WA0076.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" width="2016" height="1512" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/IMG-20251205-WA0077.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                    <img src="images/IMG-20251205-WA0077.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" width="1600" height="1200" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/IMG-20251205-WA0078.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                    <img src="images/IMG-20251205-WA0078.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" width="2016" height="1512" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/IMG-20251205-WA0079.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                    <img src="images/IMG-20251205-WA0079.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" width="1536" height="2048" loading="lazy" decoding="async">
                 </div>
                 <div class="gallery-item">
-                    <img src="images/IMG-20251205-WA0083.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                    <img src="images/IMG-20251205-WA0083.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" width="1200" height="1600" loading="lazy" decoding="async">
                 </div>
             </div>
         </div>
@@ -1002,8 +1001,7 @@
     <!-- UTF-8 Encoding Validator - Temporarily disabled -->
     <!-- <script defer src="js/encoding-validator.js"></script> -->
 
-    <!-- Mobile Menu Fix -->
-    <script src="mobile-menu-fix.js"></script>
+    <!-- Mobile Menu is handled by script.js - no need for separate file -->
     <!-- Force HTTP for local development -->
     <script src="force-http.js"></script>
 </body>

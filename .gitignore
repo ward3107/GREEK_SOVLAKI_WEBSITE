@@ -48,6 +48,7 @@ temp/
 *.bak
 backup_*/
 *.backup
+.backup/
 
 # Coverage directory
 coverage/

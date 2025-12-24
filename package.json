@@ -5,6 +5,8 @@
   "scripts": {
     "start": "node server.js",
     "dev": "node server.js",
+    "build": "node build.js",
+    "build:restore": "node restore.js",
     "test": "playwright test",
     "test:headed": "playwright test --headed",
     "test:ui": "playwright test --ui",
@@ -28,7 +30,9 @@
   "devDependencies": {
     "@axe-core/playwright": "^4.8.0",
     "@playwright/test": "^1.40.0",
+    "csso-cli": "^4.0.2",
     "playwright": "^1.40.0",
-    "sharp": "^0.34.5"
+    "sharp": "^0.34.5",
+    "terser": "^5.44.1"
   }
 }
