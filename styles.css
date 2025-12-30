@@ -1966,7 +1966,7 @@ body.dark-mode .whatsapp-circle::after {
     padding-top: 80px;
     background:
         linear-gradient(135deg, rgba(0, 0, 0, 0.5) 0%, rgba(0, 0, 0, 0.3) 50%, rgba(0, 0, 0, 0.6) 100%),
-        url('images/IMG-20251205-WA0032.webp') center/cover no-repeat;
+        url('/images/IMG-20251205-WA0032.webp') center/cover no-repeat;
     background-color: #1e3a8a;
 }
 
@@ -3302,15 +3302,15 @@ footer {
     cursor: pointer;
     height: 250px;
     border: 2px solid var(--color-border);
-    /* Flip animation - starts hidden */
+    /* Flip animation - now visible by default */
     transform-origin: top center;
-    transform: perspective(800px) rotateX(-90deg);
-    opacity: 0;
-}
-
-.gallery-item.flip-in {
     transform: rotateX(0deg);
     opacity: 1;
+}
+
+/* Animation enhancement when items come into view */
+.gallery-item.flip-in {
+    animation: flipIn 0.6s ease forwards;
 }
 
 .gallery-item.flip-in:hover {
@@ -3517,6 +3517,94 @@ footer {
 
 .lightbox-content img:active {
     cursor: grabbing;
+}
+
+/* Ensure lightbox modal image is always visible */
+.lightbox-modal.active img,
+.lightbox-modal.active .lightbox-image {
+    opacity: 1 !important;
+    visibility: visible !important;
+    display: block !important;
+    max-width: 90vw !important;
+    max-height: 85vh !important;
+    object-fit: contain !important;
+}
+
+/* Fix toolbar positioning - ensure it's positioned relative to lightbox-content */
+.lightbox-modal.active .lightbox-toolbar {
+    position: absolute !important;
+    bottom: 30px !important;
+    left: 50% !important;
+    transform: translateX(-50%) !important;
+    z-index: 10002 !important;
+}
+
+/* Fix navigation buttons positioning */
+.lightbox-modal.active .lightbox-nav {
+    position: absolute !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    z-index: 10001 !important;
+}
+
+.lightbox-modal.active .lightbox-prev {
+    left: 20px !important;
+}
+
+.lightbox-modal.active .lightbox-next {
+    right: 20px !important;
+}
+
+/* Fix close button positioning */
+.lightbox-modal.active .lightbox-close {
+    position: fixed !important;
+    top: 20px !important;
+    right: 20px !important;
+    z-index: 10003 !important;
+    font-size: 40px !important;
+    width: 50px !important;
+    height: 50px !important;
+    background: rgba(255, 255, 255, 0.9) !important;
+    color: #000 !important;
+    border-radius: 50% !important;
+}
+
+/* Fix image visibility - use position: fixed like close button */
+.lightbox-modal.active .lightbox-image-container {
+    position: fixed !important;
+    top: 50% !important;
+    left: 50% !important;
+    transform: translate(-50%, -50%) !important;
+    z-index: 10001 !important;
+    max-width: 90vw !important;
+    max-height: 85vh !important;
+}
+
+/* Fix arrows visibility */
+.lightbox-modal.active .lightbox-prev {
+    position: fixed !important;
+    left: 20px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    z-index: 10002 !important;
+    font-size: 40px !important;
+    background: rgba(255, 255, 255, 0.8) !important;
+    width: 50px !important;
+    height: 50px !important;
+    border-radius: 50% !important;
+}
+
+.lightbox-modal.active .lightbox-next {
+    position: fixed !important;
+    right: 20px !important;
+    top: 50% !important;
+    transform: translateY(-50%) !important;
+    z-index: 10002 !important;
+    font-size: 40px !important;
+    background: rgba(255, 255, 255, 0.8) !important;
+    width: 50px !important;
+    height: 50px !important;
+    border-radius: 50% !important;
 }
 
 .lightbox-toolbar {
@@ -5892,13 +5980,10 @@ html, body {
     animation: imageShimmer 1.2s ease-in-out infinite;
 }
 
+/* Make images visible by default - no longer rely on JavaScript for basic visibility */
 .gallery-item img {
-    opacity: 0;
-    transition: opacity 0.4s ease-in;
-}
-
-.gallery-item img.loaded {
     opacity: 1;
+    transition: opacity 0.4s ease-in;
 }
 
 .gallery-item.loaded {
@@ -6316,6 +6401,36 @@ html, body {
 
 .lightbox.active .lightbox-image {
     transform: scale(1);
+}
+
+/* Also support lightbox-modal class used in HTML */
+.lightbox-modal.active .lightbox-image {
+    transform: scale(1);
+}
+
+/* ENSURE all lightbox content is visible when active */
+.lightbox-modal.active .lightbox-content {
+    display: flex !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.lightbox-modal.active .lightbox-image-container {
+    display: flex !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.lightbox-modal.active .lightbox-close {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
+}
+
+.lightbox-modal.active .lightbox-nav {
+    display: block !important;
+    opacity: 1 !important;
+    visibility: visible !important;
 }
 
 .lightbox-close {

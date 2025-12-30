@@ -29,7 +29,23 @@
     <meta property="og:type" content="restaurant">
     <meta property="og:title" content="סובלאקי יווני כפר יאסיף | מסעדה יוונית אותנטית">
     <meta property="og:description" content="מסעדה יוונית אותנטית בכפר יאסיף. סובלאקי, גירוס, פיתות יווניות ומגשי בשרים. פתוח רביעי-שבת 13:00-01:00">
-    <meta property="og:image" content="https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/images/gallery-1.webp">
+
+    <!-- Primary Open Graph Image (landscape, optimal for social sharing) -->
+    <meta property="og:image" content="https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/images/IMG-20251205-WA0043.webp">
+    <meta property="og:image:width" content="2016">
+    <meta property="og:image:height" content="1512">
+    <meta property="og:image:alt" content="מגש סובלאקי עם פיתות וירקות טריות ממסעדת Greek Souvlaki">
+    <meta property="og:image:type" content="image/webp">
+
+    <!-- Additional OG Images for fallback -->
+    <meta property="og:image" content="https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/images/IMG-20251205-WA0044.webp">
+    <meta property="og:image:width" content="2016">
+    <meta property="og:image:height" content="1512">
+
+    <meta property="og:image" content="https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/images/IMG-20251205-WA0033.webp">
+    <meta property="og:image:width" content="1600">
+    <meta property="og:image:height" content="1200">
+
     <meta property="og:url" content="https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/">
     <meta property="og:site_name" content="Greek Souvlaki - סובלאקי יווני">
     <meta property="og:locale" content="he_IL">
@@ -42,7 +58,8 @@
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="סובלאקי יווני כפר יאסיף | מסעדה יוונית אותנטית">
     <meta name="twitter:description" content="מסעדה יוונית אותנטית בכפר יאסיף. סובלאקי, גירוס ומגשי בשרים. פתוח רביעי-שבת 13:00-01:00">
-    <meta name="twitter:image" content="https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/images/gallery-1.webp">
+    <meta name="twitter:image" content="https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/images/IMG-20251205-WA0043.webp">
+    <meta name="twitter:image:alt" content="מגש סובלאקי עם פיתות וירקות טריות ממסעדת Greek Souvlaki">
 
     <!-- Hreflang Tags for Multi-language -->
     <link rel="alternate" hreflang="he" href="https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/">
@@ -71,8 +88,8 @@
     <link rel="icon" type="image/jpeg" href="logo.jpg">
 
     <!-- Preload critical CSS for faster rendering -->
-    <link rel="preload" href="styles.css?v=43" as="style">
-    <link rel="stylesheet" href="styles.css?v=43">
+    <link rel="preload" href="styles.css?v=51" as="style">
+    <link rel="stylesheet" href="styles.css?v=51">
     <link rel="stylesheet" href="css/inline-styles.css">
     <link rel="stylesheet" href="animations.css?v=14">
     <link rel="stylesheet" href="accessibility-widget.css?v=22">
@@ -322,9 +339,10 @@
     }
     </script>
 
-    <!-- Google Analytics Placeholder -->
-    <!-- Replace G-XXXXXXXXXX with your actual Google Analytics ID -->
-    <!-- Google Analytics will be added later when tracking ID is available -->
+    <!-- Google Analytics 4 (GA4) -->
+    <!-- Replace G-XXXXXXXXXX with your actual Google Analytics Measurement ID -->
+    <!-- To get your ID: https://analytics.google.com/ → Admin → Create Property → Data Streams -->
+    <script src="js/google-analytics.js?v=1"></script>
 </head>
 <body>
     <!-- Skip Navigation Link for Accessibility -->
@@ -931,7 +949,8 @@
 
     <!-- Premium Snow Effect - Now included in script.js -->
 
-    <!-- Lightbox Modal -->
+    <!-- OLD Lightbox Modal - DISABLED, using simple-lightbox-v2.js instead -->
+    <!--
     <div class="lightbox-modal" id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-title" tabindex="-1">
         <h2 id="lightbox-title" class="sr-only">גלריית תמונות - תמונה מוגדלת</h2>
 
@@ -940,7 +959,7 @@
             <button type="button" class="lightbox-nav lightbox-prev" aria-label="Previous">&#10094;</button>
             <button type="button" class="lightbox-nav lightbox-next" aria-label="Next">&#10095;</button>
             <div class="lightbox-image-container">
-                <img src="" alt="תמונת גלריה מוגדלת - מנה יוונית ממגוון התפריט" id="lightbox-img">
+                <img src="" alt="תמונת גלריה מוגדלת - מנה יוונית ממגוון התפריט" id="lightbox-img" class="lightbox-image">
             </div>
             <div class="lightbox-toolbar">
                 <button type="button" id="zoom-out" aria-label="Zoom out">&#8722;</button>
@@ -952,12 +971,12 @@
             </div>
         </div>
     </div>
+    -->
 
     <!-- <script defer src="js/lightbox.js"></script> -->
   <!-- <script defer src="js/gallery-debug.js"></script> -->
 
-    <!-- Gallery Fix Script -->
-    <script defer src="js/gallery-fix.js"></script>
+    <!-- <script defer src="js/gallery-fix.js?v=2"></script> DISABLED - using simple-lightbox-v3.js instead -->
 
     <!-- Menu Tabs -->
     <script defer src="js/menu-tabs.js"></script>
@@ -1006,5 +1025,11 @@
     <script src="mobile-menu-fix.js"></script>
     <!-- Force HTTP for local development -->
     <script src="force-http.js"></script>
+
+    <!-- Error Handler - Load first to catch all errors -->
+    <script src="js/error-handler.js?v=1"></script>
+
+    <!-- Simple Lightbox Final - Production version -->
+    <script src="simple-lightbox-final.js"></script>
 </body>
 </html>
