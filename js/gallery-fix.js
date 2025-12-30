@@ -55,10 +55,23 @@
     function showLightbox() {
         const img = galleryImages[currentIndex];
         console.log('[Gallery Fix] Opening lightbox for:', img.src);
+        console.log('[Gallery Fix] lightboxImg element:', lightboxImg);
+        console.log('[Gallery Fix] lightboxImg classes:', lightboxImg.className);
 
         lightboxImg.src = img.src;
         lightboxImg.alt = img.alt || 'Gallery image';
         lightbox.classList.add('active');
+
+        // Force image visibility with inline styles as fallback
+        lightboxImg.style.opacity = '1';
+        lightboxImg.style.visibility = 'visible';
+        lightboxImg.style.display = 'block';
+        lightboxImg.style.maxWidth = '90vw';
+        lightboxImg.style.maxHeight = '85vh';
+
+        console.log('[Gallery Fix] Image src set to:', lightboxImg.src);
+        console.log('[Gallery Fix] Image display style:', lightboxImg.style.display);
+        console.log('[Gallery Fix] Image opacity:', lightboxImg.style.opacity);
 
         // Prevent body scrolling when lightbox is open
         document.body.style.overflow = 'hidden';
