@@ -22,6 +22,41 @@ console.log('[SL-FINAL] Loading final lightbox...');
     const galleryImages = Array.from(document.querySelectorAll('.gallery-item img'));
     console.log('[SL-FINAL] Found', galleryImages.length, 'gallery images');
 
+    // If no images found yet, wait for them to load
+    if (galleryImages.length === 0) {
+        console.log('[SL-FINAL] No images found, waiting for gallery to load...');
+        setTimeout(initLightbox, 500);
+        setTimeout(initLightbox, 1000);
+        setTimeout(initLightbox, 2000);
+        return;
+    }
+
+    // Force images to be visible and load them
+    galleryImages.forEach((img, index) => {
+        // Check if image is visible
+        const rect = img.getBoundingClientRect();
+        const isVisible = rect.width > 0 && rect.height > 0;
+
+        if (!isVisible) {
+            console.log('[SL-FINAL] Image', index, 'is not visible, forcing display...');
+            img.style.display = 'block';
+            img.style.visibility = 'visible';
+            img.style.opacity = '1';
+        }
+
+        // Ensure image has src and loads
+        if (!img.src && img.dataset.src) {
+            img.src = img.dataset.src;
+        }
+
+        // Remove loading="lazy" to force immediate load
+        if (img.loading === 'lazy') {
+            img.loading = 'eager';
+        }
+    });
+
+    console.log('[SL-FINAL] Images processed and made visible');
+
     // Create lightbox wrapper - positioned at current scroll
     const lightbox = document.createElement('div');
     lightbox.id = 'lightbox-wrapper';
