@@ -1,101 +1,91 @@
-// Mobile menu fix - works with actual HTML structure
-(function() {
-    'use strict';
-    console.log('[MOBILE-MENU-FIX] Loading...');
+// Mobile menu fix - SIMPLIFIED version that runs immediately
+console.log('[MOBILE-MENU] Script loaded');
 
-    function initMobileMenu() {
-        const hamburger = document.querySelector('.hamburger');
-        const mainNavPanel = document.querySelector('.main-nav-panel');
-        const mainNavDropdown = document.querySelector('.main-nav-dropdown');
+// Wait for elements to exist
+function checkAndInit() {
+    const hamburger = document.querySelector('.hamburger');
+    const mainNavPanel = document.querySelector('.main-nav-panel');
 
-        console.log('[MOBILE-MENU-FIX] hamburger:', hamburger);
-        console.log('[MOBILE-MENU-FIX] mainNavPanel:', mainNavPanel);
-        console.log('[MOBILE-MENU-FIX] mainNavDropdown:', mainNavDropdown);
+    console.log('[MOBILE-MENU] Checking elements... hamburger:', !!hamburger, 'panel:', !!mainNavPanel);
 
-        if (!hamburger || !mainNavPanel) {
-            console.log('[MOBILE-MENU-FIX] Elements not found, retrying...');
-            setTimeout(initMobileMenu, 100);
-            return;
-        }
+    if (hamburger && mainNavPanel) {
+        console.log('[MOBILE-MENU] Elements found! Adding click handler...');
 
-        let isOpen = false;
-
-        function toggleMenu(e) {
+        hamburger.addEventListener('click', function(e) {
+            console.log('[MOBILE-MENU] HAMBURGER CLICKED!');
             e.preventDefault();
             e.stopPropagation();
 
-            console.log('[MOBILE-MENU-FIX] Toggle menu! Current state:', isOpen);
+            const isOpen = hamburger.classList.contains('mobile-open');
+            console.log('[MOBILE-MENU] Current isOpen:', isOpen);
 
-            isOpen = !isOpen;
+            if (!isOpen) {
+                // Open menu
+                hamburger.classList.add('mobile-open');
+                hamburger.classList.add('active');
+                hamburger.setAttribute('aria-expanded', 'true');
 
-            // Toggle hamburger active state
-            hamburger.classList.toggle('active', isOpen);
-            hamburger.setAttribute('aria-expanded', isOpen);
-
-            // Show/hide the nav panel
-            if (isOpen) {
                 mainNavPanel.style.display = 'block';
                 mainNavPanel.style.position = 'fixed';
                 mainNavPanel.style.top = '60px';
                 mainNavPanel.style.left = '0';
                 mainNavPanel.style.right = '0';
+                mainNavPanel.style.width = '100%';
                 mainNavPanel.style.background = 'rgba(30, 58, 138, 0.98)';
-                mainNavPanel.style.padding = '20px';
-                mainNavPanel.style.zIndex = '9998';
-                console.log('[MOBILE-MENU-FIX] Menu OPENED');
+                mainNavPanel.style.padding = '30px 20px';
+                mainNavPanel.style.zIndex = '9999';
+
+                console.log('[MOBILE-MENU] MENU OPENED!');
             } else {
-                mainNavPanel.style.display = '';
-                console.log('[MOBILE-MENU-FIX] Menu CLOSED');
-            }
-        }
-
-        // Remove old listeners
-        hamburger.removeEventListener('click', toggleMenu);
-
-        // Add click handler
-        hamburger.addEventListener('click', toggleMenu);
-        hamburger.addEventListener('touchstart', function(e) {
-            e.preventDefault();
-            toggleMenu(e);
-        }, { passive: false });
-
-        // Close menu when clicking links
-        const links = mainNavPanel.querySelectorAll('.nav-dropdown-item');
-        console.log('[MOBILE-MENU-FIX] Found', links.length, 'nav links');
-
-        links.forEach(function(link) {
-            link.addEventListener('click', function(e) {
-                const href = link.getAttribute('href');
-                if (href && href.startsWith('#')) {
-                    // Close menu
-                    isOpen = false;
-                    hamburger.classList.remove('active');
-                    hamburger.setAttribute('aria-expanded', 'false');
-                    mainNavPanel.style.display = '';
-                }
-            });
-        });
-
-        // Close when clicking outside
-        document.addEventListener('click', function(e) {
-            if (isOpen && !hamburger.contains(e.target) && !mainNavPanel.contains(e.target)) {
-                isOpen = false;
+                // Close menu
+                hamburger.classList.remove('mobile-open');
                 hamburger.classList.remove('active');
                 hamburger.setAttribute('aria-expanded', 'false');
                 mainNavPanel.style.display = '';
+
+                console.log('[MOBILE-MENU] MENU CLOSED!');
             }
+        }, true); // Use capture phase
+
+        // Close when clicking links
+        const links = mainNavPanel.querySelectorAll('a');
+        links.forEach(function(link) {
+            link.addEventListener('click', function() {
+                console.log('[MOBILE-MENU] Link clicked, closing menu');
+                hamburger.classList.remove('mobile-open');
+                hamburger.classList.remove('active');
+                hamburger.setAttribute('aria-expanded', 'false');
+                mainNavPanel.style.display = '';
+            });
         });
 
-        console.log('[MOBILE-MENU-FIX] Initialized successfully!');
+        console.log('[MOBILE-MENU] Setup complete!');
+        return true;
     }
 
-    // Initialize
+    return false;
+}
+
+// Try multiple times
+if (!checkAndInit()) {
+    console.log('[MOBILE-MENU] Elements not ready, will retry...');
+
+    // Try on DOMContentLoaded
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initMobileMenu);
-    } else {
-        initMobileMenu();
+        document.addEventListener('DOMContentLoaded', function() {
+            console.log('[MOBILE-MENU] DOMContentLoaded fired');
+            checkAndInit();
+        });
     }
 
-    // Fallback
-    setTimeout(initMobileMenu, 500);
-})();
+    // Try after delay
+    setTimeout(function() {
+        console.log('[MOBILE-MENU] Timeout check');
+        checkAndInit();
+    }, 500);
+
+    setTimeout(function() {
+        console.log('[MOBILE-MENU] Final check');
+        checkAndInit();
+    }, 1000);
+}
