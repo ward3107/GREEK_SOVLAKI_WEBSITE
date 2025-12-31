@@ -86,20 +86,29 @@
                         items.forEach(i => i.classList.remove('active'));
                         item.classList.add('active');
 
+                        // Close dropdown immediately
+                        this.closeDropdown(dropdown);
+
+                        // Close mobile menu if open (both checkbox and hamburger variants)
+                        const mobileMenuCheckbox = document.querySelector('#mobile-menu-toggle');
+                        const hamburger = document.querySelector('.hamburger');
+                        const mobileMenu = document.querySelector('.nav-menu');
+
+                        // Uncheck the CSS-only checkbox
+                        if (mobileMenuCheckbox) {
+                            mobileMenuCheckbox.checked = false;
+                        }
+
+                        // Close hamburger-style menu
+                        if (mobileMenu && hamburger && hamburger.getAttribute('aria-expanded') === 'true') {
+                            mobileMenu.classList.remove('active');
+                            hamburger.setAttribute('aria-expanded', 'false');
+                            hamburger.classList.remove('active');
+                        }
+
                         // Only handle internal hash links
                         if (href && href.startsWith('#')) {
                             e.preventDefault();
-
-                            // Close dropdown immediately
-                            this.closeDropdown(dropdown);
-
-                            // Close mobile menu if open
-                            const mobileMenu = document.querySelector('.nav-menu');
-                            const hamburger = document.querySelector('.hamburger');
-                            if (mobileMenu && hamburger && hamburger.getAttribute('aria-expanded') === 'true') {
-                                mobileMenu.classList.remove('active');
-                                hamburger.setAttribute('aria-expanded', 'false');
-                            }
 
                             // Smooth scroll to section
                             const target = document.querySelector(href);
@@ -113,12 +122,8 @@
                                     behavior: 'smooth'
                                 });
                             }
-                        } else {
-                            // For external links, close dropdown after short delay
-                            setTimeout(() => {
-                                this.closeDropdown(dropdown);
-                            }, 150);
                         }
+                        // For external links, let them navigate normally
                     });
                 });
 
