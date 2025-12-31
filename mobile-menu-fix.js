@@ -20,7 +20,6 @@ function setupCheckboxMenu() {
     label.className = 'hamburger-css';
     label.innerHTML = '<span></span><span></span><span></span>';
     label.setAttribute('aria-label', 'Toggle menu');
-    // Don't set display - let CSS media query handle it
     label.style.cssText = `
         flex-direction: column;
         cursor: pointer;
@@ -108,6 +107,18 @@ function setupCheckboxMenu() {
         }
     `;
     document.head.appendChild(style);
+
+    // Add click handlers to close menu when clicking nav items
+    setTimeout(() => {
+        const navItems = document.querySelectorAll('.main-nav-panel a, .main-nav-panel .nav-dropdown-item');
+        navItems.forEach(item => {
+            item.addEventListener('click', () => {
+                console.log('[MOBILE-MENU] Nav item clicked, closing menu');
+                checkbox.checked = false;
+            });
+        });
+        console.log('[MOBILE-MENU] Added click handlers to ' + navItems.length + ' nav items');
+    }, 1000);
 
     console.log('[MOBILE-MENU] CSS-only menu setup complete!');
     return true;

@@ -13,14 +13,21 @@ class PWAInstallManager {
     init() {
         console.log('[PWA] Initializing...');
 
-        // Register service worker
-        this.registerServiceWorker();
+        // Register service worker and wait for it to be active
+        this.registerServiceWorker().then(() => {
+            console.log('[PWA] Service worker registration complete, checking for install prompt...');
+            // After service worker is registered, wait a bit and show banner
+            setTimeout(() => {
+                this.showInstallBanner();
+            }, 2000);
+        });
 
-        // Set up install prompt
+        // Set up install prompt - capture it as early as possible
         window.addEventListener('beforeinstallprompt', (e) => {
             console.log('[PWA] Install prompt detected!');
             e.preventDefault();
             this.installPrompt = e;
+            // Show or update the banner
             this.showInstallButton();
         });
 
@@ -30,26 +37,29 @@ class PWAInstallManager {
             localStorage.setItem('pwa-installed', 'true');
             this.hideInstallButton();
         });
+    }
 
-        // Show install banner after a delay for mobile users
-        setTimeout(() => {
-            console.log('[PWA] Checking installability...');
+    showInstallBanner() {
+        console.log('[PWA] Checking installability...');
 
-            // Check if PWA meets installability criteria
-            const isInstallable = this.checkPWAInstallability();
-            const isIOS = /iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase());
+        // Check if PWA meets installability criteria
+        const isInstallable = this.checkPWAInstallability();
+        const isIOS = /iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase());
 
-            if (isIOS) {
-                console.log('[PWA] iOS detected - showing iOS install banner');
-                this.showIOSInstallBanner();
-            } else if (this.installPrompt || isInstallable) {
-                console.log('[PWA] PWA is installable, showing banner');
-                this.showInstallButton();
-            } else {
-                console.log('[PWA] PWA not installable yet, showing demo banner');
-                this.showInstallButton();
-            }
-        }, 3000);
+        if (isIOS) {
+            console.log('[PWA] iOS detected - showing iOS install banner');
+            this.showIOSInstallBanner();
+        } else if (this.installPrompt) {
+            console.log('[PWA] Install prompt available, showing install banner');
+            this.showInstallButton();
+        } else if (isInstallable) {
+            console.log('[PWA] PWA is installable but no prompt yet, showing banner with manual option');
+            this.showInstallButton();
+        } else {
+            console.log('[PWA] PWA not installable yet');
+            // Still show banner for debugging
+            this.showInstallButton();
+        }
     }
 
     async registerServiceWorker() {
