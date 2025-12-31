@@ -22,8 +22,14 @@
 
         setupDropdowns() {
             const dropdowns = document.querySelectorAll('.nav-dropdown');
+            const isMobile = window.innerWidth <= 768;
 
             dropdowns.forEach(dropdown => {
+                // Skip main-nav-dropdown on mobile since it's hidden by CSS
+                if (isMobile && dropdown.classList.contains('main-nav-dropdown')) {
+                    console.log('[NAV-DROPDOWN] Skipping main-nav-dropdown on mobile');
+                    return;
+                }
                 const toggle = dropdown.querySelector('.nav-dropdown-toggle');
                 const panel = dropdown.querySelector('.nav-dropdown-panel');
 
@@ -41,8 +47,13 @@
 
         setupEventListeners() {
             const dropdowns = document.querySelectorAll('.nav-dropdown');
+            const isMobile = window.innerWidth <= 768;
 
             dropdowns.forEach(dropdown => {
+                // Skip main-nav-dropdown on mobile since it's hidden by CSS
+                if (isMobile && dropdown.classList.contains('main-nav-dropdown')) {
+                    return;
+                }
                 const toggle = dropdown.toggle;
                 const panel = dropdown.panel;
 
@@ -168,8 +179,13 @@
 
         setupKeyboardNavigation() {
             const dropdowns = document.querySelectorAll('.nav-dropdown');
+            const isMobile = window.innerWidth <= 768;
 
             dropdowns.forEach(dropdown => {
+                // Skip main-nav-dropdown on mobile since it's hidden by CSS
+                if (isMobile && dropdown.classList.contains('main-nav-dropdown')) {
+                    return;
+                }
                 const toggle = dropdown.toggle;
                 const panel = dropdown.panel;
 

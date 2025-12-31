@@ -7,32 +7,61 @@
         if (menuInitialized) return;
 
         const hamburger = document.querySelector('.hamburger');
-        const navMenu = document.querySelector('.nav-menu');
+        const navMenu = document.querySelector('.main-nav-panel');
 
         if (!hamburger || !navMenu) {
-            console.log('Hamburger or navMenu not found');
+            console.log('[MOBILE-MENU] Hamburger or mainNavPanel not found');
             return;
         }
 
           menuInitialized = true;
+          console.log('[MOBILE-MENU] Found hamburger and mainNavPanel, initializing...');
 
         // Toggle function
         function toggleMenu() {
-                    hamburger.classList.toggle('active');
-            navMenu.classList.toggle('active');
+            const isOpen = hamburger.getAttribute('aria-expanded') === 'true';
+            console.log('[MOBILE-MENU] Toggle menu - currently open:', isOpen);
+
+            if (!isOpen) {
+                // Open menu
+                hamburger.classList.add('active');
+                hamburger.classList.add('mobile-open');
+                hamburger.setAttribute('aria-expanded', 'true');
+
+                navMenu.style.display = 'block';
+                navMenu.setAttribute('aria-hidden', 'false');
+
+                console.log('[MOBILE-MENU] Menu opened');
+            } else {
+                // Close menu
+                hamburger.classList.remove('active');
+                hamburger.classList.remove('mobile-open');
+                hamburger.setAttribute('aria-expanded', 'false');
+                navMenu.style.display = '';
+                navMenu.setAttribute('aria-hidden', 'true');
+
+                console.log('[MOBILE-MENU] Menu closed');
+            }
         }
 
         // Handle touch events - prevent double firing with click
         hamburger.addEventListener('touchstart', function(e) {
-            e.preventDefault();
+            console.log('[MOBILE-MENU] touchstart fired');
             touchHandled = true;
-            toggleMenu();
+        }, { passive: true });
+
+        hamburger.addEventListener('touchend', function(e) {
+            console.log('[MOBILE-MENU] touchend fired');
+            e.preventDefault();
+            if (touchHandled) {
+                touchHandled = false;
+                toggleMenu();
+            }
         }, { passive: false });
 
         // Handle click for non-touch devices
         hamburger.addEventListener('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
+            console.log('[MOBILE-MENU] click fired, touchHandled:', touchHandled);
             // Skip if touch already handled this interaction
             if (touchHandled) {
                 touchHandled = false;
@@ -45,18 +74,29 @@
         const links = navMenu.querySelectorAll('a');
         links.forEach(function(link) {
             link.addEventListener('click', function() {
+                console.log('[MOBILE-MENU] Nav link clicked, closing menu');
                 hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
+                hamburger.classList.remove('mobile-open');
+                hamburger.setAttribute('aria-expanded', 'false');
+                navMenu.style.display = '';
+                navMenu.setAttribute('aria-hidden', 'true');
             });
         });
 
         // Close menu when clicking outside
         document.addEventListener('click', function(e) {
-            if (!hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+            const isOpen = hamburger.getAttribute('aria-expanded') === 'true';
+            if (isOpen && !hamburger.contains(e.target) && !navMenu.contains(e.target)) {
+                console.log('[MOBILE-MENU] Clicked outside, closing menu');
                 hamburger.classList.remove('active');
-                navMenu.classList.remove('active');
+                hamburger.classList.remove('mobile-open');
+                hamburger.setAttribute('aria-expanded', 'false');
+                navMenu.style.display = '';
+                navMenu.setAttribute('aria-hidden', 'true');
             }
         });
+
+        console.log('[MOBILE-MENU] Initialization complete!');
     }
 
     // Try to init now
@@ -280,26 +320,33 @@ document.addEventListener('DOMContentLoaded', () => {
     const navbar = qs('.navbar');
     if (navbar) navbar.setAttribute('aria-label', 'Main navigation');
 
-    const navMenu = qs('.nav-menu');
+    // Use main-nav-panel instead of non-existent nav-menu
+    const navMenu = qs('.main-nav-panel');
     if (navMenu && !navMenu.id) navMenu.id = 'primary-menu';
 
-    // Make hamburger accessible
+    // Make hamburger accessible (handlers are already attached in initMobileMenu above)
     const hamburger = qs('.hamburger');
     if (hamburger) {
       hamburger.setAttribute('role', 'button');
       hamburger.setAttribute('tabindex', '0');
       hamburger.setAttribute('aria-controls', 'primary-menu');
-      hamburger.setAttribute('aria-expanded', 'false');
+      if (!hamburger.getAttribute('aria-expanded')) {
+        hamburger.setAttribute('aria-expanded', 'false');
+      }
 
-      const toggle = () => {
-        if (!navMenu) return;
-        const active = navMenu.classList.toggle('active');
-        hamburger.setAttribute('aria-expanded', active ? 'true' : 'false');
-      };
-      hamburger.addEventListener('click', toggle);
+      // Only add keyboard handlers (click handlers are in initMobileMenu)
       hamburger.addEventListener('keydown', (e) => {
-        if (e.key === 'Enter' || e.key === ' ') { e.preventDefault(); toggle(); }
-        if (e.key === 'Escape') { navMenu?.classList.remove('active'); hamburger.setAttribute('aria-expanded', 'false'); }
+        if (e.key === 'Enter' || e.key === ' ') {
+          e.preventDefault();
+          // Trigger click to run through the same handler
+          hamburger.click();
+        }
+        if (e.key === 'Escape') {
+          const isOpen = hamburger.getAttribute('aria-expanded') === 'true';
+          if (isOpen) {
+            hamburger.click(); // Close menu
+          }
+        }
       });
     }
 
@@ -313,23 +360,28 @@ document.addEventListener('DOMContentLoaded', () => {
         e.preventDefault();
 
         // Close mobile menu if open
-        if (navMenu && navMenu.classList.contains('active')) {
-          navMenu.classList.remove('active');
-          hamburger?.setAttribute('aria-expanded', 'false');
+        const isMenuOpen = hamburger && hamburger.getAttribute('aria-expanded') === 'true';
+        if (isMenuOpen && navMenu) {
+          hamburger.classList.remove('active');
+          hamburger.classList.remove('mobile-open');
+          hamburger.setAttribute('aria-expanded', 'false');
+          navMenu.style.display = '';
+          navMenu.setAttribute('aria-hidden', 'true');
         }
 
         const navbarHeight = qs('.navbar')?.offsetHeight || 0;
         const top = Math.max(0, target.offsetTop - navbarHeight);
         window.scrollTo({ top, behavior: 'smooth' });
 
-        qsa('.nav-menu a').forEach(l => l.classList.remove('active'));
+        // Update active state for nav links
+        qsa('.main-nav-panel a').forEach(l => l.classList.remove('active'));
         a.classList.add('active');
       });
     });
 
     // Highlight active section on scroll (throttled)
     const sections = qsa('section[id]');
-    const navLinks = qsa('.nav-menu a');
+    const navLinks = qsa('.main-nav-panel a');
     const onScroll = () => {
       const navbarHeight = qs('.navbar')?.offsetHeight || 0;
       let current = '';

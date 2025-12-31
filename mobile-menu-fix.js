@@ -1,91 +1,112 @@
-// Mobile menu fix - SIMPLIFIED version that runs immediately
-console.log('[MOBILE-MENU] Script loaded');
+// Mobile menu - CSS-only checkbox hack (no JS clicks needed)
+console.log('[MOBILE-MENU] Setting up CSS-only mobile menu');
 
-// Wait for elements to exist
-function checkAndInit() {
-    const hamburger = document.querySelector('.hamburger');
-    const mainNavPanel = document.querySelector('.main-nav-panel');
-
-    console.log('[MOBILE-MENU] Checking elements... hamburger:', !!hamburger, 'panel:', !!mainNavPanel);
-
-    if (hamburger && mainNavPanel) {
-        console.log('[MOBILE-MENU] Elements found! Adding click handler...');
-
-        hamburger.addEventListener('click', function(e) {
-            console.log('[MOBILE-MENU] HAMBURGER CLICKED!');
-            e.preventDefault();
-            e.stopPropagation();
-
-            const isOpen = hamburger.classList.contains('mobile-open');
-            console.log('[MOBILE-MENU] Current isOpen:', isOpen);
-
-            if (!isOpen) {
-                // Open menu
-                hamburger.classList.add('mobile-open');
-                hamburger.classList.add('active');
-                hamburger.setAttribute('aria-expanded', 'true');
-
-                mainNavPanel.style.display = 'block';
-                mainNavPanel.style.position = 'fixed';
-                mainNavPanel.style.top = '60px';
-                mainNavPanel.style.left = '0';
-                mainNavPanel.style.right = '0';
-                mainNavPanel.style.width = '100%';
-                mainNavPanel.style.background = 'rgba(30, 58, 138, 0.98)';
-                mainNavPanel.style.padding = '30px 20px';
-                mainNavPanel.style.zIndex = '9999';
-
-                console.log('[MOBILE-MENU] MENU OPENED!');
-            } else {
-                // Close menu
-                hamburger.classList.remove('mobile-open');
-                hamburger.classList.remove('active');
-                hamburger.setAttribute('aria-expanded', 'false');
-                mainNavPanel.style.display = '';
-
-                console.log('[MOBILE-MENU] MENU CLOSED!');
-            }
-        }, true); // Use capture phase
-
-        // Close when clicking links
-        const links = mainNavPanel.querySelectorAll('a');
-        links.forEach(function(link) {
-            link.addEventListener('click', function() {
-                console.log('[MOBILE-MENU] Link clicked, closing menu');
-                hamburger.classList.remove('mobile-open');
-                hamburger.classList.remove('active');
-                hamburger.setAttribute('aria-expanded', 'false');
-                mainNavPanel.style.display = '';
-            });
-        });
-
-        console.log('[MOBILE-MENU] Setup complete!');
-        return true;
+function setupCheckboxMenu() {
+    const navbar = document.querySelector('.navbar');
+    if (!navbar) {
+        console.log('[MOBILE-MENU] Navbar not found, retrying...');
+        return false;
     }
 
-    return false;
+    // Create checkbox for toggle state
+    const checkbox = document.createElement('input');
+    checkbox.type = 'checkbox';
+    checkbox.id = 'mobile-menu-toggle';
+    checkbox.style.cssText = 'display: none;';
+
+    // Create hamburger label
+    const label = document.createElement('label');
+    label.htmlFor = 'mobile-menu-toggle';
+    label.className = 'hamburger-css';
+    label.innerHTML = '<span></span><span></span><span></span>';
+    label.setAttribute('aria-label', 'Toggle menu');
+    label.style.cssText = `
+        display: flex;
+        flex-direction: column;
+        cursor: pointer;
+        gap: 5px;
+        position: fixed;
+        top: 15px;
+        right: 15px;
+        z-index: 999999;
+        padding: 10px;
+        background: rgba(30, 58, 138, 0.9);
+        border-radius: 8px;
+        border: 2px solid white;
+    `;
+
+    // Style spans
+    label.querySelectorAll('span').forEach((span, i) => {
+        span.style.cssText = `
+            width: 25px;
+            height: 3px;
+            background: white;
+            border-radius: 3px;
+            transition: all 0.3s;
+        `;
+    });
+
+    // Add to navbar
+    navbar.insertBefore(checkbox, navbar.firstChild);
+    navbar.appendChild(label);
+
+    // Add CSS for panel visibility based on checkbox
+    const style = document.createElement('style');
+    style.textContent = `
+        /* Hide panel by default on mobile */
+        @media (max-width: 768px) {
+            .main-nav-panel {
+                display: none !important;
+                opacity: 0 !important;
+                visibility: hidden !important;
+            }
+
+            /* Show panel when checkbox is checked */
+            #mobile-menu-toggle:checked ~ .container .main-nav-panel,
+            #mobile-menu-toggle:checked ~ * .main-nav-panel {
+                display: block !important;
+                opacity: 1 !important;
+                visibility: visible !important;
+                position: fixed !important;
+                top: 70px !important;
+                left: 0 !important;
+                right: 0 !important;
+                bottom: 0 !important;
+                min-height: calc(100vh - 70px) !important;
+                background: rgba(30, 58, 138, 0.98) !important;
+                z-index: 999998 !important;
+                padding: 20px !important;
+                overflow-y: auto !important;
+            }
+
+            /* Hide original hamburger */
+            .hamburger {
+                display: none !important;
+            }
+
+            /* Transform hamburger to X when checked */
+            #mobile-menu-toggle:checked ~ label.hamburger-css span:nth-child(1) {
+                transform: rotate(45deg) translate(6px, 6px);
+            }
+            #mobile-menu-toggle:checked ~ label.hamburger-css span:nth-child(2) {
+                opacity: 0;
+            }
+            #mobile-menu-toggle:checked ~ label.hamburger-css span:nth-child(3) {
+                transform: rotate(-45deg) translate(6px, -6px);
+            }
+        }
+    `;
+    document.head.appendChild(style);
+
+    console.log('[MOBILE-MENU] CSS-only menu setup complete!');
+    return true;
 }
 
-// Try multiple times
-if (!checkAndInit()) {
-    console.log('[MOBILE-MENU] Elements not ready, will retry...');
-
-    // Try on DOMContentLoaded
+// Try to setup immediately
+if (!setupCheckboxMenu()) {
     if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('[MOBILE-MENU] DOMContentLoaded fired');
-            checkAndInit();
-        });
+        document.addEventListener('DOMContentLoaded', setupCheckboxMenu);
     }
-
-    // Try after delay
-    setTimeout(function() {
-        console.log('[MOBILE-MENU] Timeout check');
-        checkAndInit();
-    }, 500);
-
-    setTimeout(function() {
-        console.log('[MOBILE-MENU] Final check');
-        checkAndInit();
-    }, 1000);
+    setTimeout(setupCheckboxMenu, 100);
+    setTimeout(setupCheckboxMenu, 500);
 }

@@ -171,6 +171,7 @@ body {
     .navbar .container {
         height: 70px;
         padding: 0 1rem;
+        position: relative;
     }
 
     .nav-menu {
@@ -193,7 +194,12 @@ body {
     }
 
     .hamburger {
-        display: flex;
+        display: flex !important;
+        position: absolute !important;
+        right: 1rem !important;
+        top: 50% !important;
+        transform: translateY(-50%) !important;
+        z-index: 9999 !important;
     }
 
     .hero {

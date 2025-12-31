@@ -1309,9 +1309,79 @@ body.dark-mode .nav-dropdown-item:focus {
 
 /* Mobile Responsive for Main Nav */
 @media (max-width: 768px) {
-    /* Hide main-nav dropdown on mobile since hamburger menu provides navigation */
+    /* Hide the main-nav toggle button on mobile */
+    .main-nav-toggle {
+        display: none !important;
+    }
+
+    /* Show hamburger button */
+    .hamburger {
+        display: none !important;
+    }
+
+    /* Keep dropdown container visible but panel hidden by default */
     .main-nav-dropdown {
-        display: none;
+        display: block;
+    }
+
+    /* Hide panel by default */
+    .main-nav-panel {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        position: fixed;
+        top: 60px;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        overflow-y: auto;
+        background: rgba(30, 58, 138, 0.98) !important;
+        padding: 15px 20px 30px 20px;
+        z-index: 9998;
+        -webkit-overflow-scrolling: touch;
+        box-sizing: border-box;
+    }
+
+    /* Show panel when active */
+    .main-nav-panel[aria-hidden="false"],
+    .main-nav-panel[style*="display: block"] {
+        display: block !important;
+        visibility: visible !important;
+        opacity: 1 !important;
+        transform: none !important;
+    }
+
+    /* Also override when hidden */
+    .main-nav-panel[aria-hidden="true"] {
+        opacity: 1 !important;
+        visibility: visible !important;
+        transform: none !important;
+    }
+
+    /* Mobile nav item styling - compact to fit all 6 items */
+    .main-nav-panel .nav-dropdown-item {
+        background: transparent !important;
+        color: white !important;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.12);
+        padding: 12px 20px;
+        font-size: 15px;
+        display: flex;
+        align-items: center;
+        line-height: 1.4;
+    }
+
+    .main-nav-panel .nav-dropdown-item:last-child {
+        border-bottom: none;
+    }
+
+    .main-nav-panel .nav-dropdown-item:hover,
+    .main-nav-panel .nav-dropdown-item:focus {
+        background: rgba(255, 255, 255, 0.1) !important;
+    }
+
+    .main-nav-panel .nav-dropdown-item.active {
+        background: rgba(255, 255, 255, 0.15) !important;
+        color: white !important;
     }
 }
 
@@ -2982,6 +3052,7 @@ footer {
 @media (max-width: 768px) {
     .navbar .container {
         padding: 0.75rem 1rem;
+        position: relative;
     }
 
     .navbar {
@@ -3133,6 +3204,12 @@ footer {
 
     .hamburger {
         display: flex !important;
+        position: fixed !important;
+        right: 1rem !important;
+        top: 1rem !important;
+        transform: none !important;
+        z-index: 9999 !important;
+        pointer-events: auto !important;
     }
 
     .language-switcher {
