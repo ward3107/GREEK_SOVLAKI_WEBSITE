@@ -55,12 +55,29 @@ class PWAInstallManager {
     async registerServiceWorker() {
         if ('serviceWorker' in navigator) {
             try {
-                const registration = await navigator.serviceWorker.register('/sw.js');
-                console.log('Service Worker registered:', registration);
+                const registration = await navigator.serviceWorker.register('/sw.js', {
+                    scope: '/'
+                });
+                console.log('[PWA] Service Worker registered:', registration);
+
+                // Check if service worker is active
+                if (registration.active) {
+                    console.log('[PWA] Service Worker is active');
+                } else if (registration.installing) {
+                    console.log('[PWA] Service Worker is installing');
+                    registration.installing.addEventListener('statechange', () => {
+                        console.log('[PWA] Service Worker state changed to:', registration.active?.state);
+                    });
+                } else if (registration.waiting) {
+                    console.log('[PWA] Service Worker is waiting');
+                }
+
                 return registration;
             } catch (error) {
-                console.log('Service Worker registration failed:', error);
+                console.error('[PWA] Service Worker registration failed:', error);
             }
+        } else {
+            console.warn('[PWA] Service Worker not supported in this browser');
         }
         return null;
     }
@@ -86,7 +103,9 @@ class PWAInstallManager {
             navigatorStandalone,
             hasAppInstalled,
             userAgent: navigator.userAgent,
-            referrer: document.referrer
+            referrer: document.referrer,
+            protocol: location.protocol,
+            hostname: location.hostname
         });
 
         // If any installation indicator is true, don't show banner
@@ -97,7 +116,10 @@ class PWAInstallManager {
             return false;
         }
 
-        return hasServiceWorker && hasManifest && isHTTPS;
+        const isInstallable = hasServiceWorker && hasManifest && isHTTPS;
+        console.log('[PWA] Can be installed:', isInstallable);
+
+        return isInstallable;
     }
 
     showInstallButton() {
@@ -584,19 +606,50 @@ class PWAInstallManager {
     }
 
     async promptInstall() {
-        if (!this.installPrompt) {
-            alert('ההתקנה אינה זמינה כרגע');
+        // Check if we have the install prompt
+        if (this.installPrompt) {
+            const result = await this.installPrompt.prompt();
+            this.installPrompt = null;
+            if (result.outcome === 'accepted') {
+                console.log('User accepted the install prompt');
+            } else {
+                console.log('User dismissed the install prompt');
+            }
             return;
         }
 
-        const result = await this.installPrompt.prompt();
-        this.installPrompt = null;
-        // Don't hide immediately - let onAppInstalled handle it
-        if (result.outcome === 'accepted') {
-            console.log('User accepted the install prompt');
+        // Fallback: Manual installation instructions
+        console.log('[PWA] Install prompt not available, showing manual instructions');
+
+        const isAndroid = /android/.test(navigator.userAgent.toLowerCase());
+        const isChrome = /chrome/.test(navigator.userAgent.toLowerCase()) && !/edge|edg/.test(navigator.userAgent.toLowerCase());
+        const isSamsung = /samsung/.test(navigator.userAgent.toLowerCase());
+
+        let message = '';
+
+        if (isAndroid && isChrome) {
+            message = `להתקנה ידנית בדפדפן Chrome:
+
+1. לחצו על תפריט (⋮) בפינה הימנית העליונה
+2. בחרו "הוספה למסך הבית" או "Install app"
+3. לחצו "הוסף" כדי לסיים`;
+        } else if (isSamsung) {
+            message = `להתקנה ידנית בדפדפן Samsung Internet:
+
+1. לחצו על תפריט (⋮)
+2. בחרו "הוספה למסך הבית"
+3. לחצו "הוסף"`;
         } else {
-            console.log('User dismissed the install prompt');
+            message = `ההתקנה האוטומטית אינה זמינה כרגע.
+
+אפשרויות:
+• השתמשו בדפדפן Chrome ב-Android
+• או: נסו להיכנס לאתר שוב מאוחר יותר (Chrome דורש אינטראקציה עם האתר לפני ההתקנה)
+
+לבדיקה: פתחו את המסוף בדפדפן (F12) וראו אם יש הודעות שגיאה.`;
         }
+
+        alert(message);
     }
 }
 
