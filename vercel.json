@@ -1,17 +1,40 @@
 {
   "version": 2,
-  "cleanUrls": true,
+  "name": "greek-souvlaki-website",
   "buildCommand": null,
+  "devCommand": null,
   "installCommand": null,
   "framework": null,
   "outputDirectory": ".",
+  "cleanUrls": true,
+  "trailingSlash": false,
+  "github": {
+    "silent": true
+  },
   "rewrites": [
     {
-      "source": "/((?!.*\\.js|.*\\.css|.*\\.png|.*\\.jpg|.*\\.jpeg|.*\\.gif|.*\\.svg|.*\\.webp|.*\\.woff2|.*\\.woff|.*\\.ttf|.*\\.ico|.*\\.webmanifest|/images/|/fonts/|/js/).*)",
+      "source": "/((?!api|.*\\..*|_next|_vercel|.*\\.[a-z0-9]+).*)",
       "destination": "/index.html"
     }
   ],
   "headers": [
+    {
+      "source": "/(.*)",
+      "headers": [
+        {
+          "key": "X-Content-Type-Options",
+          "value": "nosniff"
+        },
+        {
+          "key": "X-Frame-Options",
+          "value": "DENY"
+        },
+        {
+          "key": "X-XSS-Protection",
+          "value": "1; mode=block"
+        }
+      ]
+    },
     {
       "source": "/images/(.*)",
       "headers": [
@@ -22,7 +45,7 @@
       ]
     },
     {
-      "source": "/(.*)\\.css",
+      "source": "/(.*)\\.(css|js)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -31,7 +54,7 @@
       ]
     },
     {
-      "source": "/(.*)\\.js",
+      "source": "/(.*)\\.(png|jpg|jpeg|gif|svg|webp|ico)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -40,88 +63,7 @@
       ]
     },
     {
-      "source": "/(.*)\\.woff2",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "/(.*)\\.woff",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "/(.*)\\.ttf",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "/(.*)\\.png",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "/(.*)\\.jpg",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "/(.*)\\.jpeg",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "/(.*)\\.webp",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "/(.*)\\.svg",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "/(.*)\\.gif",
-      "headers": [
-        {
-          "key": "Cache-Control",
-          "value": "public, max-age=31536000, immutable"
-        }
-      ]
-    },
-    {
-      "source": "/(.*)\\.ico",
+      "source": "/(.*)\\.(woff2|woff|ttf)",
       "headers": [
         {
           "key": "Cache-Control",
@@ -135,14 +77,6 @@
         {
           "key": "Cache-Control",
           "value": "no-cache, no-store, must-revalidate"
-        },
-        {
-          "key": "Pragma",
-          "value": "no-cache"
-        },
-        {
-          "key": "Expires",
-          "value": "0"
         }
       ]
     },
@@ -151,12 +85,16 @@
       "headers": [
         {
           "key": "Cache-Control",
-          "value": "no-cache, no-store, must-revalidate"
+          "value": "no-cache"
+        },
+        {
+          "key": "Service-Worker-Allowed",
+          "value": "/"
         }
       ]
     },
     {
-      "source": "/(.*)\\.json",
+      "source": "/manifest.json",
       "headers": [
         {
           "key": "Cache-Control",
