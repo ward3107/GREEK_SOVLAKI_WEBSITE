@@ -2,7 +2,8 @@
  * Simple PWA Install Manager
  * Handles service worker registration and install prompts
  *
- * Updated to work with pwa-early-capture.js for better Android Chrome support
+ * Shows install banner with one-click install if available,
+ * or manual install instructions otherwise.
  */
 
 class PWAInstallManager {
@@ -33,8 +34,10 @@ class PWAInstallManager {
             console.log('[PWA] Received install prompt from early capture');
             this.installPrompt = e.detail.prompt;
 
-            // Show banner if user is engaged
-            if (this.userEngaged && !this.bannerShown) {
+            // Update banner if already shown
+            if (this.bannerShown) {
+                this.updateBannerForAutoInstall();
+            } else if (this.userEngaged) {
                 this.showInstallBanner();
             }
         });
@@ -44,8 +47,8 @@ class PWAInstallManager {
             console.log('[PWA] User engaged (from early capture)');
             this.userEngaged = true;
 
-            // Show banner if we have the prompt
-            if (this.installPrompt && !this.bannerShown) {
+            // Show banner after engagement
+            if (!this.bannerShown) {
                 this.showInstallBanner();
             }
         });
@@ -62,7 +65,10 @@ class PWAInstallManager {
             e.preventDefault();
             this.installPrompt = e;
 
-            if (this.userEngaged && !this.bannerShown) {
+            // Update banner if already shown
+            if (this.bannerShown) {
+                this.updateBannerForAutoInstall();
+            } else if (this.userEngaged) {
                 this.showInstallBanner();
             }
         });
@@ -76,21 +82,29 @@ class PWAInstallManager {
 
         // Register service worker
         this.registerServiceWorker();
+
+        // Auto-show banner after a delay regardless of prompt availability
+        // This ensures users see install instructions even if Chrome won't fire beforeinstallprompt
+        setTimeout(() => {
+            if (!this.bannerShown && !this.isAlreadyInstalled()) {
+                console.log('[PWA] Auto-showing banner after delay');
+                this.showInstallBanner();
+            }
+        }, 3000);
     }
 
     showInstallBanner() {
         console.log('[PWA] Checking if we should show install banner...');
 
-        // CRITICAL: Only show if we actually have the install prompt
-        if (!this.installPrompt) {
-            console.log('[PWA] No install prompt available, not showing banner');
+        // Don't show if already installed
+        if (this.isAlreadyInstalled()) {
+            console.log('[PWA] App already installed, not showing banner');
             return;
         }
 
-        // Check if PWA meets installability criteria
-        const isInstallable = this.checkPWAInstallability();
-        if (!isInstallable) {
-            console.log('[PWA] PWA not installable yet');
+        // Don't show if already shown
+        if (this.bannerShown) {
+            console.log('[PWA] Banner already shown, skipping');
             return;
         }
 
@@ -100,8 +114,25 @@ class PWAInstallManager {
             console.log('[PWA] iOS detected - showing iOS install banner');
             this.showIOSInstallBanner();
         } else {
-            console.log('[PWA] Android/Chrome detected with install prompt - showing install banner');
+            console.log('[PWA] Android/Chrome detected - showing install banner');
             this.showInstallButton();
+        }
+    }
+
+    isAlreadyInstalled() {
+        const isStandalone = globalThis.matchMedia('(display-mode: standalone)').matches;
+        const navigatorStandalone = navigator.standalone;
+        const hasAppInstalled = localStorage.getItem('pwa-installed') === 'true';
+
+        return isStandalone || navigatorStandalone || hasAppInstalled;
+    }
+
+    updateBannerForAutoInstall() {
+        const installBtn = document.getElementById('pwa-install-btn');
+        if (installBtn) {
+            installBtn.textContent = 'התקן עכשיו';
+            installBtn.disabled = false;
+            console.log('[PWA] Banner updated for auto-install');
         }
     }
 
@@ -113,7 +144,6 @@ class PWAInstallManager {
                 });
                 console.log('[PWA] Service Worker registered:', registration);
 
-                // Check if service worker is active
                 if (registration.active) {
                     console.log('[PWA] Service Worker is active');
                 } else if (registration.installing) {
@@ -135,53 +165,7 @@ class PWAInstallManager {
         return null;
     }
 
-    checkPWAInstallability() {
-        // Check basic PWA requirements
-        const hasServiceWorker = 'serviceWorker' in navigator;
-        const hasManifest = document.querySelector('link[rel="manifest"]');
-        const isHTTPS = location.protocol === 'https:' || location.hostname === 'localhost';
-
-        // Check if the site is already installed
-        const isStandalone = globalThis.matchMedia('(display-mode: standalone)').matches;
-        const isInWebApp = globalThis.matchMedia('(display-mode: standalone)').matches || globalThis.matchMedia('(display-mode: minimal-ui)').matches;
-        const navigatorStandalone = navigator.standalone;
-        const hasAppInstalled = localStorage.getItem('pwa-installed') === 'true';
-
-        console.log('[PWA] Installability Check:', {
-            hasServiceWorker,
-            hasManifest,
-            isHTTPS,
-            isStandalone,
-            isInWebApp,
-            navigatorStandalone,
-            hasAppInstalled,
-            userAgent: navigator.userAgent,
-            referrer: document.referrer,
-            protocol: location.protocol,
-            hostname: location.hostname
-        });
-
-        // If any installation indicator is true, don't show banner
-        const isAlreadyInstalled = isStandalone || isInWebApp || navigatorStandalone || hasAppInstalled;
-
-        if (isAlreadyInstalled) {
-            console.log('[PWA] App already installed, hiding banner');
-            return false;
-        }
-
-        const isInstallable = hasServiceWorker && hasManifest && isHTTPS;
-        console.log('[PWA] Can be installed:', isInstallable);
-
-        return isInstallable;
-    }
-
     showInstallButton() {
-        // Don't show if already shown
-        if (this.bannerShown) {
-            console.log('[PWA] Banner already shown, skipping');
-            return;
-        }
-
         console.log('[PWA] Showing install button...');
         this.bannerShown = true;
 
@@ -190,6 +174,9 @@ class PWAInstallManager {
         if (existingBanner) {
             existingBanner.remove();
         }
+
+        const hasAutoInstall = !!this.installPrompt;
+        const buttonText = hasAutoInstall ? 'התקן עכשיו' : 'איך להתקין';
 
         const banner = document.createElement('div');
         banner.id = 'pwa-install-banner';
@@ -200,21 +187,21 @@ class PWAInstallManager {
                     <span class="pwa-banner-icon">📱</span>
                     <div class="pwa-banner-text">
                         <strong>התקן את Greek Souvlaki</strong>
-                        <span>קבלו חוויה מהירה ונוחה יותר!</span>
+                        <span>${hasAutoInstall ? 'קבלו חוויה מהירה ונוחה יותר!' : 'התקינו את האפליקציה לחוויה מהירה יותר'}</span>
                     </div>
                 </div>
                 <div class="pwa-banner-actions">
                     <button class="pwa-banner-btn-close" id="pwa-close-btn">
                         ✕
                     </button>
-                    <button class="pwa-banner-btn-install" id="pwa-install-btn">
-                        התקן עכשיו
+                    <button class="pwa-banner-btn-install" id="pwa-install-btn" ${!hasAutoInstall ? 'data-manual="true"' : ''}>
+                        ${buttonText}
                     </button>
                 </div>
             </div>
         `;
 
-        // Add comprehensive styles
+        // Add styles
         const style = document.createElement('style');
         style.textContent = `
             .pwa-install-banner {
@@ -318,6 +305,11 @@ class PWAInstallManager {
                 background: #f0f0f0;
                 transform: translateY(-2px);
                 box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+            }
+
+            .pwa-banner-btn-install[data-manual="true"] {
+                background: #fbbf24;
+                color: #1e3a8a;
             }
 
             @keyframes slideDown {
@@ -451,16 +443,10 @@ class PWAInstallManager {
         // Make available globally
         globalThis.pwaManager = this;
 
-        console.log('[PWA] Install button banner added to page');
+        console.log('[PWA] Install button banner added to page (auto-install:', hasAutoInstall, ')');
     }
 
     showIOSInstallBanner() {
-        // Don't show if already shown
-        if (this.bannerShown) {
-            console.log('[PWA] Banner already shown, skipping');
-            return;
-        }
-
         console.log('[PWA] Showing iOS install instructions...');
         this.bannerShown = true;
 
@@ -664,7 +650,7 @@ class PWAInstallManager {
     }
 
     async promptInstall() {
-        // Check if we have the install prompt
+        // Check if we have the install prompt for one-click install
         if (this.installPrompt) {
             console.log('[PWA] Prompting user to install...');
 
@@ -679,15 +665,45 @@ class PWAInstallManager {
             return;
         }
 
-        // Fallback: This shouldn't happen with the new implementation
-        console.error('[PWA] Install prompt not available - this should not happen!');
-        console.log('[PWA] Debug info:', {
-            hasPrompt: !!this.installPrompt,
-            userEngaged: this.userEngaged,
-            bannerShown: this.bannerShown,
-            earlyCapturePrompt: !!window._pwaInstallPrompt,
-            earlyCaptureCaptured: window._pwaInstallPromptCaptured
-        });
+        // Manual install instructions
+        console.log('[PWA] Showing manual install instructions');
+
+        const isAndroid = /android/.test(navigator.userAgent.toLowerCase());
+        const isChrome = /chrome/.test(navigator.userAgent.toLowerCase()) && !/edge|edg/.test(navigator.userAgent.toLowerCase());
+        const isSamsung = /samsung/.test(navigator.userAgent.toLowerCase());
+
+        let message = '';
+
+        if (isAndroid && isChrome) {
+            message = `📱 להתקנת האפליקציה ב-Android Chrome:
+
+1. לחצו על תפריט (⋮) בפינה הימנית העליונה
+2. בחרו "הוספה למסך הבית" או "Install app"
+3. לחצו "הוסף" כדי לסיים
+
+💡 טיפ: בקרו באתר מספר פעמים כדי לקבל התראה להתקנה מהירה יותר!`;
+        } else if (isSamsung) {
+            message = `📱 להתקנת האפליקציה ב-Samsung Internet:
+
+1. לחצו על תפריט (⋮)
+2. בחרו "הוספה למסך הבית"
+3. לחצו "הוסף"`;
+        } else {
+            message = `📱 להתקנת האפליקציה:
+
+Android Chrome:
+1. תפריט (⋮) → "הוספה למסך הבית"
+
+Samsung Internet:
+1. תפריט (⋮) → "הוספה למסך הבית"
+
+Firefox:
+1. תפריט (⋮) → "Install"
+
+💡 בקרו באתר מספר פעמים להתקנה אוטומטית!`;
+        }
+
+        alert(message);
     }
 }
 
@@ -700,7 +716,7 @@ if (document.readyState === 'loading') {
     new PWAInstallManager();
 }
 
-// Global function for manual testing on mobile
+// Global function for manual testing
 window.showPWAInstallBanner = function() {
     if (window.pwaManager) {
         console.log('[PWA] Manual trigger - showing install banner');
