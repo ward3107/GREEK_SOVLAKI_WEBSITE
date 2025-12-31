@@ -225,18 +225,20 @@
         }
 
         setupResponsiveHandling() {
-            // Handle mobile menu toggle
+            // Don't interfere with hamburger menu - mobile-menu-fix.js handles it
+            // Just ensure dropdowns are closed when mobile menu opens
             const mobileMenuToggle = document.querySelector('.hamburger');
-            const navMenu = document.querySelector('.nav-menu');
 
-            if (mobileMenuToggle && navMenu) {
-                mobileMenuToggle.addEventListener('click', () => {
-                    const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
-
-                    if (!isExpanded) {
-                        // When opening mobile menu, close all dropdowns
-                        this.closeAllDropdowns();
-                    }
+            if (mobileMenuToggle) {
+                mobileMenuToggle.addEventListener('click', (e) => {
+                    // Use setTimeout to check if menu will be open after other handlers run
+                    setTimeout(() => {
+                        const isExpanded = mobileMenuToggle.getAttribute('aria-expanded') === 'true';
+                        if (isExpanded) {
+                            // When mobile menu is opened, close all dropdowns
+                            this.closeAllDropdowns();
+                        }
+                    }, 0);
                 });
             }
         }
