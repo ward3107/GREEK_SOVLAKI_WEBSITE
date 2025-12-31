@@ -1,63 +1,106 @@
 /**
  * Simple PWA Install Manager
  * Handles service worker registration and install prompts
+ *
+ * Updated to work with pwa-early-capture.js for better Android Chrome support
  */
 
-// PWA Install Manager
 class PWAInstallManager {
     constructor() {
         this.installPrompt = null;
+        this.userEngaged = false;
+        this.bannerShown = false;
         this.init();
     }
 
     init() {
         console.log('[PWA] Initializing...');
 
-        // Register service worker and wait for it to be active
-        this.registerServiceWorker().then(() => {
-            console.log('[PWA] Service worker registration complete, checking for install prompt...');
-            // After service worker is registered, wait a bit and show banner
-            setTimeout(() => {
+        // Check if early capture already caught the prompt
+        if (window._pwaInstallPrompt) {
+            console.log('[PWA] Early capture already has the install prompt!');
+            this.installPrompt = window._pwaInstallPrompt;
+        }
+
+        // Check if user is already engaged
+        if (window._pwaUserEngaged) {
+            console.log('[PWA] User already engaged (from early capture)');
+            this.userEngaged = true;
+        }
+
+        // Listen for early capture events
+        window.addEventListener('pwa-install-prompt-captured', (e) => {
+            console.log('[PWA] Received install prompt from early capture');
+            this.installPrompt = e.detail.prompt;
+
+            // Show banner if user is engaged
+            if (this.userEngaged && !this.bannerShown) {
                 this.showInstallBanner();
-            }, 2000);
+            }
         });
 
-        // Set up install prompt - capture it as early as possible
+        // Listen for user engagement
+        window.addEventListener('pwa-user-engaged', () => {
+            console.log('[PWA] User engaged (from early capture)');
+            this.userEngaged = true;
+
+            // Show banner if we have the prompt
+            if (this.installPrompt && !this.bannerShown) {
+                this.showInstallBanner();
+            }
+        });
+
+        // Listen for app installed
+        window.addEventListener('pwa-app-installed', () => {
+            console.log('[PWA] App installed (from early capture)');
+            this.hideInstallButton();
+        });
+
+        // Also set up the regular event listener (backup)
         window.addEventListener('beforeinstallprompt', (e) => {
-            console.log('[PWA] Install prompt detected!');
+            console.log('[PWA] Install prompt detected (backup listener)!');
             e.preventDefault();
             this.installPrompt = e;
-            // Show or update the banner
-            this.showInstallButton();
+
+            if (this.userEngaged && !this.bannerShown) {
+                this.showInstallBanner();
+            }
         });
 
-        // Handle app installed
+        // Handle app installed (backup)
         window.addEventListener('appinstalled', () => {
-            console.log('[PWA] App installed successfully');
+            console.log('[PWA] App installed successfully (backup listener)');
             localStorage.setItem('pwa-installed', 'true');
             this.hideInstallButton();
         });
+
+        // Register service worker
+        this.registerServiceWorker();
     }
 
     showInstallBanner() {
-        console.log('[PWA] Checking installability...');
+        console.log('[PWA] Checking if we should show install banner...');
+
+        // CRITICAL: Only show if we actually have the install prompt
+        if (!this.installPrompt) {
+            console.log('[PWA] No install prompt available, not showing banner');
+            return;
+        }
 
         // Check if PWA meets installability criteria
         const isInstallable = this.checkPWAInstallability();
+        if (!isInstallable) {
+            console.log('[PWA] PWA not installable yet');
+            return;
+        }
+
         const isIOS = /iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase());
 
         if (isIOS) {
             console.log('[PWA] iOS detected - showing iOS install banner');
             this.showIOSInstallBanner();
-        } else if (this.installPrompt) {
-            console.log('[PWA] Install prompt available, showing install banner');
-            this.showInstallButton();
-        } else if (isInstallable) {
-            console.log('[PWA] PWA is installable but no prompt yet, showing banner with manual option');
-            this.showInstallButton();
         } else {
-            console.log('[PWA] PWA not installable yet');
-            // Still show banner for debugging
+            console.log('[PWA] Android/Chrome detected with install prompt - showing install banner');
             this.showInstallButton();
         }
     }
@@ -133,20 +176,20 @@ class PWAInstallManager {
     }
 
     showInstallButton() {
+        // Don't show if already shown
+        if (this.bannerShown) {
+            console.log('[PWA] Banner already shown, skipping');
+            return;
+        }
+
         console.log('[PWA] Showing install button...');
+        this.bannerShown = true;
 
-        // DEBUG: Check for existing banners
+        // Remove any existing banners
         const existingBanner = document.getElementById('pwa-install-banner');
-        const allBanners = document.querySelectorAll('[id*="pwa-install"], [class*="pwa-install"]');
-
-        console.log('[PWA] Existing banners found:', existingBanner);
-        console.log('[PWA] All PWA-related elements:', allBanners.length);
-
-              // Remove all existing PWA banners to prevent duplicates
-        allBanners.forEach(banner => {
-            console.log('[PWA] Removing existing banner:', banner);
-            banner.remove();
-        });
+        if (existingBanner) {
+            existingBanner.remove();
+        }
 
         const banner = document.createElement('div');
         banner.id = 'pwa-install-banner';
@@ -385,7 +428,7 @@ class PWAInstallManager {
         // Add class to body for spacing
         document.body.classList.add('has-pwa-banner');
 
-        // Add event listeners for buttons (CSP-safe)
+        // Add event listeners for buttons
         const closeBtn = banner.querySelector('#pwa-close-btn');
         const installBtn = banner.querySelector('#pwa-install-btn');
 
@@ -401,18 +444,25 @@ class PWAInstallManager {
             });
         }
 
-        // Store reference for promptInstall method
+        // Store reference
         this.bannerElement = banner;
         document.body.appendChild(banner);
 
-        // Make promptInstall available globally for other potential uses
+        // Make available globally
         globalThis.pwaManager = this;
 
         console.log('[PWA] Install button banner added to page');
     }
 
     showIOSInstallBanner() {
+        // Don't show if already shown
+        if (this.bannerShown) {
+            console.log('[PWA] Banner already shown, skipping');
+            return;
+        }
+
         console.log('[PWA] Showing iOS install instructions...');
+        this.bannerShown = true;
 
         const banner = document.createElement('div');
         banner.id = 'pwa-ios-install-banner';
@@ -588,7 +638,6 @@ class PWAInstallManager {
         `;
         document.head.appendChild(style);
 
-        // Add event listener for close button
         const closeBtn = banner.querySelector('#pwa-ios-close-btn');
         if (closeBtn) {
             closeBtn.addEventListener('click', () => {
@@ -611,55 +660,34 @@ class PWAInstallManager {
         const banner = document.getElementById('pwa-install-banner');
         if (banner) banner.remove();
 
-        // Remove body spacing class
         document.body.classList.remove('has-pwa-banner');
     }
 
     async promptInstall() {
         // Check if we have the install prompt
         if (this.installPrompt) {
+            console.log('[PWA] Prompting user to install...');
+
             const result = await this.installPrompt.prompt();
             this.installPrompt = null;
+
             if (result.outcome === 'accepted') {
-                console.log('User accepted the install prompt');
+                console.log('[PWA] User accepted the install prompt');
             } else {
-                console.log('User dismissed the install prompt');
+                console.log('[PWA] User dismissed the install prompt');
             }
             return;
         }
 
-        // Fallback: Manual installation instructions
-        console.log('[PWA] Install prompt not available, showing manual instructions');
-
-        const isAndroid = /android/.test(navigator.userAgent.toLowerCase());
-        const isChrome = /chrome/.test(navigator.userAgent.toLowerCase()) && !/edge|edg/.test(navigator.userAgent.toLowerCase());
-        const isSamsung = /samsung/.test(navigator.userAgent.toLowerCase());
-
-        let message = '';
-
-        if (isAndroid && isChrome) {
-            message = `להתקנה ידנית בדפדפן Chrome:
-
-1. לחצו על תפריט (⋮) בפינה הימנית העליונה
-2. בחרו "הוספה למסך הבית" או "Install app"
-3. לחצו "הוסף" כדי לסיים`;
-        } else if (isSamsung) {
-            message = `להתקנה ידנית בדפדפן Samsung Internet:
-
-1. לחצו על תפריט (⋮)
-2. בחרו "הוספה למסך הבית"
-3. לחצו "הוסף"`;
-        } else {
-            message = `ההתקנה האוטומטית אינה זמינה כרגע.
-
-אפשרויות:
-• השתמשו בדפדפן Chrome ב-Android
-• או: נסו להיכנס לאתר שוב מאוחר יותר (Chrome דורש אינטראקציה עם האתר לפני ההתקנה)
-
-לבדיקה: פתחו את המסוף בדפדפן (F12) וראו אם יש הודעות שגיאה.`;
-        }
-
-        alert(message);
+        // Fallback: This shouldn't happen with the new implementation
+        console.error('[PWA] Install prompt not available - this should not happen!');
+        console.log('[PWA] Debug info:', {
+            hasPrompt: !!this.installPrompt,
+            userEngaged: this.userEngaged,
+            bannerShown: this.bannerShown,
+            earlyCapturePrompt: !!window._pwaInstallPrompt,
+            earlyCaptureCaptured: window._pwaInstallPromptCaptured
+        });
     }
 }
 
@@ -676,6 +704,6 @@ if (document.readyState === 'loading') {
 window.showPWAInstallBanner = function() {
     if (window.pwaManager) {
         console.log('[PWA] Manual trigger - showing install banner');
-        window.pwaManager.showInstallButton();
+        window.pwaManager.showInstallBanner();
     }
 };

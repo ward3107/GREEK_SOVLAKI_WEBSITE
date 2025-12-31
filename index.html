@@ -87,6 +87,9 @@
     <link rel="apple-touch-icon" sizes="512x512" href="logo.jpg">
     <link rel="icon" type="image/jpeg" href="logo.jpg">
 
+    <!-- PWA Early Capture Script - MUST load early in head to capture install prompt -->
+    <script src="js/pwa-early-capture.js?v=1"></script>
+
     <!-- Preload critical CSS for faster rendering -->
     <link rel="preload" href="styles.css?v=57" as="style">
     <link rel="stylesheet" href="styles.css?v=57">
@@ -995,7 +998,7 @@
 
 
     <!-- PWA Install Handler -->
-    <script src="js/pwa-install.js?v=3"></script>
+    <script src="js/pwa-install.js?v=4"></script>
 
     <!-- PWA banner will be shown by the main pwa-install.js script -->
 
