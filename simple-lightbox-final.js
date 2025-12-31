@@ -396,9 +396,15 @@ console.log('[SL-FINAL] Loading final lightbox...');
     });
 
     // Add click handlers using event delegation
+    // Debug: log all clicks to diagnose issues
+    document.addEventListener('click', (e) => {
+        console.log('[SL-DEBUG] Click on:', e.target.tagName, e.target.className);
+    }, true);
+
     document.addEventListener('click', (e) => {
         const clickedImg = e.target.closest('.gallery-item img');
         if (clickedImg) {
+            console.log('[SL-FINAL] Gallery image clicked! Opening lightbox...');
             e.preventDefault();
             e.stopPropagation();
             const index = galleryImages.indexOf(clickedImg);
