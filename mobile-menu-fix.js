@@ -20,8 +20,8 @@ function setupCheckboxMenu() {
     label.className = 'hamburger-css';
     label.innerHTML = '<span></span><span></span><span></span>';
     label.setAttribute('aria-label', 'Toggle menu');
+    // Don't set display - let CSS media query handle it
     label.style.cssText = `
-        display: flex;
         flex-direction: column;
         cursor: pointer;
         gap: 5px;
@@ -53,8 +53,19 @@ function setupCheckboxMenu() {
     // Add CSS for panel visibility based on checkbox
     const style = document.createElement('style');
     style.textContent = `
-        /* Hide panel by default on mobile */
+        /* Hide hamburger label on desktop */
+        .hamburger-css {
+            display: none;
+        }
+
+        /* Mobile only styles */
         @media (max-width: 768px) {
+            /* Show hamburger label on mobile */
+            .hamburger-css {
+                display: flex !important;
+            }
+
+            /* Hide panel by default on mobile */
             .main-nav-panel {
                 display: none !important;
                 opacity: 0 !important;
