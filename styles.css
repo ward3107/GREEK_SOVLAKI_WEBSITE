@@ -1309,31 +1309,9 @@ body.dark-mode .nav-dropdown-item:focus {
 
 /* Mobile Responsive for Main Nav */
 @media (max-width: 768px) {
+    /* Hide main-nav dropdown on mobile since hamburger menu provides navigation */
     .main-nav-dropdown {
-        width: 100%;
-        margin: 10px 0;
-    }
-
-    .main-nav-toggle {
-        width: 100%;
-        justify-content: space-between;
-        padding: 16px 20px;
-        font-size: 18px;
-        color: white !important;
-    }
-
-    .main-nav-panel {
-        position: relative;
-        top: 0;
-        left: 0;
-        width: 100%;
-        margin-top: 10px;
-    }
-
-    .main-nav-panel .nav-dropdown-item {
-        padding: 18px 24px;
-        font-size: 17px;
-        color: #333 !important;
+        display: none;
     }
 }
 
