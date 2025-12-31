@@ -452,3 +452,4 @@ console.log('[SL-FINAL] Loading final lightbox...');
     console.log('[SL-FINAL] Lightbox initialized! Gallery images:', galleryImages.length);
 
 })();
+
