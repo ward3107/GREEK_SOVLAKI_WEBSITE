@@ -1,9 +1,15 @@
 {
   "version": 2,
   "buildCommand": null,
-  "outputDirectory": null,
+  "outputDirectory": "./",
   "installCommand": null,
   "framework": null,
+  "rewrites": [
+    {
+      "source": "/(.*)",
+      "destination": "/index.html"
+    }
+  ],
   "headers": [
     {
       "source": "/images/(.*)",
