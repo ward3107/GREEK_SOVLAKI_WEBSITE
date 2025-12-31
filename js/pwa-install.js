@@ -37,15 +37,19 @@ class PWAInstallManager {
 
             // Check if PWA meets installability criteria
             const isInstallable = this.checkPWAInstallability();
+            const isIOS = /iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase());
 
-            if (this.installPrompt || isInstallable) {
+            if (isIOS) {
+                console.log('[PWA] iOS detected - showing iOS install banner');
+                this.showIOSInstallBanner();
+            } else if (this.installPrompt || isInstallable) {
                 console.log('[PWA] PWA is installable, showing banner');
                 this.showInstallButton();
             } else {
                 console.log('[PWA] PWA not installable yet, showing demo banner');
                 this.showInstallButton();
             }
-        }, 2000);
+        }, 3000);
     }
 
     async registerServiceWorker() {
@@ -375,6 +379,202 @@ class PWAInstallManager {
         console.log('[PWA] Install button banner added to page');
     }
 
+    showIOSInstallBanner() {
+        console.log('[PWA] Showing iOS install instructions...');
+
+        const banner = document.createElement('div');
+        banner.id = 'pwa-ios-install-banner';
+        banner.className = 'pwa-ios-install-banner';
+        banner.innerHTML = `
+            <div class="pwa-ios-banner-content">
+                <div class="pwa-ios-banner-header">
+                    <span class="pwa-ios-banner-icon">📱</span>
+                    <div class="pwa-ios-banner-text">
+                        <strong>התקינו את האפליקציה שלנו</strong>
+                        <span>לחצו על השתתף ואז "למסך הבית"</span>
+                    </div>
+                    <button class="pwa-ios-banner-btn-close" id="pwa-ios-close-btn">
+                        ✕
+                    </button>
+                </div>
+                <div class="pwa-ios-banner-steps">
+                    <div class="pwa-ios-step">
+                        <div class="pwa-ios-step-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="4" y="4" width="16" height="16" rx="2"/>
+                                <circle cx="12" cy="12" r="3"/>
+                            </svg>
+                        </div>
+                        <span>לחצו על כפתור השתתף</span>
+                    </div>
+                    <div class="pwa-ios-step">
+                        <div class="pwa-ios-step-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="4" y="4" width="16" height="16" rx="2"/>
+                                <rect x="9" y="9" width="6" height="6"/>
+                            </svg>
+                        </div>
+                        <span>גללו למטה ובחרו "למסך הבית"</span>
+                    </div>
+                    <div class="pwa-ios-step">
+                        <div class="pwa-ios-step-icon">
+                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M5 12l5 5l10 -10"/>
+                            </svg>
+                        </div>
+                        <span>לחצו "הוסף" וסיימתם!</span>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        const style = document.createElement('style');
+        style.textContent = `
+            .pwa-ios-install-banner {
+                position: fixed !important;
+                bottom: 0 !important;
+                left: 0 !important;
+                right: 0 !important;
+                background: linear-gradient(180deg, rgba(30, 64, 175, 0.98) 0%, rgba(55, 48, 163, 0.98) 100%) !important;
+                color: white !important;
+                z-index: 999999 !important;
+                box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2) !important;
+                animation: slideUp 0.5s cubic-bezier(0.23, 1, 0.32, 1) !important;
+                font-family: 'Inter', 'Poppins', sans-serif !important;
+                border-top: 2px solid rgba(255, 255, 255, 0.3) !important;
+            }
+
+            .pwa-ios-banner-content {
+                padding: 20px 20px 30px;
+                max-width: 500px;
+                margin: 0 auto;
+            }
+
+            .pwa-ios-banner-header {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                margin-bottom: 20px;
+            }
+
+            .pwa-ios-banner-icon {
+                font-size: 32px;
+                flex-shrink: 0;
+            }
+
+            .pwa-ios-banner-text {
+                flex: 1;
+                display: flex;
+                flex-direction: column;
+                line-height: 1.3;
+            }
+
+            .pwa-ios-banner-text strong {
+                font-size: 18px;
+                font-weight: 600;
+            }
+
+            .pwa-ios-banner-text span {
+                font-size: 14px;
+                opacity: 0.9;
+            }
+
+            .pwa-ios-banner-btn-close {
+                background: rgba(255, 255, 255, 0.1);
+                border: none;
+                color: white;
+                width: 32px;
+                height: 32px;
+                border-radius: 50%;
+                cursor: pointer;
+                font-size: 16px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                transition: all 0.3s ease;
+                flex-shrink: 0;
+            }
+
+            .pwa-ios-banner-btn-close:hover {
+                background: rgba(255, 255, 255, 0.2);
+            }
+
+            .pwa-ios-banner-steps {
+                display: flex;
+                flex-direction: column;
+                gap: 12px;
+            }
+
+            .pwa-ios-step {
+                display: flex;
+                align-items: center;
+                gap: 15px;
+                background: rgba(255, 255, 255, 0.1);
+                padding: 12px 15px;
+                border-radius: 12px;
+                font-size: 14px;
+            }
+
+            .pwa-ios-step-icon {
+                width: 36px;
+                height: 36px;
+                background: rgba(255, 255, 255, 0.2);
+                border-radius: 8px;
+                display: flex;
+                align-items: center;
+                justify-content: center;
+                flex-shrink: 0;
+            }
+
+            .pwa-ios-step-icon svg {
+                width: 20px;
+                height: 20px;
+            }
+
+            @keyframes slideUp {
+                from {
+                    transform: translateY(100%);
+                    opacity: 0;
+                }
+                to {
+                    transform: translateY(0);
+                    opacity: 1;
+                }
+            }
+
+            @media (max-width: 480px) {
+                .pwa-ios-banner-content {
+                    padding: 15px 15px 25px;
+                }
+                .pwa-ios-banner-text strong {
+                    font-size: 16px;
+                }
+                .pwa-ios-banner-text span {
+                    font-size: 13px;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+
+        // Add event listener for close button
+        const closeBtn = banner.querySelector('#pwa-ios-close-btn');
+        if (closeBtn) {
+            closeBtn.addEventListener('click', () => {
+                this.hideIOSInstallBanner();
+            });
+        }
+
+        this.iosBannerElement = banner;
+        document.body.appendChild(banner);
+
+        console.log('[PWA] iOS install banner added to page');
+    }
+
+    hideIOSInstallBanner() {
+        const banner = document.getElementById('pwa-ios-install-banner');
+        if (banner) banner.remove();
+    }
+
     hideInstallButton() {
         const banner = document.getElementById('pwa-install-banner');
         if (banner) banner.remove();
@@ -403,9 +603,10 @@ class PWAInstallManager {
 // Initialize when DOM is ready
 if (document.readyState === 'loading') {
     document.addEventListener('DOMContentLoaded', () => {
-        ;
+        new PWAInstallManager();
     });
-} else { ;
+} else {
+    new PWAInstallManager();
 }
 
 // Global function for manual testing on mobile
