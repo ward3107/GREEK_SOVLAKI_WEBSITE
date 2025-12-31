@@ -4,6 +4,7 @@
   "buildCommand": null,
   "installCommand": null,
   "framework": null,
+  "outputDirectory": ".",
   "rewrites": [
     {
       "source": "/((?!.*\\.js|.*\\.css|.*\\.png|.*\\.jpg|.*\\.jpeg|.*\\.gif|.*\\.svg|.*\\.webp|.*\\.woff2|.*\\.woff|.*\\.ttf|.*\\.ico|.*\\.webmanifest|/images/|/fonts/|/js/).*)",
