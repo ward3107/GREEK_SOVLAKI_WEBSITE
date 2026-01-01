@@ -1,0 +1,996 @@
+<!DOCTYPE html>
+
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <!-- Content Security Policy - Secure CSP with limited unsafe-inline for styles -->
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self';
+        script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://vercel.live;
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com http://fonts.googleapis.com;
+        font-src 'self' https://fonts.gstatic.com http://fonts.gstatic.com;
+        img-src 'self' data: blob: https://images.unsplash.com https://flagcdn.com https://*.google-analytics.com;
+        connect-src 'self' https://images.unsplash.com https://flagcdn.com https://www.google-analytics.com https://*.google-analytics.com https://vercel.live;
+        frame-src 'self' https://www.google.com;
+        object-src 'none';
+        base-uri 'self';
+        form-action 'self';
+    ">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <!-- <style id="i18n-hide">body{visibility:hidden}</style> -->
+    <title>סובלאקי יווני כפר יאסיף | מסעדה יוונית אותנטית - Greek Souvlaki</title>
+    <meta name="description" content="מסעדה יוונית אותנטית בכפר יאסיף. סובלאקי, גירוס, פיתות יווניות ומגשי בשרים במחירים נוחים. פתוח רביעי-שבת 13:00-01:00. ☎️ 04-812-2980">
+    <meta name="keywords" content="סובלאקי יווני, מסעדה יוונית, כפר יאסיף, גירוס, אוכל יווני, Greek Souvlaki, מסעדה בצפון, אוכל ים תיכוני">
+    <link rel="canonical" href="https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:type" content="restaurant">
+    <meta property="og:title" content="סובלאקי יווני כפר יאסיף | מסעדה יוונית אותנטית">
+    <meta property="og:description" content="מסעדה יוונית אותנטית בכפר יאסיף. סובלאקי, גירוס, פיתות יווניות ומגשי בשרים. פתוח רביעי-שבת 13:00-01:00">
+    <meta property="og:image" content="https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/images/gallery-1.webp">
+    <meta property="og:url" content="https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/">
+    <meta property="og:site_name" content="Greek Souvlaki - סובלאקי יווני">
+    <meta property="og:locale" content="he_IL">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:locale:alternate" content="ar_SA">
+    <meta property="og:locale:alternate" content="ru_RU">
+    <meta property="og:locale:alternate" content="el_GR">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="סובלאקי יווני כפר יאסיף | מסעדה יוונית אותנטית">
+    <meta name="twitter:description" content="מסעדה יוונית אותנטית בכפר יאסיף. סובלאקי, גירוס ומגשי בשרים. פתוח רביעי-שבת 13:00-01:00">
+    <meta name="twitter:image" content="https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/images/gallery-1.webp">
+
+    <!-- Hreflang Tags for Multi-language -->
+    <link rel="alternate" hreflang="he" href="https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/">
+    <link rel="alternate" hreflang="en" href="https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/?lang=en">
+    <link rel="alternate" hreflang="ar" href="https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/?lang=ar">
+    <link rel="alternate" hreflang="ru" href="https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/?lang=ru">
+    <link rel="alternate" hreflang="el" href="https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/?lang=el">
+    <link rel="alternate" hreflang="x-default" href="https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/jpeg" href="logo.jpg">
+
+    <!-- PWA Meta Tags -->
+    <meta name="theme-color" content="#1e3a8a">
+    <meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Greek Souvlaki">
+    <link rel="manifest" href="manifest.json">
+
+    <!-- Preload critical CSS for faster rendering -->
+    <link rel="preload" href="styles.css?v=43" as="style">
+    <link rel="stylesheet" href="styles.css?v=43">
+    <link rel="stylesheet" href="css/inline-styles.css">
+    <link rel="stylesheet" href="animations.css?v=14">
+    <link rel="stylesheet" href="accessibility-widget.css?v=22">
+    <link rel="stylesheet" href="cookie-consent.css?v=15">
+    <script defer src="js/css-loader.js"></script>
+    <script defer src="js/gallery-performance.js"></script>
+    <noscript>
+        <link rel="stylesheet" href="animations.css?v=14">
+        <link rel="stylesheet" href="accessibility-widget.css?v=22">
+        <link rel="stylesheet" href="cookie-consent.css?v=15">
+    </noscript>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <!-- Optimized font loading with font-display=swap for better performance -->
+    <link rel="preload" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap" as="style">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap">
+    <noscript><link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;500;600;700;800&family=Inter:wght@300;400;500;600;700&display=swap"></noscript>
+    <link rel="preconnect" href="https://images.unsplash.com" crossorigin>
+    <link rel="preconnect" href="https://flagcdn.com" crossorigin>
+
+    <!-- Preload critical gallery images for faster initial load -->
+    <link rel="preload" as="image" href="images/gallery-1.webp" fetchpriority="high">
+    <link rel="preload" as="image" href="images/gallery-2.webp" fetchpriority="high">
+    <link rel="preload" as="image" href="images/gallery-3.webp">
+
+    <!-- Structured Data for SEO -->
+    <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "Restaurant",
+          "@id": "https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/#restaurant",
+          "name": "Greek Souvlaki - סובלאקי יווני",
+          "alternateName": ["Greek Souvlaki", "סובלאקי יווני כפר יאסיף"],
+          "description": "מסעדה יוונית אותנטית בכפר יאסיף. סובלאקי, גירוס ומטעמים יווניים מסורתיים באווירה חמה ומזמינה. פתוח חמישי-שבת.",
+          "image": "https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/images/gallery-1.webp",
+          "priceRange": "₪₪",
+          "servesCuisine": ["Greek", "Mediterranean", "Middle Eastern"],
+          "address": {
+            "@type": "PostalAddress",
+            "streetAddress": "כביש 70",
+            "addressLocality": "כפר יאסיף",
+            "addressRegion": "הגליל המערבי",
+            "addressCountry": "IL"
+          },
+          "geo": {
+            "@type": "GeoCoordinates",
+            "latitude": 32.9556,
+            "longitude": 35.1636
+          },
+          "telephone": "+972-4-8122980",
+          "url": "https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/",
+          "openingHoursSpecification": [
+            {
+              "@type": "OpeningHoursSpecification",
+              "dayOfWeek": ["Thursday", "Friday", "Saturday"],
+              "opens": "13:00",
+              "closes": "01:00"
+            }
+          ],
+          "acceptsReservations": true,
+          "menu": "https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/#menu",
+          "hasMenu": {
+            "@type": "Menu",
+            "hasMenuSection": [
+              {
+                "@type": "MenuSection",
+                "name": "סובלאקי בפיתה",
+                "hasMenuItem": [
+                  {
+                    "@type": "MenuItem",
+                    "name": "Souvlaki Pita Chicken",
+                    "description": "פיתה יוונית, שיפוד עוף, רוטב צזיקי/חריף,  בצל, עגבנייה, חסה, צ'יפס",
+                    "offers": {
+                      "@type": "Offer",
+                      "price": "30",
+                      "priceCurrency": "ILS"
+                    }
+                  },
+                  {
+                    "@type": "MenuItem",
+                    "name": "Souvlaki Pita Gyros",
+                    "description": "פיתה יוונית, גירוס לבן (שווארמה), רוטב צזיקי/חריף,  בצל, עגבנייה, חסה, צ'יפס",
+                    "offers": {
+                      "@type": "Offer",
+                      "price": "30",
+                      "priceCurrency": "ILS"
+                    }
+                  }
+                ]
+              },
+              {
+                "@type": "MenuSection",
+                "name": "מגשים",
+                "hasMenuItem": [
+                  {
+                    "@type": "MenuItem",
+                    "name": "Meat Platter for Two",
+                    "description": "3 שיפודים (לבן/עוף/קבב), נקניקה, רוטב מיוחד, 2 סטייק לבן סינטה",
+                    "offers": {
+                      "@type": "Offer",
+                      "price": "150",
+                      "priceCurrency": "ILS"
+                    }
+                  }
+                ]
+              }
+            ]
+          },
+          "sameAs": [
+            "https://www.instagram.com/greek.souvlakii",
+            "https://www.facebook.com/greeksouvlaki"
+          ],
+          "aggregateRating": {
+            "@type": "AggregateRating",
+            "ratingValue": "4.9",
+            "bestRating": "5",
+            "worstRating": "1",
+            "ratingCount": "127"
+          }
+        },
+        {
+          "@type": "FAQPage",
+          "@id": "https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/#faq",
+          "mainEntity": [
+            {
+              "@type": "Question",
+              "name": "מה שעות הפעילות של המסעדה?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "המסעדה פתוחה בימים חמישי עד שבת, בין השעות 13:00 עד 01:00. ימים ראשון עד רביעי המסעדה סגורה."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "איפה נמצאת המסעדה?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "המסעדה ממוקמת בכביש 70, כפר יאסיף בגליל המערבי. ניתן להגיע בקלות עם Waze או Google Maps."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "מה המחיר של סובלאקי בפיתה?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "סובלאקי בפיתה מתחיל מ-30₪ וכולל פיתה יוונית, שיפוד לבחירה, רוטב צזיקי/חריף, ירקות טריים וצ'יפס."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "האם יש אפשרויות טבעוניות או ללא גלוטן?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "כן! יש לנו סובלאקי טבעוני בפיתה (30₪) וגם אפשרות לפיתה ללא גלוטן (40₪) עם כל סוגי השיפודים."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "איך אפשר להזמין מקום?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "ניתן להתקשר למספר 04-812-2980 או לשלוח הודעת WhatsApp. מומלץ להזמין מקום מראש בסופי שבוע."
+              }
+            },
+            {
+              "@type": "Question",
+              "name": "מה ההבדל בין סובלאקי לגירוס?",
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": "סובלאקי הוא שיפוד בשר צלוי על האש, בעוד גירוס (שווארמה יוונית) הוא בשר שנחתך משיפוד מסתובב. שניהם מוגשים בפיתה יוונית עם ירקות ורטבים."
+              }
+            }
+          ]
+        },
+        {
+          "@type": "BreadcrumbList",
+          "@id": "https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/#breadcrumb",
+          "itemListElement": [
+            {
+              "@type": "ListItem",
+              "position": 1,
+              "name": "Home",
+              "item": "https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/"
+            },
+            {
+              "@type": "ListItem",
+              "position": 2,
+              "name": "Menu",
+              "item": "https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/#menu"
+            },
+            {
+              "@type": "ListItem",
+              "position": 3,
+              "name": "About",
+              "item": "https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/#about"
+            },
+            {
+              "@type": "ListItem",
+              "position": 4,
+              "name": "Gallery",
+              "item": "https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/#gallery"
+            },
+            {
+              "@type": "ListItem",
+              "position": 5,
+              "name": "FAQ",
+              "item": "https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/#faq"
+            },
+            {
+              "@type": "ListItem",
+              "position": 6,
+              "name": "Contact",
+              "item": "https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/#contact"
+            }
+          ]
+        },
+        {
+          "@type": "Article",
+          "@id": "https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/#about-article",
+          "headline": "Greek Souvlaki - Authentic Greek Cuisine in Kfar Yasif",
+          "description": "Experience authentic Greek souvlaki and gyros at our traditional Greek restaurant in Kfar Yasif, Galilee. Fresh ingredients, traditional recipes, warm atmosphere.",
+          "author": {
+            "@type": "Organization",
+            "name": "Greek Souvlaki - סובלאקי יווני"
+          },
+          "publisher": {
+            "@type": "Organization",
+            "name": "Greek Souvlaki - סובלאקי יווני",
+            "logo": {
+              "@type": "ImageObject",
+              "url": "https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/logo.jpg"
+            }
+          },
+          "mainEntityOfPage": {
+            "@type": "WebPage",
+            "@id": "https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/"
+          },
+          "datePublished": "2024-01-01",
+          "dateModified": "2024-12-12",
+          "image": "https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/images/gallery-1.webp",
+          "articleSection": "Greek Cuisine",
+          "keywords": "Greek souvlaki, gyros, Greek restaurant, Kfar Yasif, Mediterranean food, Greek food Israel"
+        }
+      ]
+    }
+    </script>
+
+    <!-- Google Analytics Placeholder -->
+    <!-- Replace G-XXXXXXXXXX with your actual Google Analytics ID -->
+    <!-- Google Analytics will be added later when tracking ID is available -->
+</head>
+<body>
+    <!-- Skip Navigation Link for Accessibility -->
+    <a href="#main-content" class="skip-link" data-lang="skip-to-content">דלג לתוכן הראשי</a>
+
+    <div class="page-content">
+    <header>
+        <nav class="navbar">
+            <div class="container">
+                <div class="language-switcher">
+                    <button type="button" class="theme-toggle" id="theme-toggle" aria-label="Toggle dark mode">
+                        <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="5"></circle>
+                            <line x1="12" y1="1" x2="12" y2="3"></line>
+                            <line x1="12" y1="21" x2="12" y2="23"></line>
+                            <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+                            <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+                            <line x1="1" y1="12" x2="3" y2="12"></line>
+                            <line x1="21" y1="12" x2="23" y2="12"></line>
+                            <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+                            <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+                        </svg>
+                        <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                        </svg>
+                    </button>
+                    <div class="language-dropdown">
+                        <button type="button" class="lang-dropdown-btn" aria-label="Select language" aria-haspopup="true" aria-expanded="false">
+                            <span class="current-lang">🇮🇱 HE</span>
+                            <span class="dropdown-arrow">▼</span>
+                        </button>
+                        <div class="language-dropdown-content" role="menu">
+                            <button type="button" class="lang-option active" data-lang-switch="he" role="menuitem">IL</button>
+                            <button type="button" class="lang-option" data-lang-switch="en" role="menuitem">EN</button>
+                            <button type="button" class="lang-option" data-lang-switch="ar" role="menuitem">AR</button>
+                            <button type="button" class="lang-option" data-lang-switch="ru" role="menuitem">RU</button>
+                            <button type="button" class="lang-option" data-lang-switch="el" role="menuitem">GR</button>
+                        </div>
+                    </div>
+                </div>
+                <ul class="nav-menu">
+                    <li><a href="#home" data-lang="nav-home">בית</a></li>
+                    <li><a href="#menu" data-lang="nav-menu">תפריט</a></li>
+                    <li><a href="#gallery" data-lang="nav-gallery">גלריה</a></li>
+                    <li><a href="#about" data-lang="nav-about">אודות</a></li>
+                    <li><a href="#faq" data-lang="nav-faq">שאלות נפוצות</a></li>
+                    <li><a href="#contact" data-lang="nav-contact">צור קשר</a></li>
+                </ul>
+                <button class="hamburger" aria-label="Toggle navigation menu" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+            </div>
+        </nav>
+    </header>
+
+    <main id="main-content">
+    <section id="home" class="hero">
+        <!-- Content on Left Side -->
+        <div class="hero-content">
+            <h1 data-lang="hero-title">סובלאקי יווני כפר יאסיף - מסעדה יוונית אותנטית</h1>
+            <p data-lang="hero-subtitle">טעמים יווניים אותנטיים בלב הגליל המערבי | כפר יאסיף</p>
+            <p class="hero-description" data-lang="hero-description">
+                חוויה קולינרית יוונית אמיתית עם מתכונים מסורתיים, חומרי גלם טריים ואווירה ים תיכונית חמה
+            </p>
+            <div class="hero-cta-buttons">
+                <a href="#menu" class="hero-cta-btn primary" data-lang="hero-cta-menu">צפו בתפריט</a>
+            </div>
+            <div class="hero-rating-badge">
+                <span class="rating-stars">⭐⭐⭐⭐⭐</span>
+                <span class="rating-text" data-lang="hero-rating">מדורג 4.9 בגוגל</span>
+            </div>
+        </div>
+
+    </section>
+
+    <!-- Modern Menu Section with Tabs -->
+<section id="menu" class="menu-section-modern greek-pattern section-reveal">
+    <div class="container">
+        <h2 class="fade-in" data-lang="menu-title">התפריט שלנו</h2>
+
+        <!-- Menu Tabs Navigation -->
+        <div class="menu-tabs" role="tablist">
+            <button type="button" id="tab-pita-btn" class="menu-tab active" data-tab="pita" aria-controls="tab-pita" role="tab" aria-selected="true"><span class="tab-icon">🥙</span> <span data-lang="cat-pita-title">סובלאקי בפיתה</span></button>
+            <button type="button" id="tab-plates-btn" class="menu-tab" data-tab="plates" aria-controls="tab-plates" role="tab" aria-selected="false"><span class="tab-icon">🍽</span> <span data-lang="cat-plates-title">צלחות</span></button>
+            <button type="button" id="tab-platters-btn" class="menu-tab" data-tab="platters" aria-controls="tab-platters" role="tab" aria-selected="false"><span class="tab-icon">🍖</span> <span data-lang="cat-platters-title">מגשים</span></button>
+            <button type="button" id="tab-more-btn" class="menu-tab" data-tab="more" aria-controls="tab-more" role="tab" aria-selected="false"><span class="tab-icon">🍕</span> <span data-lang="tab-more">עוד</span></button>
+            <button type="button" id="tab-drinks-btn" class="menu-tab" data-tab="drinks" aria-controls="tab-drinks" role="tab" aria-selected="false"><span class="tab-icon">🥤</span> <span data-lang="cat-drinks-title">משקאות</span></button>
+        </div>
+
+        <!-- Tab Content: Souvlaki in Pita -->
+        <div class="menu-tab-content active" id="tab-pita" role="tabpanel" aria-labelledby="tab-pita-btn" tabindex="0">
+            <div class="menu-card-grid">
+                <div class="menu-card">
+                    <div class="menu-item-title" data-lang="item-pita-chicken">Souvlaki Pita Chicken</div>
+                    <p data-lang="desc-pita-chicken">פיתה יוונית, שיפוד עוף, רוטב צזיקי/חריף,  בצל, עגבנייה, חסה, צ'יפס</p>
+                    <span class="price">30 ₪</span>
+                </div>
+                <div class="menu-card">
+                    <div class="menu-item-title" data-lang="item-pita-pork">Souvlaki Pita White Meat</div>
+                    <p data-lang="desc-pita-pork">פיתה יוונית, שיפוד בשר לבן, רוטב צזיקי/חריף,  בצל, עגבנייה, חסה, צ'יפס</p>
+                    <span class="price">30 ₪</span>
+                </div>
+                <div class="menu-card">
+                    <div class="menu-item-title" data-lang="item-pita-gyros">Souvlaki Pita Gyros</div>
+                    <p data-lang="desc-pita-gyros">פיתה יוונית, גירוס בשר לבן (שווארמה), רוטב צזיקי/חריף,  בצל, עגבנייה, חסה, צ'יפס</p>
+                    <span class="price">35 ₪</span>
+                </div>
+                <div class="menu-card">
+                    <div class="menu-item-title" data-lang="item-pita-kebab">Souvlaki Pita Kebab</div>
+                    <p data-lang="desc-pita-kebab">פיתה יוונית, קבב רגל טלה, רוטב צזיקי/חריף,  בצל, עגבנייה, חסה, צ'יפס</p>
+                    <span class="price">30 ₪</span>
+                </div>
+                <div class="menu-card">
+                    <div class="menu-item-title" data-lang="item-pita-sausage">Souvlaki Pita Sausage</div>
+                    <p data-lang="desc-pita-sausage">פיתה יוונית, נקניקיות, רוטב צזיקי/חריף,  בצל, עגבנייה, חסה, צ'יפס</p>
+                    <span class="price">30 ₪</span>
+                </div>
+                <div class="menu-card">
+                    <div class="menu-item-title" data-lang="item-pita-vegan">Souvlaki Pita Vegan</div>
+                    <p data-lang="desc-pita-vegan">פיתה יוונית, שיפוד טבעוני, רוטב צזיקי/חריף,  בצל, עגבנייה, חסה, צ'יפס</p>
+                    <span class="price">30 ₪</span>
+                </div>
+                <div class="menu-card">
+                    <div class="menu-item-title" data-lang="item-pita-steak">Souvlaki Pita Steak</div>
+                    <p data-lang="desc-pita-steak">פיתה יוונית, סטייק בשר לבן סינטה, רוטב צזיקי/חריף,  בצל, עגבנייה, חסה, צ'יפס</p>
+                    <span class="price">35 ₪</span>
+                </div>
+                <div class="menu-card">
+                    <div class="menu-item-title" data-lang="item-pita-glutenfree">Souvlaki Pita Gluten Free</div>
+                    <p data-lang="desc-pita-glutenfree">פיתה ללא גלוטן, שיפוד לבחירה, רוטב צזיקי/חריף,  בצל, עגבנייה, חסה, צ'יפס</p>
+                    <span class="price">40 ₪</span>
+                </div>
+                <div class="menu-card special">
+                    <div class="menu-item-title" data-lang="item-double-skewer">Double Skewer</div>
+                    <p data-lang="desc-double-skewer">תוספת שיפוד נוסף</p>
+                    <span class="price">+15 ₪</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Content: Plates -->
+        <div class="menu-tab-content" id="tab-plates" role="tabpanel" aria-labelledby="tab-plates-btn" tabindex="0" hidden>
+            <div class="menu-card-grid">
+                <div class="menu-card">
+                    <div class="menu-item-title" data-lang="item-plate-souvlaki">Souvlaki Plate</div>
+                    <p data-lang="desc-plate-souvlaki">שיפודים לבחירה, רוטב צזיקי/חריף,  בצל, עגבנייה, חסה, צ'יפס</p>
+                    <span class="price">40 ₪</span>
+                </div>
+                <div class="menu-card">
+                    <div class="menu-item-title" data-lang="item-plate-gyros">Souvlaki Plate Gyros</div>
+                    <p data-lang="desc-plate-gyros">שווארמה לבן, רוטב צזיקי/חריף,  בצל, עגבנייה, חסה, צ'יפס</p>
+                    <span class="price">50 ₪</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Content: Platters -->
+        <div class="menu-tab-content" id="tab-platters" role="tabpanel" aria-labelledby="tab-platters-btn" tabindex="0" hidden>
+            <div class="menu-card-grid">
+                <div class="menu-card featured">
+                    <div class="menu-item-title" data-lang="item-platter-personal">מגש שווארמה אישי</div>
+                    <p data-lang="desc-platter-personal">שווארמה לבן, צ'יפס, רוטב צזיקי, ירקות טריים, סלט יווני</p>
+                    <span class="price">50 ₪</span>
+                </div>
+                <div class="menu-card featured">
+                    <div class="menu-item-title" data-lang="item-platter-couple">מגש שווארמה זוגי</div>
+                    <p data-lang="desc-platter-couple">שווארמה לבן, 2 סוגי שיפודים, צ'יפס, רטבים, ירקות, סלטים</p>
+                    <span class="price">120 ₪</span>
+                </div>
+                <div class="menu-card featured">
+                    <div class="menu-item-title" data-lang="item-platter-family">מגש שווארמה משפחתי</div>
+                    <p data-lang="desc-platter-family">שווארמה לבן, 3 סוגי שיפודים, צ'יפס, רטבים, ירקות, סלטים, פיתות</p>
+                    <span class="price">170 ₪</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Content: More (Pizza, Salad, Sides) -->
+        <div class="menu-tab-content" id="tab-more" role="tabpanel" aria-labelledby="tab-more-btn" tabindex="0" hidden>
+            <div class="menu-subcategory">
+                <h3 class="subcategory-title">🍕 <span data-lang="cat-pizza-title">פיצה גירוס</span></h3>
+                <div class="menu-card-grid">
+                    <div class="menu-card">
+                        <div class="menu-item-title" data-lang="item-pizza-small">Pizza Gyros (Small)</div>
+                        <p data-lang="desc-pizza-small">פיצה עם שווארמה לבן וצ'יפס</p>
+                        <span class="price">40 ₪</span>
+                    </div>
+                    <div class="menu-card">
+                        <div class="menu-item-title" data-lang="item-pizza-large">Pizza Gyros (Large)</div>
+                        <p data-lang="desc-pizza-large">פיצה עם שווארמה לבן וצ'יפס</p>
+                        <span class="price">70 ₪</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-subcategory">
+                <h3 class="subcategory-title">🥗 <span data-lang="cat-salad-title">סלטים</span></h3>
+                <div class="menu-card-grid">
+                    <div class="menu-card">
+                        <div class="menu-item-title" data-lang="item-greek-salad">Greek Salad</div>
+                        <p data-lang="desc-greek-salad">עגבניות, מלפפון, פלפל מחוק, בצל, זיתים שחורים קלמטה, גבינת פטה</p>
+                        <span class="price">40 ₪</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-subcategory">
+                <h3 class="subcategory-title">🍟 <span data-lang="cat-sides-title">תוספות</span></h3>
+                <div class="menu-card-grid">
+                    <div class="menu-card">
+                        <div class="menu-item-title" data-lang="item-fries">Fries Chips</div>
+                        <p data-lang="desc-fries">צלחת צ'יפס</p>
+                        <span class="price">15 ₪</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Tab Content: Drinks -->
+        <div class="menu-tab-content" id="tab-drinks" role="tabpanel" aria-labelledby="tab-drinks-btn" tabindex="0" hidden>
+            <div class="menu-subcategory">
+                <h3 class="subcategory-title">🥤 <span data-lang="cat-drinks-title">משקאות קלים</span></h3>
+                <div class="menu-card-grid">
+                    <div class="menu-card">
+                        <div class="menu-item-title" data-lang="item-soft-drinks">Soft Drinks</div>
+                        <p data-lang="desc-soft-drinks">קוקה קולה, קולה זירו, פנטה, ספרייט, ענבים</p>
+                        <span class="price"><span class="menu-card-icon">🥤</span> 7 ₪</span>
+                    </div>
+                    <div class="menu-card">
+                        <div class="menu-item-title" data-lang="item-water">Water</div>
+                        <p data-lang="desc-water">מים</p>
+                        <span class="price"><span class="menu-card-icon">💧</span> 5 ₪</span>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-subcategory">
+                <h3 class="subcategory-title">🍷 <span data-lang="cat-alcohol-title">אלכוהול</span></h3>
+                <div class="menu-card-grid">
+                    <div class="menu-card">
+                        <div class="menu-item-title" data-lang="item-beer">Drift Beer (1/3)</div>
+                        <p data-lang="desc-beer">בירה הבית</p>
+                        <span class="price"><span class="menu-card-icon">🍺</span> 15 ₪</span>
+                    </div>
+                    <div class="menu-card">
+                        <div class="menu-item-title" data-lang="item-wine-glass">Wine (Glass)</div>
+                        <p data-lang="desc-wine-glass">יין אדום/לבן/רוזה</p>
+                        <span class="price"><span class="menu-card-icon">🍷</span> 15 ₪</span>
+                    </div>
+                    <div class="menu-card">
+                        <div class="menu-item-title" data-lang="item-wine-bottle">Wine Bottle</div>
+                        <p data-lang="desc-wine-bottle">בקבוק יין</p>
+                        <span class="price"><span class="menu-card-icon">🍾</span> 100 ₪</span>
+                    </div>
+                    <div class="menu-card">
+                        <div class="menu-item-title" data-lang="item-whiskey">Whiskey</div>
+                        <p data-lang="desc-whiskey">וויסקי</p>
+                        <span class="price"><span class="menu-card-icon">🥃</span> 30 ₪</span>
+                    </div>
+                    <div class="menu-card">
+                        <div class="menu-item-title" data-lang="item-ouzo">Ouzo Plomari</div>
+                        <p data-lang="desc-ouzo">בקבוק אוזו פלומרי 200 מ"ל</p>
+                        <span class="price"><span class="menu-card-icon">🥛</span> 70 ₪</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+    </div>
+</section>
+
+    <section id="about" class="about-section-new">
+        <div class="container">
+            <h2 class="about-title-new" data-lang="about-title">אודותינו</h2>
+            <p class="about-text-new fade-slide-up" data-lang="about-text"><strong>Greek Souvlaki</strong> היא מסעדה יוונית אותנטית בכפר יאסיף, הגליל המערבי. אנו מתמחים בסובלאקי, גירוס ומנות ים תיכוניות מסורתיות עם מתכונים שעוברים במשפחה מדור לדור. המסעדה שלנו מציעה אווירה יוונית חמה ומזמינה, שירות מעולה וחומרי גלם טריים ואיכותיים. פתוחים חמישי-שבת, 13:00-01:00.</p>
+            <a href="#menu" class="about-cta-link" data-lang="about-cta">צפו בתפריט המלא שלנו →</a>
+
+            <div class="features-carousel">
+                <div class="feature-circle">
+                    <div class="circle-icon">🍖</div>
+                    <h3 data-lang="quality-title">בשרים איכותיים</h3>
+                    <p data-lang="quality-desc">בשרים טריים ואיכותיים מספקים מובחרים</p>
+                </div>
+                <div class="feature-circle">
+                    <div class="circle-icon">🌿</div>
+                    <h3 data-lang="fresh-title">חומרי גלם טריים</h3>
+                    <p data-lang="fresh-desc">ירקות ותבלינים טריים מדי יום</p>
+                </div>
+                <div class="feature-circle">
+                    <div class="circle-icon">👨‍🍳</div>
+                    <h3 data-lang="chef-title">מתכונים מסורתיים</h3>
+                    <p data-lang="chef-desc">שיטות בישול יווניות אותנטיות</p>
+                </div>
+                <div class="feature-circle">
+                    <div class="circle-icon">🏛️</div>
+                    <h3 data-lang="atmosphere-title">אווירה יוונית</h3>
+                    <p data-lang="atmosphere-desc">עיצוב ים תיכוני ומוזיקה יוונית</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="gallery" class="gallery-section section-zoom">
+        <div class="container">
+            <h2 data-lang="gallery-title">גלריה</h2>
+            <p data-lang="gallery-subtitle">טעימה מהאווירה והמנות שלנו</p>
+            <div class="gallery-grid">
+                <div class="gallery-item">
+                    <img src="images/gallery-1.webp" alt="סובלאקי עוף בפיתה יוונית עם צזיקי וירקות טריים" width="400" height="600" fetchpriority="high" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/gallery-2.webp" alt="מגש בשרים יווני עם שיפודים וסטייקים" width="400" height="600" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/gallery-3.webp" alt="גירוס יווני עם צ'יפס ורוטב צזיקי" width="800" height="369" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/gallery-4.webp" alt="סלט יווני עם גבינת פטה וזיתי קלמטה" width="400" height="600" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/gallery-5.webp" alt="שיפודי בשר על האש במסעדה יוונית" width="800" height="369" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/gallery-6.webp" alt="פיתה יוונית במילוי סובלאקי וירקות" width="400" height="600" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/gallery-7.webp" alt="אווירת המסעדה היוונית בכפר יאסיף" width="800" height="369" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/gallery-8.webp" alt="צלחת סובלאקי עם תוספות יווניות" width="800" height="369" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/gallery-9.webp" alt="פיצה גירוס עם שווארמה יוונית" width="400" height="600" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/gallery-10.webp" alt="מנות יווניות מסורתיות במסעדת Greek Souvlaki" width="400" height="600" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/gallery-11.webp" alt="עיצוב ים תיכוני במסעדה היוונית" width="800" height="369" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20251205-WA0032.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" width="400" height="600" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20251205-WA0033.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" width="400" height="600" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20251205-WA0034.webp" alt="מגש סובלאקי עם פיתות וירקות טריות ממסעדת Greek Souvlaki" width="400" height="600" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20251205-WA0035.webp" alt="צלחת גירוס עם צ'יפס וסלט יווני ממסעדת Greek Souvlaki" width="400" height="600" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20251205-WA0036.webp" alt="מגש בשרים מעורב עם שיפודים וצ'יפס ממסעדת Greek Souvlaki" width="400" height="600" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20251205-WA0037.webp" alt="סובלאקי עוף בפיתה עם ירקות טריות ורוטב צזיקי ממסעדת Greek Souvlaki" width="400" height="600" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20251205-WA0038.webp" alt="מגש סטייקים עם ירקות צלויות ותוספות יווניות ממסעדת Greek Souvlaki" width="400" height="600" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20251205-WA0039.webp" alt="פיצה גירוס עם ירקות וגבינה ממסעדת Greek Souvlaki כפר יאסיף" width="400" height="600" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20251205-WA0040.webp" alt="מגש אירוחי יווני עם פלפלים, זיתים וגבינת פטה ממסעדת Greek Souvlaki" width="400" height="600" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20251205-WA0041.webp" alt="סלט יווני גדול עם ירקות טריים וגבינת פטה ממסעדת Greek Souvlaki" width="400" height="600" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20251205-WA0042.webp" alt="שיפודי בשר על האש במסעדה יוונית בכפר יאסיף" width="400" height="600" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20251205-WA0044.webp" alt="מגש שווארמה עם פיתות וירקות ממסעדת Greek Souvlaki כפר יאסיף" width="400" height="600" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20251205-WA0046.webp" alt="מגש קינוחים יווניים עם בקבוק אוזו וכוסות יין ממסעדת Greek Souvlaki" width="400" height="600" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20251205-WA0047.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20251205-WA0048.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20251205-WA0049.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20251205-WA0050.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20251205-WA0051.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20251205-WA0052.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20251205-WA0053.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20251205-WA0054.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20251205-WA0055.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20251205-WA0056.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20251205-WA0057.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20251205-WA0058.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20251205-WA0059.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20251205-WA0060.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20251205-WA0061.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20251205-WA0062.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20251205-WA0063.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20251205-WA0064.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20251205-WA0066.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20251205-WA0070.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20251205-WA0072.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20251205-WA0073.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20251205-WA0074.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20251205-WA0075.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20251205-WA0076.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20251205-WA0077.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20251205-WA0078.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20251205-WA0079.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                </div>
+                <div class="gallery-item">
+                    <img src="images/IMG-20251205-WA0083.webp" alt="מנה יוונית אותנטית במסעדת Greek Souvlaki כפר יאסיף" loading="lazy" decoding="async">
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="faq" class="faq-section">
+        <div class="container">
+            <h2 data-lang="faq-title">שאלות נפוצות</h2>
+
+            <div class="faq-list">
+                <div class="faq-item">
+                    <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-1">
+                        <span data-lang="faq-q1">מה שעות הפעילות של המסעדה?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-1" hidden>
+                        <p data-lang="faq-a1">המסעדה פתוחה בימים חמישי עד שבת, בין השעות 13:00 עד 01:00. ימים ראשון עד רביעי המסעדה סגורה.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-2">
+                        <span data-lang="faq-q2">איפה נמצאת המסעדה?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-2" hidden>
+                        <p data-lang="faq-a2">המסעדה ממוקמת בכביש 70, כפר יאסיף בגליל המערבי. ניתן להגיע בקלות עם <a href="https://waze.com/ul?ll=32.9556,35.1636&navigate=yes" target="_blank" rel="noopener" class="faq-link">Waze</a> או Google Maps.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-3">
+                        <span data-lang="faq-q3">מה המחיר של סובלאקי בפיתה?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-3" hidden>
+                        <p data-lang="faq-a3">סובלאקי בפיתה מתחיל מ-30₪ וכולל פיתה יוונית, שיפוד לבחירה, רוטב צזיקי/חריף, ירקות טריים וצ'יפס. <a href="#menu" class="faq-link">צפו בתפריט המלא</a>.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-4">
+                        <span data-lang="faq-q4">האם יש אפשרויות טבעוניות או ללא גלוטן?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-4" hidden>
+                        <p data-lang="faq-a4">כן! יש לנו סובלאקי טבעוני בפיתה (30₪) וגם אפשרות לפיתה ללא גלוטן (40₪) עם כל סוגי השיפודים.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-5">
+                        <span data-lang="faq-q5">איך אפשר להזמין מקום?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-5" hidden>
+                        <p data-lang="faq-a5">ניתן להתקשר למספר <a href="tel:+97248122980" class="faq-link">04-812-2980</a> או לשלוח הודעת <a href="https://wa.me/972528921454" target="_blank" rel="noopener" class="faq-link">WhatsApp</a>. מומלץ להזמין מקום מראש בסופי שבוע.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <button type="button" class="faq-question" aria-expanded="false" aria-controls="faq-answer-6">
+                        <span data-lang="faq-q6">מה ההבדל בין סובלאקי לגירוס?</span>
+                        <span class="faq-icon">+</span>
+                    </button>
+                    <div class="faq-answer" id="faq-answer-6" hidden>
+                        <p data-lang="faq-a6">סובלאקי הוא שיפוד בשר צלוי על האש, בעוד גירוס (שווארמה יוונית) הוא בשר שנחתך משיפוד מסתובב. שניהם מוגשים בפיתה יוונית עם ירקות ורטבים.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+    </main>
+
+    <footer id="contact" class="footer-compact">
+        <div class="menu-contact-footer-compact">
+            <div class="contact-row">
+                <div class="contact-col contact-phones-vertical">
+                    <div class="phone-item phone-prominent">
+                        <span class="contact-icon">📞</span>
+                        <a href="tel:+97248122980" dir="ltr" class="phone-link-big">04-812-2980</a>
+                    </div>
+                </div>
+                <div class="contact-col">
+                    <span class="contact-icon">📍</span>
+                    <a href="https://waze.com/ul?ll=32.9556,35.1636&navigate=yes" target="_blank" rel="noopener" class="location-link" data-lang="location-text">כביש 70, כפר יאסיף</a>
+                </div>
+                <div class="contact-col contact-hours-vertical">
+                    <div class="hours-item">
+                        <span class="contact-icon">🚫</span>
+                        <span data-lang="hours-closed">ראשון-שלישי: סגור</span>
+                    </div>
+                    <div class="hours-item">
+                        <span class="contact-icon">🕐</span>
+                        <span data-lang="hours-open">רביעי-שבת: 13:00-01:00</span>
+                    </div>
+                </div>
+            </div>
+            <div class="contact-buttons-row">
+                <a href="https://wa.me/972542001235" class="contact-btn whatsapp" target="_blank" rel="noopener" aria-label="WhatsApp Jennje">💬 WhatsApp</a>
+                <a href="https://wa.me/972528921454" class="contact-btn whatsapp" target="_blank" rel="noopener" aria-label="WhatsApp Andreia">💬 WhatsApp</a>
+                <a href="https://www.instagram.com/GREEK.SOUVLAKII" class="contact-btn instagram" target="_blank" rel="noopener">📷 Instagram</a>
+                <a href="https://waze.com/ul?ll=32.9556,35.1636&navigate=yes" class="contact-btn waze" target="_blank" rel="noopener" data-lang="nav-waze">🧭 Waze</a>
+            </div>
+        </div>
+        <div class="footer-row">
+            <a href="terms.html" data-lang="footer-terms">תנאי שימוש</a>
+            <span>|</span>
+            <a href="privacy.html" data-lang="footer-privacy">פרטיות</a>
+            <span>|</span>
+            <a href="accessibility.html" data-lang="footer-accessibility">נגישות</a>
+        </div>
+        <div class="footer-bottom">
+            <p data-lang="footer-copyright">&copy; 2024 Greek Souvlaki - סובלאקי יווני</p>
+            <div class="footer-developer">
+                <span data-lang="footer-developed-by">Developed by</span>
+                <a href="https://wwebsie.vercel.app" target="_blank" rel="noopener">
+                    <img src="images/ws-logo.png" alt="WS Logo" class="ws-logo" width="1024" height="1024">
+                </a>
+            </div>
+        </div>
+    </footer>
+    </div><!-- end page-content -->
+
+    <script defer src="storage-utils.js?v=1"></script>
+    <script defer src="translations-new.js?v=18"></script>
+    <script defer src="script.js?v=23"></script>
+    <script defer src="toggles.js?v=15"></script>
+    <script defer src="scroll-button.js?v=14"></script>
+    <script defer src="accessibility-widget.js?v=17"></script>
+    <script defer src="cookie-consent.js?v=15"></script>
+    <script defer src="wow-animations.js?v=14"></script>
+    <!-- <script defer src="theme-manager.js?v=1"></script> Christmas theme disabled -->
+        <script defer src="hide-debug-content.js"></script>
+    <script defer src="js/index-scripts.js"></script>
+
+    <!-- Premium Snow Effect - Now included in script.js -->
+
+    <!-- Lightbox Modal -->
+    <div class="lightbox-modal" id="lightbox" role="dialog" aria-modal="true" aria-labelledby="lightbox-title" tabindex="-1">
+        <h2 id="lightbox-title" class="sr-only">גלריית תמונות - תמונה מוגדלת</h2>
+        <button type="button" class="lightbox-close" aria-label="Close">&times;</button>
+        <button type="button" class="lightbox-nav lightbox-prev" aria-label="Previous">&#10094;</button>
+        <button type="button" class="lightbox-nav lightbox-next" aria-label="Next">&#10095;</button>
+
+        <div class="lightbox-content">
+            <div class="lightbox-image-container">
+                <img src="" alt="תמונת גלריה מוגדלת - מנה יוונית ממגוון התפריט" id="lightbox-img">
+            </div>
+        </div>
+
+        <div class="lightbox-toolbar">
+            <button type="button" id="zoom-out" aria-label="Zoom out">&#8722;</button>
+            <span class="lightbox-zoom-level" id="zoom-level">100%</span>
+            <button type="button" id="zoom-in" aria-label="Zoom in">&#43;</button>
+            <button type="button" id="rotate-left" aria-label="Rotate left">&#8634;</button>
+            <button type="button" id="rotate-right" aria-label="Rotate right">&#8635;</button>
+            <button type="button" id="reset-view" aria-label="Reset view">&#8634;&#8635;</button>
+        </div>
+    </div>
+
+    <script defer src="js/lightbox.js"></script>
+  
+    <!-- Menu Tabs -->
+    <!-- <script defer src="js/menu-tabs.js"></script> -->
+
+  
+  
+  
+    <!-- Preemptive Image Loading with Intersection Observer -->
+    <script defer src="js/image-loader.js"></script>
+
+    <!-- Image Fade-In Handler -->
+    <script defer src="js/image-fade.js"></script>
+
+    <!-- Navigation Dropdown Handler -->
+    <script defer src="js/navigation-dropdown.js?v=2"></script>
+
+    
+    <!-- PWA Install Handler -->
+    <script src="pwa-final.js"></script>
+
+    <!-- PWA banner will be shown by the main pwa-install.js script -->
+
+    <!-- WhatsApp Floating Buttons -->
+    <div class="whatsapp-floating" id="whatsapp-floating">
+        <a href="https://wa.me/972542001235" target="_blank" rel="noopener" class="whatsapp-circle" aria-label="WhatsApp Jennje" data-phone="054-2001235">
+            <div class="whatsapp-content">
+                <div class="whatsapp-icon">💬</div>
+                <div class="whatsapp-name">Jennje</div>
+            </div>
+        </a>
+        <a href="https://wa.me/972528921454" target="_blank" rel="noopener" class="whatsapp-circle" aria-label="WhatsApp Andreia" data-phone="052-8921454">
+            <div class="whatsapp-content">
+                <div class="whatsapp-icon">💬</div>
+                <div class="whatsapp-name">Andreia</div>
+            </div>
+        </a>
+    </div>
+
+    <!-- WhatsApp Buttons Handler -->
+    <script defer src="js/whatsapp-buttons.js?v=4"></script>
+
+    <!-- UTF-8 Encoding Validator - Temporarily disabled -->
+    <!-- <script defer src="js/encoding-validator.js"></script> -->
+
+    <!-- Mobile Menu Fix -->
+    <script src="mobile-menu-fix.js"></script>
+    <!-- Force HTTP for local development -->
+    <script src="force-http.js"></script>
+</body>
+</html>

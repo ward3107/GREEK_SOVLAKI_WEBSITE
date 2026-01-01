@@ -1,0 +1,10 @@
+server.js
+package.json
+node_modules/
+.git/
+README*
+*.md
+.env*
+.env
+.DS_Store
+Thumbs.db

@@ -1,0 +1,80 @@
+/**
+ * Premium Snow Effect Styles
+ * CSS for Canvas-based falling snow overlay
+ */
+
+/*
+ * Snow Canvas Container
+ * Uses fixed positioning to overlay entire viewport
+ * High z-index ensures visibility but below most UI elements
+ */
+#snow-canvas {
+    position: fixed !important;
+    top: 0 !important;
+    left: 0 !important;
+    width: 100vw !important;
+    height: 100vh !important;
+    pointer-events: none !important;  /* Crucial: doesn't block clicks/taps */
+    z-index: 1000 !important;          /* High enough to be visible, but not blocking */
+    opacity: 1.0 !important;           /* Full opacity for better visibility */
+    mix-blend-mode: normal;           /* Normal blend mode for better visibility */
+}
+
+/*
+ * Ensure snow works with different backgrounds
+ * The mix-blend-mode creates a premium effect on both light and dark themes
+ */
+@media (prefers-color-scheme: dark) {
+    #snow-canvas {
+        mix-blend-mode: screen;
+        opacity: 0.8;
+    }
+}
+
+@media (prefers-color-scheme: light) {
+    #snow-canvas {
+        mix-blend-mode: multiply;
+        opacity: 0.6;
+    }
+}
+
+/*
+ * Performance optimization for mobile
+ * Reduce intensity on smaller screens to maintain performance
+ */
+@media (max-width: 768px) {
+    #snow-canvas {
+        opacity: 0.7;
+        will-change: transform;  /* Hardware acceleration hint */
+    }
+}
+
+/*
+ * Accessibility: Respect prefers-reduced-motion
+ * This provides an additional safety net if JS check fails
+ */
+@media (prefers-reduced-motion: reduce) {
+    #snow-canvas {
+        display: none !important;  /* Hide completely if motion preferred reduced */
+    }
+}
+
+/*
+ * Print styles: Hide snow when printing
+ */
+@media print {
+    #snow-canvas {
+        display: none !important;
+    }
+}
+
+/*
+ * Fallback for very old browsers
+ * Basic opacity and positioning fallback
+ */
+@supports not (mix-blend-mode: screen) {
+    #snow-canvas {
+        background: transparent;
+        opacity: 0.7 !important;
+    }
+}

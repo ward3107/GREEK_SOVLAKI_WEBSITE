@@ -1,0 +1,365 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Content Security Policy - Secure CSP without unsafe-inline -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://vercel.live 'sha256-vvt4KWwuNr51XfE5m+hzeNEGhiOfZzG97ccfqGsPwvE='; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://vercel.live; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests;">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Terms of Use - Greek Souvlaki</title>
+    <link rel="stylesheet" href="styles.css">
+    <style>
+        body {
+            background: #f9fafb;
+            font-family: 'Inter', 'Rubik', 'Assistant', 'Arial Hebrew', 'David', sans-serif;
+        }
+        .legal-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            background: white;
+            min-height: 100vh;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .legal-container h1 {
+            color: var(--color-primary, #2563eb);
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+        }
+        .legal-container h2 {
+            color: var(--color-primary-dark, #1e40af);
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+        .legal-container h3 {
+            color: #333;
+            margin-top: 2rem;
+            margin-bottom: 1rem;
+            font-size: 1.4rem;
+        }
+        .legal-container p, .legal-container li {
+            line-height: 1.9;
+            margin-bottom: 1.2rem;
+            color: #444;
+            font-size: 1.05rem;
+        }
+        .legal-container ul, .legal-container ol {
+            margin: 1.5rem 0 2rem 0;
+        }
+        [dir="rtl"] .legal-container ul,
+        [dir="rtl"] .legal-container ol {
+            margin-right: 2.5rem;
+            margin-left: 0;
+        }
+        [dir="ltr"] .legal-container ul,
+        [dir="ltr"] .legal-container ol {
+            margin-left: 2.5rem;
+            margin-right: 0;
+        }
+        .update-date {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 2.5rem;
+            font-size: 0.95rem;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 2rem;
+            color: var(--color-primary, #2563eb);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+        .back-link:hover {
+            text-decoration: underline;
+        }
+        .lang-content {
+            display: none;
+        }
+        [lang="he"] .lang-he { display: block; }
+        [lang="ar"] .lang-ar { display: block; }
+        [lang="en"] .lang-en { display: block; }
+        [lang="ru"] .lang-ru { display: block; }
+
+        /* Language switcher styles */
+        .lang-switcher {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 1000;
+        }
+        .lang-toggle {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: white;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        .lang-toggle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+        }
+        .lang-dropdown {
+            position: absolute;
+            top: 56px;
+            left: 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            overflow: hidden;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+        .lang-switcher.open .lang-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .lang-dropdown button {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            padding: 12px 16px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+            color: #374151;
+            transition: background 0.2s;
+            white-space: nowrap;
+        }
+        .lang-dropdown button:hover {
+            background: #f3f4f6;
+        }
+        .lang-dropdown button.active {
+            background: #eff6ff;
+            color: var(--color-primary, #2563eb);
+            font-weight: 600;
+        }
+        .lang-dropdown button span.flag {
+            font-size: 1.25rem;
+        }
+    </style>
+</head>
+<body>
+    <!-- Language Switcher -->
+    <div class="lang-switcher" id="langSwitcher">
+        <button class="lang-toggle" aria-label="Change language" id="langToggle">🇮🇱</button>
+        <div class="lang-dropdown">
+            <button class="lang-btn active" data-lang="he" onclick="switchPageLang('he')">
+                <span class="flag">🇮🇱</span> עברית
+            </button>
+            <button class="lang-btn" data-lang="ar" onclick="switchPageLang('ar')">
+                <span class="flag">🇸🇦</span> العربية
+            </button>
+            <button class="lang-btn" data-lang="en" onclick="switchPageLang('en')">
+                <span class="flag">🇬🇧</span> English
+            </button>
+            <button class="lang-btn" data-lang="ru" onclick="switchPageLang('ru')">
+                <span class="flag">🇷🇺</span> Русский
+            </button>
+        </div>
+    </div>
+
+    <div class="legal-container">
+        <a href="index.html" class="back-link">← <span class="back-text">חזרה לאתר</span></a>
+
+        <!-- HEBREW CONTENT -->
+        <div class="lang-content lang-he">
+            <h1>תקנון ותנאי שימוש</h1>
+            <p class="update-date">תאריך עדכון אחרון: 1 בדצמבר 2025</p>
+
+            <h2>1. מבוא והגדרות</h2>
+            <p>ברוכים הבאים לאתר <strong>Greek Souvlaki</strong> (בשם: "<strong>האתר</strong>").</p>
+            <p>האתר מופעל על ידי <strong>Greek Souvlaki</strong>, עסק הממוקם ב<strong>כביש 70, כפר יאסיף</strong>.</p>
+            <p>תקנון זה מסדיר את תנאי השימוש באתר ובשירותיים המוצעים בו. השימוש באתר מהווה הסכמה מלאה לתנאים אלו.</p>
+
+            <h3>הגדרות</h3>
+            <ul>
+                <li><strong>"האתר"</strong> – https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/</li>
+                <li><strong>"סובלאקי יווני"</strong> – מסעדה יוונית אוטנטית של המציעה סובלאקי, גירוס ומנות תיכונית</li>
+                <li><strong>"המשתמש"</strong> – כל מי שגולש באתר</li>
+            </ul>
+
+            <h2>2. גיל ושימוש באתר</h2>
+            <p>האתר מיועד למשתמשים בני 18 ומעלה. אם אתה מתחת לגיל 18, השימוש באתר מותר בהסכמה ובפיקוח של הורה או אפוטרופוס.</p>
+
+            <h2>3. תנאי שימוש כלליים</h2>
+            <p>השימוש באתר מותר למטרות חוקיות בלבד. אסור:</p>
+            <ul>
+                <li>להפר חוק או זכויות של צד שלישי</li>
+                <li>לגרום נזק או הטרדה למשתמשים אחרים</li>
+                <li>להפיץ תוכן פוגעני או בלתי חוקי</li>
+                <li>להעתיק תוכן ללא אישור</li>
+            </ul>
+
+            <h2>4. שימושים אסורים</h2>
+            <ul>
+                <li>ניסיון לחדור למערכות או לפרוץ אבטחה</li>
+                <li>שימוש ברובוטים לאיסוף מידע (scraping)</li>
+                <li>העמסת יתר על שרתי האתר</li>
+                <li>שימוש מסחרי ללא אישור</li>
+            </ul>
+
+            <h2>5. הצהרת אי-אחריות מקצועית</h2>
+            <p><strong>האתר מספק מידע כללי בלבד ואינו מהווה ייעוץ מקצועי מכל סוג.</strong></p>
+            <p>המידע אינו תחליף לייעוץ רפואי, תזונתי, משפטי או פיננסי. לייעוץ מקצועי, פנה לגורם מוסמך.</p>
+
+            <h2>6. קניין רוחני</h2>
+            <p>כל זכויות הקניין הרוחני באתר שייכים לחברה. אסור להעתיק, לשכפל או להפיץ תוכן ללא אישור בכתב.</p>
+
+            <h2>7. הגבלת אחריות</h2>
+            <p>השירות מסופק "כמות שהוא" (AS IS) ללא אחריות. החברה לא תהיה אחראית לנזקים עקיפים, אובדן רווחים או אובדן נתונים.</p>
+
+            <h2>8. קישורים חיצוניים</h2>
+            <p>האתר עשוי לכלול קישורים לאתרי צד שלישי. החברה אינה אחראית לתוכן או לאבטחה של אתרים אלו.</p>
+
+            <h2>9. שיפוי</h2>
+            <p>אתה מתחייב לשפות את החברה בגין נזקים הנובעים מהפרת תנאי תקנון זה על ידך.</p>
+
+            <h2>10. פרטיות</h2>
+            <p>השימוש באתר כפוף ל<a href="privacy.html">מדיניות הפרטיות</a> שלנו, בהתאם לחוק הגנת הפרטיות, התשמ"א-1981 ותיקון 13.</p>
+
+            <h2>11. שינויים בשירות</h2>
+            <p>החברה רשאית לשנות, להשהות או להפסיק את השירות בכל עת ללא הודעה מוקדמת.</p>
+
+            <h2>12. דין וסמכות שיפוט</h2>
+            <p>תקנון זה כפוף לחוקי מדינת ישראל. סמכות השיפוט הבלעדית היא לבתי משפט בחיפה.</p>
+
+            <h2>13. יצירת קשר</h2>
+            <p>לשאלות: <strong>04-8122980</strong></p>
+        </div>
+
+        <!-- ARABIC CONTENT -->
+        <div class="lang-content lang-ar">
+            <h2>الشروط والأحكام</h2>
+            <p class="update-date">تاريخ آخر تحديث: 1 ديسمبر 2025</p>
+
+            <h2>1. المقدمة والتعريفات</h2>
+            <p>مرحباً بك في موقع <strong>Greek Souvlaki</strong> (يشار إليه فيما يلي بـ "الموقع").</p>
+            <p>يتم تشغيل الموقع بواسطة <strong>Greek Souvlaki</strong>، شركة تقع في <strong>طريق 70، كفر ياسيف</strong>.</p>
+
+            <h2>2. العمر واستخدام الموقع</h2>
+            <p>الموقع مخصص للمستخدمين الذين تبلغ أعمارهم 18 عاماً أو أكثر.</p>
+
+            <h2>3. شروط الاستخدام العامة</h2>
+            <p>يُسمح باستخدام الموقع لأغراض قانونية فقط.</p>
+
+            <h2>4. الخصوصية</h2>
+            <p>يخضع استخدام الموقع <a href="privacy.html">لسياسة الخصوصية</a> الخاصة بنا.</p>
+
+            <h2>5. القانون والاختصاص القضائي</h2>
+            <p>تخضع هذه الشروط لقوانين دولة إسرائيل. الاختصاص القضائي الحصري هو لمحاكم حيفا.</p>
+
+            <h2>6. الاتصال</h2>
+            <p>للأسئلة: <strong>04-8122980</strong></p>
+        </div>
+
+        <!-- ENGLISH CONTENT -->
+        <div class="lang-content lang-en">
+            <h2>Terms of Use</h2>
+            <p class="update-date">Last updated: December 1, 2025</p>
+
+            <h2>1. Introduction & Definitions</h2>
+            <p>Welcome to <strong>Greek Souvlaki</strong> website (the "Site").</p>
+            <p>The Site is operated by <strong>Greek Souvlaki</strong>, a business located at <strong>Route 70, Kafr Yasif</strong>.</p>
+
+            <h3>Definitions</h3>
+            <ul>
+                <li><strong>"Site"</strong> – https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/</li>
+                <li><strong>"Service"</strong> – Authentic Greek restaurant offering souvlaki, gyros, and Mediterranean dishes</li>
+                <li><strong>"User"</strong> – Anyone who browses the Site</li>
+            </ul>
+
+            <h2>2. Age & Use</h2>
+            <p>The Site is intended for users 18 years or older. If under 18, use requires parental consent and supervision.</p>
+
+            <h2>3. General Terms</h2>
+            <p>Use of the Site is permitted for lawful purposes only. Prohibited:</p>
+            <ul>
+                <li>Violating laws or third-party rights</li>
+                <li>Causing harm or harassment to other users</li>
+                <li>Distributing offensive or illegal content</li>
+                <li>Copying content without permission</li>
+            </ul>
+
+            <h2>4. Prohibited Uses</h2>
+            <ul>
+                <li>Attempting to hack or breach security</li>
+                <li>Using bots for scraping</li>
+                <li>Overloading servers</li>
+                <li>Commercial use without permission</li>
+            </ul>
+
+            <h2>5. No Professional Advice</h2>
+            <p><strong>The Site provides general information only and does not constitute professional advice.</strong></p>
+            <p>Information is not a substitute for medical, nutritional, legal, or financial advice.</p>
+
+            <h2>6. Intellectual Property</h2>
+            <p>All intellectual property rights belong to the company. Copying, reproducing, or distributing content without written permission is prohibited.</p>
+
+            <h2>7. Limitation of Liability</h2>
+            <p>The service is provided "AS IS" without warranties. The company is not liable for indirect damages, loss of profits, or data loss.</p>
+
+            <h2>8. External Links</h2>
+            <p>The Site may include links to third-party websites. The company is not responsible for their content or security.</p>
+
+            <h2>9. Indemnification</h2>
+            <p>You agree to indemnify the company for damages arising from your breach of these Terms.</p>
+
+            <h2>10. Privacy</h2>
+            <p>Use of the Site is subject to our <a href="privacy.html">Privacy Policy</a>, in accordance with Israeli Privacy Protection Law and Amendment 13.</p>
+
+            <h2>11. Changes to Service</h2>
+            <p>The company may modify, suspend, or discontinue the service at any time without notice.</p>
+
+            <h2>12. Governing Law</h2>
+            <p>These Terms are governed by Israeli law. Exclusive jurisdiction is in Haifa courts.</p>
+
+            <h2>13. Contact</h2>
+            <p>For questions: <strong>04-8122980</strong></p>
+        </div>
+
+        <!-- RUSSIAN CONTENT -->
+        <div class="lang-content lang-ru">
+            <h2>Условия использования</h2>
+            <p class="update-date">Последнее обновление: 1 декабря 2025</p>
+
+            <h2>1. Введение</h2>
+            <p>Добро пожаловать на сайт <strong>Greek Souvlaki</strong>.</p>
+            <p>Сайт управляется компанией <strong>Greek Souvlaki</strong>, расположенной по адресу <strong>Маршрут 70, Кфар-Ясиф</strong>.</p>
+
+            <h2>2. Возраст</h2>
+            <p>Сайт предназначен для пользователей 18 лет и старше.</p>
+
+            <h2>3. Общие условия</h2>
+            <p>Использование сайта разрешено только в законных целях.</p>
+
+            <h2>4. Конфиденциальность</h2>
+            <p>Использование сайта регулируется нашей <a href="privacy.html">Политикой конфиденциальности</a>.</p>
+
+            <h2>5. Применимое право</h2>
+            <p>Эти Условия регулируются законодательством Израиля. Исключительная юрисдикция - суды Хайфы.</p>
+
+            <h2>6. Контакты</h2>
+            <p>По вопросам: <strong>04-8122980</strong></p>
+        </div>
+    </div>
+
+    <script src="js/language-switch.js"></script>
+
+    <!-- Premium Snow Effect - Now included in script.js -->
+</body>
+</html>

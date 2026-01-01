@@ -1,0 +1,34 @@
+{
+  "name": "greek-souvlaki-website",
+  "version": "1.0.0",
+  "description": "Greek Souvlaki Restaurant Website - Minimal Modern Design with WOW Animations",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "test": "playwright test",
+    "test:headed": "playwright test --headed",
+    "test:ui": "playwright test --ui",
+    "test:debug": "playwright test --debug",
+    "test:report": "playwright show-report",
+    "test:accessibility": "playwright test --grep @accessibility",
+    "test:animations": "playwright test --grep @animations",
+    "test:pwa": "playwright test --grep @pwa",
+    "test:mobile": "playwright test --project=mobile",
+    "test:all": "playwright test --project=chromium --project=firefox --project=webkit"
+  },
+  "keywords": [
+    "restaurant",
+    "greek",
+    "souvlaki",
+    "pwa",
+    "animations"
+  ],
+  "author": "",
+  "license": "ISC",
+  "devDependencies": {
+    "@axe-core/playwright": "^4.8.0",
+    "@playwright/test": "^1.40.0",
+    "playwright": "^1.40.0",
+    "sharp": "^0.34.5"
+  }
+}

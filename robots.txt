@@ -1,0 +1,38 @@
+# robots.txt for Greek Souvlaki Restaurant Website
+# https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/
+
+# Allow all crawlers
+User-agent: *
+
+# Disallow development and config files
+Disallow: /CLAUDE.md
+Disallow: /README.md
+Disallow: /package.json
+Disallow: /package-lock.json
+
+# Disallow development directories
+Disallow: /scripts/
+Disallow: /tests/
+Disallow: /node_modules/
+Disallow: /js/
+Disallow: /css/
+
+# Disallow utility scripts
+Disallow: /service-worker.js
+Disallow: /sw.js
+Disallow: /force-http.js
+Disallow: /mobile-menu-fix.js
+Disallow: /simple-lightbox.js
+
+# Allow public content
+Allow: /images/
+Allow: /icons/
+Allow: /accessibility-widget.js
+Allow: /cookie-consent.js
+Allow: /translations-new.js
+
+# Sitemap location
+Sitemap: https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/sitemap.xml
+
+# Crawl-delay (polite crawling, ignored by Google but honored by others)
+Crawl-delay: 1

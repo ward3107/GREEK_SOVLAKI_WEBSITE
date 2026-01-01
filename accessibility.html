@@ -1,0 +1,466 @@
+<!DOCTYPE html>
+<html lang="he" dir="rtl">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Content Security Policy - Secure CSP without unsafe-inline -->
+    <meta http-equiv="Content-Security-Policy" content="default-src 'self'; script-src 'self' https://vercel.live; style-src 'self' 'unsafe-inline' https://fonts.googleapis.com; font-src 'self' https://fonts.gstatic.com; img-src 'self' data:; connect-src 'self' https://vercel.live; object-src 'none'; base-uri 'self'; form-action 'self'; upgrade-insecure-requests;">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <title>Accessibility Statement - Greek Souvlaki</title>
+    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="css/inline-styles.css">
+    <style>
+        body {
+            background: #f9fafb;
+            font-family: 'Inter', 'Rubik', 'Assistant', 'Arial Hebrew', 'David', sans-serif;
+        }
+        .legal-container {
+            max-width: 900px;
+            margin: 0 auto;
+            padding: 3rem 2rem;
+            background: white;
+            min-height: 100vh;
+            box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+        }
+        .legal-container h1 {
+            color: var(--color-primary, #2563eb);
+            margin-bottom: 2rem;
+            font-size: 2.5rem;
+        }
+        .legal-container h2 {
+            color: var(--color-primary-dark, #1e40af);
+            margin-top: 3rem;
+            margin-bottom: 1.5rem;
+            font-size: 1.8rem;
+        }
+        .legal-container p, .legal-container li {
+            line-height: 1.9;
+            margin-bottom: 1.2rem;
+            color: #444;
+            font-size: 1.05rem;
+        }
+        .legal-container ul {
+            margin: 1.5rem 0 2rem 0;
+        }
+        [dir="rtl"] .legal-container ul {
+            margin-right: 2.5rem;
+            margin-left: 0;
+        }
+        [dir="ltr"] .legal-container ul {
+            margin-left: 2.5rem;
+            margin-right: 0;
+        }
+        .update-date {
+            color: #666;
+            font-style: italic;
+            margin-bottom: 2.5rem;
+            font-size: 0.95rem;
+        }
+        .back-link {
+            display: inline-block;
+            margin-bottom: 2rem;
+            color: var(--color-primary, #2563eb);
+            text-decoration: none;
+            font-weight: 600;
+            font-size: 1.05rem;
+        }
+        .back-link:hover { text-decoration: underline; }
+        .lang-content { display: none; }
+        [lang="he"] .lang-he { display: block; }
+        [lang="ar"] .lang-ar { display: block; }
+        [lang="en"] .lang-en { display: block; }
+        [lang="ru"] .lang-ru { display: block; }
+        .contact-box {
+            background: #f0fdf4;
+            border-right: 4px solid #10b981;
+            padding: 1.5rem;
+            margin: 2rem 0;
+            border-radius: 4px;
+        }
+        [dir="ltr"] .contact-box {
+            border-right: none;
+            border-left: 4px solid #10b981;
+        }
+        .lang-switcher {
+            position: fixed;
+            top: 2rem;
+            left: 2rem;
+            z-index: 1000;
+        }
+        .lang-toggle {
+            width: 48px;
+            height: 48px;
+            border-radius: 50%;
+            background: white;
+            border: none;
+            cursor: pointer;
+            box-shadow: 0 2px 12px rgba(0,0,0,0.15);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        .lang-toggle:hover {
+            transform: scale(1.05);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+        }
+        .lang-dropdown {
+            position: absolute;
+            top: 56px;
+            left: 0;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            overflow: hidden;
+            opacity: 0;
+            visibility: hidden;
+            transform: translateY(-10px);
+            transition: all 0.3s ease;
+        }
+        .lang-switcher.open .lang-dropdown {
+            opacity: 1;
+            visibility: visible;
+            transform: translateY(0);
+        }
+        .lang-dropdown button {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            width: 100%;
+            padding: 12px 16px;
+            border: none;
+            background: none;
+            cursor: pointer;
+            font-size: 0.95rem;
+            color: #374151;
+            transition: background 0.2s;
+            white-space: nowrap;
+        }
+        .lang-dropdown button:hover {
+            background: #f3f4f6;
+        }
+        .lang-dropdown button.active {
+            background: #eff6ff;
+            color: var(--color-primary, #2563eb);
+            font-weight: 600;
+        }
+        .lang-dropdown button span.flag {
+            font-size: 1.25rem;
+        }
+    </style>
+</head>
+<body>
+    <div class="lang-switcher" id="langSwitcher">
+        <button class="lang-toggle" id="langToggle" aria-label="Change language">🇮🇱</button>
+        <div class="lang-dropdown">
+            <button class="lang-btn active" data-lang="he">
+                <span class="flag">🇮🇱</span> עברית
+            </button>
+            <button class="lang-btn" data-lang="ar">
+                <span class="flag">🇸🇦</span> العربية
+            </button>
+            <button class="lang-btn" data-lang="en">
+                <span class="flag">🇬🇧</span> English
+            </button>
+            <button class="lang-btn" data-lang="ru">
+                <span class="flag">🇷🇺</span> Русский
+            </button>
+        </div>
+    </div>
+
+    <div class="legal-container">
+        <a href="index.html" class="back-link">← <span class="back-text">Back</span></a>
+
+        <!-- HEBREW -->
+        <div class="lang-content lang-he">
+            <h1>הצהרת נגישות</h1>
+            <p class="update-date">תאריך עדכון: 19 בדצמבר 2024</p>
+
+            <h2>1. מחויבות לנגישות</h2>
+            <p>Greek Souvlaki מחויב לנגישות האתר לאנשים עם מוגבלויות, בהתאם לתקנות שוויון זכויות לאנשים עם מוגבלויות (התאמות נגישות לשירותים), התשע"ג-2013.</p>
+            <p>האתר נבנה על פי <strong>תקן ישראלי ת"י 5568</strong> ו-<strong>WCAG 2.1</strong> ברמת <strong>AA</strong>.</p>
+
+            <h2>2. אמצעי נגישות</h2>
+            <ul>
+                <li><strong>ניווט במקלדת:</strong> ניווט מלא עם סימון חזותי (Focus)</li>
+                <li><strong>קוראי מסך:</strong> כותרות סמנטיות, ARIA landmarks, טקסט חלופי לתמונות</li>
+                <li><strong>ניגודיות:</strong> יחס 4.5:1 לטקסט רגיל</li>
+                <li><strong>הגדלת טקסט:</strong> עד 200% ללא אובדן תפקוד</li>
+                <li><strong>תמיכה בשפות:</strong> עברית, ערבית, אנגלית, רוסית עם RTL/LTR</li>
+            </ul>
+
+            <h2>3. פלטפורמות נתמכות</h2>
+            <ul>
+                <li><strong>דפדפנים:</strong> Chrome, Firefox, Edge, Safari (גרסאות אחרונות)</li>
+                <li><strong>קוראי מסך:</strong> NVDA, JAWS, VoiceOver, TalkBack</li>
+                <li><strong>מכשירים ניידים:</strong> iOS, Android</li>
+            </ul>
+
+            <h2>4. מגבלות ידועות</h2>
+            <ul>
+                <li>תמונות חיצוניות (Unsplash) עשויות להיות ללא טקסט חלופי מפורט</li>
+                <li>אינטגרציות חיצוניות (מפות, סרטונים) בשליטה חלקית</li>
+            </ul>
+
+            <div class="contact-box">
+                <h2 class="contact-coordinator-heading">📞 רכז/ת נגישות</h2>
+                <p><strong>שם:</strong> Greek Souvlaki Management<br>
+                <strong>טלפון:</strong> 04-8122980<br>
+                <strong>דוא"ל:</strong> accessibility@greeksouvlaki.co.il<br>
+                <strong>כתובת:</strong> כביש 70, כפר יאסיף</p>
+                <p><strong>זמן תגובה:</strong> 7 ימים עסקיים</p>
+            </div>
+
+            <h2>5. התחייבות וציות לתקנות</h2>
+            <p>מסעדת "סובלאקי יווני כפר יאסיף" מתחייבת להפוך את שירותיה ואת האתר האינטרנט שלה נגישים לאנשים עם מוגבלויות, בהתאם ל:</p>
+            <ul>
+                <li><strong>חוק שוויון זכויות לאנשים עם מוגבלויות, התשנ"ח-1998</strong></li>
+                <li><strong>תקנות שוויון זכויות לאנשים עם מוגבלויות (התאמות נגישות לשירותים), התשע"ג-2013</strong></li>
+                <li><strong>תקן ישראלי ת"י 5568 לנגישות אתרי אינטרנט</strong></li>
+                <li><strong>הנחיות הממונה על יישום חוק שוויון זכויות לאנשים עם מוגבלויות</strong></li>
+            </ul>
+
+            <h2>6. מאמצים לנגישות שבוצעו</h2>
+            <p>השקענו מאמצים רבים להבטיח נגישות מירבית באתר שלנו:</p>
+            <ul>
+                <li><strong>ניווט מקלדת מלא:</strong> כל האתר נגיש לניווט במקלדת בלבד</li>
+                <li><strong>קוראי מסך:</strong> תמיכה מלאה בקוראי מסך מובילים</li>
+                <li><strong>ניגודיות צבעים:</strong> יחסי ניגודיות העומדים בתקן WCAG 2.1 רמת AA</li>
+                <li><strong>מבנה סמנטי:</strong> שימוש נכון בכותרות HTML5 ותגיות ARIA</li>
+                <li><strong>תמיכה רב-לשונית:</strong> תמיכה בעברית, ערבית, אנגלית ורוסית</li>
+                <li><strong>נגישות מובייל:</strong> ממשק מותאם למשתמשים עם מוגבלויות במכשירים ניידים</li>
+                <li><strong>נגישות תמונות:</strong> טקסט חלופי לכל התמונות המשמעותיות</li>
+                <li><strong>טפסים נגישים:</strong> תוויות נכונות והודעות שגיאה ברורות</li>
+            </ul>
+
+            <h2>7. דיווח על בעיות נגישות</h2>
+            <p>אנו מחויבים לשפר את הנגישות באופן מתמיד. אם נתקלת בבעיה נגישות, אנא דווח לנו:</p>
+            <ul>
+                <li><strong>טלפון:</strong> 04-812-2980</li>
+                <li><strong>דוא"ל:</strong> accessibility@greeksouvlaki.co.il</li>
+                <li><strong>פקס:</strong> 04-812-2981</li>
+                <li><strong>דואר:</strong> מסעדת סובלאקי יווני כפר יאסיף, כביש 70, כפר יאסיף, הגליל המערבי, ישראל</li>
+            </ul>
+            <p><strong>זמן תגובה מתוכנן:</strong> עד 7 ימי עסקים מיום קבלת הפנייה</p>
+
+            <h2>8. הליכי אכיפת נגישות</h2>
+            <p>כדי להבטיח ציות מתמיד לדרישות הנגישות:</p>
+            <ul>
+                <li><strong>בדיקות תקופתיות:</strong> אנו מבצעים בדיקות נגישות אוטומטיות וידניות רבע-שנתיות</li>
+                <li><strong>הדרכת צוות:</strong> כל העובדים המעורבים בתוכן האתר עוברים הדרכת נגישות</li>
+                <li><strong>תהליכי בקרת איכות:</strong> נגישות היא חלק אינטגרלי מתהליכי פיתוח ועדכון</li>
+                <li><strong>משוב לקוחות:</strong> אנו אוספים משוב ממשתמשים עם מוגבלויות ומיישמים שיפורים</li>
+                <li><strong>עדכונים שוטפים:</strong> כל שינוי באתר נבדק לנגישות לפני השקה</li>
+            </ul>
+
+            <h2>9. גורמים חיצוניים וצד שלישי</h2>
+            <p>אתרנו כולל תוכן מגורמים חיצוניים. אנו עובדים עם ספקים המחויבים לנגישות:</p>
+            <ul>
+                <li><strong>מערכת הזמנות:</strong> מערכת נגישה להזמנת מקומות</li>
+                <li><strong>שירותי משלוח:</strong> ממשק נגיש להזמנות משלוחים</li>
+                <li><strong>תשלומים:</strong> שער תשלומים נגיש התואם לתקני PCI DSS</li>
+                <li><strong>מפות:</strong> שירות מפות נגיש עם הוראות ניווט חלופיות</li>
+                <li><strong>רשתות חברתיות:</strong> תוכן מדיה חברתית עם כתוביות ותיאורים נגישים</li>
+            </ul>
+
+            <h2>10. זכויות והיבטים משפטיים</h2>
+            <p><strong>זכות לגישה שווה:</strong> אנו מכבדים את זכותכם לגישה שווה לשירותינו. אם נתקלת במחסום נגישות, יש לך את הזכות לדווח על כך ולקבל תגובה.</p>
+            <p><strong>פניות אנונימיות:</strong> כל פנייה בנושא נגישות תטופל בדיסקרטיות מלאה ובכבוד.</p>
+            <p><strong>זמן תגובה:</strong> אנו מתחייבים לתת מענה לכל פנייה בנושא נגישות תוך 7 ימי עסקים.</p>
+            <p><strong>התאמות סבירות:</strong> נספק התאמות סבירות לאנשים עם מוגבלויות בהתאם לדין הישראלי.</p>
+
+            <h2>11. הצהרת תאימות</h2>
+            <p><strong>תאריך הצהרה:</strong> 19 בדצמבר 2024</p>
+            <p><strong>רמת תאימות:</strong> WCAG 2.1 רמת AA ותקן ישראלי ת"י 5568</p>
+            <p><strong>היקף ההצהרה:</strong> הצהרה זו חלה על אתר האינטרנט של מסעדת סובלאקי יווני כפר יאסיף.</p>
+            <p>אנו מאשרים כי ביצענו בדיקות נגישות מקיפות והאתר עומד בדרישות התקן והחוק.</p>
+
+            <h2>12. פרטי התקשרות לענייני נגישות</h2>
+            <div class="contact-box">
+                <h3>רכז/ת נגישות</h3>
+                <p><strong>שם:</strong> מנהל הנגישות - סובלאקי יווני כפר יאסיף</p>
+                <p><strong>תפקיד:</strong> רכז/ת נגישות אחראי/ת ליישום ואכיפת הוראות הנגישות</p>
+                <p><strong>טלפון:</strong> 04-812-2980</p>
+                <p><strong>דוא"ל:</strong> accessibility@greeksouvlaki.co.il</p>
+                <p><strong>פקס:</strong> 04-812-2981</p>
+                <p><strong>כתובת:</strong> כביש 70, כפר יאסיף, הגליל המערבי, ישראל, מיקוד 2490500</p>
+                <p><strong>שעות פעילות לענייני נגישות:</strong> א'-ה' 09:00-17:00, ו' 09:00-14:00</p>
+                <p><strong>שפות מועדפות:</strong> עברית, ערבית, אנגלית, רוסית</p>
+            </div>
+
+            <p><strong>תודה על עזרתך בהפיכת האתר שלנו לנגיש יותר לכולם!</strong></p>
+
+            <div class="legal-footer">
+                <p><strong>הצהרה זו מהווה חלק מהתחייבותנו לנגישות שווה והכללה במדיניות הנגישות שלנו.</strong></p>
+                <p><strong>מסמך זה זמין בפורמטים נגישים נוספים על פי דרישה.</strong></p>
+            </div>
+        </div>
+
+        <!-- ARABIC -->
+        <div class="lang-content lang-ar">
+            <h2>بيان إمكانية الوصول</h2>
+            <p class="update-date">آخر تحديث: 19 ديسمبر 2024</p>
+
+            <h3>1. الالتزام بإمكانية الوصول</h3>
+            <p>Greek Souvlaki ملتزم بجعل موقعه الإلكتروني متاحاً للأشخاص ذوي الإعاقة، وفقاً للوائح المساواة في الحقوق.</p>
+
+            <h3>2. ميزات إمكانية الوصول</h3>
+            <ul>
+                <li>التنقل بلوحة المفاتيح الكاملة</li>
+                <li>دعم قارئات الشاشة</li>
+                <li>تباين اللون المناسب</li>
+                <li>تكبير النص حتى 200%</li>
+            </ul>
+
+            <div class="contact-box">
+                <h2 class="contact-coordinator-heading">📞 منسق إمكانية الوصول</h2>
+                <p><strong>الاسم:</strong> Greek Souvlaki Management<br>
+                <strong>الهاتف:</strong> 04-8122980<br>
+                <strong>البريد الإلكتروني:</strong> accessibility@greeksouvlaki.co.il<br>
+                <strong>وقت الرد:</strong> 7 أيام عمل</p>
+            </div>
+        </div>
+
+        <!-- ENGLISH -->
+        <div class="lang-content lang-en">
+            <h2>Accessibility Statement</h2>
+            <p class="update-date">Last updated: December 19, 2024</p>
+
+            <h3>1. Commitment</h3>
+            <p>Greek Souvlaki is committed to making its website accessible to people with disabilities, in accordance with Israeli regulations (Equal Rights for Persons with Disabilities) and international standards (<strong>WCAG 2.1 Level AA</strong>, <strong>Israeli Standard 5568</strong>).</p>
+
+            <h3>2. Accessibility Features</h3>
+            <ul>
+                <li><strong>Keyboard navigation:</strong> Full support with visible focus indicators</li>
+                <li><strong>Screen readers:</strong> Semantic headings, ARIA landmarks, alt text</li>
+                <li><strong>Contrast:</strong> 4.5:1 ratio for text</li>
+                <li><strong>Text scaling:</strong> Up to 200% without loss of functionality</li>
+                <li><strong>Language support:</strong> Hebrew, Arabic, English, Russian with RTL/LTR</li>
+            </ul>
+
+            <h2>3. Supported Platforms</h2>
+            <ul>
+                <li><strong>Browsers:</strong> Chrome, Firefox, Edge, Safari (latest versions)</li>
+                <li><strong>Screen readers:</strong> NVDA, JAWS, VoiceOver, TalkBack</li>
+                <li><strong>Mobile:</strong> iOS, Android</li>
+            </ul>
+
+            <h2>4. Known Limitations</h2>
+            <ul>
+                <li>External images (Unsplash) may lack detailed alt text</li>
+                <li>Third-party integrations (maps, videos) have partial accessibility</li>
+            </ul>
+
+            <div class="contact-box">
+                <h2 class="contact-coordinator-heading">📞 Accessibility Coordinator</h2>
+                <p><strong>Name:</strong> Greek Souvlaki Management<br>
+                <strong>Phone:</strong> 04-8122980<br>
+                <strong>Email:</strong> accessibility@greeksouvlaki.co.il<br>
+                <strong>Address:</strong> Route 70, Kafr Yasif<br>
+                <strong>Response time:</strong> 7 business days</p>
+            </div>
+
+            <h2>5. Legal Compliance & Commitment</h2>
+            <p>Greek Souvlaki Kafr Yasif is committed to making our website accessible to people with disabilities, in accordance with:</p>
+            <ul>
+                <li><strong>Israeli Standard IS 5568 for Internet Accessibility</strong></li>
+                <li><strong>Equal Rights for Persons with Disabilities Law, 1998</strong></li>
+                <li><strong>Regulations for Accessibility to Services, 2013</strong></li>
+                <li><strong>WCAG 2.1 Level AA international standard</strong></li>
+            </ul>
+
+            <h2>6. Accessibility Measures Implemented</h2>
+            <p>We have invested significant efforts to ensure maximum accessibility on our site:</p>
+            <ul>
+                <li><strong>Full Keyboard Navigation:</strong> Entire site accessible via keyboard</li>
+                <li><strong>Screen Reader Support:</strong> Complete compatibility with leading screen readers</li>
+                <li><strong>Color Contrast:</strong> WCAG 2.1 AA compliant contrast ratios</li>
+                <li><strong>Semantic Structure:</strong> Proper HTML5 headings and ARIA markup</li>
+                <li><strong>Multilingual Support:</strong> Hebrew, Arabic, English, and Russian</li>
+                <li><strong>Mobile Accessibility:</strong> Adaptive interface for mobile users with disabilities</li>
+                <li><strong>Image Accessibility:</strong> Alt text for all meaningful images</li>
+                <li><strong>Accessible Forms:</strong> Proper labels and clear error messages</li>
+            </ul>
+
+            <h2>7. Report Accessibility Issues</h2>
+            <p>We are committed to continuously improving accessibility. If you encounter an accessibility issue, please report it:</p>
+            <ul>
+                <li><strong>Phone:</strong> 04-8122980</li>
+                <li><strong>Email:</strong> accessibility@greeksouvlaki.co.il</li>
+                <li><strong>Fax:</strong> 04-8122981</li>
+                <li><strong>Mail:</strong> Greek Souvlaki Kafr Yasif, Route 70, Western Galilee, Israel</li>
+            </ul>
+            <p><strong>Planned Response Time:</strong> Up to 7 business days from receipt of inquiry</p>
+
+            <h2>8. Accessibility Enforcement Procedures</h2>
+            <p>To ensure ongoing compliance with accessibility requirements:</p>
+            <ul>
+                <li><strong>Periodic Testing:</strong> Quarterly automated and manual accessibility audits</li>
+                <li><strong>Staff Training:</strong> All content creators receive accessibility training</li>
+                <li><strong>Quality Control:</strong> Accessibility integrated into development and update processes</li>
+                <li><strong>User Feedback:</strong> We collect feedback from users with disabilities</li>
+                <li><strong>Pre-launch Testing:</strong> All site changes tested for accessibility before deployment</li>
+            </ul>
+
+            <h2>9. Legal Rights and Protections</h2>
+            <p><strong>Right to Equal Access:</strong> We respect your right to equal access to our services. If you encounter an accessibility barrier, you have the right to report it and receive a response.</p>
+            <p><strong>Confidential Inquiries:</strong> All accessibility-related inquiries will be handled with complete discretion and respect.</p>
+            <p><strong>Response Commitment:</strong> We are committed to responding to all accessibility inquiries within 7 business days.</p>
+            <p><strong>Reasonable Accommodations:</strong> We will provide reasonable accommodations for people with disabilities in accordance with Israeli law.</p>
+
+            <h2>10. Compliance Declaration</h2>
+            <p><strong>Declaration Date:</strong> December 19, 2024</p>
+            <p><strong>Compliance Level:</strong> WCAG 2.1 Level AA and Israeli Standard IS 5568</p>
+            <p><strong>Scope:</strong> This declaration applies to the website of Greek Souvlaki Kafr Yasif.</p>
+            <p>We certify that we have conducted comprehensive accessibility testing and our website meets the requirements of the standard and law.</p>
+
+            <h2>11. Accessibility Coordinator Contact</h2>
+            <div class="contact-box">
+                <h3>Accessibility Coordinator</h3>
+                <p><strong>Name:</strong> Accessibility Manager - Greek Souvlaki Kafr Yasif</p>
+                <p><strong>Role:</strong> Responsible for implementing and enforcing accessibility guidelines</p>
+                <p><strong>Phone:</strong> 04-8122980</p>
+                <p><strong>Email:</strong> accessibility@greeksouvlaki.co.il</p>
+                <p><strong>Fax:</strong> 04-8122981</p>
+                <p><strong>Address:</strong> Route 70, Kafr Yasif, Western Galilee, Israel, 2490500</p>
+                <p><strong>Office Hours:</strong> Sunday-Thursday 09:00-17:00, Friday 09:00-14:00</p>
+                <p><strong>Preferred Languages:</strong> Hebrew, Arabic, English, Russian</p>
+            </div>
+
+            <p><strong>Thank you for helping us make our website accessible to everyone!</strong></p>
+        </div>
+
+        <!-- RUSSIAN -->
+        <div class="lang-content lang-ru">
+            <h2>Заявление о доступности</h2>
+            <p class="update-date">Обновлено: 19 декабря 2024</p>
+
+            <h3>1. Обязательство</h3>
+            <p>Greek Souvlaki стремится сделать свой веб-сайт доступным для людей с ограниченными возможностями в соответствии с израильскими правилами и международными стандартами (WCAG 2.1 уровень AA).</p>
+
+            <h3>2. Функции доступности</h3>
+            <ul>
+                <li>Навигация с клавиатуры</li>
+                <li>Поддержка программ чтения с экрана</li>
+                <li>Контрастность цветов</li>
+                <li>Масштабирование текста до 200%</li>
+            </ul>
+
+            <div class="contact-box">
+                <h2 class="contact-coordinator-heading">📞 Координатор доступности</h2>
+                <p><strong>Имя:</strong> Greek Souvlaki Management<br>
+                <strong>Телефон:</strong> 04-8122980<br>
+                <strong>Email:</strong> accessibility@greeksouvlaki.co.il<br>
+                <strong>Время ответа:</strong> 7 рабочих дней</p>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/page-scripts.js"></script>
+    <script src="js/language-switch.js"></script>
+
+    <!-- Premium Snow Effect - Now included in script.js -->
+</body>
+</html>

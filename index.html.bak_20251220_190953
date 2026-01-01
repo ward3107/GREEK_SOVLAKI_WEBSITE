@@ -1,0 +1,79 @@
+﻿<!DOCTYPE html>
+
+<html lang="he" dir="rtl">
+<head>
+  <link rel="manifest" href="/manifest.webmanifest">
+  <meta name="theme-color" content="">
+<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
+    <!-- Content Security Policy - Secure CSP with limited unsafe-inline for styles -->
+    <meta http-equiv="Content-Security-Policy" content="
+        default-src 'self';
+        script-src 'self' https://www.googletagmanager.com https://www.google-analytics.com https://vercel.live;
+        style-src 'self' 'unsafe-inline' https://fonts.googleapis.com http://fonts.googleapis.com;
+        font-src 'self' https://fonts.gstatic.com http://fonts.gstatic.com;
+        img-src 'self' data: blob: https://images.unsplash.com https://flagcdn.com https://*.google-analytics.com;
+        connect-src 'self' https://images.unsplash.com https://flagcdn.com https://www.google-analytics.com https://*.google-analytics.com https://vercel.live;
+        frame-src 'self' https://www.google.com;
+        object-src 'none';
+        base-uri 'self';
+        form-action 'self';
+    ">
+    <meta http-equiv="X-Content-Type-Options" content="nosniff">
+    <meta name="referrer" content="strict-origin-when-cross-origin">
+    <!-- <style id="i18n-hide">body{visibility:hidden}</style> -->
+    <title>×¡×•×‘×œ××§×™ ×™×•×•× ×™ ×›×¤×¨ ×™××¡×™×£ | ×ž×¡×¢×“×” ×™×•×•× ×™×ª ××•×ª× ×˜×™×ª - Greek Souvlaki</title>
+    <meta name="description" content="×ž×¡×¢×“×” ×™×•×•× ×™×ª ××•×ª× ×˜×™×ª ×‘×›×¤×¨ ×™××¡×™×£. ×¡×•×‘×œ××§×™, ×’×™×¨×•×¡, ×¤×™×ª×•×ª ×™×•×•× ×™×•×ª ×•×ž×’×©×™ ×‘×©×¨×™× ×‘×ž×—×™×¨×™× × ×•×—×™×. ×¤×ª×•×— ×¨×‘×™×¢×™-×©×‘×ª 13:00-01:00. â˜Žï¸ 04-812-2980">
+    <meta name="keywords" content="×¡×•×‘×œ××§×™ ×™×•×•× ×™, ×ž×¡×¢×“×” ×™×•×•× ×™×ª, ×›×¤×¨ ×™××¡×™×£, ×’×™×¨×•×¡, ××•×›×œ ×™×•×•× ×™, Greek Souvlaki, ×ž×¡×¢×“×” ×‘×¦×¤×•×Ÿ, ××•×›×œ ×™× ×ª×™×›×•× ×™">
+    <link rel="canonical" href="https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:type" content="restaurant">
+    <meta property="og:title" content="×¡×•×‘×œ××§×™ ×™×•×•× ×™ ×›×¤×¨ ×™××¡×™×£ | ×ž×¡×¢×“×” ×™×•×•× ×™×ª ××•×ª× ×˜×™×ª">
+    <meta property="og:description" content="×ž×¡×¢×“×” ×™×•×•× ×™×ª ××•×ª× ×˜×™×ª ×‘×›×¤×¨ ×™××¡×™×£. ×¡×•×‘×œ××§×™, ×’×™×¨×•×¡, ×¤×™×ª×•×ª ×™×•×•× ×™×•×ª ×•×ž×’×©×™ ×‘×©×¨×™×. ×¤×ª×•×— ×¨×‘×™×¢×™-×©×‘×ª 13:00-01:00">
+    <meta property="og:image" content="https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/images/gallery-1.webp">
+    <meta property="og:url" content="https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/">
+    <meta property="og:site_name" content="Greek Souvlaki - ×¡×•×‘×œ××§×™ ×™×•×•× ×™">
+    <meta property="og:locale" content="he_IL">
+    <meta property="og:locale:alternate" content="en_US">
+    <meta property="og:locale:alternate" content="ar_SA">
+    <meta property="og:locale:alternate" content="ru_RU">
+    <meta property="og:locale:alternate" content="el_GR">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="×¡×•×‘×œ××§×™ ×™×•×•× ×™ ×›×¤×¨ ×™××¡×™×£ | ×ž×¡×¢×“×” ×™×•×•× ×™×ª ××•×ª× ×˜×™×ª">
+    <meta name="twitter:description" content="×ž×¡×¢×“×” ×™×•×•× ×™×ª ××•×ª× ×˜×™×ª ×‘×›×¤×¨ ×™××¡×™×£. ×¡×•×‘×œ××§×™, ×’×™×¨×•×¡ ×•×ž×’×©×™ ×‘×©×¨×™×. ×¤×ª×•×— ×¨×‘×™×¢×™-×©×‘×ª 13:00-01:00">
+    <meta name="twitter:image" content="https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/images/gallery-1.webp">
+
+    <!-- Hreflang Tags for Multi-language -->
+    <link rel="alternate" hreflang="he" href="https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/">
+    <link rel="alternate" hreflang="en" href="https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/?lang=en">
+    <link rel="alternate" hreflang="ar" href="https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/?lang=ar">
+    <link rel="alternate" hreflang="ru" href="https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/?lang=ru">
+    <link rel="alternate" hreflang="el" href="https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/?lang=el">
+    <link rel="alternate" hreflang="x-default" href="https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/x-icon" href="favicon.ico">
+    <link rel="icon" type="image/jpeg" href="logo.jpg">
+
+    <!-- PWA Meta Tags -->
+<meta name="mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent">
+    <meta name="apple-mobile-web-app-title" content="Greek Souvlaki">
+<!-- Preload critical CSS for faster rendering -->
+    <link rel="preload" href="styles.css?v=43" as="style">
+    <link rel="stylesheet" href="styles.css?v=43">
+    <link rel="stylesheet" href="css/inline-styles.css">
+    <link rel="stylesheet" href="animations.css?v=14">
+    <link rel="stylesheet" href="accessibility-widget.css?v=22">
+    <link rel="stylesheet" href="cookie-consent.css?v=15">
+    
+  <script src="/pwa-register.js"></script>
+</body>
+</html>
+
+
+
+

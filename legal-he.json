@@ -1,0 +1,112 @@
+{
+  "page-title-terms": "תקנון ותנאי שימוש - Greek Souvlaki",
+  "page-title-privacy": "מדיניות פרטיות - Greek Souvlaki",
+  "page-title-accessibility": "הצהרת נגישות - Greek Souvlaki",
+
+  "back-link": "חזרה לאתר",
+  "last-updated": "תאריך עדכון אחרון:",
+  "update-date-placeholder": "[תאריך עדכון]",
+
+  "terms-h1": "תקנון ותנאי שימוש",
+  "terms-intro-title": "1. מבוא והגדרות",
+  "terms-intro-p1": "ברוכים הבאים לאתר Greek Souvlaki (להלן: \"האתר\" או \"השירות\").",
+  "terms-intro-p2": "האתר מופעל על ידי Greek Souvlaki (להלן: \"החברה\" או \"אנחנו\"), עסק הממוקם בכביש 70, כפר יאסיף.",
+  "terms-intro-p3": "תקנון זה מסדיר את תנאי השימוש באתר ובשירותים המוצעים בו. השימוש באתר מהווה הסכמה מלאה ובלתי מסויגת לתנאים המפורטים להלן.",
+
+  "terms-definitions": "הגדרות",
+  "terms-def-site": "\"האתר\" – אתר האינטרנט הזמין בכתובת https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/",
+  "terms-def-service": "\"השירות\" – מסעדה יוונית אותנטית בכפר יאסיף המציעה סובלאקי, גירוס ומנות ים תיכוניות מסורתיות",
+  "terms-def-user": "\"המשתמש\" או \"אתה\" – כל מי שגולש באתר או עושה שימוש בשירותים",
+  "terms-def-content": "\"התוכן\" – כל מידע, טקסט, תמונה, סרטון, קוד, עיצוב או חומר אחר המופיע באתר",
+
+  "terms-age-title": "2. גיל ושימוש באתר",
+  "terms-age-text": "האתר מיועד למשתמשים בני 18 ומעלה. אם אתה מתחת לגיל 18, השימוש באתר מותנה בהסכמה ובפיקוח של הורה או אפוטרופוס חוקי.",
+
+  "terms-general-title": "3. תנאי שימוש כלליים",
+  "terms-general-p1": "השימוש באתר מותר אך ורק למטרות חוקיות, סבירות ועל פי תנאי תקנון זה וכל דין חל. אסור לעשות שימוש באתר בדרך העלולה:",
+  "terms-general-li1": "להפר חוק, תקנה או זכות של צד שלישי",
+  "terms-general-li2": "לגרום נזק, הטרדה, פגיעה בפרטיות או אי-נוחות למשתמשים אחרים או לצדדים שלישיים",
+  "terms-general-li3": "להפיץ תוכן פוגעני, גזעני, מאיים, מעליב, משמיץ או בלתי חוקי",
+  "terms-general-li4": "להעתיק, לשכפל, לשנות או להפיץ תוכן מהאתר ללא אישור מפורש בכתב",
+
+  "terms-prohibited-title": "4. שימושים אסורים",
+  "terms-prohibited-intro": "בשימוש באתר, אסור לבצע את הפעולות הבאות:",
+
+  "terms-disclaimer-title": "5. הצהרת אי-ייעוץ מקצועי",
+  "terms-disclaimer-p1": "האתר מספק מידע כללי בלבד ואינו מהווה ייעוץ מקצועי מכל סוג שהוא.",
+  "terms-disclaimer-p2": "המידע באתר אינו תחליף לייעוץ רפואי, תזונתי, משפטי, פיננסי או כל ייעוץ מקצועי אחר. בכל מקרה של צורך בייעוץ מקצועי, יש לפנות לגורם מוסמך ומקצועי.",
+
+  "terms-ip-title": "6. קניין רוחני",
+  "terms-ip-p1": "כל זכויות הקניין הרוחני באתר, לרבות התוכן, העיצוב, הקוד, מסדי הנתונים, הסימנים המסחריים, הלוגו והגרפיקה – שייכים לחברה או למעניקי רישיונות שלה.",
+
+  "terms-liability-title": "7. הגבלת אחריות",
+  "terms-liability-asis": "השירות מסופק \"כמות שהוא\" (AS IS) וללא אחריות מכל סוג, מפורשת או משתמעת.",
+
+  "terms-links-title": "8. קישורים לאתרים חיצוניים",
+  "terms-links-text": "האתר עשוי לכלול קישורים לאתרי צד שלישי. החברה אינה אחראית לתוכן, למדיניות הפרטיות, לאבטחה או לחוקיות של אתרי צד שלישי.",
+
+  "terms-indemnity-title": "9. שיפוי",
+  "terms-indemnity-text": "אתה מתחייב לשפות ולפצות את החברה, עובדיה, מנהליה ושותפיה בגין כל תביעה, נזק, הוצאה או אובדן הנובעים מהפרה של תנאי תקנון זה על ידך.",
+
+  "terms-privacy-title": "10. פרטיות ואבטחת מידע",
+  "terms-privacy-link-text": "השימוש באתר כפוף גם למדיניות הפרטיות שלנו",
+  "terms-privacy-text": "אנו מתחייבים לשמור על פרטיות המשתמשים בהתאם לחוק הגנת הפרטיות, התשמ\"א-1981 ותיקון 13.",
+
+  "terms-changes-title": "11. שינויים והפסקת השירות",
+  "terms-changes-intro": "החברה שומרת לעצמה את הזכות:",
+
+  "terms-law-title": "12. דין וסמכות שיפוט",
+  "terms-law-p1": "תקנון זה כפוף לחוקי מדינת ישראל בלבד.",
+  "terms-law-p2": "סמכות השיפוט הבלעדית בכל סכסוך הנובע מהשימוש באתר או מתקנון זה תהיה לבתי המשפט המוסמכים בחיפה בלבד.",
+
+  "terms-general-provisions-title": "13. הוראות כלליות",
+  "terms-contact-text": "לשאלות או הבהרות בנוגע לתקנון, ניתן ליצור קשר עם החברה בטלפון 04-8122980.",
+
+  "privacy-h1": "מדיניות פרטיות ואבטחת מידע",
+  "privacy-important-title": "חשוב לדעת:",
+  "privacy-important-text": "אנו ב-Greek Souvlaki מתחייבים להגן על הפרטיות שלך. מדיניות זו מסבירה כיצד אנו אוספים, משתמשים ומגנים על המידע האישי שלך בהתאם לחוק הגנת הפרטיות, התשמ\"א-1981 ותיקון 13.",
+
+  "privacy-owner-title": "1. זהות בעל המאגר ומנהל המידע",
+  "privacy-company-name": "שם החברה:",
+  "privacy-address": "כתובת:",
+  "privacy-phone": "טלפון:",
+  "privacy-email": "דוא\"ל לפניות פרטיות:",
+
+  "privacy-principles-title": "2. עקרונות יסוד",
+  "privacy-principles-intro": "מדיניות זו מושתתת על העקרונות הבאים:",
+  "privacy-principle-transparency": "שקיפות: נספר לך בבירור מה אנו עושים עם המידע שלך",
+  "privacy-principle-minimization": "מזעור: נאסוף רק מידע הכרחי למטרות לגיטימיות",
+
+  "privacy-data-types-title": "3. סוגי המידע שאנו אוספים",
+  "privacy-data-provided-title": "3.1 מידע שאתה מספק לנו",
+  "privacy-data-automatic-title": "3.2 מידע שנאסף אוטומטית",
+
+  "privacy-purposes-title": "4. מטרות עיבוד המידע והבסיס המשפטי",
+  "privacy-cookies-title": "5. Cookies (עוגיות) וטכנולוגיות מעקב",
+  "privacy-sharing-title": "6. שיתוף מידע עם צדדים שלישיים",
+  "privacy-international-title": "7. העברת מידע מחוץ לישראל",
+  "privacy-retention-title": "8. תקופות שימור מידע",
+  "privacy-rights-title": "9. זכויות נושאי המידע",
+  "privacy-security-title": "10. אבטחת מידע ואירועי אבטחה",
+  "privacy-changes-title": "11. שינויים במדיניות",
+  "privacy-contact-title": "12. יצירת קשר",
+
+  "accessibility-h1": "הצהרת נגישות",
+  "accessibility-commitment-title": "1. מחויבות לנגישות",
+  "accessibility-commitment-p1": "Greek Souvlaki מחויב להנגשת אתר האינטרנט שלו לאנשים עם מוגבלות ולכל המשתמשים, לפי תקנות שוויון זכויות לאנשים עם מוגבלות (התאמות נגישות לשירות), התשע\"ג-2013.",
+  "accessibility-commitment-p2": "האתר נבנה תוך מאמץ ליישום נגישות בהתאם לתקן ישראלי ת\"י 5568 ול-WCAG 2.1 ברמת התאמה AA.",
+
+  "accessibility-standards-title": "2. תקנים ועקרונות נגישות",
+  "accessibility-measures-title": "3. אמצעי נגישות מרכזיים באתר",
+  "accessibility-platforms-title": "4. פלטפורמות נתמכות",
+  "accessibility-limitations-title": "5. מגבלות נגישות ידועות",
+  "accessibility-testing-title": "6. תהליך בדיקה ושיפור",
+  "accessibility-coordinator-title": "7. רכז/ת נגישות ויצירת קשר",
+  "accessibility-contact-intro": "ליצירת קשר בנושא נגישות:",
+  "accessibility-response-time": "זמן תגובה: נשתדל לענות תוך 7 ימי עסקים מקבלת הפנייה.",
+
+  "accessibility-process-title": "8. תהליך טיפול בפניות נגישות",
+  "accessibility-types-title": "9. סוגי פניות שניתן להגיש",
+  "accessibility-commitment-ongoing-title": "10. התחייבות מתמשכת",
+  "accessibility-thanks": "תודה על סבלנותך ועל עזרתך בהפיכת האתר לנגיש יותר לכולם!"
+}

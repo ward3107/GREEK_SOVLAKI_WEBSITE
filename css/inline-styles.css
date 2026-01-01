@@ -1,0 +1,115 @@
+/**
+ * CSS classes to replace inline styles
+ * This allows removing 'unsafe-inline' from Content Security Policy
+ */
+
+/* Gallery image aspect ratios */
+.gallery-item img {
+    max-width: 100%;
+    height: auto;
+    object-fit: cover;
+}
+
+/* Tall images (800x1732 ~ 2:1 ratio) */
+.gallery-item img[src*="gallery-1.webp"],
+.gallery-item img[src*="gallery-2.webp"],
+.gallery-item img[src*="gallery-4.webp"],
+.gallery-item img[src*="gallery-6.webp"],
+.gallery-item img[src*="gallery-9.webp"],
+.gallery-item img[src*="gallery-10.webp"] {
+    aspect-ratio: 2/4.3;
+}
+
+/* Wide images (800x369 ~ 2:1 ratio) */
+.gallery-item img[src*="gallery-3.webp"],
+.gallery-item img[src*="gallery-5.webp"],
+.gallery-item img[src*="gallery-7.webp"],
+.gallery-item img[src*="gallery-8.webp"],
+.gallery-item img[src*="gallery-11.webp"] {
+    aspect-ratio: 2/1;
+}
+
+/* IMG images (assume 4:3 ratio) */
+.gallery-item img[src*="IMG-"] {
+    aspect-ratio: 4/3;
+}
+
+/* Theme toggle icon visibility */
+.moon-icon {
+    display: none;
+}
+
+/* Language switcher styling */
+.lang-toggle {
+    background: none;
+    border: none;
+    cursor: pointer;
+    font-size: 16px;
+    padding: 8px;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+.lang-toggle:hover {
+    background-color: rgba(255, 255, 255, 0.1);
+}
+
+.lang-toggle:focus {
+    outline: 2px solid #1e3a8a;
+    outline-offset: 2px;
+}
+
+/* Language dropdown styling is handled in main styles.css */
+
+/* RTL support for language dropdown */
+[dir="rtl"] .language-dropdown-content {
+    right: auto;
+    left: 0;
+}
+
+/* Language buttons */
+.lang-btn {
+    background: none;
+    border: none;
+    padding: 8px 12px;
+    cursor: pointer;
+    width: 100%;
+    text-align: left;
+    transition: background-color 0.3s ease;
+    font-size: 14px;
+}
+
+.lang-btn:hover {
+    background-color: #f0f0f0;
+}
+
+.lang-btn.active {
+    background-color: #1e3a8a;
+    color: white;
+}
+
+.lang-btn:focus {
+    outline: 2px solid #1e3a8a;
+    outline-offset: -2px;
+}
+
+/* Legal page contact section styling */
+.contact-coordinator h2 {
+    margin-top: 0;
+    color: #1e3a8a;
+}
+
+/* Image loading states */
+img {
+    opacity: 0;
+    transition: opacity 0.3s ease;
+}
+
+img.loaded {
+    opacity: 1;
+}
+
+img.error {
+    opacity: 0.5;
+    filter: grayscale(100%);
+}

@@ -1,0 +1,97 @@
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Restaurant",
+      "@id": "https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/#restaurant",
+      "name": "Greek Souvlaki",
+      "alternateName": ["Greek Souvlaki", "Souvlaki Kafr Yasif"],
+      "description": "Authentic Greek restaurant in Kafr Yasif. Souvlaki, gyros and traditional Greek dishes. Open Thu-Sat.",
+      "image": "https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/images/gallery-1.jpg",
+      "priceRange": "$$",
+      "servesCuisine": ["Greek", "Mediterranean", "Middle Eastern"],
+      "address": {
+        "@type": "PostalAddress",
+        "streetAddress": "Route 70",
+        "addressLocality": "Kafr Yasif",
+        "addressRegion": "Western Galilee",
+        "addressCountry": "IL"
+      },
+      "geo": {
+        "@type": "GeoCoordinates",
+        "latitude": 32.9556,
+        "longitude": 35.1636
+      },
+      "telephone": "+972-4-8122980",
+      "url": "https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/",
+      "openingHoursSpecification": [
+        {
+          "@type": "OpeningHoursSpecification",
+          "dayOfWeek": ["Thursday", "Friday", "Saturday"],
+          "opens": "13:00",
+          "closes": "01:00"
+        }
+      ],
+      "acceptsReservations": true,
+      "menu": "https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/#menu",
+      "sameAs": [
+        "https://www.instagram.com/greek.souvlakii",
+        "https://www.facebook.com/greeksouvlaki"
+      ]
+    },
+    {
+      "@type": "FAQPage",
+      "@id": "https://ward3107.github.io/GREEK_SOVLAKI_WEBSITE/#faq",
+      "mainEntity": [
+        {
+          "@type": "Question",
+          "name": "What are the restaurant opening hours?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The restaurant is open Thursday to Saturday, from 1:00pm to 1:00am. Sunday to Wednesday we are closed."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Where is the restaurant located?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "The restaurant is located on Route 70, Kafr Yasif in Western Galilee. Easy to reach via Waze or Google Maps."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the price of souvlaki in pita?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Souvlaki in pita starts at 30 ILS and includes Greek pita, skewer of choice, tzatziki/hot sauce, fresh vegetables and fries."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "Are there vegan or gluten-free options?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Yes! We have vegan souvlaki in pita (30 ILS) and also gluten-free pita option (40 ILS) with all skewer types."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "How can I make a reservation?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "You can call 04-812-2980 or send a WhatsApp message. We recommend booking in advance for weekends."
+          }
+        },
+        {
+          "@type": "Question",
+          "name": "What is the difference between souvlaki and gyros?",
+          "acceptedAnswer": {
+            "@type": "Answer",
+            "text": "Souvlaki is grilled meat skewer, while gyros (Greek shawarma) is meat sliced from a rotating spit. Both are served in Greek pita with vegetables and sauces."
+          }
+        }
+      ]
+    }
+  ]
+}
