@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PWA Test - Greek Souvlaki</title>
+    <link rel="manifest" href="manifest.json">
+    <meta name="theme-color" content="#1e3a8a">
+</head>
+<body>
+    <h1>PWA Test Page</h1>
+    <div id="status"></div>
+    <button id="install-btn" style="display:none; padding:20px; font-size:18px;">Install App</button>
+
+    <script>
+        const status = document.getElementById('status');
+        const installBtn = document.getElementById('install-btn');
+        let deferredPrompt = null;
+
+        function updateStatus(msg) {
+            status.innerHTML += '<p>' + msg + '</p>';
+            console.log(msg);
+        }
+
+        updateStatus('✅ Page loaded');
+
+        // Check HTTPS
+        if (location.protocol === 'https:' || location.hostname === 'localhost') {
+            updateStatus('✅ HTTPS (or localhost)');
+        } else {
+            updateStatus('❌ NOT HTTPS - PWA requires HTTPS');
+        }
+
+        // Check manifest
+        const manifestLink = document.querySelector('link[rel="manifest"]');
+        if (manifestLink) {
+            updateStatus('✅ Manifest link found: ' + manifestLink.href);
+        } else {
+            updateStatus('❌ No manifest link found');
+        }
+
+        // Check service worker
+        if ('serviceWorker' in navigator) {
+            updateStatus('✅ Service Worker supported');
+            navigator.serviceWorker.register('/sw.js')
+                .then(reg => {
+                    updateStatus('✅ Service Worker registered: ' + reg.scope);
+                    if (reg.active) {
+                        updateStatus('✅ Service Worker is ACTIVE');
+                    } else if (reg.installing) {
+                        updateStatus('⏳ Service Worker is INSTALLING...');
+                        reg.installing.addEventListener('statechange', () => {
+                            if (reg.active) {
+                                updateStatus('✅ Service Worker is now ACTIVE');
+                            }
+                        });
+                    } else if (reg.waiting) {
+                        updateStatus('⏳ Service Worker is WAITING');
+                    }
+                })
+                .catch(err => {
+                    updateStatus('❌ Service Worker registration failed: ' + err);
+                });
+        } else {
+            updateStatus('❌ Service Worker NOT supported');
+        }
+
+        // Listen for beforeinstallprompt
+        window.addEventListener('beforeinstallprompt', (e) => {
+            updateStatus('🎉 ===== beforeinstallprompt FIRED! =====');
+            e.preventDefault();
+            deferredPrompt = e;
+            installBtn.style.display = 'block';
+            installBtn.textContent = '📱 Install App (One-Click)';
+            updateStatus('✅ Install prompt captured. Click button to install.');
+        });
+
+        // Listen for appinstalled
+        window.addEventListener('appinstalled', () => {
+            updateStatus('✅ ===== APP INSTALLED! =====');
+            installBtn.style.display = 'none';
+        });
+
+        // Manual install button click
+        installBtn.addEventListener('click', async () => {
+            if (deferredPrompt) {
+                updateStatus('Triggering install...');
+                deferredPrompt.prompt()
+                    .then((result) => {
+                        if (result.outcome === 'accepted') {
+                            updateStatus('✅ User accepted install');
+                        } else {
+                            updateStatus('❌ User dismissed install');
+                        }
+                        deferredPrompt = null;
+                    })
+                    .catch((err) => {
+                        updateStatus('❌ Install error: ' + err);
+                    });
+            }
+        });
+
+        updateStatus('<strong>Waiting for beforeinstallprompt...</strong>');
+        updateStatus('<em>Note: Chrome requires site to be visited 2+ times with 2+ days between visits</em>');
+    </script>
+</body>
+</html>
