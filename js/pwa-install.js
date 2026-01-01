@@ -16,6 +16,21 @@ class PWAInstallManager {
 
     init() {
         console.log('[PWA] Initializing...');
+        console.log('[PWA] User Agent:', navigator.userAgent);
+        console.log('[PWA] Platform:', navigator.platform);
+
+        // Detect device type
+        const isIOS = /iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase());
+        const isAndroid = /android/.test(navigator.userAgent.toLowerCase());
+        const isMobile = /mobile|android|iphone|ipad|ipod/.test(navigator.userAgent.toLowerCase());
+
+        console.log('[PWA] Device detection:', {
+            isIOS,
+            isAndroid,
+            isMobile,
+            userAgent: navigator.userAgent,
+            platform: navigator.platform
+        });
 
         // Check if early capture already caught the prompt
         if (window._pwaInstallPrompt) {
@@ -114,7 +129,7 @@ class PWAInstallManager {
             console.log('[PWA] iOS detected - showing iOS install banner');
             this.showIOSInstallBanner();
         } else {
-            console.log('[PWA] Android/Chrome detected - showing install banner');
+            console.log('[PWA] Android/Desktop detected - showing install banner');
             this.showInstallButton();
         }
     }
@@ -124,6 +139,12 @@ class PWAInstallManager {
         const navigatorStandalone = navigator.standalone;
         const hasAppInstalled = localStorage.getItem('pwa-installed') === 'true';
 
+        console.log('[PWA] Already installed check:', {
+            isStandalone,
+            navigatorStandalone,
+            hasAppInstalled
+        });
+
         return isStandalone || navigatorStandalone || hasAppInstalled;
     }
 
@@ -132,6 +153,8 @@ class PWAInstallManager {
         if (installBtn) {
             installBtn.textContent = 'התקן עכשיו';
             installBtn.disabled = false;
+            installBtn.style.background = 'white';
+            installBtn.style.color = '#1e40af';
             console.log('[PWA] Banner updated for auto-install');
         }
     }
@@ -177,245 +200,85 @@ class PWAInstallManager {
 
         const hasAutoInstall = !!this.installPrompt;
         const buttonText = hasAutoInstall ? 'התקן עכשיו' : 'איך להתקין';
+        const buttonStyle = hasAutoInstall ? '' : 'background: #fbbf24 !important; color: #1e3a8a !important;';
+
+        console.log('[PWA] Creating banner with auto-install:', hasAutoInstall);
 
         const banner = document.createElement('div');
         banner.id = 'pwa-install-banner';
         banner.className = 'pwa-install-banner';
+
+        // Use inline styles to ensure they're applied
+        banner.style.cssText = `
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            background: linear-gradient(135deg, rgba(30, 64, 175, 0.97) 0%, rgba(55, 48, 163, 0.97) 100%) !important;
+            color: white !important;
+            z-index: 2147483647 !important;
+            box-shadow: 0 4px 20px rgba(30, 58, 138, 0.3) !important;
+            font-family: 'Inter', 'Poppins', sans-serif !important;
+            backdrop-filter: blur(10px) !important;
+            min-height: 90px !important;
+            border-bottom: 3px solid rgba(255, 255, 255, 0.5) !important;
+            display: block !important;
+            visibility: visible !important;
+            font-size: 14px !important;
+            font-weight: 500 !important;
+            animation: slideDown 0.6s cubic-bezier(0.23, 1, 0.32, 1) !important;
+        `;
+
         banner.innerHTML = `
-            <div class="pwa-banner-content">
-                <div class="pwa-banner-left">
-                    <span class="pwa-banner-icon">📱</span>
-                    <div class="pwa-banner-text">
-                        <strong>התקן את Greek Souvlaki</strong>
-                        <span>${hasAutoInstall ? 'קבלו חוויה מהירה ונוחה יותר!' : 'התקינו את האפליקציה לחוויה מהירה יותר'}</span>
+            <div style="display: flex; align-items: center; justify-content: space-between; padding: 12px 20px; max-width: 1200px; margin: 0 auto; gap: 20px;">
+                <div style="display: flex; align-items: center; gap: 12px; flex: 1;">
+                    <span style="font-size: 24px; animation: bounce 2s infinite;">📱</span>
+                    <div style="display: flex; flex-direction: column; line-height: 1.3;">
+                        <strong style="font-size: 16px; font-weight: 600;">התקן את Greek Souvlaki</strong>
+                        <span style="font-size: 14px; opacity: 0.9;">${hasAutoInstall ? 'קבלו חוויה מהירה ונוחה יותר!' : 'התקינו את האפליקציה לחוויה מהירה יותר'}</span>
                     </div>
                 </div>
-                <div class="pwa-banner-actions">
-                    <button class="pwa-banner-btn-close" id="pwa-close-btn">
+                <div style="display: flex; align-items: center; gap: 12px;">
+                    <button id="pwa-close-btn" style="background: rgba(255, 255, 255, 0.1); border: none; color: white; width: 36px; height: 36px; border-radius: 50%; cursor: pointer; font-size: 18px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease;">
                         ✕
                     </button>
-                    <button class="pwa-banner-btn-install" id="pwa-install-btn" ${!hasAutoInstall ? 'data-manual="true"' : ''}>
+                    <button id="pwa-install-btn" style="${buttonStyle} background: white; color: #1e40af; border: none; padding: 10px 20px; border-radius: 25px; font-size: 14px; font-weight: 600; cursor: pointer; transition: all 0.3s ease; white-space: nowrap;">
                         ${buttonText}
                     </button>
                 </div>
             </div>
+            <style>
+                @keyframes slideDown {
+                    from { transform: translateY(-100%); opacity: 0; }
+                    to { transform: translateY(0); opacity: 1; }
+                }
+                @keyframes bounce {
+                    0%, 20%, 53%, 80%, 100% { transform: translateY(0); }
+                    40%, 43% { transform: translateY(-3px); }
+                    70% { transform: translateY(-2px); }
+                    90% { transform: translateY(-1px); }
+                }
+                @media (max-width: 768px) {
+                    #pwa-install-banner {
+                        min-height: 120px !important;
+                    }
+                    #pwa-install-banner > div {
+                        flex-direction: column !important;
+                        text-align: center !important;
+                        padding: 20px 15px !important;
+                    }
+                    #pwa-install-banner > div > div:first-child {
+                        flex-direction: column !important;
+                    }
+                    #pwa-install-btn {
+                        flex: 1 !important;
+                        max-width: 250px !important;
+                        padding: 12px 24px !important;
+                        font-size: 16px !important;
+                    }
+                }
+            </style>
         `;
-
-        // Add styles
-        const style = document.createElement('style');
-        style.textContent = `
-            .pwa-install-banner {
-                position: fixed !important;
-                top: 0 !important;
-                left: 0 !important;
-                right: 0 !important;
-                background: linear-gradient(135deg, rgba(30, 64, 175, 0.97) 0%, rgba(55, 48, 163, 0.97) 100%) !important;
-                color: white !important;
-                z-index: 999999 !important;
-                box-shadow: 0 4px 20px rgba(30, 58, 138, 0.3) !important;
-                animation: slideDown 0.6s cubic-bezier(0.23, 1, 0.32, 1) !important;
-                font-family: 'Inter', 'Poppins', sans-serif !important;
-                backdrop-filter: blur(10px) !important;
-                min-height: 90px !important;
-                border-bottom: 3px solid rgba(255, 255, 255, 0.5) !important;
-                display: block !important;
-                visibility: visible !important;
-                font-size: 14px !important;
-                font-weight: 500 !important;
-            }
-
-            .pwa-banner-content {
-                display: flex;
-                align-items: center;
-                justify-content: space-between;
-                padding: 12px 20px;
-                max-width: 1200px;
-                margin: 0 auto;
-                gap: 20px;
-            }
-
-            .pwa-banner-left {
-                display: flex;
-                align-items: center;
-                gap: 12px;
-                flex: 1;
-            }
-
-            .pwa-banner-icon {
-                font-size: 24px;
-                animation: bounce 2s infinite;
-            }
-
-            .pwa-banner-text {
-                display: flex;
-                flex-direction: column;
-                line-height: 1.3;
-            }
-
-            .pwa-banner-text strong {
-                font-size: 16px;
-                font-weight: 600;
-            }
-
-            .pwa-banner-text span {
-                font-size: 14px;
-                opacity: 0.9;
-            }
-
-            .pwa-banner-actions {
-                display: flex;
-                align-items: center;
-                gap: 12px;
-            }
-
-            .pwa-banner-btn-close {
-                background: rgba(255, 255, 255, 0.1);
-                border: none;
-                color: white;
-                width: 36px;
-                height: 36px;
-                border-radius: 50%;
-                cursor: pointer;
-                font-size: 18px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                transition: all 0.3s ease;
-            }
-
-            .pwa-banner-btn-close:hover {
-                background: rgba(255, 255, 255, 0.2);
-                transform: scale(1.1);
-            }
-
-            .pwa-banner-btn-install {
-                background: white;
-                color: #1e40af;
-                border: none;
-                padding: 10px 20px;
-                border-radius: 25px;
-                font-size: 14px;
-                font-weight: 600;
-                cursor: pointer;
-                transition: all 0.3s ease;
-                white-space: nowrap;
-            }
-
-            .pwa-banner-btn-install:hover {
-                background: #f0f0f0;
-                transform: translateY(-2px);
-                box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
-            }
-
-            .pwa-banner-btn-install[data-manual="true"] {
-                background: #fbbf24;
-                color: #1e3a8a;
-            }
-
-            @keyframes slideDown {
-                from {
-                    transform: translateY(-100%);
-                    opacity: 0;
-                }
-                to {
-                    transform: translateY(0);
-                    opacity: 1;
-                }
-            }
-
-            @keyframes bounce {
-                0%, 20%, 53%, 80%, 100% {
-                    transform: translateY(0);
-                }
-                40%, 43% {
-                    transform: translateY(-3px);
-                }
-                70% {
-                    transform: translateY(-2px);
-                }
-                90% {
-                    transform: translateY(-1px);
-                }
-            }
-
-            /* Mobile responsiveness */
-            @media (max-width: 768px) {
-                .pwa-install-banner {
-                    min-height: 120px !important;
-                    font-size: 16px !important;
-                }
-
-                .pwa-banner-content {
-                    flex-direction: column;
-                    text-align: center;
-                    padding: 20px 15px;
-                    gap: 15px;
-                }
-
-                .pwa-banner-left {
-                    flex-direction: column;
-                    gap: 10px;
-                }
-
-                .pwa-banner-icon {
-                    font-size: 28px !important;
-                }
-
-                .pwa-banner-text strong {
-                    font-size: 16px !important;
-                }
-
-                .pwa-banner-text span {
-                    font-size: 14px !important;
-                }
-
-                .pwa-banner-actions {
-                    width: 100%;
-                    justify-content: center;
-                    gap: 15px;
-                }
-
-                .pwa-banner-btn-close {
-                    width: 40px !important;
-                    height: 40px !important;
-                    font-size: 20px !important;
-                }
-
-                .pwa-banner-btn-install {
-                    flex: 1;
-                    max-width: 250px !important;
-                    padding: 12px 24px !important;
-                    font-size: 16px !important;
-                }
-            }
-
-            /* Extra small mobile devices */
-            @media (max-width: 480px) {
-                .pwa-install-banner {
-                    min-height: 140px !important;
-                }
-
-                .pwa-banner-content {
-                    padding: 25px 10px;
-                }
-            }
-
-            /* Add space for banner on body */
-            body {
-                padding-top: 0 !important;
-            }
-
-            body.has-pwa-banner {
-                padding-top: 70px !important;
-            }
-
-            @media (max-width: 768px) {
-                body.has-pwa-banner {
-                    padding-top: 110px !important;
-                }
-            }
-        `;
-        document.head.appendChild(style);
 
         // Add class to body for spacing
         document.body.classList.add('has-pwa-banner');
@@ -438,12 +301,27 @@ class PWAInstallManager {
 
         // Store reference
         this.bannerElement = banner;
-        document.body.appendChild(banner);
+
+        // Append to document - use document.body first, fallback to document.documentElement
+        try {
+            document.body.appendChild(banner);
+            console.log('[PWA] Banner added to body');
+        } catch (e) {
+            console.error('[PWA] Failed to add banner to body:', e);
+            try {
+                document.documentElement.appendChild(banner);
+                console.log('[PWA] Banner added to documentElement');
+            } catch (e2) {
+                console.error('[PWA] Failed to add banner to documentElement:', e2);
+            }
+        }
 
         // Make available globally
         globalThis.pwaManager = this;
 
         console.log('[PWA] Install button banner added to page (auto-install:', hasAutoInstall, ')');
+        console.log('[PWA] Banner element:', banner);
+        console.log('[PWA] Banner visible:', banner.style.display, banner.style.visibility);
     }
 
     showIOSInstallBanner() {
@@ -453,40 +331,58 @@ class PWAInstallManager {
         const banner = document.createElement('div');
         banner.id = 'pwa-ios-install-banner';
         banner.className = 'pwa-ios-install-banner';
+
+        // Use inline styles
+        banner.style.cssText = `
+            position: fixed !important;
+            bottom: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            background: linear-gradient(180deg, rgba(30, 64, 175, 0.98) 0%, rgba(55, 48, 163, 0.98) 100%) !important;
+            color: white !important;
+            z-index: 2147483647 !important;
+            box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2) !important;
+            font-family: 'Inter', 'Poppins', sans-serif !important;
+            border-top: 2px solid rgba(255, 255, 255, 0.3) !important;
+            display: block !important;
+            visibility: visible !important;
+            animation: slideUp 0.5s cubic-bezier(0.23, 1, 0.32, 1) !important;
+        `;
+
         banner.innerHTML = `
-            <div class="pwa-ios-banner-content">
-                <div class="pwa-ios-banner-header">
-                    <span class="pwa-ios-banner-icon">📱</span>
-                    <div class="pwa-ios-banner-text">
-                        <strong>התקינו את האפליקציה שלנו</strong>
-                        <span>לחצו על השתתף ואז "למסך הבית"</span>
+            <div style="padding: 20px 20px 30px; max-width: 500px; margin: 0 auto;">
+                <div style="display: flex; align-items: center; gap: 15px; margin-bottom: 20px;">
+                    <span style="font-size: 32px; flex-shrink: 0;">📱</span>
+                    <div style="flex: 1; display: flex; flex-direction: column; line-height: 1.3;">
+                        <strong style="font-size: 18px; font-weight: 600;">התקינו את האפליקציה שלנו</strong>
+                        <span style="font-size: 14px; opacity: 0.9;">לחצו על השתתף ואז "למסך הבית"</span>
                     </div>
-                    <button class="pwa-ios-banner-btn-close" id="pwa-ios-close-btn">
+                    <button id="pwa-ios-close-btn" style="background: rgba(255, 255, 255, 0.1); border: none; color: white; width: 32px; height: 32px; border-radius: 50%; cursor: pointer; font-size: 16px; display: flex; align-items: center; justify-content: center; transition: all 0.3s ease; flex-shrink: 0;">
                         ✕
                     </button>
                 </div>
-                <div class="pwa-ios-banner-steps">
-                    <div class="pwa-ios-step">
-                        <div class="pwa-ios-step-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <div style="display: flex; flex-direction: column; gap: 12px;">
+                    <div style="display: flex; align-items: center; gap: 15px; background: rgba(255, 255, 255, 0.1); padding: 12px 15px; border-radius: 12px; font-size: 14px;">
+                        <div style="width: 36px; height: 36px; background: rgba(255, 255, 255, 0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <rect x="4" y="4" width="16" height="16" rx="2"/>
                                 <circle cx="12" cy="12" r="3"/>
                             </svg>
                         </div>
                         <span>לחצו על כפתור השתתף</span>
                     </div>
-                    <div class="pwa-ios-step">
-                        <div class="pwa-ios-step-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <div style="display: flex; align-items: center; gap: 15px; background: rgba(255, 255, 255, 0.1); padding: 12px 15px; border-radius: 12px; font-size: 14px;">
+                        <div style="width: 36px; height: 36px; background: rgba(255, 255, 255, 0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <rect x="4" y="4" width="16" height="16" rx="2"/>
                                 <rect x="9" y="9" width="6" height="6"/>
                             </svg>
                         </div>
                         <span>גללו למטה ובחרו "למסך הבית"</span>
                     </div>
-                    <div class="pwa-ios-step">
-                        <div class="pwa-ios-step-icon">
-                            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <div style="display: flex; align-items: center; gap: 15px; background: rgba(255, 255, 255, 0.1); padding: 12px 15px; border-radius: 12px; font-size: 14px;">
+                        <div style="width: 36px; height: 36px; background: rgba(255, 255, 255, 0.2); border-radius: 8px; display: flex; align-items: center; justify-content: center; flex-shrink: 0;">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M5 12l5 5l10 -10"/>
                             </svg>
                         </div>
@@ -494,135 +390,13 @@ class PWAInstallManager {
                     </div>
                 </div>
             </div>
+            <style>
+                @keyframes slideUp {
+                    from { transform: translateY(100%); opacity: 0; }
+                    to { transform: translateY(0); opacity: 1; }
+                }
+            </style>
         `;
-
-        const style = document.createElement('style');
-        style.textContent = `
-            .pwa-ios-install-banner {
-                position: fixed !important;
-                bottom: 0 !important;
-                left: 0 !important;
-                right: 0 !important;
-                background: linear-gradient(180deg, rgba(30, 64, 175, 0.98) 0%, rgba(55, 48, 163, 0.98) 100%) !important;
-                color: white !important;
-                z-index: 999999 !important;
-                box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.2) !important;
-                animation: slideUp 0.5s cubic-bezier(0.23, 1, 0.32, 1) !important;
-                font-family: 'Inter', 'Poppins', sans-serif !important;
-                border-top: 2px solid rgba(255, 255, 255, 0.3) !important;
-            }
-
-            .pwa-ios-banner-content {
-                padding: 20px 20px 30px;
-                max-width: 500px;
-                margin: 0 auto;
-            }
-
-            .pwa-ios-banner-header {
-                display: flex;
-                align-items: center;
-                gap: 15px;
-                margin-bottom: 20px;
-            }
-
-            .pwa-ios-banner-icon {
-                font-size: 32px;
-                flex-shrink: 0;
-            }
-
-            .pwa-ios-banner-text {
-                flex: 1;
-                display: flex;
-                flex-direction: column;
-                line-height: 1.3;
-            }
-
-            .pwa-ios-banner-text strong {
-                font-size: 18px;
-                font-weight: 600;
-            }
-
-            .pwa-ios-banner-text span {
-                font-size: 14px;
-                opacity: 0.9;
-            }
-
-            .pwa-ios-banner-btn-close {
-                background: rgba(255, 255, 255, 0.1);
-                border: none;
-                color: white;
-                width: 32px;
-                height: 32px;
-                border-radius: 50%;
-                cursor: pointer;
-                font-size: 16px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                transition: all 0.3s ease;
-                flex-shrink: 0;
-            }
-
-            .pwa-ios-banner-btn-close:hover {
-                background: rgba(255, 255, 255, 0.2);
-            }
-
-            .pwa-ios-banner-steps {
-                display: flex;
-                flex-direction: column;
-                gap: 12px;
-            }
-
-            .pwa-ios-step {
-                display: flex;
-                align-items: center;
-                gap: 15px;
-                background: rgba(255, 255, 255, 0.1);
-                padding: 12px 15px;
-                border-radius: 12px;
-                font-size: 14px;
-            }
-
-            .pwa-ios-step-icon {
-                width: 36px;
-                height: 36px;
-                background: rgba(255, 255, 255, 0.2);
-                border-radius: 8px;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                flex-shrink: 0;
-            }
-
-            .pwa-ios-step-icon svg {
-                width: 20px;
-                height: 20px;
-            }
-
-            @keyframes slideUp {
-                from {
-                    transform: translateY(100%);
-                    opacity: 0;
-                }
-                to {
-                    transform: translateY(0);
-                    opacity: 1;
-                }
-            }
-
-            @media (max-width: 480px) {
-                .pwa-ios-banner-content {
-                    padding: 15px 15px 25px;
-                }
-                .pwa-ios-banner-text strong {
-                    font-size: 16px;
-                }
-                .pwa-ios-banner-text span {
-                    font-size: 13px;
-                }
-            }
-        `;
-        document.head.appendChild(style);
 
         const closeBtn = banner.querySelector('#pwa-ios-close-btn');
         if (closeBtn) {
