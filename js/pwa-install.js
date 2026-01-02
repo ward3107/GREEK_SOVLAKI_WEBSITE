@@ -589,11 +589,24 @@ console.log('[PWA-INSTALL] Script loaded');
      * Initialize PWA install handler
      */
     function init() {
-        console.log('[PWA-INSTALL] Initializing...');
+        console.log('[PWA-INSTALL] ===== INIT START =====');
+        console.log('[PWA-INSTALL] document.readyState:', document.readyState);
+        console.log('[PWA-INSTALL] UserAgent:', navigator.userAgent);
 
         // If app is already installed, do nothing
-        if (isAppInstalled()) {
+        const installed = isAppInstalled();
+        console.log('[PWA-INSTALL] isAppInstalled():', installed);
+
+        if (installed) {
             console.log('[PWA-INSTALL] App already installed, skipping initialization');
+            return;
+        }
+
+        const dismissed = wasRecentlyDismissed();
+        console.log('[PWA-INSTALL] wasRecentlyDismissed():', dismissed);
+
+        if (dismissed) {
+            console.log('[PWA-INSTALL] Banner was recently dismissed, not showing');
             return;
         }
 
@@ -646,20 +659,29 @@ console.log('[PWA-INSTALL] Script loaded');
             return;
         }
 
-        // For Chrome/Edge, the banner will be shown when beforeinstallprompt fires
-        // But also show a fallback after 3 seconds if the event hasn't fired
+        // For Chrome/Edge Desktop/Android - show banner immediately
+        console.log('[PWA-INSTALL] Chrome/Edge detected, showing banner in 2 seconds');
         setTimeout(() => {
-            if (!deferredPrompt && !isAppInstalled() && !wasRecentlyDismissed() && !bannerElement) {
-                console.log('[PWA-INSTALL] No beforeinstallprompt event yet, showing banner anyway');
+            if (!isAppInstalled() && !wasRecentlyDismissed() && !bannerElement) {
+                console.log('[PWA-INSTALL] Showing banner now (fallback mode)');
                 showBanner();
+            } else {
+                console.log('[PWA-INSTALL] Banner not shown - conditions:', {
+                    installed: isAppInstalled(),
+                    dismissed: wasRecentlyDismissed(),
+                    bannerExists: !!bannerElement
+                });
             }
-        }, 3000);
+        }, 2000);
     }
 
     // Start initialization when DOM is ready
+    console.log('[PWA-INSTALL] Checking DOM ready state:', document.readyState);
     if (document.readyState === 'loading') {
+        console.log('[PWA-INSTALL] Waiting for DOMContentLoaded');
         document.addEventListener('DOMContentLoaded', init);
     } else {
+        console.log('[PWA-INSTALL] DOM ready, calling init() directly');
         init();
     }
 
