@@ -199,45 +199,87 @@ console.log('[PWA-INSTALL] Script loaded');
      * Show the install banner
      */
     function showBanner() {
-        if (bannerElement) return; // Already shown
-        if (isAppInstalled()) {
+        console.log('[PWA-INSTALL] showBanner() called');
+        console.log('[PWA-INSTALL] bannerElement exists:', !!bannerElement);
+        console.log('[PWA-INSTALL] document.body exists:', !!document.body);
+
+        if (bannerElement) {
+            console.log('[PWA-INSTALL] Banner already shown, returning');
+            return;
+        }
+
+        const installed = isAppInstalled();
+        console.log('[PWA-INSTALL] isAppInstalled():', installed);
+        if (installed) {
             console.log('[PWA-INSTALL] App already installed, not showing banner');
             return;
         }
-        if (wasRecentlyDismissed()) {
+
+        const dismissed = wasRecentlyDismissed();
+        console.log('[PWA-INSTALL] wasRecentlyDismissed():', dismissed);
+        if (dismissed) {
             console.log('[PWA-INSTALL] Banner recently dismissed, not showing');
             return;
         }
 
-        console.log('[PWA-INSTALL] Showing install banner');
+        console.log('[PWA-INSTALL] Creating banner...');
 
-        bannerElement = createBanner();
-        document.body.appendChild(bannerElement);
+        try {
+            bannerElement = createBanner();
+            console.log('[PWA-INSTALL] Banner element created:', !!bannerElement);
+            console.log('[PWA-INSTALL] Banner HTML length:', bannerElement.innerHTML.length);
 
-        // Add event listeners
-        const installBtn = bannerElement.querySelector('#pwa-install-btn');
-        const dismissBtn = bannerElement.querySelector('#pwa-dismiss-btn');
+            document.body.appendChild(bannerElement);
+            console.log('[PWA-INSTALL] Banner appended to body');
+            console.log('[PWA-INSTALL] Banner in DOM:', document.getElementById('pwa-install-banner') !== null);
 
-        installBtn.addEventListener('click', handleInstallClick);
-        dismissBtn.addEventListener('click', handleDismissClick);
+            // Add event listeners
+            const installBtn = bannerElement.querySelector('#pwa-install-btn');
+            const dismissBtn = bannerElement.querySelector('#pwa-dismiss-btn');
+            console.log('[PWA-INSTALL] installBtn found:', !!installBtn);
+            console.log('[PWA-INSTALL] dismissBtn found:', !!dismissBtn);
 
-        // Keyboard accessibility
-        installBtn.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                handleInstallClick();
+            if (installBtn) {
+                installBtn.addEventListener('click', handleInstallClick);
+                // Also add touch event for better mobile support
+                installBtn.addEventListener('touchend', (e) => {
+                    e.preventDefault();
+                    handleInstallClick();
+                });
             }
-        });
-        dismissBtn.addEventListener('keydown', (e) => {
-            if (e.key === 'Enter' || e.key === ' ') {
-                e.preventDefault();
-                handleDismissClick();
-            }
-        });
 
-        // Focus trap helper - make buttons focusable
-        installBtn.setAttribute('tabindex', '0');
-        dismissBtn.setAttribute('tabindex', '0');
+            if (dismissBtn) {
+                dismissBtn.addEventListener('click', handleDismissClick);
+                dismissBtn.addEventListener('touchend', (e) => {
+                    e.preventDefault();
+                    handleDismissClick();
+                });
+            }
+
+            // Keyboard accessibility
+            installBtn.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    handleInstallClick();
+                }
+            });
+            dismissBtn.addEventListener('keydown', (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                    e.preventDefault();
+                    handleDismissClick();
+                }
+            });
+
+            // Focus trap helper - make buttons focusable
+            installBtn.setAttribute('tabindex', '0');
+            dismissBtn.setAttribute('tabindex', '0');
+
+            console.log('[PWA-INSTALL] Banner successfully created and attached!');
+
+        } catch (error) {
+            console.error('[PWA-INSTALL] Error creating banner:', error);
+            console.error('[PWA-INSTALL] Error stack:', error.stack);
+        }
     }
 
     /**
