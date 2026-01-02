@@ -647,13 +647,13 @@ console.log('[PWA-INSTALL] Script loaded');
         }
 
         // For Chrome/Edge, the banner will be shown when beforeinstallprompt fires
-        // But also show a fallback after 30 seconds if the event hasn't fired
+        // But also show a fallback after 3 seconds if the event hasn't fired
         setTimeout(() => {
             if (!deferredPrompt && !isAppInstalled() && !wasRecentlyDismissed() && !bannerElement) {
-                console.log('[PWA-INSTALL] No beforeinstallprompt event, showing banner anyway');
+                console.log('[PWA-INSTALL] No beforeinstallprompt event yet, showing banner anyway');
                 showBanner();
             }
-        }, 30000);
+        }, 3000);
     }
 
     // Start initialization when DOM is ready

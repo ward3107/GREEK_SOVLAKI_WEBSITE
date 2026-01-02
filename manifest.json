@@ -2,7 +2,7 @@
   "name": "סובלאקי יווני כפר יאסיף | Greek Souvlaki",
   "short_name": "סובלאקי יווני",
   "description": "מסעדה יוונית אותנטית בכפר יאסיף. סובלאקי, גירוס, פיתות יווניות ומגשי בשרים. Authentic Greek restaurant in Kfar Yasif.",
-  "start_url": "/?utm_source=pwa",
+  "start_url": "/",
   "scope": "/",
   "display": "standalone",
   "orientation": "portrait-primary",
