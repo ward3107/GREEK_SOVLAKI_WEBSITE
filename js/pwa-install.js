@@ -793,6 +793,8 @@ console.log('[PWA-INSTALL] Script loaded');
     }, 3000);
 
     // FOR MOBILE DEBUGGING: Add visual indicator after 5 seconds
+    // DISABLED in production - only enable for debugging
+    /*
     setTimeout(() => {
         console.log('[PWA-INSTALL] 5 second check:', { bannerElement: !!bannerElement });
         if (!bannerElement && document.body) {
@@ -803,6 +805,7 @@ console.log('[PWA-INSTALL] Script loaded');
             console.error('[PWA-INSTALL] DEBUG: No banner after 5 seconds! Check logs above.');
         }
     }, 5000);
+    */
 
     // Expose functions for debugging
     window.PWAInstall = {
@@ -810,7 +813,12 @@ console.log('[PWA-INSTALL] Script loaded');
         hideBanner: hideBanner,
         showIOSOverlay: showIOSOverlay,
         isAppInstalled: isAppInstalled,
-        wasRecentlyDismissed: wasRecentlyDismissed
+        wasRecentlyDismissed: wasRecentlyDismissed,
+        clearDismissed: function() {
+            localStorage.removeItem(CONFIG.STORAGE_KEY_DISMISSED);
+            localStorage.removeItem(CONFIG.STORAGE_KEY_INSTALLED);
+            console.log('[PWA-INSTALL] Cleared dismissed and installed state. Refresh to see banner.');
+        }
     };
 
     console.log('[PWA-INSTALL] Setup complete');
