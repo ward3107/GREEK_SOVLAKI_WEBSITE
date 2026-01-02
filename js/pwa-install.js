@@ -34,6 +34,13 @@ console.log('[PWA-INSTALL] Script loaded');
     }
 
     /**
+     * Detect Samsung Internet browser
+     */
+    function isSamsungInternet() {
+        return /samsung/i.test(navigator.userAgent);
+    }
+
+    /**
      * Check if app is already installed (running in standalone mode)
      */
     function isAppInstalled() {
@@ -50,6 +57,7 @@ console.log('[PWA-INSTALL] Script loaded');
 
         console.log('[PWA-INSTALL] Installation check:', result);
         console.log('[PWA-INSTALL] isMobile():', isMobile());
+        console.log('[PWA-INSTALL] isSamsungInternet():', isSamsungInternet());
         console.log('[PWA-INSTALL] UserAgent:', navigator.userAgent);
 
         return isStandalone || isIOSStandalone || wasInstalled;
@@ -847,6 +855,19 @@ console.log('[PWA-INSTALL] Script loaded');
             return;
         }
 
+        // For Samsung Internet, show specific instructions
+        if (isSamsungInternet()) {
+            alert('📱 Samsung Internet - PWA Installation\n\n' +
+                  'Samsung Internet supports PWA installation!\n\n' +
+                  '1. Tap the menu button (⋮) or (≡)\n' +
+                  '2. Tap "Add to home screen" or "Install app"\n' +
+                  '3. Tap "Add" to confirm\n\n' +
+                  'If you don\'t see these options:\n' +
+                  '- Make sure you\'re on the homepage\n' +
+                  '- Try using Chrome instead for better PWA support');
+            return;
+        }
+
         const isAndroid = /android/i.test(navigator.userAgent);
         const isDesktop = !isAndroid && !isIOSSafari();
 
@@ -1086,6 +1107,7 @@ console.log('[PWA-INSTALL] Script loaded');
         isAppInstalled: isAppInstalled,
         wasRecentlyDismissed: wasRecentlyDismissed,
         isFirefox: isFirefox,
+        isSamsungInternet: isSamsungInternet,
         clearDismissed: function() {
             localStorage.removeItem(CONFIG.STORAGE_KEY_DISMISSED);
             localStorage.removeItem(CONFIG.STORAGE_KEY_INSTALLED);
