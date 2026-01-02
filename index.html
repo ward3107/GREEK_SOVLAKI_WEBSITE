@@ -997,6 +997,71 @@
     <!-- PWA Install Handler -->
     <script src="js/pwa-install.js?v=10"></script>
 
+    <!-- PWA Banner (Inline for mobile reliability) -->
+    <div id="pwa-install-banner-inline" style="display:none;position:fixed;top:0;left:0;right:0;background:linear-gradient(135deg,#1e40af,#3730a7);color:#fff;z-index:999999;padding:15px;box-shadow:0 4px 20px rgba(0,0,0,0.3);">
+        <div style="display:flex;align-items:center;gap:12px;max-width:1200px;margin:0 auto;">
+            <span style="font-size:32px;">📱</span>
+            <div style="flex:1;">
+                <div style="font-weight:700;font-size:18px;margin-bottom:4px;">התקן את Greek Souvlaki</div>
+                <div style="font-size:14px;opacity:0.9;">קבלו חוויה מהירה יותר!</div>
+            </div>
+            <div style="display:flex;gap:10px;">
+                <button onclick="pwaInstall()" style="background:#fbbf24;color:#1e3a8a;border:none;padding:12px 24px;border-radius:25px;font-size:15px;font-weight:700;cursor:pointer;white-space:nowrap;">התקן עכשיו</button>
+                <button onclick="pwaClose()" style="background:rgba(255,255,255,0.2);color:#fff;border:none;padding:8px 16px;border-radius:20px;font-size:14px;cursor:pointer;">✕</button>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        console.log('[PWA-INLINE] Inline script loaded!');
+
+        // Show banner after 1 second
+        setTimeout(function() {
+            if (localStorage.getItem('pwa-installed') === 'true') {
+                console.log('[PWA-INLINE] Already installed');
+                return;
+            }
+
+            var banner = document.getElementById('pwa-install-banner-inline');
+            if (banner) {
+                banner.style.display = 'flex';
+                console.log('[PWA-INLINE] Banner shown!');
+            }
+        }, 1000);
+
+        function pwaClose() {
+            var banner = document.getElementById('pwa-install-banner-inline');
+            if (banner) {
+                banner.style.display = 'none';
+            }
+        }
+
+        function pwaInstall() {
+            var isAndroid = /android/i.test(navigator.userAgent);
+            var isChrome = /chrome/i.test(navigator.userAgent) && !/edge|edg/i.test(navigator.userAgent);
+
+            if (isAndroid && isChrome) {
+                alert('📱 להתקנת האפליקציה ב-Android Chrome:\n\n1. לחצו על תפריט (⋮) בפינה הימנית העליונה\n2. בחרו "הוספה למסך הבית" או "Install app"\n3. לחצו "הוסף" כדי לסיים\n\n💡 טיפ: בקרו באתר מספר פעמים כדי לקבל את אפשרות ההתקנה המהירה!');
+            } else {
+                alert('📱 להתקנת האפליקציה:\n\nAndroid Chrome: תפריט (⋮) → "הוספה למסך הבית"');
+            }
+            pwaClose();
+        }
+
+        // Listen for beforeinstallprompt
+        window.addEventListener('beforeinstallprompt', function(e) {
+            console.log('[PWA-INLINE] beforeinstallprompt fired!');
+            window.deferredPrompt = e;
+        });
+
+        // Listen for appinstalled
+        window.addEventListener('appinstalled', function() {
+            console.log('[PWA-INLINE] App installed!');
+            localStorage.setItem('pwa-installed', 'true');
+            pwaClose();
+        });
+    </script>
+
     <!-- PWA banner will be shown by the main pwa-install.js script -->
 
     <!-- WhatsApp Floating Buttons -->
