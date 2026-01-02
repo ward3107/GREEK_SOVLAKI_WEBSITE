@@ -682,8 +682,17 @@ console.log('[PWA-INSTALL] Script loaded');
         document.addEventListener('DOMContentLoaded', init);
     } else {
         console.log('[PWA-INSTALL] DOM ready, calling init() directly');
-        init();
+        // Use setTimeout to ensure DOM is fully ready
+        setTimeout(init, 100);
     }
+
+    // Fallback: force init after 500ms regardless of DOM state
+    setTimeout(() => {
+        if (!bannerElement && !isAppInstalled()) {
+            console.log('[PWA-INSTALL] Fallback timeout, forcing init');
+            init();
+        }
+    }, 500);
 
     // Expose functions for debugging
     window.PWAInstall = {
