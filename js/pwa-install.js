@@ -27,6 +27,13 @@ console.log('[PWA-INSTALL] Script loaded');
     // ============== DETECTION FUNCTIONS ==============
 
     /**
+     * Check if device is mobile
+     */
+    function isMobile() {
+        return /android|iphone|ipad|ipod|mobile/i.test(navigator.userAgent);
+    }
+
+    /**
      * Check if app is already installed (running in standalone mode)
      */
     function isAppInstalled() {
@@ -34,12 +41,16 @@ console.log('[PWA-INSTALL] Script loaded');
         const isIOSStandalone = navigator.standalone === true;
         const wasInstalled = localStorage.getItem(CONFIG.STORAGE_KEY_INSTALLED) === 'true';
 
-        console.log('[PWA-INSTALL] Installation check:', {
+        const result = {
             isStandalone,
             isIOSStandalone,
             wasInstalled,
             isInstalled: isStandalone || isIOSStandalone || wasInstalled
-        });
+        };
+
+        console.log('[PWA-INSTALL] Installation check:', result);
+        console.log('[PWA-INSTALL] isMobile():', isMobile());
+        console.log('[PWA-INSTALL] UserAgent:', navigator.userAgent);
 
         return isStandalone || isIOSStandalone || wasInstalled;
     }
@@ -703,15 +714,36 @@ console.log('[PWA-INSTALL] Script loaded');
 
     // ULTIMATE FALLBACK: Show banner after 3 seconds no matter what
     setTimeout(() => {
+        console.log('[PWA-INSTALL] ULTIMATE FALLBACK check:', {
+            bannerElement: !!bannerElement,
+            documentBody: !!document.body,
+            isAppInstalled: isAppInstalled(),
+            wasRecentlyDismissed: wasRecentlyDismissed()
+        });
+
         if (!bannerElement && document.body) {
             console.log('[PWA-INSTALL] ULTIMATE FALLBACK: Force showing banner');
             try {
                 showBanner();
+                console.log('[PWA-INSTALL] ULTIMATE FALLBACK: showBanner() called successfully');
             } catch (e) {
                 console.error('[PWA-INSTALL] Error in ultimate fallback:', e);
             }
+        } else {
+            console.log('[PWA-INSTALL] ULTIMATE FALLBACK: Banner already exists or no body');
         }
     }, 3000);
+
+    // FOR MOBILE DEBUGGING: Add visual indicator after 5 seconds
+    setTimeout(() => {
+        if (!bannerElement && document.body) {
+            const debugDiv = document.createElement('div');
+            debugDiv.style.cssText = 'position:fixed;top:10px;left:10px;background:red;color:white;padding:10px;z-index:9999999;font-size:12px;';
+            debugDiv.innerHTML = 'PWA: No banner after 5s. Check console.';
+            document.body.appendChild(debugDiv);
+            console.error('[PWA-INSTALL] DEBUG: No banner after 5 seconds! Check logs above.');
+        }
+    }, 5000);
 
     // Expose functions for debugging
     window.PWAInstall = {
