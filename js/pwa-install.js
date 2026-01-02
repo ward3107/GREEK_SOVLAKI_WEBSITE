@@ -1,272 +1,676 @@
-// PWA Install Banner - Mobile-first approach
-console.log('[PWA-MOBILE] ===== SCRIPT LOADED =====');
-console.log('[PWA-MOBILE] User Agent:', navigator.userAgent);
-console.log('[PWA-MOBILE] document.readyState:', document.readyState);
+/**
+ * PWA Install Handler
+ *
+ * Proper implementation using real browser beforeinstallprompt event
+ * - Desktop/Android Chrome: Triggers real install prompt
+ * - iOS Safari: Shows manual install instructions overlay
+ */
+
+console.log('[PWA-INSTALL] Script loaded');
 
 (function() {
     'use strict';
 
-    let deferredPrompt = null;
-    let bannerShown = false;
-    let initAttempts = 0;
+    // ============== CONFIGURATION ==============
+    const CONFIG = {
+        // How long to hide banner after dismissal (in milliseconds)
+        DISMISSAL_DURATION: 7 * 24 * 60 * 60 * 1000, // 7 days
+        STORAGE_KEY_DISMISSED: 'pwa-banner-dismissed-until',
+        STORAGE_KEY_INSTALLED: 'pwa-installed',
+    };
 
-    // Check if already installed
-    function isAlreadyInstalled() {
+    // ============== STATE ==============
+    let deferredPrompt = null;      // Stores the beforeinstallprompt event
+    let bannerElement = null;       // Reference to banner DOM element
+    let iosOverlayElement = null;   // Reference to iOS overlay
+
+    // ============== DETECTION FUNCTIONS ==============
+
+    /**
+     * Check if app is already installed (running in standalone mode)
+     */
+    function isAppInstalled() {
         const isStandalone = window.matchMedia('(display-mode: standalone)').matches;
-        const hasAppInstalled = localStorage.getItem('pwa-installed') === 'true';
-        return isStandalone || hasAppInstalled;
+        const isIOSStandalone = navigator.standalone === true;
+        const wasInstalled = localStorage.getItem(CONFIG.STORAGE_KEY_INSTALLED) === 'true';
+
+        console.log('[PWA-INSTALL] Installation check:', {
+            isStandalone,
+            isIOSStandalone,
+            wasInstalled,
+            isInstalled: isStandalone || isIOSStandalone || wasInstalled
+        });
+
+        return isStandalone || isIOSStandalone || wasInstalled;
     }
 
-    // Create and show banner
-    function showBanner() {
-        if (bannerShown) {
-            console.log('[PWA-MOBILE] Banner already shown, skipping');
-            return;
+    /**
+     * Check if banner was recently dismissed
+     */
+    function wasRecentlyDismissed() {
+        const dismissedUntil = localStorage.getItem(CONFIG.STORAGE_KEY_DISMISSED);
+        if (!dismissedUntil) return false;
+
+        const now = Date.now();
+        const dismissedTime = parseInt(dismissedUntil, 10);
+
+        // Clear if expired
+        if (now > dismissedTime) {
+            localStorage.removeItem(CONFIG.STORAGE_KEY_DISMISSED);
+            return false;
         }
 
-        if (isAlreadyInstalled()) {
-            console.log('[PWA-MOBILE] Already installed, not showing banner');
-            return;
-        }
+        return true;
+    }
 
-        bannerShown = true;
-        console.log('[PWA-MOBILE] ===== CREATING BANNER =====');
+    /**
+     * Detect iOS Safari (not Chrome iOS)
+     */
+    function isIOSSafari() {
+        const isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
+        const isSafari = /safari/i.test(navigator.userAgent) && !/chrome|crios/i.test(navigator.userAgent);
+        return isIOS && isSafari;
+    }
 
-        try {
-            const isMobile = /android|iphone|ipad|ipod|mobile/i.test(navigator.userAgent);
-            console.log('[PWA-MOBILE] isMobile:', isMobile);
+    /**
+     * Detect if the browser supports PWA installation
+     */
+    function supportsPWAInstall() {
+        // Chrome, Edge, Opera on desktop/Android support beforeinstallprompt
+        // iOS Safari does NOT support it
+        return !isIOSSafari();
+    }
 
-            // Create banner container
-            const banner = document.createElement('div');
-            banner.id = 'pwa-install-banner-mobile';
+    // ============== BANNER CREATION ==============
 
-            // Use direct inline styles on the element
-            banner.setAttribute('style',
-                'position:fixed!important;' +
-                'top:0!important;' +
-                'left:0!important;' +
-                'right:0!important;' +
-                'background:linear-gradient(135deg,rgba(30,64,175,0.98),rgba(55,48,163,0.98))!important;' +
-                'color:#ffffff!important;' +
-                'z-index:999999!important;' +
-                'padding:15px!important;' +
-                'display:flex!important;' +
-                'align-items:center!important;' +
-                'justify-content:center!important;' +
-                'box-shadow:0 4px 20px rgba(0,0,0,0.3)!important;' +
-                'font-family:-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif!important;' +
-                'min-height:80px!important;'
-            );
+    /**
+     * Create the install banner element
+     */
+    function createBanner() {
+        const banner = document.createElement('div');
+        banner.id = 'pwa-install-banner';
+        banner.setAttribute('role', 'banner');
+        banner.setAttribute('aria-label', 'התקנת אפליקציה');
 
-            // Mobile-specific adjustments
-            if (isMobile) {
-                banner.setAttribute('style', banner.getAttribute('style') +
-                    'flex-direction:column!important;' +
-                    'text-align:center!important;' +
-                    'padding:20px 15px!important;'
-                );
-            }
+        // Styling
+        banner.style.cssText = `
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            background: linear-gradient(135deg, #1e40af, #3730a7) !important;
+            color: #ffffff !important;
+            z-index: 999999 !important;
+            padding: 16px 20px !important;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.3) !important;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            transform: translateY(0) !important;
+            transition: transform 0.3s ease !important;
+        `.trim().replace(/\s+/g, ' ');
 
-            banner.innerHTML = `
-                <div style="display:flex;align-items:center;gap:12px;flex:1;max-width:1200px;">
-                    <span style="font-size:32px;flex-shrink:0;">📱</span>
-                    <div style="flex:1;">
-                        <div style="font-weight:700;font-size:18px;margin-bottom:4px;">התקן את Greek Souvlaki</div>
-                        <div style="font-size:14px;opacity:0.9;">קבלו חוויה מהירה יותר!</div>
+        banner.innerHTML = `
+            <div style="display: flex; align-items: center; gap: 12px; max-width: 1200px; width: 100%;">
+                <span style="font-size: 32px; flex-shrink: 0;" aria-hidden="true">📱</span>
+                <div style="flex: 1;">
+                    <div style="font-weight: 700; font-size: 18px; margin-bottom: 2px;">
+                        התקנו את Greek Souvlaki
                     </div>
-                    <div style="display:flex;gap:10px;flex-shrink:0;">
-                        <button id="pwa-install-btn-mobile" style="background:#fbbf24;color:#1e3a8a;border:none;padding:12px 24px;border-radius:25px;font-size:15px;font-weight:700;cursor:pointer;white-space:nowrap;">התקן עכשיו</button>
-                        <button id="pwa-close-btn-mobile" style="background:rgba(255,255,255,0.2);color:#fff;border:none;padding:8px 16px;border-radius:20px;font-size:14px;cursor:pointer;">✕</button>
+                    <div style="font-size: 14px; opacity: 0.9;">
+                        קבלו חוויה מהירה יותר!
                     </div>
                 </div>
-            `;
+                <div style="display: flex; gap: 10px; flex-shrink: 0;">
+                    <button
+                        id="pwa-install-btn"
+                        style="
+                            background: #fbbf24;
+                            color: #1e3a8a;
+                            border: none;
+                            padding: 12px 24px;
+                            border-radius: 25px;
+                            font-size: 15px;
+                            font-weight: 700;
+                            cursor: pointer;
+                            white-space: nowrap;
+                            transition: transform 0.2s, box-shadow 0.2s;
+                        "
+                        aria-label="התקן את האפליקציה"
+                    >
+                        התקנה
+                    </button>
+                    <button
+                        id="pwa-dismiss-btn"
+                        style="
+                            background: rgba(255, 255, 255, 0.2);
+                            color: #fff;
+                            border: none;
+                            padding: 8px 16px;
+                            border-radius: 20px;
+                            font-size: 14px;
+                            cursor: pointer;
+                            transition: background 0.2s;
+                        "
+                        aria-label="סגור הודעה זו"
+                    >
+                        ✕
+                    </button>
+                </div>
+            </div>
+        `;
 
-            // Add to document
-            if (document.body) {
-                document.body.appendChild(banner);
-                console.log('[PWA-MOBILE] ===== BANNER ADDED TO BODY =====');
-            } else {
-                document.documentElement.appendChild(banner);
-                console.log('[PWA-MOBILE] ===== BANNER ADDED TO DOCUMENT ELEMENT =====');
-            }
+        // Add hover effects for install button
+        const installBtn = banner.querySelector('#pwa-install-btn');
+        installBtn.addEventListener('mouseenter', () => {
+            installBtn.style.transform = 'scale(1.05)';
+            installBtn.style.boxShadow = '0 4px 12px rgba(0, 0, 0, 0.3)';
+        });
+        installBtn.addEventListener('mouseleave', () => {
+            installBtn.style.transform = 'scale(1)';
+            installBtn.style.boxShadow = 'none';
+        });
 
-            // Add event listeners after a small delay to ensure DOM is ready
-            setTimeout(function() {
-                const installBtn = document.getElementById('pwa-install-btn-mobile');
-                const closeBtn = document.getElementById('pwa-close-btn-mobile');
+        // Add hover effects for dismiss button
+        const dismissBtn = banner.querySelector('#pwa-dismiss-btn');
+        dismissBtn.addEventListener('mouseenter', () => {
+            dismissBtn.style.background = 'rgba(255, 255, 255, 0.3)';
+        });
+        dismissBtn.addEventListener('mouseleave', () => {
+            dismissBtn.style.background = 'rgba(255, 255, 255, 0.2)';
+        });
 
-                console.log('[PWA-MOBILE] installBtn found:', !!installBtn);
-                console.log('[PWA-MOBILE] closeBtn found:', !!closeBtn);
-
-                if (installBtn) {
-                    installBtn.addEventListener('click', handleInstallClick);
-                    // Also add touch event for mobile
-                    installBtn.addEventListener('touchend', function(e) {
-                        e.preventDefault();
-                        handleInstallClick(e);
-                    });
-                    console.log('[PWA-MOBILE] Event listeners added');
-                }
-
-                if (closeBtn) {
-                    closeBtn.addEventListener('click', hideBanner);
-                    closeBtn.addEventListener('touchend', function(e) {
-                        e.preventDefault();
-                        hideBanner();
-                    });
-                }
-            }, 100);
-
-        } catch (e) {
-            console.error('[PWA-MOBILE] Error creating banner:', e);
-        }
+        return banner;
     }
 
-    function handleInstallClick(e) {
-        if (e) e.preventDefault();
-        console.log('[PWA-MOBILE] ===== INSTALL BUTTON CLICKED =====');
-        console.log('[PWA-MOBILE] deferredPrompt:', deferredPrompt);
+    /**
+     * Show the install banner
+     */
+    function showBanner() {
+        if (bannerElement) return; // Already shown
+        if (isAppInstalled()) {
+            console.log('[PWA-INSTALL] App already installed, not showing banner');
+            return;
+        }
+        if (wasRecentlyDismissed()) {
+            console.log('[PWA-INSTALL] Banner recently dismissed, not showing');
+            return;
+        }
 
+        console.log('[PWA-INSTALL] Showing install banner');
+
+        bannerElement = createBanner();
+        document.body.appendChild(bannerElement);
+
+        // Add event listeners
+        const installBtn = bannerElement.querySelector('#pwa-install-btn');
+        const dismissBtn = bannerElement.querySelector('#pwa-dismiss-btn');
+
+        installBtn.addEventListener('click', handleInstallClick);
+        dismissBtn.addEventListener('click', handleDismissClick);
+
+        // Keyboard accessibility
+        installBtn.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                handleInstallClick();
+            }
+        });
+        dismissBtn.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                handleDismissClick();
+            }
+        });
+
+        // Focus trap helper - make buttons focusable
+        installBtn.setAttribute('tabindex', '0');
+        dismissBtn.setAttribute('tabindex', '0');
+    }
+
+    /**
+     * Hide the install banner
+     */
+    function hideBanner() {
+        if (!bannerElement) return;
+
+        console.log('[PWA-INSTALL] Hiding banner');
+
+        bannerElement.style.transform = 'translateY(-100%)';
+
+        setTimeout(() => {
+            if (bannerElement && bannerElement.parentNode) {
+                bannerElement.parentNode.removeChild(bannerElement);
+            }
+            bannerElement = null;
+        }, 300);
+    }
+
+    // ============== INSTALL HANDLERS ==============
+
+    /**
+     * Handle install button click
+     */
+    async function handleInstallClick() {
+        console.log('[PWA-INSTALL] Install button clicked');
+        console.log('[PWA-INSTALL] deferredPrompt available:', !!deferredPrompt);
+        console.log('[PWA-INSTALL] isIOSSafari():', isIOSSafari());
+
+        // iOS Safari - show manual instructions overlay
+        if (isIOSSafari()) {
+            showIOSOverlay();
+            return;
+        }
+
+        // Chrome/Edge on Desktop/Android - use real install prompt
         if (deferredPrompt) {
-            // One-click install!
-            console.log('[PWA-MOBILE] Triggering Chrome install dialog...');
-            deferredPrompt.prompt()
-                .then(function(result) {
-                    console.log('[PWA-MOBILE] Install result:', result.outcome);
-                    if (result.outcome === 'accepted') {
-                        console.log('[PWA-MOBILE] User accepted!');
-                        localStorage.setItem('pwa-installed', 'true');
-                        hideBanner();
-                    } else {
-                        console.log('[PWA-MOBILE] User dismissed');
-                    }
-                    deferredPrompt = null;
-                })
-                .catch(function(err) {
-                    console.error('[PWA-MOBILE] Install error:', err);
-                    deferredPrompt = null;
-                });
+            console.log('[PWA-INSTALL] Triggering real browser install prompt...');
+
+            try {
+                // Show the native browser install dialog
+                const result = await deferredPrompt.prompt();
+
+                console.log('[PWA-INSTALL] Install prompt result:', result.outcome);
+
+                if (result.outcome === 'accepted') {
+                    console.log('[PWA-INSTALL] User accepted install');
+                    localStorage.setItem(CONFIG.STORAGE_KEY_INSTALLED, 'true');
+                    hideBanner();
+                } else {
+                    console.log('[PWA-INSTALL] User dismissed install');
+                    // Keep banner hidden for a while
+                    dismissBanner();
+                }
+
+                // Clear the deferred prompt (can only be used once)
+                deferredPrompt = null;
+
+            } catch (error) {
+                console.error('[PWA-INSTALL] Install prompt error:', error);
+                // Fallback to manual instructions if prompt fails
+                showManualInstructions();
+            }
         } else {
-            // No prompt available - show manual instructions
-            console.log('[PWA-MOBILE] No install prompt, showing manual instructions');
+            console.log('[PWA-INSTALL] No install prompt available, showing manual instructions');
             showManualInstructions();
         }
     }
 
+    /**
+     * Handle dismiss button click
+     */
+    function handleDismissClick() {
+        console.log('[PWA-INSTALL] Dismiss button clicked');
+        dismissBanner();
+    }
+
+    /**
+     * Dismiss banner and remember not to show it for a while
+     */
+    function dismissBanner() {
+        const dismissedUntil = Date.now() + CONFIG.DISMISSAL_DURATION;
+        localStorage.setItem(CONFIG.STORAGE_KEY_DISMISSED, dismissedUntil.toString());
+        hideBanner();
+    }
+
+    // ============== iOS OVERLAY ==============
+
+    /**
+     * Create iOS install instructions overlay
+     */
+    function createIOSOverlay() {
+        const overlay = document.createElement('div');
+        overlay.id = 'pwa-ios-overlay';
+        overlay.setAttribute('role', 'dialog');
+        overlay.setAttribute('aria-modal', 'true');
+        overlay.setAttribute('aria-label', 'הוראות התקנה ל-iPhone');
+
+        overlay.style.cssText = `
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            background: rgba(0, 0, 0, 0.85) !important;
+            z-index: 9999999 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            padding: 20px !important;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+        `.trim().replace(/\s+/g, ' ');
+
+        overlay.innerHTML = `
+            <div style="
+                background: #ffffff;
+                border-radius: 20px;
+                padding: 30px;
+                max-width: 400px;
+                width: 100%;
+                text-align: center;
+                color: #1e3a8a;
+                position: relative;
+            ">
+                <button
+                    id="pwa-ios-close"
+                    style="
+                        position: absolute;
+                        top: 15px;
+                        left: 15px;
+                        background: #f3f4f6;
+                        border: none;
+                        width: 36px;
+                        height: 36px;
+                        border-radius: 50%;
+                        font-size: 20px;
+                        cursor: pointer;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        color: #374151;
+                        transition: background 0.2s;
+                    "
+                    aria-label="סגור"
+                >✕</button>
+
+                <div style="font-size: 48px; margin-bottom: 16px;" aria-hidden="true">📱</div>
+
+                <h2 style="margin: 0 0 12px 0; font-size: 22px; font-weight: 700;">
+                    התקנה ב-iPhone/iPad
+                </h2>
+
+                <p style="margin: 0 0 24px 0; font-size: 15px; color: #6b7280; line-height: 1.5;">
+                    הוסיפו את האפליקציה למסך הבית שלכם
+                </p>
+
+                <div style="text-align: right; direction: rtl; space-y: 16px;">
+                    <div style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px;">
+                        <span style="
+                            background: #1e40af;
+                            color: white;
+                            width: 28px;
+                            height: 28px;
+                            border-radius: 50%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-weight: 700;
+                            font-size: 14px;
+                            flex-shrink: 0;
+                        ">1</span>
+                        <p style="margin: 0; font-size: 15px; line-height: 1.5;">
+                            לחצו על כפתור <strong style="color: #1e3a8a;">"שתף"</strong>
+                            <span style="font-size: 20px;" aria-hidden="true"> ↑</span>
+                            בתחתית המסך
+                        </p>
+                    </div>
+
+                    <div style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px;">
+                        <span style="
+                            background: #1e40af;
+                            color: white;
+                            width: 28px;
+                            height: 28px;
+                            border-radius: 50%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-weight: 700;
+                            font-size: 14px;
+                            flex-shrink: 0;
+                        ">2</span>
+                        <p style="margin: 0; font-size: 15px; line-height: 1.5;">
+                            גללו למטה ובחרו <strong style="color: #1e3a8a;">"במסך הבית"</strong>
+                        </p>
+                    </div>
+
+                    <div style="display: flex; align-items: flex-start; gap: 12px;">
+                        <span style="
+                            background: #1e40af;
+                            color: white;
+                            width: 28px;
+                            height: 28px;
+                            border-radius: 50%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-weight: 700;
+                            font-size: 14px;
+                            flex-shrink: 0;
+                        ">3</span>
+                        <p style="margin: 0; font-size: 15px; line-height: 1.5;">
+                            לחצו <strong style="color: #1e3a8a;">"הוסף"</strong> בפינה הימנית העליונה
+                        </p>
+                    </div>
+                </div>
+
+                <div style="
+                    margin-top: 24px;
+                    padding: 12px;
+                    background: #fef3c7;
+                    border-radius: 10px;
+                    font-size: 13px;
+                    color: #92400e;
+                    text-align: center;
+                ">
+                    💡 האפליקציה תעבוד במצב דפדפן
+                </div>
+            </div>
+        `;
+
+        // Close button handler
+        const closeBtn = overlay.querySelector('#pwa-ios-close');
+        closeBtn.addEventListener('click', hideIOSOverlay);
+        closeBtn.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                hideIOSOverlay();
+            }
+        });
+
+        // Close on overlay background click
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) {
+                hideIOSOverlay();
+            }
+        });
+
+        // Close on Escape key
+        overlay.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                hideIOSOverlay();
+            }
+        });
+
+        return overlay;
+    }
+
+    /**
+     * Show iOS install overlay
+     */
+    function showIOSOverlay() {
+        if (iosOverlayElement) return;
+
+        console.log('[PWA-INSTALL] Showing iOS install overlay');
+
+        iosOverlayElement = createIOSOverlay();
+        document.body.appendChild(iosOverlayElement);
+        document.body.style.overflow = 'hidden'; // Prevent scrolling
+
+        // Focus the close button for accessibility
+        setTimeout(() => {
+            const closeBtn = iosOverlayElement.querySelector('#pwa-ios-close');
+            closeBtn.focus();
+        }, 100);
+    }
+
+    /**
+     * Hide iOS install overlay
+     */
+    function hideIOSOverlay() {
+        if (!iosOverlayElement) return;
+
+        console.log('[PWA-INSTALL] Hiding iOS overlay');
+
+        if (iosOverlayElement.parentNode) {
+            iosOverlayElement.parentNode.removeChild(iosOverlayElement);
+        }
+        iosOverlayElement = null;
+        document.body.style.overflow = ''; // Restore scrolling
+    }
+
+    /**
+     * Show fallback manual instructions (for non-iOS devices without prompt)
+     */
     function showManualInstructions() {
-        var isAndroid = /android/i.test(navigator.userAgent);
-        var isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
-        var isChrome = /chrome/i.test(navigator.userAgent) && !/edge|edg/i.test(navigator.userAgent);
-        var isDesktop = !isAndroid && !isIOS;
+        const isAndroid = /android/i.test(navigator.userAgent);
+        const isDesktop = !isAndroid && !isIOSSafari();
 
-        var message = '';
+        let message = '';
 
-        if (isAndroid && isChrome) {
-            message = '📱 להתקנת האפליקציה ב-Android Chrome:\n\n' +
-                   '1. לחצו על תפריט (⋮) בפינה הימנית העליונה\n' +
-                   '2. בחרו "הוספה למסך הבית" או "Install app"\n' +
-                   '3. לחצו "הוסף" כדי לסיים\n\n' +
-                   '💡 טיפ: בקרו באתר מספר פעמים כדי לקבל את אפשרות ההתקנה המהירה!';
-        } else if (isIOS) {
-            message = '📱 להתקנת האפליקציה ב-iPhone/iPad:\n\n' +
-                   '1. לחצו על כפתור "שתף" (↑) בתחתית המסך\n' +
-                   '2. גללו למטה ובחרו "הוספה למסך הבית"\n' +
-                   '3. לחצו "הוסף" כדי לסיים\n\n' +
-                   '💡 טיפ: האפליקציה תעבוד במצב דפדפן!';
+        if (isAndroid) {
+            message = '📱 להתקנת האפליקציה ב-Android:\n\n' +
+                     '1. לחצו על תפריט (⋮) בפינה הימנית העליונה\n' +
+                     '2. בחרו "התקנה" או "הוספה למסך הבית"\n' +
+                     '3. לחצו "התקנה" כדי לסיים';
         } else if (isDesktop) {
-            message = '💻 התקנת PWA במחשב:\n\n' +
-                   'Chrome/Edge: הכפתור "התקנה" יופיע בשורת הכתובת (⊕)\n\n' +
-                   'או שתשתמשו במכשיר הנייד שלכם להתקנה!\n\n' +
-                   '📱 Android: תפריט (⋮) → "הוספה למסך הבית"\n' +
-                   '📱 iPhone: שתף (↑) → "הוספה למסך הבית"';
-        } else {
-            message = '📱 להתקנת האפליקציה:\n\n' +
-                   'Android Chrome: תפריט (⋮) → "הוספה למסך הבית"\n\n' +
-                   'iPhone: שתף (↑) → "הוספה למסך הבית"\n\n' +
-                   'Desktop: כפתור התקנה בשורת הכתובת';
+            message = '💻 להתקנת האפליקציה:\n\n' +
+                     'ב-Chrome/Edge: חפשו את סמל ההתקנה (⊕ או ⤡)\n' +
+                     'בשורת הכתובת, ליד הסימנייה';
         }
 
         alert(message);
     }
 
-    function hideBanner() {
-        var banner = document.getElementById('pwa-install-banner-mobile');
-        if (banner) {
-            banner.remove();
-            console.log('[PWA-MOBILE] Banner removed');
-        }
-    }
+    // ============== EVENT LISTENERS ==============
 
-    // Listen for beforeinstallprompt
-    window.addEventListener('beforeinstallprompt', function(e) {
-        console.log('[PWA-MOBILE] ===== beforeinstallprompt FIRED! =====');
+    /**
+     * Listen for beforeinstallprompt event
+     * This is fired by Chrome/Edge when the app is installable
+     */
+    window.addEventListener('beforeinstallprompt', (e) => {
+        console.log('[PWA-INSTALL] beforeinstallprompt event fired!');
+
+        // Prevent the mini-infobar from showing automatically
+        e.preventDefault();
+
+        // Store the event for later use
         deferredPrompt = e;
-        // Don't prevent default - let Chrome show its prompt too
-    });
 
-    // Listen for appinstalled
-    window.addEventListener('appinstalled', function() {
-        console.log('[PWA-MOBILE] ===== APP INSTALLED! =====');
-        localStorage.setItem('pwa-installed', 'true');
-        hideBanner();
-    });
-
-    // INIT function with multiple fallback strategies
-    function tryInit() {
-        initAttempts++;
-        console.log('[PWA-MOBILE] ===== tryInit ATTEMPT ' + initAttempts + ' =====');
-        console.log('[PWA-MOBILE] document.body:', !!document.body);
-        console.log('[PWA-MOBILE] document.readyState:', document.readyState);
-        console.log('[PWA-MOBILE] isAlreadyInstalled:', isAlreadyInstalled());
-
-        if (document.body && !isAlreadyInstalled() && !bannerShown) {
-            console.log('[PWA-MOBILE] ===== CONDITIONS MET, SHOWING BANNER =====');
-            showBanner();
-            return true;
-        }
-
-        if (initAttempts >= 20) {
-            console.log('[PWA-MOBILE] ===== MAX ATTEMPTS REACHED =====');
-            return true; // Stop trying
-        }
-
-        return false;
-    }
-
-    // Strategy 1: Try immediately
-    if (!tryInit()) {
-        // Strategy 2: Wait for DOMContentLoaded
-        document.addEventListener('DOMContentLoaded', function() {
-            console.log('[PWA-MOBILE] DOMContentLoaded fired');
-            tryInit();
-        });
-
-        // Strategy 3: Wait for window load
-        window.addEventListener('load', function() {
-            console.log('[PWA-MOBILE] Window load fired');
-            tryInit();
-        });
-
-        // Strategy 4: Poll every 200ms (up to 4 seconds)
-        var pollInterval = setInterval(function() {
-            if (tryInit()) {
-                clearInterval(pollInterval);
-                console.log('[PWA-MOBILE] ===== POLLING COMPLETE =====');
-            }
-        }, 200);
-
-        // Stop polling after 4 seconds
-        setTimeout(function() {
-            clearInterval(pollInterval);
-            console.log('[PWA-MOBILE] ===== POLLING TIMEOUT =====');
-        }, 4000);
-    }
-
-    // Manual trigger
-    window.showPWAInstallBanner = function() {
-        console.log('[PWA-MOBILE] ===== MANUAL TRIGGER =====');
+        // Show our custom banner (only if not already installed/dismissed)
         showBanner();
+    });
+
+    /**
+     * Listen for appinstalled event
+     * This is fired when the app is successfully installed
+     */
+    window.addEventListener('appinstalled', () => {
+        console.log('[PWA-INSTALL] appinstalled event fired! App was installed successfully');
+
+        // Mark as installed
+        localStorage.setItem(CONFIG.STORAGE_KEY_INSTALLED, 'true');
+
+        // Hide banner and overlay
+        hideBanner();
+        hideIOSOverlay();
+
+        // Clear dismissal timestamp since app is now installed
+        localStorage.removeItem(CONFIG.STORAGE_KEY_DISMISSED);
+
+        // Optional: Show success message
+        // alert('🎉 האפליקציה הותקנה בהצלחה!');
+    });
+
+    // ============== INITIALIZATION ==============
+
+    /**
+     * Initialize PWA install handler
+     */
+    function init() {
+        console.log('[PWA-INSTALL] Initializing...');
+
+        // If app is already installed, do nothing
+        if (isAppInstalled()) {
+            console.log('[PWA-INSTALL] App already installed, skipping initialization');
+            return;
+        }
+
+        // For iOS Safari, we can't use beforeinstallprompt
+        // Show banner after a short delay if page is engaged
+        if (isIOSSafari()) {
+            console.log('[PWA-INSTALL] iOS Safari detected, will show banner after engagement');
+
+            // Show banner after user interacts with the page
+            const showAfterInteraction = () => {
+                // Remove event listeners
+                document.removeEventListener('scroll', onScroll);
+                document.removeEventListener('click', onClick);
+
+                // Show banner after a delay
+                setTimeout(() => {
+                    if (!isAppInstalled() && !wasRecentlyDismissed()) {
+                        showBanner();
+                    }
+                }, 2000);
+            };
+
+            let hasScrolled = false;
+            const onScroll = () => {
+                if (!hasScrolled) {
+                    hasScrolled = true;
+                    showAfterInteraction();
+                }
+            };
+
+            let hasClicked = false;
+            const onClick = () => {
+                if (!hasClicked) {
+                    hasClicked = true;
+                    showAfterInteraction();
+                }
+            };
+
+            // Wait for user engagement
+            document.addEventListener('scroll', onScroll, { once: true, passive: true });
+            document.addEventListener('click', onClick, { once: true });
+
+            // Fallback: show after 10 seconds regardless
+            setTimeout(() => {
+                if (!isAppInstalled() && !wasRecentlyDismissed() && !bannerElement) {
+                    showBanner();
+                }
+            }, 10000);
+
+            return;
+        }
+
+        // For Chrome/Edge, the banner will be shown when beforeinstallprompt fires
+        // But also show a fallback after 30 seconds if the event hasn't fired
+        setTimeout(() => {
+            if (!deferredPrompt && !isAppInstalled() && !wasRecentlyDismissed() && !bannerElement) {
+                console.log('[PWA-INSTALL] No beforeinstallprompt event, showing banner anyway');
+                showBanner();
+            }
+        }, 30000);
+    }
+
+    // Start initialization when DOM is ready
+    if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+    } else {
+        init();
+    }
+
+    // Expose functions for debugging
+    window.PWAInstall = {
+        showBanner: showBanner,
+        hideBanner: hideBanner,
+        showIOSOverlay: showIOSOverlay,
+        isAppInstalled: isAppInstalled,
+        wasRecentlyDismissed: wasRecentlyDismissed
     };
 
-    console.log('[PWA-MOBILE] ===== SETUP COMPLETE =====');
+    console.log('[PWA-INSTALL] Setup complete');
 })();
