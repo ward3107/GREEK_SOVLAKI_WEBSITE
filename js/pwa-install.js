@@ -742,6 +742,22 @@ console.log('[PWA-INSTALL] Script loaded');
         setTimeout(init, 100);
     }
 
+    // IMMEDIATE FALLBACK: Try to show banner right away if body exists
+    if (document.body && !isAppInstalled() && !wasRecentlyDismissed()) {
+        console.log('[PWA-INSTALL] IMMEDIATE: Body exists, showing banner NOW');
+        try {
+            showBanner();
+        } catch (e) {
+            console.error('[PWA-INSTALL] IMMEDIATE error:', e);
+        }
+    } else {
+        console.log('[PWA-INSTALL] IMMEDIATE check:', {
+            hasBody: !!document.body,
+            installed: isAppInstalled(),
+            dismissed: wasRecentlyDismissed()
+        });
+    }
+
     // Fallback: force init after 1 second regardless of DOM state
     setTimeout(() => {
         console.log('[PWA-INSTALL] Fallback timeout check:', {
@@ -778,6 +794,7 @@ console.log('[PWA-INSTALL] Script loaded');
 
     // FOR MOBILE DEBUGGING: Add visual indicator after 5 seconds
     setTimeout(() => {
+        console.log('[PWA-INSTALL] 5 second check:', { bannerElement: !!bannerElement });
         if (!bannerElement && document.body) {
             const debugDiv = document.createElement('div');
             debugDiv.style.cssText = 'position:fixed;top:10px;left:10px;background:red;color:white;padding:10px;z-index:9999999;font-size:12px;';
