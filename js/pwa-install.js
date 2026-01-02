@@ -155,7 +155,9 @@ console.log('[PWA-MOBILE] document.readyState:', document.readyState);
 
     function showManualInstructions() {
         var isAndroid = /android/i.test(navigator.userAgent);
+        var isIOS = /iphone|ipad|ipod/i.test(navigator.userAgent);
         var isChrome = /chrome/i.test(navigator.userAgent) && !/edge|edg/i.test(navigator.userAgent);
+        var isDesktop = !isAndroid && !isIOS;
 
         var message = '';
 
@@ -165,10 +167,23 @@ console.log('[PWA-MOBILE] document.readyState:', document.readyState);
                    '2. בחרו "הוספה למסך הבית" או "Install app"\n' +
                    '3. לחצו "הוסף" כדי לסיים\n\n' +
                    '💡 טיפ: בקרו באתר מספר פעמים כדי לקבל את אפשרות ההתקנה המהירה!';
+        } else if (isIOS) {
+            message = '📱 להתקנת האפליקציה ב-iPhone/iPad:\n\n' +
+                   '1. לחצו על כפתור "שתף" (↑) בתחתית המסך\n' +
+                   '2. גללו למטה ובחרו "הוספה למסך הבית"\n' +
+                   '3. לחצו "הוסף" כדי לסיים\n\n' +
+                   '💡 טיפ: האפליקציה תעבוד במצב דפדפן!';
+        } else if (isDesktop) {
+            message = '💻 התקנת PWA במחשב:\n\n' +
+                   'Chrome/Edge: הכפתור "התקנה" יופיע בשורת הכתובת (⊕)\n\n' +
+                   'או שתשתמשו במכשיר הנייד שלכם להתקנה!\n\n' +
+                   '📱 Android: תפריט (⋮) → "הוספה למסך הבית"\n' +
+                   '📱 iPhone: שתף (↑) → "הוספה למסך הבית"';
         } else {
             message = '📱 להתקנת האפליקציה:\n\n' +
                    'Android Chrome: תפריט (⋮) → "הוספה למסך הבית"\n\n' +
-                   'Samsung: תפריט (⋮) → "הוספה למסך הבית"';
+                   'iPhone: שתף (↑) → "הוספה למסך הבית"\n\n' +
+                   'Desktop: כפתור התקנה בשורת הכתובת';
         }
 
         alert(message);
