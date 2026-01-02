@@ -574,9 +574,279 @@ console.log('[PWA-INSTALL] Script loaded');
     }
 
     /**
+     * Detect Firefox browser
+     */
+    function isFirefox() {
+        return /firefox/i.test(navigator.userAgent) && !/seamonkey/i.test(navigator.userAgent);
+    }
+
+    /**
+     * Show Firefox installation overlay
+     */
+    function showFirefoxOverlay() {
+        if (iosOverlayElement) return;
+
+        console.log('[PWA-INSTALL] Showing Firefox install overlay');
+
+        iosOverlayElement = createFirefoxOverlay();
+        document.body.appendChild(iosOverlayElement);
+        document.body.style.overflow = 'hidden';
+
+        setTimeout(() => {
+            const closeBtn = iosOverlayElement.querySelector('#pwa-ff-close');
+            if (closeBtn) closeBtn.focus();
+        }, 100);
+    }
+
+    /**
+     * Create Firefox install instructions overlay
+     */
+    function createFirefoxOverlay() {
+        const overlay = document.createElement('div');
+        overlay.id = 'pwa-ff-overlay';
+        overlay.setAttribute('role', 'dialog');
+        overlay.setAttribute('aria-modal', 'true');
+        overlay.setAttribute('aria-label', 'הוראות התקנה ל-Firefox');
+
+        overlay.style.cssText = `
+            position: fixed !important;
+            top: 0 !important;
+            left: 0 !important;
+            right: 0 !important;
+            bottom: 0 !important;
+            background: rgba(0, 0, 0, 0.85) !important;
+            z-index: 9999999 !important;
+            display: flex !important;
+            align-items: center !important;
+            justify-content: center !important;
+            padding: 20px !important;
+            font-family: -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, sans-serif !important;
+        `.trim().replace(/\s+/g, ' ');
+
+        const isWindows = /win/i.test(navigator.platform);
+
+        overlay.innerHTML = `
+            <div style="
+                background: #ffffff;
+                border-radius: 20px;
+                padding: 30px;
+                max-width: 450px;
+                width: 100%;
+                text-align: center;
+                color: #1e3a8a;
+                position: relative;
+                max-height: 90vh;
+                overflow-y: auto;
+            ">
+                <button
+                    id="pwa-ff-close"
+                    style="
+                        position: absolute;
+                        top: 15px;
+                        left: 15px;
+                        background: #f3f4f6;
+                        border: none;
+                        width: 36px;
+                        height: 36px;
+                        border-radius: 50%;
+                        font-size: 20px;
+                        cursor: pointer;
+                        display: flex;
+                        align-items: center;
+                        justify-content: center;
+                        color: #374151;
+                        transition: background 0.2s;
+                    "
+                    aria-label="סגור"
+                >✕</button>
+
+                <div style="font-size: 48px; margin-bottom: 16px;" aria-hidden="true">🦊</div>
+
+                <h2 style="margin: 0 0 12px 0; font-size: 22px; font-weight: 700;">
+                    התקנה ב-Firefox
+                </h2>
+
+                <p style="margin: 0 0 24px 0; font-size: 15px; color: #6b7280; line-height: 1.5;">
+                    Firefox דורש אפשרות מיוחדת להתקנת אפליקציות
+                </p>
+
+                ${isWindows ? `
+                <div style="text-align: right; direction: rtl; margin-bottom: 20px;">
+                    <div style="background: #fef3c7; padding: 16px; border-radius: 12px; margin-bottom: 16px;">
+                        <div style="font-weight: 700; color: #92400e; margin-bottom: 8px; font-size: 16px;">
+                            ⚙️ אפשרות ניסיונית ב-Windows
+                        </div>
+                        <div style="font-size: 14px; color: #92400e; line-height: 1.6;">
+                            Firefox הוסיף תמיכה ב-PWA (ניסיוני)
+                        </div>
+                    </div>
+
+                    <div style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px;">
+                        <span style="
+                            background: #1e40af;
+                            color: white;
+                            width: 28px;
+                            height: 28px;
+                            border-radius: 50%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-weight: 700;
+                            font-size: 14px;
+                            flex-shrink: 0;
+                        ">1</span>
+                        <p style="margin: 0; font-size: 15px; line-height: 1.5;">
+                            הקלידו <strong style="color: #1e3a8a;">about:preferences#experimental</strong> בשורת הכתובת
+                        </p>
+                    </div>
+
+                    <div style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px;">
+                        <span style="
+                            background: #1e40af;
+                            color: white;
+                            width: 28px;
+                            height: 28px;
+                            border-radius: 50%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-weight: 700;
+                            font-size: 14px;
+                            flex-shrink: 0;
+                        ">2</span>
+                        <p style="margin: 0; font-size: 15px; line-height: 1.5;">
+                            גללו למטה ל-<strong style="color: #1e3a8a;">"Firefox Labs"</strong>
+                        </p>
+                    </div>
+
+                    <div style="display: flex; align-items: flex-start; gap: 12px; margin-bottom: 16px;">
+                        <span style="
+                            background: #1e40af;
+                            color: white;
+                            width: 28px;
+                            height: 28px;
+                            border-radius: 50%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-weight: 700;
+                            font-size: 14px;
+                            flex-shrink: 0;
+                        ">3</span>
+                        <p style="margin: 0; font-size: 15px; line-height: 1.5;">
+                            אפשרו את <strong style="color: #1e3a8a;">"Web App Support"</strong>
+                        </p>
+                    </div>
+
+                    <div style="display: flex; align-items: flex-start; gap: 12px;">
+                        <span style="
+                            background: #1e40af;
+                            color: white;
+                            width: 28px;
+                            height: 28px;
+                            border-radius: 50%;
+                            display: flex;
+                            align-items: center;
+                            justify-content: center;
+                            font-weight: 700;
+                            font-size: 14px;
+                            flex-shrink: 0;
+                        ">4</span>
+                        <p style="margin: 0; font-size: 15px; line-height: 1.5;">
+                            הפעילו מחדש את Firefox ותחזרו לאתר
+                        </p>
+                    </div>
+                </div>
+
+                <div style="border-top: 1px solid #e5e7eb; padding-top: 16px; margin-bottom: 16px;">
+                    <div style="font-size: 13px; color: #6b7280; margin-bottom: 8px;">או נסו אלטרנטיבה:</div>
+                </div>
+                ` : ''}
+
+                <div style="text-align: right; direction: rtl;">
+                    <div style="background: #eff6ff; padding: 16px; border-radius: 12px; margin-bottom: 16px;">
+                        <div style="font-weight: 700; color: #1e40af; margin-bottom: 8px; font-size: 16px;">
+                            🔧 התוסף PWAsForFirefox
+                        </div>
+                        <p style="margin: 0 0 12px 0; font-size: 14px; color: #1e40af; line-height: 1.5;">
+                            תוסף קהילתי שמאפשר התקנת PWA ב-Firefox
+                        </p>
+                        <a
+                            href="https://addons.mozilla.org/en-US/firefox/addon/pwas-for-firefox/"
+                            target="_blank"
+                            rel="noopener noreferrer"
+                            style="
+                                display: inline-block;
+                                background: #1e40af;
+                                color: white;
+                                text-decoration: none;
+                                padding: 10px 20px;
+                                border-radius: 8px;
+                                font-size: 14px;
+                                font-weight: 600;
+                                transition: background 0.2s;
+                            "
+                        >
+                            פתח חנות התוספים ↗
+                        </a>
+                    </div>
+
+                    <div style="background: #f9fafb; padding: 16px; border-radius: 12px;">
+                        <div style="font-weight: 700; color: #374151; margin-bottom: 8px; font-size: 15px;">
+                            🌐 אפשרויות נוספות
+                        </div>
+                        <ul style="margin: 0; padding-right: 20px; font-size: 14px; color: #4b5563; line-height: 1.8;">
+                            <li style="margin-bottom: 6px;">השתמשו ב-<strong>Chrome</strong> או <strong>Edge</strong> להתקנה</li>
+                            <li style="margin-bottom: 6px;">האפליקציה תעבוד בכל הדפדפנים לאחר התקנה</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        `;
+
+        // Close button handler
+        const closeBtn = overlay.querySelector('#pwa-ff-close');
+        closeBtn.addEventListener('click', () => {
+            hideIOSOverlay();
+            iosOverlayElement = null;
+        });
+        closeBtn.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                hideIOSOverlay();
+                iosOverlayElement = null;
+            }
+        });
+
+        // Close on overlay background click
+        overlay.addEventListener('click', (e) => {
+            if (e.target === overlay) {
+                hideIOSOverlay();
+                iosOverlayElement = null;
+            }
+        });
+
+        // Close on Escape key
+        overlay.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                hideIOSOverlay();
+                iosOverlayElement = null;
+            }
+        });
+
+        return overlay;
+    }
+
+    /**
      * Show fallback manual instructions (for non-iOS devices without prompt)
      */
     function showManualInstructions() {
+        // For Firefox, show the overlay
+        if (isFirefox()) {
+            showFirefoxOverlay();
+            return;
+        }
+
         const isAndroid = /android/i.test(navigator.userAgent);
         const isDesktop = !isAndroid && !isIOSSafari();
 
@@ -812,8 +1082,10 @@ console.log('[PWA-INSTALL] Script loaded');
         showBanner: showBanner,
         hideBanner: hideBanner,
         showIOSOverlay: showIOSOverlay,
+        showFirefoxOverlay: showFirefoxOverlay,
         isAppInstalled: isAppInstalled,
         wasRecentlyDismissed: wasRecentlyDismissed,
+        isFirefox: isFirefox,
         clearDismissed: function() {
             localStorage.removeItem(CONFIG.STORAGE_KEY_DISMISSED);
             localStorage.removeItem(CONFIG.STORAGE_KEY_INSTALLED);

@@ -13,39 +13,39 @@
   "categories": ["restaurant", "food", "greek", "mediterranean"],
   "icons": [
     {
-      "src": "/icons/icon-512-maskable.png",
+      "src": "/images/app-logo.webp",
       "sizes": "512x512",
-      "type": "image/png",
+      "type": "image/webp",
       "purpose": "any maskable"
     },
     {
-      "src": "/icons/icon-192-maskable.png",
+      "src": "/images/app-logo.webp",
       "sizes": "192x192",
-      "type": "image/png",
+      "type": "image/webp",
       "purpose": "any maskable"
     },
     {
-      "src": "/icons/icon-512.png",
+      "src": "/images/app-logo.webp",
       "sizes": "512x512",
-      "type": "image/png",
+      "type": "image/webp",
       "purpose": "any"
     },
     {
-      "src": "/icons/icon-192.png",
+      "src": "/images/app-logo.webp",
       "sizes": "192x192",
-      "type": "image/png",
+      "type": "image/webp",
       "purpose": "any"
     },
     {
-      "src": "/icons/icon-128.png",
+      "src": "/images/app-logo.webp",
       "sizes": "128x128",
-      "type": "image/png",
+      "type": "image/webp",
       "purpose": "any"
     },
     {
-      "src": "/icons/icon-96.png",
+      "src": "/images/app-logo.webp",
       "sizes": "96x96",
-      "type": "image/png",
+      "type": "image/webp",
       "purpose": "any"
     },
     {
@@ -61,28 +61,28 @@
       "short_name": "תפריט",
       "description": "צפו בתפריט שלנו",
       "url": "/#menu",
-      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+      "icons": [{ "src": "/images/app-logo.webp", "sizes": "192x192", "type": "image/webp" }]
     },
     {
       "name": "גלריה",
       "short_name": "גלריה",
       "description": "תמונות מהמסעדה",
       "url": "/#gallery",
-      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+      "icons": [{ "src": "/images/app-logo.webp", "sizes": "192x192", "type": "image/webp" }]
     },
     {
       "name": "צור קשר",
       "short_name": "צור קשר",
       "description": "הזמינו מקום או התקשרו",
       "url": "/#contact",
-      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+      "icons": [{ "src": "/images/app-logo.webp", "sizes": "192x192", "type": "image/webp" }]
     },
     {
       "name": "שעות פתיחה",
       "short_name": "שעות",
       "description": "רביעי-שבת 13:00-01:00",
       "url": "/#contact",
-      "icons": [{ "src": "/icons/icon-192.png", "sizes": "192x192" }]
+      "icons": [{ "src": "/images/app-logo.webp", "sizes": "192x192", "type": "image/webp" }]
     }
   ],
   "screenshots": [

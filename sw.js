@@ -1,4 +1,4 @@
-﻿const VERSION = "pwa-v2-fixed";
+﻿const VERSION = "pwa-v3-logo-fix";
 const PRECACHE = `${VERSION}-precache`;
 const RUNTIME  = `${VERSION}-runtime`;
 
@@ -10,10 +10,7 @@ const PRECACHE_URLS = [
   "/offline.html",
   "/styles.css",
   "/logo.jpg",
-  "/icons/icon-192.png",
-  "/icons/icon-512.png",
-  "/icons/icon-192-maskable.png",
-  "/icons/icon-512-maskable.png"
+  "/images/app-logo.webp"
 ];
 
 self.addEventListener("install", (event) => {
