@@ -997,7 +997,7 @@
     <!-- PWA Install Handler -->
     <script src="js/pwa-install.js?v=10"></script>
 
-    <!-- PWA Banner (Inline for mobile reliability) -->
+    <!-- PWA Banner (Inline HTML for reliability) -->
     <div id="pwa-install-banner-inline" style="display:none;position:fixed;top:0;left:0;right:0;background:linear-gradient(135deg,#1e40af,#3730a7);color:#fff;z-index:999999;padding:15px;box-shadow:0 4px 20px rgba(0,0,0,0.3);">
         <div style="display:flex;align-items:center;gap:12px;max-width:1200px;margin:0 auto;">
             <span style="font-size:32px;">📱</span>
@@ -1012,55 +1012,8 @@
         </div>
     </div>
 
-    <script>
-        console.log('[PWA-INLINE] Inline script loaded!');
-
-        // Show banner after 1 second
-        setTimeout(function() {
-            if (localStorage.getItem('pwa-installed') === 'true') {
-                console.log('[PWA-INLINE] Already installed');
-                return;
-            }
-
-            var banner = document.getElementById('pwa-install-banner-inline');
-            if (banner) {
-                banner.style.display = 'flex';
-                console.log('[PWA-INLINE] Banner shown!');
-            }
-        }, 1000);
-
-        function pwaClose() {
-            var banner = document.getElementById('pwa-install-banner-inline');
-            if (banner) {
-                banner.style.display = 'none';
-            }
-        }
-
-        function pwaInstall() {
-            var isAndroid = /android/i.test(navigator.userAgent);
-            var isChrome = /chrome/i.test(navigator.userAgent) && !/edge|edg/i.test(navigator.userAgent);
-
-            if (isAndroid && isChrome) {
-                alert('📱 להתקנת האפליקציה ב-Android Chrome:\n\n1. לחצו על תפריט (⋮) בפינה הימנית העליונה\n2. בחרו "הוספה למסך הבית" או "Install app"\n3. לחצו "הוסף" כדי לסיים\n\n💡 טיפ: בקרו באתר מספר פעמים כדי לקבל את אפשרות ההתקנה המהירה!');
-            } else {
-                alert('📱 להתקנת האפליקציה:\n\nAndroid Chrome: תפריט (⋮) → "הוספה למסך הבית"');
-            }
-            pwaClose();
-        }
-
-        // Listen for beforeinstallprompt
-        window.addEventListener('beforeinstallprompt', function(e) {
-            console.log('[PWA-INLINE] beforeinstallprompt fired!');
-            window.deferredPrompt = e;
-        });
-
-        // Listen for appinstalled
-        window.addEventListener('appinstalled', function() {
-            console.log('[PWA-INLINE] App installed!');
-            localStorage.setItem('pwa-installed', 'true');
-            pwaClose();
-        });
-    </script>
+    <!-- PWA Banner Script (External to work with CSP) -->
+    <script src="js/pwa-banner-inline.js?v=1"></script>
 
     <!-- PWA banner will be shown by the main pwa-install.js script -->
 
