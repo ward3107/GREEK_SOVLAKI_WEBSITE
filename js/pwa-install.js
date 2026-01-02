@@ -679,20 +679,39 @@ console.log('[PWA-INSTALL] Script loaded');
     console.log('[PWA-INSTALL] Checking DOM ready state:', document.readyState);
     if (document.readyState === 'loading') {
         console.log('[PWA-INSTALL] Waiting for DOMContentLoaded');
-        document.addEventListener('DOMContentLoaded', init);
+        document.addEventListener('DOMContentLoaded', () => {
+            console.log('[PWA-INSTALL] DOMContentLoaded fired!');
+            init();
+        });
     } else {
         console.log('[PWA-INSTALL] DOM ready, calling init() directly');
         // Use setTimeout to ensure DOM is fully ready
         setTimeout(init, 100);
     }
 
-    // Fallback: force init after 500ms regardless of DOM state
+    // Fallback: force init after 1 second regardless of DOM state
     setTimeout(() => {
+        console.log('[PWA-INSTALL] Fallback timeout check:', {
+            bannerElement: !!bannerElement,
+            isAppInstalled: isAppInstalled()
+        });
         if (!bannerElement && !isAppInstalled()) {
             console.log('[PWA-INSTALL] Fallback timeout, forcing init');
             init();
         }
-    }, 500);
+    }, 1000);
+
+    // ULTIMATE FALLBACK: Show banner after 3 seconds no matter what
+    setTimeout(() => {
+        if (!bannerElement && document.body) {
+            console.log('[PWA-INSTALL] ULTIMATE FALLBACK: Force showing banner');
+            try {
+                showBanner();
+            } catch (e) {
+                console.error('[PWA-INSTALL] Error in ultimate fallback:', e);
+            }
+        }
+    }, 3000);
 
     // Expose functions for debugging
     window.PWAInstall = {
