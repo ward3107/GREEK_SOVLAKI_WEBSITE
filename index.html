@@ -1006,14 +1006,14 @@
                 <div style="font-size:14px;opacity:0.9;">קבלו חוויה מהירה יותר!</div>
             </div>
             <div style="display:flex;gap:10px;">
-                <button onclick="pwaInstall()" style="background:#fbbf24;color:#1e3a8a;border:none;padding:12px 24px;border-radius:25px;font-size:15px;font-weight:700;cursor:pointer;white-space:nowrap;">התקן עכשיו</button>
-                <button onclick="pwaClose()" style="background:rgba(255,255,255,0.2);color:#fff;border:none;padding:8px 16px;border-radius:20px;font-size:14px;cursor:pointer;">✕</button>
+                <button id="pwa-install-btn" style="background:#fbbf24;color:#1e3a8a;border:none;padding:12px 24px;border-radius:25px;font-size:15px;font-weight:700;cursor:pointer;white-space:nowrap;">התקן עכשיו</button>
+                <button id="pwa-close-btn" style="background:rgba(255,255,255,0.2);color:#fff;border:none;padding:8px 16px;border-radius:20px;font-size:14px;cursor:pointer;">✕</button>
             </div>
         </div>
     </div>
 
     <!-- PWA Banner Script (External to work with CSP) -->
-    <script src="js/pwa-banner-inline.js?v=1"></script>
+    <script src="js/pwa-banner-inline.js?v=2"></script>
 
     <!-- PWA banner will be shown by the main pwa-install.js script -->
 

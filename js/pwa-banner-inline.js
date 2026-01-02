@@ -12,6 +12,28 @@ setTimeout(function() {
     if (banner) {
         banner.style.display = 'flex';
         console.log('[PWA-BANNER] Banner shown!');
+
+        // Add event listeners to buttons
+        var installBtn = document.getElementById('pwa-install-btn');
+        var closeBtn = document.getElementById('pwa-close-btn');
+
+        if (installBtn) {
+            installBtn.addEventListener('click', pwaInstall);
+            installBtn.addEventListener('touchend', function(e) {
+                e.preventDefault();
+                pwaInstall();
+            });
+            console.log('[PWA-BANNER] Install button listener added');
+        }
+
+        if (closeBtn) {
+            closeBtn.addEventListener('click', pwaClose);
+            closeBtn.addEventListener('touchend', function(e) {
+                e.preventDefault();
+                pwaClose();
+            });
+            console.log('[PWA-BANNER] Close button listener added');
+        }
     } else {
         console.error('[PWA-BANNER] Banner element not found!');
     }
